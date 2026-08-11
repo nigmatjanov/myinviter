@@ -1,8 +1,7 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="uz">
 
 <head>
-
 <meta charset="UTF-8">
 
 <meta
@@ -12,12 +11,7 @@
 
 <title>Aziz & Madina — MyInviter</title>
 
-
 <style>
-
-/* =========================
-   GENERAL
-========================= */
 
 *{
   box-sizing:border-box;
@@ -35,504 +29,277 @@ body{
   font-family:Georgia,"Times New Roman",serif;
 }
 
-
-/* =========================
-   HERO
-========================= */
+/* HERO */
 
 .hero{
-
   min-height:100vh;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   text-align:center;
-
   padding:40px 20px;
-
   position:relative;
-
   overflow:hidden;
 }
 
-
 .hero::before,
 .hero::after{
-
   content:"";
-
   position:absolute;
-
   width:280px;
   height:280px;
-
   border:1px solid #d8c8b7;
-
   border-radius:50%;
-
   opacity:.45;
 }
 
-
 .hero::before{
-
   top:-150px;
   left:-150px;
-
 }
-
 
 .hero::after{
-
   right:-150px;
   bottom:-150px;
-
 }
-
 
 .content{
-
   width:100%;
-
   max-width:600px;
-
   position:relative;
-
   z-index:2;
-
   animation:fadeUp 1.4s ease;
-
 }
 
-
 @keyframes fadeUp{
-
   from{
-
     opacity:0;
-
     transform:translateY(30px);
-
   }
 
   to{
-
     opacity:1;
-
     transform:translateY(0);
-
   }
-
 }
 
-
-/* =========================
-   TEXT
-========================= */
+/* TEXT */
 
 .label{
-
   letter-spacing:4px;
-
   font-size:11px;
-
   text-transform:uppercase;
-
   color:#9b836c;
-
   margin-bottom:25px;
-
 }
-
 
 .photo{
-
   width:180px;
-
   height:180px;
-
   border-radius:50%;
-
   object-fit:cover;
-
   border:7px solid #fffdf9;
-
-  box-shadow:
-    0 8px 30px rgba(70,50,35,.12);
-
+  box-shadow:0 8px 30px rgba(70,50,35,.12);
   margin-bottom:25px;
-
 }
-
 
 h1{
-
   font-size:52px;
-
   font-weight:normal;
-
   line-height:1.1;
-
 }
-
 
 .and{
-
   font-size:25px;
-
   font-style:italic;
-
   color:#aa927b;
-
   margin:10px 0;
-
 }
-
 
 .divider{
-
   width:70px;
-
   height:1px;
-
   background:#bda990;
-
   margin:25px auto;
-
 }
-
 
 .text{
-
   line-height:1.8;
-
   font-size:16px;
-
   color:#6d6259;
-
 }
-
 
 .date{
-
   margin-top:25px;
-
   letter-spacing:3px;
-
   font-size:14px;
-
 }
 
-
-/* =========================
-   COUNTDOWN
-========================= */
+/* COUNTDOWN */
 
 .countdown{
-
   display:flex;
-
   justify-content:center;
-
   gap:8px;
-
   margin:30px 0;
-
 }
-
 
 .box{
-
   width:68px;
-
   padding:13px 5px;
-
   background:#fffdf9;
-
   border:1px solid #e5dbcf;
-
-  box-shadow:
-    0 5px 18px rgba(70,50,35,.06);
-
+  box-shadow:0 5px 18px rgba(70,50,35,.06);
 }
-
 
 .box b{
-
   display:block;
-
   font-size:22px;
-
   font-weight:normal;
-
 }
-
 
 .box span{
-
   font-size:8px;
-
   letter-spacing:1px;
-
   color:#9b836c;
-
 }
 
-
-/* =========================
-   BUTTONS
-========================= */
+/* BUTTONS */
 
 .buttons{
-
   display:flex;
-
   justify-content:center;
-
   gap:10px;
-
   flex-wrap:wrap;
-
   margin-top:20px;
-
 }
-
 
 .button{
-
   display:inline-block;
-
   padding:13px 23px;
-
   border:1px solid #9b836c;
-
   color:#5c4d40;
-
   text-decoration:none;
-
   letter-spacing:1px;
-
   font-size:11px;
-
   background:transparent;
-
   cursor:pointer;
-
   transition:.3s;
-
 }
-
 
 .button:hover{
-
   background:#5c4d40;
-
   color:white;
-
 }
-
 
 .button:disabled{
-
   opacity:.5;
-
   cursor:not-allowed;
-
 }
 
-
-/* =========================
-   MUSIC
-========================= */
+/* MUSIC */
 
 .music{
-
   position:fixed;
-
   right:18px;
-
   top:18px;
-
   width:45px;
-
   height:45px;
-
   border-radius:50%;
-
   border:1px solid #bda990;
-
   background:#fffdf9;
-
   color:#5c4d40;
-
   z-index:20;
-
   cursor:pointer;
-
-  box-shadow:
-    0 5px 20px rgba(0,0,0,.08);
-
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
-
-/* =========================
-   SECTIONS
-========================= */
+/* SECTION */
 
 .section{
-
   background:#fffdf9;
-
   text-align:center;
-
   padding:80px 22px;
-
 }
-
 
 .section h2{
-
   font-size:32px;
-
   font-weight:normal;
-
   margin-bottom:20px;
-
 }
-
 
 .location{
-
   line-height:2;
-
   color:#6d6259;
-
   margin-bottom:28px;
-
 }
 
-
-/* =========================
-   RSVP
-========================= */
+/* RSVP */
 
 .rsvp{
-
   max-width:430px;
-
   margin:0 auto;
-
 }
-
 
 .rsvp input,
 .rsvp select,
 .rsvp textarea{
-
   width:100%;
-
   padding:14px;
-
   margin-bottom:12px;
-
   border:1px solid #dfd4c7;
-
   background:#fdfbf8;
-
   color:#40372f;
-
   font-family:inherit;
-
   outline:none;
-
 }
-
 
 .rsvp textarea{
-
   height:100px;
-
   resize:none;
-
 }
-
 
 .message{
-
   margin-top:15px;
-
-  color:#7d6652;
-
   font-size:14px;
-
-  min-height:20px;
-
+  min-height:22px;
+  color:#7d6652;
 }
 
-
-/* =========================
-   FOOTER
-========================= */
+/* FOOTER */
 
 footer{
-
   text-align:center;
-
   padding:30px;
-
   background:#f7f3ed;
-
   font-size:11px;
-
   letter-spacing:2px;
-
   color:#9b836c;
-
 }
 
-
-/* =========================
-   MOBILE
-========================= */
+/* MOBILE */
 
 @media(max-width:500px){
 
   h1{
-
     font-size:43px;
-
   }
-
 
   .photo{
-
     width:155px;
-
     height:155px;
-
   }
-
 
   .countdown{
-
     gap:5px;
-
   }
-
 
   .box{
-
     width:62px;
-
   }
 
-
   .box b{
-
     font-size:19px;
-
   }
 
 }
@@ -545,18 +312,14 @@ footer{
 <body>
 
 
-<!-- =========================
-     MUSIC
-========================= -->
+<!-- MUSIC -->
 
 <button
   class="music"
   id="musicButton"
   type="button"
 >
-
 ♪
-
 </button>
 
 
@@ -570,52 +333,36 @@ footer{
 </audio>
 
 
-
-<!-- =========================
-     HERO
-========================= -->
+<!-- HERO -->
 
 <section class="hero">
 
   <div class="content">
 
-
     <div class="label">
-
       Sizni to'yimizga taklif qilamiz
-
     </div>
 
 
     <img
-
       class="photo"
-
       src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
-
       alt="Aziz va Madina"
-
     >
 
 
     <h1>
-
       Aziz
-
     </h1>
 
 
     <div class="and">
-
       &
-
     </div>
 
 
     <h1>
-
       Madina
-
     </h1>
 
 
@@ -623,178 +370,117 @@ footer{
 
 
     <p class="text">
-
       Hayotimizdagi eng go'zal kunni
-
       siz bilan birga nishonlashdan
-
       mamnun bo'lamiz.
-
     </p>
 
 
     <div class="date">
-
       20 · SENTYABR · 2026
-
     </div>
-
 
 
     <!-- COUNTDOWN -->
 
     <div class="countdown">
 
-
       <div class="box">
-
         <b id="days">00</b>
-
         <span>KUN</span>
-
       </div>
 
-
       <div class="box">
-
         <b id="hours">00</b>
-
         <span>SOAT</span>
-
       </div>
 
-
       <div class="box">
-
         <b id="minutes">00</b>
-
         <span>DAQIQA</span>
-
       </div>
-
 
       <div class="box">
-
         <b id="seconds">00</b>
-
         <span>SONIYA</span>
-
       </div>
-
 
     </div>
 
 
-
     <div class="buttons">
-
 
       <a
         href="#location"
         class="button"
       >
-
         MANZIL
-
       </a>
-
 
       <a
         href="#rsvp"
         class="button"
       >
-
         RSVP
-
       </a>
 
-
     </div>
-
 
   </div>
 
 </section>
 
 
-
-<!-- =========================
-     LOCATION
-========================= -->
+<!-- LOCATION -->
 
 <section
   class="section"
   id="location"
 >
 
-
   <h2>
-
     To'y manzili
-
   </h2>
 
 
   <div class="location">
 
-
     <p>
-
       Grand Wedding Palace
-
     </p>
 
-
     <p>
-
       Toshkent shahri
-
     </p>
-
 
     <p>
-
       20-sentyabr · 18:00
-
     </p>
-
 
   </div>
 
 
   <a
-
     href="https://maps.google.com"
-
     target="_blank"
-
+    rel="noopener noreferrer"
     class="button"
-
   >
-
     GOOGLE MAPS
-
   </a>
-
 
 </section>
 
 
-
-<!-- =========================
-     RSVP
-========================= -->
+<!-- RSVP -->
 
 <section
   class="section"
   id="rsvp"
 >
 
-
   <h2>
-
     Ishtirokingizni tasdiqlang
-
   </h2>
 
 
@@ -802,29 +488,22 @@ footer{
     class="text"
     style="margin-bottom:25px;"
   >
-
     Sizni kutib qolamiz ❤️
-
   </p>
-
 
 
   <form
     class="rsvp"
     id="rsvpForm"
+    novalidate
   >
 
-
     <input
-
       type="text"
-
       id="guestName"
-
       placeholder="Ismingiz"
-
+      autocomplete="name"
       required
-
     >
 
 
@@ -834,99 +513,72 @@ footer{
     >
 
       <option value="">
-
         Ishtirokingiz
-
       </option>
-
 
       <option value="Albatta kelaman">
-
         Albatta kelaman
-
       </option>
 
-
       <option value="Kela olmayman">
-
         Kela olmayman
-
       </option>
 
     </select>
 
 
     <textarea
-
       id="guestMessage"
-
       placeholder="Tilak yoki izohingiz"
-
     ></textarea>
 
 
     <button
-
       class="button"
-
       type="submit"
-
       id="submitRSVP"
-
     >
-
       TASDIQLASH
-
     </button>
 
 
     <div
-
       class="message"
-
       id="message"
-
+      aria-live="polite"
     ></div>
 
-
   </form>
-
 
 </section>
 
 
-
-<!-- =========================
-     FOOTER
-========================= -->
-
 <footer>
-
   MYINVITER · 2026
-
 </footer>
 
 
-
-<!-- =========================
-     SUPABASE LIBRARY
-========================= -->
+<!-- SUPABASE -->
 
 <script
   src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
 ></script>
 
 
-
 <script>
 
-/* =========================
-   SUPABASE CONFIG
-========================= */
+/* =================================
+   SUPABASE
+================================= */
 
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
 
+
+/*
+  BU YERGA SENING SUPABASE
+  PUBLISHABLE KEYINGNI QO'Y.
+*/
 
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
@@ -939,10 +591,9 @@ supabase.createClient(
 );
 
 
-
-/* =========================
+/* =================================
    COUNTDOWN
-========================= */
+================================= */
 
 const weddingDate =
 new Date(
@@ -954,7 +605,6 @@ function countdown(){
 
   const now =
   new Date().getTime();
-
 
   const distance =
   weddingDate - now;
@@ -975,7 +625,6 @@ function countdown(){
     "00";
 
     return;
-
   }
 
 
@@ -1025,38 +674,46 @@ setInterval(
 );
 
 
-
-/* =========================
+/* =================================
    MUSIC
-========================= */
+================================= */
 
 const music =
 document.getElementById("music");
 
 
 const musicButton =
-document.getElementById(
-  "musicButton"
-);
+document.getElementById("musicButton");
 
 
 musicButton.addEventListener(
   "click",
-  function(){
+  async function(){
 
-    if(music.paused){
+    try{
 
-      music.play();
+      if(music.paused){
 
-      musicButton.innerText =
-      "Ⅱ";
+        await music.play();
 
-    }else{
+        musicButton.innerText =
+        "Ⅱ";
 
-      music.pause();
+      }else{
 
-      musicButton.innerText =
-      "♪";
+        music.pause();
+
+        musicButton.innerText =
+        "♪";
+
+      }
+
+    }catch(error){
+
+      console.error(
+        "Music error:",
+        error
+      );
 
     }
 
@@ -1064,10 +721,9 @@ musicButton.addEventListener(
 );
 
 
-
-/* =========================
+/* =================================
    RSVP
-========================= */
+================================= */
 
 const rsvpForm =
 document.getElementById(
@@ -1087,10 +743,14 @@ document.getElementById(
 );
 
 
-
 rsvpForm.addEventListener(
   "submit",
   async function(event){
+
+    /*
+      ENG MUHIM:
+      sahifa refresh bo'lmaydi
+    */
 
     event.preventDefault();
 
@@ -1113,25 +773,27 @@ rsvpForm.addEventListener(
     ).value.trim();
 
 
-    if(!guestName){
+    /* VALIDATION */
+
+    if(guestName === ""){
 
       messageBox.innerText =
       "Iltimos, ismingizni kiriting.";
 
       return;
-
     }
 
 
-    if(!attendance){
+    if(attendance === ""){
 
       messageBox.innerText =
       "Iltimos, ishtirokingizni tanlang.";
 
       return;
-
     }
 
+
+    /* LOADING */
 
     messageBox.innerText =
     "Yuborilmoqda...";
@@ -1141,76 +803,89 @@ rsvpForm.addEventListener(
     true;
 
 
+    try{
 
-    /*
+      /*
+        MUHIM:
 
-      invitation_id HOZIRCHA YO'Q.
+        invitation_id yuborilmaydi.
+        .select() ham ishlatilmaydi.
 
-      Shuning uchun faqat:
+        Faqat 3 ta ustun:
+        guest_name
+        attendance
+        message
+      */
 
-      guest_name
-      attendance
-      message
+      const { error } =
+      await db
+        .from("rsvps")
+        .insert({
 
-      yuboriladi.
+          guest_name:
+          guestName,
 
-    */
+          attendance:
+          attendance,
 
+          message:
+          guestMessage
 
-    const { data, error } =
-    await db
-      .from("rsvps")
-      .insert({
-
-        guest_name:
-        guestName,
-
-        attendance:
-        attendance,
-
-        message:
-        guestMessage
-
-      })
-      .select();
+        });
 
 
+      if(error){
 
-    submitButton.disabled =
-    false;
+        console.error(
+          "Supabase RSVP error:",
+          error
+        );
 
 
+        messageBox.innerText =
+        "XATO: " +
+        error.message;
 
-    if(error){
+
+        submitButton.disabled =
+        false;
+
+
+        return;
+      }
+
+
+      /* SUCCESS */
+
+      messageBox.innerText =
+      "Rahmat! Ishtirokingiz qayd etildi ❤️";
+
+
+      rsvpForm.reset();
+
+
+      submitButton.disabled =
+      false;
+
+    }
+
+
+    catch(error){
 
       console.error(
-        "SUPABASE ERROR:",
+        "Unexpected error:",
         error
       );
 
 
       messageBox.innerText =
-      "XATO: " +
-      error.message;
+      "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
 
 
-      return;
+      submitButton.disabled =
+      false;
 
     }
-
-
-
-    console.log(
-      "RSVP SAVED:",
-      data
-    );
-
-
-    messageBox.innerText =
-    "Rahmat! Ishtirokingiz qayd etildi ❤️";
-
-
-    rsvpForm.reset();
 
   }
 );
