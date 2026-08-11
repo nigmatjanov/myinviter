@@ -1,227 +1,321 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MyInviter — Online Taklifnoma</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+<title>Aziz & Madina — MyInviter</title>
 
-    body {
-      font-family: Georgia, serif;
-      background: #f8f3ed;
-      color: #3b3028;
-      text-align: center;
-    }
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
-    .hero {
-      min-height: 100vh;
-      padding: 80px 20px 50px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
+body{
+  background:#f7f3ed;
+  color:#40372f;
+  font-family:Georgia,serif;
+}
 
-    .small {
-      font-size: 14px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      margin-bottom: 25px;
-    }
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px 20px;
+  position:relative;
+  overflow:hidden;
+}
 
-    h1 {
-      font-size: 56px;
-      font-weight: normal;
-      margin-bottom: 15px;
-    }
+.hero:before,
+.hero:after{
+  content:"";
+  position:absolute;
+  width:260px;
+  height:260px;
+  border:1px solid #d7c8b7;
+  border-radius:50%;
+  opacity:.45;
+}
 
-    .names {
-      font-size: 32px;
-      margin: 20px 0;
-    }
+.hero:before{
+  top:-130px;
+  left:-130px;
+}
 
-    .date {
-      font-size: 18px;
-      margin: 20px 0 35px;
-    }
+.hero:after{
+  bottom:-130px;
+  right:-130px;
+}
 
-    .divider {
-      width: 80px;
-      height: 1px;
-      background: #8c7562;
-      margin: 20px auto;
-    }
+.content{
+  max-width:650px;
+  position:relative;
+  z-index:2;
+}
 
-    .countdown {
-      display: flex;
-      gap: 12px;
-      margin: 25px 0;
-    }
+.label{
+  letter-spacing:5px;
+  font-size:12px;
+  text-transform:uppercase;
+  color:#9b836c;
+  margin-bottom:25px;
+}
 
-    .time {
-      background: white;
-      padding: 15px 10px;
-      min-width: 65px;
-      border-radius: 10px;
-      box-shadow: 0 4px 15px rgba(0,0,0,.08);
-    }
+h1{
+  font-size:56px;
+  font-weight:normal;
+  line-height:1.1;
+}
 
-    .time strong {
-      display: block;
-      font-size: 22px;
-    }
+.and{
+  font-size:25px;
+  font-style:italic;
+  color:#aa927b;
+  margin:15px 0;
+}
 
-    .time span {
-      font-size: 11px;
-    }
+.date{
+  margin-top:30px;
+  letter-spacing:3px;
+  font-size:15px;
+}
 
-    .button {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 14px 28px;
-      border-radius: 30px;
-      background: #3b3028;
-      color: white;
-      text-decoration: none;
-    }
+.divider{
+  width:80px;
+  height:1px;
+  background:#bda990;
+  margin:30px auto;
+}
 
-    .section {
-      padding: 70px 25px;
-      background: white;
-    }
+.text{
+  line-height:1.8;
+  font-size:16px;
+  color:#6d6259;
+}
 
-    .section h2 {
-      font-size: 30px;
-      font-weight: normal;
-      margin-bottom: 20px;
-    }
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  margin:35px 0;
+}
 
-    .location {
-      margin-top: 25px;
-      line-height: 1.7;
-    }
+.box{
+  width:70px;
+  padding:14px 5px;
+  background:#fffdf9;
+  border:1px solid #e6ddd2;
+}
 
-    footer {
-      padding: 30px;
-      font-size: 13px;
-      background: #f8f3ed;
-    }
-  </style>
+.box b{
+  display:block;
+  font-size:23px;
+  font-weight:normal;
+}
+
+.box span{
+  font-size:9px;
+  letter-spacing:1px;
+  color:#9b836c;
+}
+
+.button{
+  display:inline-block;
+  padding:14px 28px;
+  border:1px solid #9b836c;
+  color:#5c4d40;
+  text-decoration:none;
+  letter-spacing:1px;
+  font-size:13px;
+  transition:.3s;
+}
+
+.button:hover{
+  background:#5c4d40;
+  color:white;
+}
+
+.section{
+  background:#fffdf9;
+  text-align:center;
+  padding:80px 25px;
+}
+
+.section h2{
+  font-size:32px;
+  font-weight:normal;
+  margin-bottom:20px;
+}
+
+.location{
+  line-height:2;
+  color:#6d6259;
+  margin-bottom:30px;
+}
+
+footer{
+  text-align:center;
+  padding:30px;
+  background:#f7f3ed;
+  font-size:12px;
+  letter-spacing:2px;
+  color:#9b836c;
+}
+
+@media(max-width:500px){
+
+  h1{
+    font-size:43px;
+  }
+
+  .countdown{
+    gap:6px;
+  }
+
+  .box{
+    width:62px;
+  }
+
+}
+</style>
 </head>
 
 <body>
 
-  <section class="hero">
+<section class="hero">
 
-    <div class="small">To'y taklifnomasi</div>
+<div class="content">
 
-    <h1>Bizning to'yimiz</h1>
+<div class="label">
+Bizning to'yimizga taklif qilamiz
+</div>
 
-    <div class="divider"></div>
+<h1>Aziz</h1>
 
-    <div class="names">
-      Aziz & Madina
-    </div>
+<div class="and">&</div>
 
-    <p>
-      Sizni hayotimizdagi eng baxtli kunimizga
-      taklif qilamiz.
-    </p>
+<h1>Madina</h1>
 
-    <div class="date">
-      20 • SENTYABR • 2026
-    </div>
+<div class="divider"></div>
 
-    <div class="countdown">
-      <div class="time">
-        <strong id="days">0</strong>
-        <span>KUN</span>
-      </div>
+<p class="text">
+Hayotimizdagi eng go'zal kunni
+siz bilan birga nishonlashdan
+mamnun bo'lamiz.
+</p>
 
-      <div class="time">
-        <strong id="hours">0</strong>
-        <span>SOAT</span>
-      </div>
+<div class="date">
+20 · SENTYABR · 2026
+</div>
 
-      <div class="time">
-        <strong id="minutes">0</strong>
-        <span>DAQIQA</span>
-      </div>
+<div class="countdown">
 
-      <div class="time">
-        <strong id="seconds">0</strong>
-        <span>SONIYA</span>
-      </div>
-    </div>
+<div class="box">
+<b id="days">00</b>
+<span>KUN</span>
+</div>
 
-    <a class="button" href="#location">
-      Manzilni ko'rish
-    </a>
+<div class="box">
+<b id="hours">00</b>
+<span>SOAT</span>
+</div>
 
-  </section>
+<div class="box">
+<b id="minutes">00</b>
+<span>DAQIQA</span>
+</div>
 
-  <section class="section" id="location">
+<div class="box">
+<b id="seconds">00</b>
+<span>SONIYA</span>
+</div>
 
-    <h2>To'y manzili</h2>
+</div>
 
-    <div class="location">
-      <p>Grand Wedding Palace</p>
-      <p>Toshkent shahri</p>
-      <p>Soat 18:00</p>
-    </div>
+<a href="#location" class="button">
+TAKLIFNOMANI OCHISH
+</a>
 
-    <a
-      class="button"
-      href="https://maps.google.com"
-      target="_blank">
-      Google Maps
-    </a>
+</div>
 
-  </section>
+</section>
 
-  <footer>
-    MyInviter © 2026
-  </footer>
 
-  <script>
-    const target = new Date("September 20, 2026 18:00:00").getTime();
+<section class="section" id="location">
 
-    setInterval(function () {
+<h2>To'y manzili</h2>
 
-      const now = new Date().getTime();
-      const difference = target - now;
+<div class="location">
 
-      if (difference <= 0) return;
+<p>Grand Wedding Palace</p>
+<p>Toshkent shahri</p>
+<p>20-sentyabr, 18:00</p>
 
-      const days = Math.floor(
-        difference / (1000 * 60 * 60 * 24)
-      );
+</div>
 
-      const hours = Math.floor(
-        (difference / (1000 * 60 * 60)) % 24
-      );
+<a
+href="https://maps.google.com"
+target="_blank"
+class="button">
+GOOGLE MAPS
+</a>
 
-      const minutes = Math.floor(
-        (difference / (1000 * 60)) % 60
-      );
+</section>
 
-      const seconds = Math.floor(
-        (difference / 1000) % 60
-      );
 
-      document.getElementById("days").textContent = days;
-      document.getElementById("hours").textContent = hours;
-      document.getElementById("minutes").textContent = minutes;
-      document.getElementById("seconds").textContent = seconds;
+<footer>
+MYINVITER · 2026
+</footer>
 
-    }, 1000);
-  </script>
+
+<script>
+
+const weddingDate =
+new Date("September 20, 2026 18:00:00").getTime();
+
+function countdown(){
+
+const now = new Date().getTime();
+
+const distance = weddingDate - now;
+
+if(distance <= 0) return;
+
+const days =
+Math.floor(distance / (1000*60*60*24));
+
+const hours =
+Math.floor((distance / (1000*60*60)) % 24);
+
+const minutes =
+Math.floor((distance / (1000*60)) % 60);
+
+const seconds =
+Math.floor((distance / 1000) % 60);
+
+document.getElementById("days").innerText =
+String(days).padStart(2,"0");
+
+document.getElementById("hours").innerText =
+String(hours).padStart(2,"0");
+
+document.getElementById("minutes").innerText =
+String(minutes).padStart(2,"0");
+
+document.getElementById("seconds").innerText =
+String(seconds).padStart(2,"0");
+
+}
+
+countdown();
+
+setInterval(countdown,1000);
+
+</script>
 
 </body>
 </html>
