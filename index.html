@@ -587,11 +587,10 @@ async function sendRSVP(event){
 
 
 if(error){
-
   console.error(error);
 
   messageBox.innerText =
-  error.message;
+  "XATO: " + error.message;
 
   return;
 }
