@@ -420,7 +420,17 @@ MYINVITER · 2026
 
 
 <script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const SUPABASE_URL = "https://bhqdkzeueunfhompvywm.supabase.co";
+const SUPABASE_KEY = "SENING_PUBLISHABLE_KEYING";
+
+const db = supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
+</script>
 const weddingDate =
 new Date("September 20, 2026 18:00:00").getTime();
 
