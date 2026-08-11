@@ -1058,11 +1058,15 @@ async function sendRSVP(event){
   .from("rsvps")
   .insert({
 
-    invitation_id:
-    "aziz-madina",
-
-    guest_name:
-    guestName,
+    const { data, error } =
+  await db
+  .from("rsvps")
+  .insert({
+    guest_name: guestName,
+    attendance: attendance,
+    message: guestMessage
+  })
+  .select();
 
     attendance:
     attendance,
