@@ -240,6 +240,16 @@ h1{
   font-size:14px;
 }
 
+#loading{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:30px;
+  color:#9b836c;
+}
+
 footer{
   text-align:center;
   padding:30px;
@@ -247,18 +257,6 @@ footer{
   font-size:11px;
   letter-spacing:2px;
   color:#9b836c;
-}
-
-.loading{
-  text-align:center;
-  padding:40px 20px;
-  color:#9b836c;
-}
-
-.error{
-  text-align:center;
-  padding:40px 20px;
-  color:#a44;
 }
 
 @media(max-width:500px){
@@ -290,7 +288,8 @@ footer{
 
 <body>
 
-<div id="loading" class="loading">
+
+<div id="loading">
   Taklifnoma yuklanmoqda...
 </div>
 
@@ -300,8 +299,8 @@ footer{
 
 <button
   class="music"
-  onclick="toggleMusic()"
-  id="musicButton">
+  id="musicButton"
+  onclick="toggleMusic()">
   ♪
 </button>
 
@@ -316,6 +315,7 @@ footer{
 <section class="hero">
 
 <div class="content">
+
 
 <div class="label">
 Sizni to'yimizga taklif qilamiz
@@ -420,15 +420,15 @@ To'y manzili
 <div class="location">
 
 <p id="venue">
-Grand Wedding Palace
+Ozbegim
 </p>
 
 <p id="address">
-Toshkent shahri
+Chirchiq
 </p>
 
 <p id="locationDate">
-20-sentyabr · 18:00
+29-sentyabr · 18:00
 </p>
 
 </div>
@@ -526,32 +526,13 @@ MYINVITER · 2026
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
-
-
 <script>
-
-/* =========================
-   SUPABASE
-========================= */
 
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
-
-const db =
-supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
-
-/* =========================
-   INVITATION ID
-========================= */
 
 const INVITATION_ID = 1;
 
@@ -563,157 +544,206 @@ const INVITATION_ID = 1;
 async function loadInvitation(){
 
   const loading =
-  document.getElementById("loading");
+    document.getElementById("loading");
 
-  const invitation =
-  document.getElementById("invitation");
+  try{
+
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/invitations?id=eq." +
+        INVITATION_ID +
+        "&select=*",
+        {
+          method:"GET",
+
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY
+          }
+        }
+      );
 
 
-  const { data, error } =
-  await db
-    .from("invitations")
-    .select("*")
-    .eq("id", INVITATION_ID)
-    .single();
+    const data =
+      await response.json();
 
 
-  if(error){
+    console.log(
+      "Invitation response:",
+      data
+    );
+
+
+    if(!response.ok){
+
+      console.error(
+        "Supabase error:",
+        data
+      );
+
+      loading.innerText =
+        "Taklifnomani yuklashda xatolik: " +
+        (data.message || "Noma'lum xato");
+
+      return;
+    }
+
+
+    if(!Array.isArray(data) ||
+       data.length === 0){
+
+      loading.innerText =
+        "ID 1 bo‘yicha taklifnoma topilmadi.";
+
+      return;
+    }
+
+
+    const invitation =
+      data[0];
+
+
+    /* NAMES */
+
+    document.getElementById(
+      "groomName"
+    ).innerText =
+      invitation.groom_name ||
+      "Aziz";
+
+
+    document.getElementById(
+      "brideName"
+    ).innerText =
+      invitation.bride_name ||
+      "Madina";
+
+
+    /* VENUE */
+
+    document.getElementById(
+      "venue"
+    ).innerText =
+      invitation.venue ||
+      "";
+
+
+    /* ADDRESS */
+
+    document.getElementById(
+      "address"
+    ).innerText =
+      invitation.address ||
+      "";
+
+
+    /* MAP */
+
+    if(invitation.maps_url){
+
+      document.getElementById(
+        "mapsButton"
+      ).href =
+        invitation.maps_url;
+
+    }
+
+
+    /* DATE */
+
+    if(invitation.event_date){
+
+      const dateString =
+        invitation.event_date;
+
+      const date =
+        new Date(
+          dateString +
+          "T18:00:00"
+        );
+
+
+      const months = [
+        "YANVAR",
+        "FEVRAL",
+        "MART",
+        "APREL",
+        "MAY",
+        "IYUN",
+        "IYUL",
+        "AVGUST",
+        "SENTYABR",
+        "OKTYABR",
+        "NOYABR",
+        "DEKABR"
+      ];
+
+
+      const day =
+        String(
+          date.getDate()
+        ).padStart(2,"0");
+
+
+      const month =
+        months[
+          date.getMonth()
+        ];
+
+
+      const year =
+        date.getFullYear();
+
+
+      document.getElementById(
+        "eventDate"
+      ).innerText =
+        day +
+        " · " +
+        month +
+        " · " +
+        year;
+
+
+      document.getElementById(
+        "locationDate"
+      ).innerText =
+        day +
+        "-" +
+        month.toLowerCase() +
+        " · 18:00";
+
+
+      startCountdown(
+        date.getTime()
+      );
+
+    }
+
+
+    loading.style.display =
+      "none";
+
+
+    document.getElementById(
+      "invitation"
+    ).style.display =
+      "block";
+
+
+  }catch(error){
 
     console.error(
-      "Invitation error:",
+      "Connection error:",
       error
     );
 
     loading.innerText =
-      "Taklifnomani yuklashda xatolik yuz berdi.";
-
-    return;
-  }
-
-
-  if(!data){
-
-    loading.innerText =
-      "Taklifnoma topilmadi.";
-
-    return;
-  }
-
-
-  /* NAMES */
-
-  document.getElementById(
-    "groomName"
-  ).innerText =
-    data.groom_name || "Aziz";
-
-
-  document.getElementById(
-    "brideName"
-  ).innerText =
-    data.bride_name || "Madina";
-
-
-  /* VENUE */
-
-  document.getElementById(
-    "venue"
-  ).innerText =
-    data.venue || "";
-
-
-  /* ADDRESS */
-
-  document.getElementById(
-    "address"
-  ).innerText =
-    data.address || "";
-
-
-  /* MAP */
-
-  if(data.maps_url){
-
-    document.getElementById(
-      "mapsButton"
-    ).href =
-      data.maps_url;
+      "Internet yoki Supabase ulanishida xatolik.";
 
   }
-
-
-  /* DATE */
-
-  if(data.event_date){
-
-    const date =
-      new Date(
-        data.event_date + "T18:00:00"
-      );
-
-    const months = [
-      "YANVAR",
-      "FEVRAL",
-      "MART",
-      "APREL",
-      "MAY",
-      "IYUN",
-      "IYUL",
-      "AVGUST",
-      "SENTYABR",
-      "OKTYABR",
-      "NOYABR",
-      "DEKABR"
-    ];
-
-
-    const day =
-      String(
-        date.getDate()
-      ).padStart(2,"0");
-
-
-    const month =
-      months[
-        date.getMonth()
-      ];
-
-
-    const year =
-      date.getFullYear();
-
-
-    document.getElementById(
-      "eventDate"
-    ).innerText =
-      day +
-      " · " +
-      month +
-      " · " +
-      year;
-
-
-    document.getElementById(
-      "locationDate"
-    ).innerText =
-      day +
-      "-" +
-      month.toLowerCase() +
-      " · 18:00";
-
-
-    startCountdown(
-      date.getTime()
-    );
-
-  }
-
-
-  loading.style.display =
-    "none";
-
-  invitation.style.display =
-    "block";
 
 }
 
@@ -722,7 +752,7 @@ async function loadInvitation(){
    COUNTDOWN
 ========================= */
 
-let countdownTimer;
+let countdownTimer = null;
 
 
 function startCountdown(
@@ -740,6 +770,7 @@ function startCountdown(
 
     const now =
       new Date().getTime();
+
 
     const distance =
       weddingDate - now;
@@ -814,6 +845,7 @@ function startCountdown(
 
   countdown();
 
+
   countdownTimer =
     setInterval(
       countdown,
@@ -828,27 +860,27 @@ function startCountdown(
 ========================= */
 
 const music =
-document.getElementById("music");
+  document.getElementById("music");
 
 
 function toggleMusic(){
 
   const button =
-  document.getElementById(
-    "musicButton"
-  );
+    document.getElementById(
+      "musicButton"
+    );
 
 
   if(music.paused){
 
     music.play()
-      .then(() => {
+      .then(function(){
 
         button.innerText =
           "Ⅱ";
 
       })
-      .catch(() => {
+      .catch(function(){
 
         button.innerText =
           "♪";
@@ -877,39 +909,39 @@ async function sendRSVP(event){
 
 
   const form =
-  event.target;
+    event.target;
 
 
   const guestName =
-  form
-    .querySelector(
-      'input[type="text"]'
-    )
-    .value
-    .trim();
+    form
+      .querySelector(
+        'input[type="text"]'
+      )
+      .value
+      .trim();
 
 
   const attendance =
-  form
-    .querySelector(
-      "select"
-    )
-    .value;
+    form
+      .querySelector(
+        "select"
+      )
+      .value;
 
 
   const message =
-  form
-    .querySelector(
-      "textarea"
-    )
-    .value
-    .trim();
+    form
+      .querySelector(
+        "textarea"
+      )
+      .value
+      .trim();
 
 
   const messageBox =
-  document.getElementById(
-    "message"
-  );
+    document.getElementById(
+      "message"
+    );
 
 
   if(!guestName){
@@ -918,7 +950,6 @@ async function sendRSVP(event){
       "Iltimos, ismingizni kiriting.";
 
     return;
-
   }
 
 
@@ -928,7 +959,6 @@ async function sendRSVP(event){
       "Iltimos, ishtirokingizni tanlang.";
 
     return;
-
   }
 
 
@@ -938,39 +968,65 @@ async function sendRSVP(event){
 
   try{
 
-    const { error } =
-      await db
-        .from("rsvps")
-        .insert({
+    const response =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/rsvps",
+        {
+          method:"POST",
 
-          invitation_id:
-            INVITATION_ID,
+          headers:{
+            "apikey":SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY,
+            "Content-Type":
+              "application/json",
+            "Prefer":
+              "return=minimal"
+          },
 
-          guest_name:
-            guestName,
+          body:JSON.stringify({
 
-          attendance:
-            attendance,
+            invitation_id:
+              INVITATION_ID,
 
-          message:
-            message
+            guest_name:
+              guestName,
 
+            attendance:
+              attendance,
+
+            message:
+              message
+
+          })
+        }
+      );
+
+
+    if(!response.ok){
+
+      const errorData =
+        await response.json()
+        .catch(function(){
+          return {};
         });
 
 
-    if(error){
-
       console.error(
         "RSVP error:",
-        error
+        errorData
       );
+
 
       messageBox.innerText =
         "XATO: " +
-        error.message;
+        (
+          errorData.message ||
+          "RSVP yuborilmadi"
+        );
 
       return;
-
     }
 
 
@@ -984,9 +1040,10 @@ async function sendRSVP(event){
   }catch(error){
 
     console.error(
-      "Unexpected error:",
+      "RSVP connection error:",
       error
     );
+
 
     messageBox.innerText =
       "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
