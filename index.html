@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Aziz & Madina — MyInviter</title>
 
 <style>
@@ -13,10 +12,14 @@
   padding:0;
 }
 
+html{
+  scroll-behavior:smooth;
+}
+
 body{
   background:#f7f3ed;
   color:#40372f;
-  font-family:Georgia,serif;
+  font-family:Georgia,"Times New Roman",serif;
 }
 
 .hero{
@@ -30,43 +33,66 @@ body{
   overflow:hidden;
 }
 
-.hero:before,
-.hero:after{
+.hero::before,
+.hero::after{
   content:"";
   position:absolute;
-  width:260px;
-  height:260px;
-  border:1px solid #d7c8b7;
+  width:280px;
+  height:280px;
+  border:1px solid #d8c8b7;
   border-radius:50%;
   opacity:.45;
 }
 
-.hero:before{
-  top:-130px;
-  left:-130px;
+.hero::before{
+  top:-150px;
+  left:-150px;
 }
 
-.hero:after{
-  bottom:-130px;
-  right:-130px;
+.hero::after{
+  right:-150px;
+  bottom:-150px;
 }
 
 .content{
-  max-width:650px;
+  width:100%;
+  max-width:600px;
   position:relative;
   z-index:2;
+  animation:fadeUp 1.4s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
 }
 
 .label{
-  letter-spacing:5px;
-  font-size:12px;
+  letter-spacing:4px;
+  font-size:11px;
   text-transform:uppercase;
   color:#9b836c;
   margin-bottom:25px;
 }
 
+.photo{
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  object-fit:cover;
+  border:7px solid #fffdf9;
+  box-shadow:0 8px 30px rgba(70,50,35,.12);
+  margin-bottom:25px;
+}
+
 h1{
-  font-size:56px;
+  font-size:52px;
   font-weight:normal;
   line-height:1.1;
 }
@@ -75,20 +101,14 @@ h1{
   font-size:25px;
   font-style:italic;
   color:#aa927b;
-  margin:15px 0;
-}
-
-.date{
-  margin-top:30px;
-  letter-spacing:3px;
-  font-size:15px;
+  margin:10px 0;
 }
 
 .divider{
-  width:80px;
+  width:70px;
   height:1px;
   background:#bda990;
-  margin:30px auto;
+  margin:25px auto;
 }
 
 .text{
@@ -97,40 +117,57 @@ h1{
   color:#6d6259;
 }
 
+.date{
+  margin-top:25px;
+  letter-spacing:3px;
+  font-size:14px;
+}
+
 .countdown{
   display:flex;
   justify-content:center;
-  gap:10px;
-  margin:35px 0;
+  gap:8px;
+  margin:30px 0;
 }
 
 .box{
-  width:70px;
-  padding:14px 5px;
+  width:68px;
+  padding:13px 5px;
   background:#fffdf9;
-  border:1px solid #e6ddd2;
+  border:1px solid #e5dbcf;
+  box-shadow:0 5px 18px rgba(70,50,35,.06);
 }
 
 .box b{
   display:block;
-  font-size:23px;
+  font-size:22px;
   font-weight:normal;
 }
 
 .box span{
-  font-size:9px;
+  font-size:8px;
   letter-spacing:1px;
   color:#9b836c;
 }
 
+.buttons{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:20px;
+}
+
 .button{
   display:inline-block;
-  padding:14px 28px;
+  padding:13px 23px;
   border:1px solid #9b836c;
   color:#5c4d40;
   text-decoration:none;
   letter-spacing:1px;
-  font-size:13px;
+  font-size:11px;
+  background:transparent;
+  cursor:pointer;
   transition:.3s;
 }
 
@@ -139,10 +176,25 @@ h1{
   color:white;
 }
 
+.music{
+  position:fixed;
+  right:18px;
+  top:18px;
+  width:45px;
+  height:45px;
+  border-radius:50%;
+  border:1px solid #bda990;
+  background:#fffdf9;
+  color:#5c4d40;
+  z-index:20;
+  cursor:pointer;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
 .section{
   background:#fffdf9;
   text-align:center;
-  padding:80px 25px;
+  padding:80px 22px;
 }
 
 .section h2{
@@ -154,14 +206,43 @@ h1{
 .location{
   line-height:2;
   color:#6d6259;
-  margin-bottom:30px;
+  margin-bottom:28px;
+}
+
+.rsvp{
+  max-width:430px;
+  margin:0 auto;
+}
+
+.rsvp input,
+.rsvp select,
+.rsvp textarea{
+  width:100%;
+  padding:14px;
+  margin-bottom:12px;
+  border:1px solid #dfd4c7;
+  background:#fdfbf8;
+  color:#40372f;
+  font-family:inherit;
+  outline:none;
+}
+
+.rsvp textarea{
+  height:100px;
+  resize:none;
+}
+
+.message{
+  margin-top:15px;
+  color:#7d6652;
+  font-size:14px;
 }
 
 footer{
   text-align:center;
   padding:30px;
   background:#f7f3ed;
-  font-size:12px;
+  font-size:11px;
   letter-spacing:2px;
   color:#9b836c;
 }
@@ -172,27 +253,50 @@ footer{
     font-size:43px;
   }
 
+  .photo{
+    width:155px;
+    height:155px;
+  }
+
   .countdown{
-    gap:6px;
+    gap:5px;
   }
 
   .box{
     width:62px;
   }
 
+  .box b{
+    font-size:19px;
+  }
 }
 </style>
 </head>
 
 <body>
 
+<button class="music" onclick="toggleMusic()" id="musicButton">
+♪ 
+</button>
+
+<audio id="music">
+  <source
+    src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
+    type="audio/mpeg">
+</audio>
+
 <section class="hero">
 
 <div class="content">
 
 <div class="label">
-Bizning to'yimizga taklif qilamiz
+Sizni to'yimizga taklif qilamiz
 </div>
+
+<img
+class="photo"
+src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
+alt="Aziz va Madina">
 
 <h1>Aziz</h1>
 
@@ -236,9 +340,17 @@ mamnun bo'lamiz.
 
 </div>
 
+<div class="buttons">
+
 <a href="#location" class="button">
-TAKLIFNOMANI OCHISH
+MANZIL
 </a>
+
+<a href="#rsvp" class="button">
+RSVP
+</a>
+
+</div>
 
 </div>
 
@@ -253,7 +365,7 @@ TAKLIFNOMANI OCHISH
 
 <p>Grand Wedding Palace</p>
 <p>Toshkent shahri</p>
-<p>20-sentyabr, 18:00</p>
+<p>20-sentyabr · 18:00</p>
 
 </div>
 
@@ -263,6 +375,41 @@ target="_blank"
 class="button">
 GOOGLE MAPS
 </a>
+
+</section>
+
+
+<section class="section" id="rsvp">
+
+<h2>Ishtirokingizni tasdiqlang</h2>
+
+<p class="text" style="margin-bottom:25px;">
+Sizni kutib qolamiz ❤️
+</p>
+
+<form class="rsvp" onsubmit="sendRSVP(event)">
+
+<input
+type="text"
+placeholder="Ismingiz"
+required>
+
+<select required>
+<option value="">Ishtirokingiz</option>
+<option>Albatta kelaman</option>
+<option>Kela olmayman</option>
+</select>
+
+<textarea
+placeholder="Tilak yoki izohingiz"></textarea>
+
+<button class="button" type="submit">
+TASDIQLASH
+</button>
+
+<div class="message" id="message"></div>
+
+</form>
 
 </section>
 
@@ -280,40 +427,70 @@ new Date("September 20, 2026 18:00:00").getTime();
 function countdown(){
 
 const now = new Date().getTime();
-
 const distance = weddingDate - now;
 
 if(distance <= 0) return;
 
-const days =
-Math.floor(distance / (1000*60*60*24));
-
-const hours =
-Math.floor((distance / (1000*60*60)) % 24);
-
-const minutes =
-Math.floor((distance / (1000*60)) % 60);
-
-const seconds =
-Math.floor((distance / 1000) % 60);
-
 document.getElementById("days").innerText =
-String(days).padStart(2,"0");
+String(Math.floor(
+distance/(1000*60*60*24)
+)).padStart(2,"0");
 
 document.getElementById("hours").innerText =
-String(hours).padStart(2,"0");
+String(Math.floor(
+(distance/(1000*60*60))%24
+)).padStart(2,"0");
 
 document.getElementById("minutes").innerText =
-String(minutes).padStart(2,"0");
+String(Math.floor(
+(distance/(1000*60))%60
+)).padStart(2,"0");
 
 document.getElementById("seconds").innerText =
-String(seconds).padStart(2,"0");
+String(Math.floor(
+(distance/1000)%60
+)).padStart(2,"0");
 
 }
 
 countdown();
-
 setInterval(countdown,1000);
+
+
+const music =
+document.getElementById("music");
+
+function toggleMusic(){
+
+if(music.paused){
+
+music.play();
+
+document.getElementById("musicButton")
+.innerText="Ⅱ";
+
+}else{
+
+music.pause();
+
+document.getElementById("musicButton")
+.innerText="♪";
+
+}
+
+}
+
+
+function sendRSVP(event){
+
+event.preventDefault();
+
+document.getElementById("message").innerText =
+"Rahmat! Ishtirokingiz qayd etildi ❤️";
+
+event.target.reset();
+
+}
 
 </script>
 
