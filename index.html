@@ -7,6 +7,7 @@
 <title>MyInviter — Taklifnoma</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -64,6 +65,7 @@ body{
 }
 
 @keyframes fadeUp{
+
   from{
     opacity:0;
     transform:translateY(30px);
@@ -73,6 +75,7 @@ body{
     opacity:1;
     transform:translateY(0);
   }
+
 }
 
 .label{
@@ -281,7 +284,9 @@ footer{
   .box b{
     font-size:19px;
   }
+
 }
+
 </style>
 </head>
 
@@ -305,10 +310,14 @@ footer{
 </button>
 
 
-<audio id="music">
+<audio
+  id="music"
+  loop>
+
   <source
     src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
     type="audio/mpeg">
+
 </audio>
 
 
@@ -325,7 +334,7 @@ Sizni to'yimizga taklif qilamiz
 <img
   id="photo"
   class="photo"
-  src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
+  src=""
   alt="To'y rasmi">
 
 
@@ -358,50 +367,93 @@ mamnun bo'lamiz.
 <div
   class="date"
   id="eventDate">
+
 20 · SENTYABR · 2026
+
 </div>
 
 
 <div class="countdown">
 
-<div class="box">
-<b id="days">00</b>
-<span>KUN</span>
-</div>
 
 <div class="box">
-<b id="hours">00</b>
-<span>SOAT</span>
+
+<b id="days">
+00
+</b>
+
+<span>
+KUN
+</span>
+
 </div>
 
-<div class="box">
-<b id="minutes">00</b>
-<span>DAQIQA</span>
-</div>
 
 <div class="box">
-<b id="seconds">00</b>
-<span>SONIYA</span>
+
+<b id="hours">
+00
+</b>
+
+<span>
+SOAT
+</span>
+
 </div>
+
+
+<div class="box">
+
+<b id="minutes">
+00
+</b>
+
+<span>
+DAQIQA
+</span>
+
+</div>
+
+
+<div class="box">
+
+<b id="seconds">
+00
+</b>
+
+<span>
+SONIYA
+</span>
+
+</div>
+
 
 </div>
 
 
 <div class="buttons">
 
+
 <a
   href="#location"
   class="button">
-  MANZIL
+
+MANZIL
+
 </a>
+
 
 <a
   href="#rsvp"
   class="button">
-  RSVP
+
+RSVP
+
 </a>
 
+
 </div>
+
 
 </div>
 
@@ -412,6 +464,7 @@ mamnun bo'lamiz.
   class="section"
   id="location">
 
+
 <h2>
 To'y manzili
 </h2>
@@ -419,17 +472,21 @@ To'y manzili
 
 <div class="location">
 
+
 <p id="venue">
 Ozbegim
 </p>
+
 
 <p id="address">
 Chirchiq
 </p>
 
+
 <p id="locationDate">
 29-sentyabr · 18:00
 </p>
+
 
 </div>
 
@@ -445,12 +502,14 @@ GOOGLE MAPS
 
 </a>
 
+
 </section>
 
 
 <section
   class="section"
   id="rsvp">
+
 
 <h2>
 Ishtirokingizni tasdiqlang
@@ -516,6 +575,7 @@ TASDIQLASH
 
 </form>
 
+
 </section>
 
 
@@ -523,46 +583,87 @@ TASDIQLASH
 MYINVITER · 2026
 </footer>
 
+
 </div>
 
 
 <script>
 
+
+/* =================================
+   SUPABASE
+================================= */
+
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
+
 
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
-const INVITATION_ID = 1;
+
+const INVITATION_ID =
+1;
 
 
-/* =========================
+/* =================================
+   DEFAULT PHOTOS
+================================= */
+
+const defaultPhotos = [
+
+"https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
+
+"https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
+
+"https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80",
+
+"https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80"
+
+];
+
+
+/* =================================
    LOAD INVITATION
-========================= */
+================================= */
 
 async function loadInvitation(){
 
+
   const loading =
-    document.getElementById("loading");
+    document.getElementById(
+      "loading"
+    );
+
 
   try{
 
+
     const response =
       await fetch(
+
         SUPABASE_URL +
         "/rest/v1/invitations?id=eq." +
         INVITATION_ID +
         "&select=*",
+
         {
+
           method:"GET",
 
           headers:{
-            "apikey":SUPABASE_KEY,
+
+            "apikey":
+              SUPABASE_KEY,
+
             "Authorization":
-              "Bearer " + SUPABASE_KEY
+              "Bearer " +
+              SUPABASE_KEY
+
           }
+
         }
+
       );
 
 
@@ -578,26 +679,38 @@ async function loadInvitation(){
 
     if(!response.ok){
 
+
       console.error(
         "Supabase error:",
         data
       );
 
+
       loading.innerText =
         "Taklifnomani yuklashda xatolik: " +
-        (data.message || "Noma'lum xato");
+        (
+          data.message ||
+          "Noma'lum xato"
+        );
+
 
       return;
+
     }
 
 
-    if(!Array.isArray(data) ||
-       data.length === 0){
+    if(
+      !Array.isArray(data) ||
+      data.length === 0
+    ){
+
 
       loading.innerText =
         "ID 1 bo‘yicha taklifnoma topilmadi.";
 
+
       return;
+
     }
 
 
@@ -605,11 +718,72 @@ async function loadInvitation(){
       data[0];
 
 
-    /* NAMES */
+    /* =========================
+       PHOTO
+    ========================= */
+
+
+    const photo =
+      document.getElementById(
+        "photo"
+      );
+
+
+    if(
+
+      invitation.photo_url &&
+
+      invitation.photo_url.trim() !== ""
+
+    ){
+
+      photo.src =
+        invitation.photo_url;
+
+    }else{
+
+
+      const randomPhoto =
+        defaultPhotos[
+          Math.floor(
+            Math.random() *
+            defaultPhotos.length
+          )
+        ];
+
+
+      photo.src =
+        randomPhoto;
+
+    }
+
+
+    /* =========================
+       PHOTO ERROR FALLBACK
+    ========================= */
+
+
+    photo.onerror =
+      function(){
+
+        this.onerror =
+          null;
+
+        this.src =
+          defaultPhotos[0];
+
+      };
+
+
+    /* =========================
+       NAMES
+    ========================= */
+
 
     document.getElementById(
       "groomName"
     ).innerText =
+
       invitation.groom_name ||
       "Aziz";
 
@@ -617,55 +791,83 @@ async function loadInvitation(){
     document.getElementById(
       "brideName"
     ).innerText =
+
       invitation.bride_name ||
       "Madina";
 
 
-    /* VENUE */
+    /* =========================
+       VENUE
+    ========================= */
+
 
     document.getElementById(
       "venue"
     ).innerText =
+
       invitation.venue ||
       "";
 
 
-    /* ADDRESS */
+    /* =========================
+       ADDRESS
+    ========================= */
+
 
     document.getElementById(
       "address"
     ).innerText =
+
       invitation.address ||
       "";
 
 
-    /* MAP */
+    /* =========================
+       GOOGLE MAPS
+    ========================= */
 
-    if(invitation.maps_url){
 
+    const mapsButton =
       document.getElementById(
         "mapsButton"
-      ).href =
+      );
+
+
+    if(
+
+      invitation.maps_url &&
+
+      invitation.maps_url.trim() !== ""
+
+    ){
+
+      mapsButton.href =
         invitation.maps_url;
 
     }
 
 
-    /* DATE */
+    /* =========================
+       DATE
+    ========================= */
 
-    if(invitation.event_date){
 
-      const dateString =
-        invitation.event_date;
+    if(
+      invitation.event_date
+    ){
+
 
       const date =
         new Date(
-          dateString +
+
+          invitation.event_date +
           "T18:00:00"
+
         );
 
 
       const months = [
+
         "YANVAR",
         "FEVRAL",
         "MART",
@@ -678,13 +880,17 @@ async function loadInvitation(){
         "OKTYABR",
         "NOYABR",
         "DEKABR"
+
       ];
 
 
       const day =
         String(
           date.getDate()
-        ).padStart(2,"0");
+        ).padStart(
+          2,
+          "0"
+        );
 
 
       const month =
@@ -700,6 +906,7 @@ async function loadInvitation(){
       document.getElementById(
         "eventDate"
       ).innerText =
+
         day +
         " · " +
         month +
@@ -710,6 +917,7 @@ async function loadInvitation(){
       document.getElementById(
         "locationDate"
       ).innerText =
+
         day +
         "-" +
         month.toLowerCase() +
@@ -721,6 +929,38 @@ async function loadInvitation(){
       );
 
     }
+
+
+    /* =========================
+       MUSIC
+    ========================= */
+
+
+    const music =
+      document.getElementById(
+        "music"
+      );
+
+
+    if(
+
+      invitation.music_url &&
+
+      invitation.music_url.trim() !== ""
+
+    ){
+
+      music.src =
+        invitation.music_url;
+
+      music.load();
+
+    }
+
+
+    /* =========================
+       SHOW PAGE
+    ========================= */
 
 
     loading.style.display =
@@ -735,10 +975,12 @@ async function loadInvitation(){
 
   }catch(error){
 
+
     console.error(
       "Connection error:",
       error
     );
+
 
     loading.innerText =
       "Internet yoki Supabase ulanishida xatolik.";
@@ -748,97 +990,152 @@ async function loadInvitation(){
 }
 
 
-/* =========================
+/* =================================
    COUNTDOWN
-========================= */
+================================= */
 
-let countdownTimer = null;
+let countdownTimer =
+  null;
 
 
 function startCountdown(
   weddingDate
 ){
 
+
   if(countdownTimer){
+
     clearInterval(
       countdownTimer
     );
+
   }
 
 
   function countdown(){
+
 
     const now =
       new Date().getTime();
 
 
     const distance =
-      weddingDate - now;
+      weddingDate -
+      now;
 
 
     if(distance <= 0){
 
+
       document.getElementById(
         "days"
-      ).innerText = "00";
+      ).innerText =
+        "00";
+
 
       document.getElementById(
         "hours"
-      ).innerText = "00";
+      ).innerText =
+        "00";
+
 
       document.getElementById(
         "minutes"
-      ).innerText = "00";
+      ).innerText =
+        "00";
+
 
       document.getElementById(
         "seconds"
-      ).innerText = "00";
+      ).innerText =
+        "00";
+
 
       return;
+
     }
 
 
     document.getElementById(
       "days"
     ).innerText =
+
       String(
+
         Math.floor(
+
           distance /
-          (1000*60*60*24)
+          (1000 * 60 * 60 * 24)
+
         )
-      ).padStart(2,"0");
+
+      ).padStart(
+        2,
+        "0"
+      );
 
 
     document.getElementById(
       "hours"
     ).innerText =
+
       String(
+
         Math.floor(
-          (distance /
-          (1000*60*60)) % 24
+
+          (
+            distance /
+            (1000 * 60 * 60)
+          ) % 24
+
         )
-      ).padStart(2,"0");
+
+      ).padStart(
+        2,
+        "0"
+      );
 
 
     document.getElementById(
       "minutes"
     ).innerText =
+
       String(
+
         Math.floor(
-          (distance /
-          (1000*60)) % 60
+
+          (
+            distance /
+            (1000 * 60)
+          ) % 60
+
         )
-      ).padStart(2,"0");
+
+      ).padStart(
+        2,
+        "0"
+      );
 
 
     document.getElementById(
       "seconds"
     ).innerText =
+
       String(
+
         Math.floor(
-          (distance / 1000) % 60
+
+          (
+            distance /
+            1000
+          ) % 60
+
         )
-      ).padStart(2,"0");
+
+      ).padStart(
+        2,
+        "0"
+      );
 
   }
 
@@ -855,15 +1152,18 @@ function startCountdown(
 }
 
 
-/* =========================
-   MUSIC
-========================= */
+/* =================================
+   MUSIC BUTTON
+================================= */
 
 const music =
-  document.getElementById("music");
+  document.getElementById(
+    "music"
+  );
 
 
 function toggleMusic(){
+
 
   const button =
     document.getElementById(
@@ -873,13 +1173,16 @@ function toggleMusic(){
 
   if(music.paused){
 
+
     music.play()
+
       .then(function(){
 
         button.innerText =
           "Ⅱ";
 
       })
+
       .catch(function(){
 
         button.innerText =
@@ -887,9 +1190,12 @@ function toggleMusic(){
 
       });
 
+
   }else{
 
+
     music.pause();
+
 
     button.innerText =
       "♪";
@@ -899,11 +1205,14 @@ function toggleMusic(){
 }
 
 
-/* =========================
+/* =================================
    RSVP
-========================= */
+================================= */
 
-async function sendRSVP(event){
+async function sendRSVP(
+  event
+){
+
 
   event.preventDefault();
 
@@ -946,19 +1255,25 @@ async function sendRSVP(event){
 
   if(!guestName){
 
+
     messageBox.innerText =
       "Iltimos, ismingizni kiriting.";
 
+
     return;
+
   }
 
 
   if(!attendance){
 
+
     messageBox.innerText =
       "Iltimos, ishtirokingizni tanlang.";
 
+
     return;
+
   }
 
 
@@ -968,49 +1283,68 @@ async function sendRSVP(event){
 
   try{
 
+
     const response =
       await fetch(
+
         SUPABASE_URL +
         "/rest/v1/rsvps",
+
         {
+
           method:"POST",
 
           headers:{
-            "apikey":SUPABASE_KEY,
+
+            "apikey":
+              SUPABASE_KEY,
+
             "Authorization":
-              "Bearer " + SUPABASE_KEY,
+              "Bearer " +
+              SUPABASE_KEY,
+
             "Content-Type":
               "application/json",
+
             "Prefer":
               "return=minimal"
+
           },
 
-          body:JSON.stringify({
 
-            invitation_id:
-              INVITATION_ID,
+          body:
+            JSON.stringify({
 
-            guest_name:
-              guestName,
+              invitation_id:
+                INVITATION_ID,
 
-            attendance:
-              attendance,
+              guest_name:
+                guestName,
 
-            message:
-              message
+              attendance:
+                attendance,
 
-          })
+              message:
+                message
+
+            })
+
         }
+
       );
 
 
     if(!response.ok){
 
+
       const errorData =
-        await response.json()
-        .catch(function(){
-          return {};
-        });
+        await response
+          .json()
+          .catch(
+            function(){
+              return {};
+            }
+          );
 
 
       console.error(
@@ -1026,7 +1360,9 @@ async function sendRSVP(event){
           "RSVP yuborilmadi"
         );
 
+
       return;
+
     }
 
 
@@ -1038,6 +1374,7 @@ async function sendRSVP(event){
 
 
   }catch(error){
+
 
     console.error(
       "RSVP connection error:",
@@ -1053,13 +1390,14 @@ async function sendRSVP(event){
 }
 
 
-/* =========================
+/* =================================
    START
-========================= */
+================================= */
 
 loadInvitation();
 
 </script>
+
 
 </body>
 </html>
