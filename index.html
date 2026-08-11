@@ -1,10 +1,17 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0"
+>
 
 <title>Aziz & Madina — MyInviter</title>
+
 
 <style>
 
@@ -24,25 +31,38 @@ body{
   font-family:Georgia,"Times New Roman",serif;
 }
 
+
+/* HERO */
+
 .hero{
   min-height:100vh;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   text-align:center;
+
   padding:40px 20px;
+
   position:relative;
   overflow:hidden;
 }
 
 .hero::before,
 .hero::after{
+
   content:"";
+
   position:absolute;
+
   width:280px;
   height:280px;
+
   border:1px solid #d8c8b7;
+
   border-radius:50%;
+
   opacity:.45;
 }
 
@@ -56,198 +76,353 @@ body{
   bottom:-150px;
 }
 
+
 .content{
+
   width:100%;
   max-width:600px;
+
   position:relative;
   z-index:2;
+
   animation:fadeUp 1.4s ease;
 }
 
+
 @keyframes fadeUp{
+
   from{
     opacity:0;
     transform:translateY(30px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
   }
+
 }
+
+
+/* TEXT */
 
 .label{
+
   letter-spacing:4px;
+
   font-size:11px;
+
   text-transform:uppercase;
+
   color:#9b836c;
+
   margin-bottom:25px;
 }
+
 
 .photo{
+
   width:180px;
   height:180px;
+
   border-radius:50%;
+
   object-fit:cover;
+
   border:7px solid #fffdf9;
-  box-shadow:0 8px 30px rgba(70,50,35,.12);
+
+  box-shadow:
+  0 8px 30px rgba(70,50,35,.12);
+
   margin-bottom:25px;
 }
 
+
 h1{
+
   font-size:52px;
+
   font-weight:normal;
+
   line-height:1.1;
 }
 
+
 .and{
+
   font-size:25px;
+
   font-style:italic;
+
   color:#aa927b;
+
   margin:10px 0;
 }
 
+
 .divider{
+
   width:70px;
   height:1px;
+
   background:#bda990;
+
   margin:25px auto;
 }
 
+
 .text{
+
   line-height:1.8;
+
   font-size:16px;
+
   color:#6d6259;
 }
 
+
 .date{
+
   margin-top:25px;
+
   letter-spacing:3px;
+
   font-size:14px;
 }
 
+
+/* COUNTDOWN */
+
 .countdown{
+
   display:flex;
+
   justify-content:center;
+
   gap:8px;
+
   margin:30px 0;
 }
 
+
 .box{
+
   width:68px;
+
   padding:13px 5px;
+
   background:#fffdf9;
+
   border:1px solid #e5dbcf;
-  box-shadow:0 5px 18px rgba(70,50,35,.06);
+
+  box-shadow:
+  0 5px 18px rgba(70,50,35,.06);
 }
 
+
 .box b{
+
   display:block;
+
   font-size:22px;
+
   font-weight:normal;
 }
 
+
 .box span{
+
   font-size:8px;
+
   letter-spacing:1px;
+
   color:#9b836c;
 }
 
+
+/* BUTTONS */
+
 .buttons{
+
   display:flex;
+
   justify-content:center;
+
   gap:10px;
+
   flex-wrap:wrap;
+
   margin-top:20px;
 }
 
+
 .button{
+
   display:inline-block;
+
   padding:13px 23px;
+
   border:1px solid #9b836c;
+
   color:#5c4d40;
+
   text-decoration:none;
+
   letter-spacing:1px;
+
   font-size:11px;
+
   background:transparent;
+
   cursor:pointer;
+
   transition:.3s;
 }
 
+
 .button:hover{
+
   background:#5c4d40;
+
   color:white;
+
 }
+
+
+/* MUSIC */
 
 .music{
+
   position:fixed;
+
   right:18px;
+
   top:18px;
+
   width:45px;
+
   height:45px;
+
   border-radius:50%;
+
   border:1px solid #bda990;
+
   background:#fffdf9;
+
   color:#5c4d40;
+
   z-index:20;
+
   cursor:pointer;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+  box-shadow:
+  0 5px 20px rgba(0,0,0,.08);
 }
 
+
+/* SECTION */
+
 .section{
+
   background:#fffdf9;
+
   text-align:center;
+
   padding:80px 22px;
 }
 
+
 .section h2{
+
   font-size:32px;
+
   font-weight:normal;
+
   margin-bottom:20px;
 }
 
+
 .location{
+
   line-height:2;
+
   color:#6d6259;
+
   margin-bottom:28px;
 }
 
+
+/* RSVP */
+
 .rsvp{
+
   max-width:430px;
+
   margin:0 auto;
 }
+
 
 .rsvp input,
 .rsvp select,
 .rsvp textarea{
+
   width:100%;
+
   padding:14px;
+
   margin-bottom:12px;
+
   border:1px solid #dfd4c7;
+
   background:#fdfbf8;
+
   color:#40372f;
+
   font-family:inherit;
+
   outline:none;
 }
 
+
 .rsvp textarea{
+
   height:100px;
+
   resize:none;
 }
 
+
 .message{
+
   margin-top:15px;
+
   color:#7d6652;
+
   font-size:14px;
+
+  min-height:20px;
 }
 
+
+/* FOOTER */
+
 footer{
+
   text-align:center;
+
   padding:30px;
+
   background:#f7f3ed;
+
   font-size:11px;
+
   letter-spacing:2px;
+
   color:#9b836c;
 }
+
+
+/* MOBILE */
 
 @media(max-width:500px){
 
@@ -256,249 +431,519 @@ footer{
   }
 
   .photo{
+
     width:155px;
+
     height:155px;
+
   }
 
   .countdown{
+
     gap:5px;
+
   }
 
   .box{
+
     width:62px;
+
   }
 
   .box b{
+
     font-size:19px;
+
   }
 
 }
 
 </style>
+
 </head>
+
 
 <body>
 
-<button class="music" onclick="toggleMusic()" id="musicButton">
+
+<!-- MUSIC BUTTON -->
+
+<button
+class="music"
+onclick="toggleMusic()"
+id="musicButton"
+type="button"
+>
+
 ♪
+
 </button>
 
+
 <audio id="music">
+
   <source
     src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    type="audio/mpeg">
+    type="audio/mpeg"
+  >
+
 </audio>
 
+
+
+<!-- HERO -->
 
 <section class="hero">
 
 <div class="content">
 
+
 <div class="label">
+
 Sizni to'yimizga taklif qilamiz
+
 </div>
 
+
 <img
+
 class="photo"
+
 src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
-alt="Aziz va Madina">
 
-<h1>Aziz</h1>
+alt="Aziz va Madina"
 
-<div class="and">&</div>
+>
 
-<h1>Madina</h1>
+
+<h1>
+
+Aziz
+
+</h1>
+
+
+<div class="and">
+
+&
+
+</div>
+
+
+<h1>
+
+Madina
+
+</h1>
+
 
 <div class="divider"></div>
 
+
 <p class="text">
+
 Hayotimizdagi eng go'zal kunni
+
 siz bilan birga nishonlashdan
+
 mamnun bo'lamiz.
+
 </p>
 
+
 <div class="date">
+
 20 · SENTYABR · 2026
+
 </div>
+
+
+
+<!-- COUNTDOWN -->
 
 <div class="countdown">
 
-<div class="box">
-<b id="days">00</b>
-<span>KUN</span>
-</div>
 
 <div class="box">
-<b id="hours">00</b>
-<span>SOAT</span>
+
+<b id="days">
+00
+</b>
+
+<span>
+KUN
+</span>
+
 </div>
+
 
 <div class="box">
-<b id="minutes">00</b>
-<span>DAQIQA</span>
+
+<b id="hours">
+00
+</b>
+
+<span>
+SOAT
+</span>
+
 </div>
+
 
 <div class="box">
-<b id="seconds">00</b>
-<span>SONIYA</span>
-</div>
+
+<b id="minutes">
+00
+</b>
+
+<span>
+DAQIQA
+</span>
 
 </div>
+
+
+<div class="box">
+
+<b id="seconds">
+00
+</b>
+
+<span>
+SONIYA
+</span>
+
+</div>
+
+
+</div>
+
+
 
 <div class="buttons">
 
-<a href="#location" class="button">
+
+<a
+href="#location"
+class="button"
+>
+
 MANZIL
+
 </a>
 
-<a href="#rsvp" class="button">
+
+<a
+href="#rsvp"
+class="button"
+>
+
 RSVP
+
 </a>
+
 
 </div>
+
 
 </div>
 
 </section>
 
 
-<section class="section" id="location">
 
-<h2>To'y manzili</h2>
+<!-- LOCATION -->
+
+<section
+class="section"
+id="location"
+>
+
+
+<h2>
+
+To'y manzili
+
+</h2>
+
 
 <div class="location">
 
-<p>Grand Wedding Palace</p>
-<p>Toshkent shahri</p>
-<p>20-sentyabr · 18:00</p>
+
+<p>
+Grand Wedding Palace
+</p>
+
+
+<p>
+Toshkent shahri
+</p>
+
+
+<p>
+20-sentyabr · 18:00
+</p>
+
 
 </div>
 
+
 <a
+
 href="https://maps.google.com"
+
 target="_blank"
-class="button">
+
+class="button"
+
+>
+
 GOOGLE MAPS
+
 </a>
+
 
 </section>
 
 
-<section class="section" id="rsvp">
 
-<h2>Ishtirokingizni tasdiqlang</h2>
+<!-- RSVP -->
 
-<p class="text" style="margin-bottom:25px;">
+<section
+class="section"
+id="rsvp"
+>
+
+
+<h2>
+
+Ishtirokingizni tasdiqlang
+
+</h2>
+
+
+<p
+class="text"
+style="margin-bottom:25px;"
+>
+
 Sizni kutib qolamiz ❤️
+
 </p>
 
-<form class="rsvp" onsubmit="sendRSVP(event)">
+
+
+<form
+class="rsvp"
+id="rsvpForm"
+>
+
 
 <input
-type="text"
-placeholder="Ismingiz"
-required>
 
-<select required>
+type="text"
+
+id="guestName"
+
+placeholder="Ismingiz"
+
+required
+
+>
+
+
+<select
+
+id="attendance"
+
+required
+
+>
 
 <option value="">
+
 Ishtirokingiz
+
 </option>
+
 
 <option value="Albatta kelaman">
+
 Albatta kelaman
+
 </option>
 
+
 <option value="Kela olmayman">
+
 Kela olmayman
+
 </option>
+
 
 </select>
 
-<textarea
-placeholder="Tilak yoki izohingiz">
-</textarea>
 
-<button class="button" type="submit">
+<textarea
+
+id="guestMessage"
+
+placeholder="Tilak yoki izohingiz"
+
+></textarea>
+
+
+<button
+
+class="button"
+
+type="submit"
+
+>
+
 TASDIQLASH
+
 </button>
 
-<div class="message" id="message"></div>
+
+<div
+
+class="message"
+
+id="message"
+
+></div>
+
 
 </form>
+
 
 </section>
 
 
+
+<!-- FOOTER -->
+
 <footer>
+
 MYINVITER · 2026
+
 </footer>
+
 
 
 <!-- SUPABASE -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script
+src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+
 
 <script>
+
+
+/* =========================
+   SUPABASE
+========================= */
+
 
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
-const db = supabase.createClient(
+
+const db =
+supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
 
 
-/* COUNTDOWN */
+
+/* =========================
+   COUNTDOWN
+========================= */
+
 
 const weddingDate =
-new Date("September 20, 2026 18:00:00").getTime();
+new Date(
+  "September 20, 2026 18:00:00"
+).getTime();
+
 
 function countdown(){
+
 
   const now =
   new Date().getTime();
 
+
   const distance =
   weddingDate - now;
 
-  if(distance <= 0) return;
+
+  if(distance <= 0){
+
+    document.getElementById("days").innerText = "00";
+
+    document.getElementById("hours").innerText = "00";
+
+    document.getElementById("minutes").innerText = "00";
+
+    document.getElementById("seconds").innerText = "00";
+
+    return;
+
+  }
+
 
   document.getElementById("days").innerText =
+
   String(
     Math.floor(
-      distance/(1000*60*60*24)
+      distance /
+      (1000 * 60 * 60 * 24)
     )
   ).padStart(2,"0");
+
 
   document.getElementById("hours").innerText =
+
   String(
     Math.floor(
-      (distance/(1000*60*60))%24
+      (distance /
+      (1000 * 60 * 60)) % 24
     )
   ).padStart(2,"0");
+
 
   document.getElementById("minutes").innerText =
+
   String(
     Math.floor(
-      (distance/(1000*60))%60
+      (distance /
+      (1000 * 60)) % 60
     )
   ).padStart(2,"0");
 
+
   document.getElementById("seconds").innerText =
+
   String(
     Math.floor(
-      (distance/1000)%60
+      (distance / 1000) % 60
     )
   ).padStart(2,"0");
 
 }
 
+
 countdown();
+
 
 setInterval(
   countdown,
@@ -506,67 +951,109 @@ setInterval(
 );
 
 
-/* MUSIC */
+
+/* =========================
+   MUSIC
+========================= */
+
 
 const music =
 document.getElementById("music");
 
+
 function toggleMusic(){
+
 
   if(music.paused){
 
+
     music.play();
+
 
     document.getElementById(
       "musicButton"
-    ).innerText="Ⅱ";
+    ).innerText = "Ⅱ";
+
 
   }else{
 
+
     music.pause();
+
 
     document.getElementById(
       "musicButton"
-    ).innerText="♪";
+    ).innerText = "♪";
+
 
   }
 
 }
 
 
-/* RSVP → SUPABASE */
+
+/* =========================
+   RSVP
+========================= */
+
+
+const rsvpForm =
+document.getElementById(
+  "rsvpForm"
+);
+
+
+rsvpForm.addEventListener(
+  "submit",
+  sendRSVP
+);
+
+
 
 async function sendRSVP(event){
 
+
   event.preventDefault();
 
-  const form =
-  event.target;
 
   const guestName =
-  form.querySelector(
-    'input[type="text"]'
-  ).value;
+  document.getElementById(
+    "guestName"
+  ).value.trim();
+
 
   const attendance =
-  form.querySelector(
-    'select'
+  document.getElementById(
+    "attendance"
   ).value;
 
-  const message =
-  form.querySelector(
-    'textarea'
-  ).value;
+
+  const guestMessage =
+  document.getElementById(
+    "guestMessage"
+  ).value.trim();
+
 
   const messageBox =
   document.getElementById(
     "message"
   );
 
+
   messageBox.innerText =
   "Yuborilmoqda...";
 
-  const { error } =
+
+  const submitButton =
+  rsvpForm.querySelector(
+    'button[type="submit"]'
+  );
+
+
+  submitButton.disabled = true;
+
+
+  const { data, error } =
   await db
   .from("rsvps")
   .insert({
@@ -581,21 +1068,51 @@ async function sendRSVP(event){
     attendance,
 
     message:
-    message
+    guestMessage
 
-  });
+  })
+  .select();
 
 
-if(error){
-  console.error(error);
+  submitButton.disabled = false;
+
+
+  if(error){
+
+
+    console.error(
+      "SUPABASE ERROR:",
+      error
+    );
+
+
+    messageBox.innerText =
+    "XATO: " + error.message;
+
+
+    return;
+
+  }
+
+
+  console.log(
+    "RSVP SAVED:",
+    data
+  );
+
 
   messageBox.innerText =
-  "XATO: " + error.message;
+  "Rahmat! Ishtirokingiz qayd etildi ❤️";
 
-  return;
+
+  rsvpForm.reset();
+
 }
+
 
 </script>
 
+
 </body>
+
 </html>
