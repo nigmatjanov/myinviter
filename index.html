@@ -491,14 +491,50 @@ document.getElementById("musicButton")
 }
 
 
-function sendRSVP(event){
+async function sendRSVP(event){
 
 event.preventDefault();
 
-document.getElementById("message").innerText =
+const form = event.target;
+
+const guestName =
+form.querySelector('input[type="text"]').value;
+
+const attendance =
+form.querySelector('select').value;
+
+const message =
+form.querySelector('textarea').value;
+
+const messageBox =
+document.getElementById("message");
+
+messageBox.innerText = "Yuborilmoqda...";
+
+const { error } = await db
+.from("rsvps")
+.insert({
+  invitation_id: "aziz-madina",
+  guest_name: guestName,
+  attendance: attendance,
+  message: message
+});
+
+if(error){
+
+console.error(error);
+
+messageBox.innerText =
+"Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
+
+return;
+
+}
+
+messageBox.innerText =
 "Rahmat! Ishtirokingiz qayd etildi ❤️";
 
-event.target.reset();
+form.reset();
 
 }
 
