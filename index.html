@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Aziz & Madina — MyInviter</title>
+<title>MyInviter — Taklifnoma</title>
 
 <style>
 *{
@@ -60,7 +60,7 @@ body{
   max-width:600px;
   position:relative;
   z-index:2;
-  animation:fadeUp 1.4s ease;
+  animation:fadeUp 1.2s ease;
 }
 
 @keyframes fadeUp{
@@ -68,6 +68,7 @@ body{
     opacity:0;
     transform:translateY(30px);
   }
+
   to{
     opacity:1;
     transform:translateY(0);
@@ -248,7 +249,20 @@ footer{
   color:#9b836c;
 }
 
+.loading{
+  text-align:center;
+  padding:40px 20px;
+  color:#9b836c;
+}
+
+.error{
+  text-align:center;
+  padding:40px 20px;
+  color:#a44;
+}
+
 @media(max-width:500px){
+
   h1{
     font-size:43px;
   }
@@ -273,7 +287,16 @@ footer{
 </style>
 </head>
 
+
 <body>
+
+<div id="loading" class="loading">
+  Taklifnoma yuklanmoqda...
+</div>
+
+
+<div id="invitation" style="display:none;">
+
 
 <button
   class="music"
@@ -281,6 +304,7 @@ footer{
   id="musicButton">
   ♪
 </button>
+
 
 <audio id="music">
   <source
@@ -291,76 +315,95 @@ footer{
 
 <section class="hero">
 
-  <div class="content">
+<div class="content">
 
-    <div class="label">
-      Sizni to'yimizga taklif qilamiz
-    </div>
+<div class="label">
+Sizni to'yimizga taklif qilamiz
+</div>
 
-    <img
-      class="photo"
-      src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
-      alt="Aziz va Madina">
 
-    <h1>Aziz</h1>
+<img
+  id="photo"
+  class="photo"
+  src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
+  alt="To'y rasmi">
 
-    <div class="and">&</div>
 
-    <h1>Madina</h1>
+<h1 id="groomName">
+Aziz
+</h1>
 
-    <div class="divider"></div>
 
-    <p class="text">
-      Hayotimizdagi eng go'zal kunni
-      siz bilan birga nishonlashdan
-      mamnun bo'lamiz.
-    </p>
+<div class="and">
+&
+</div>
 
-    <div class="date">
-      20 · SENTYABR · 2026
-    </div>
 
-    <div class="countdown">
+<h1 id="brideName">
+Madina
+</h1>
 
-      <div class="box">
-        <b id="days">00</b>
-        <span>KUN</span>
-      </div>
 
-      <div class="box">
-        <b id="hours">00</b>
-        <span>SOAT</span>
-      </div>
+<div class="divider">
+</div>
 
-      <div class="box">
-        <b id="minutes">00</b>
-        <span>DAQIQA</span>
-      </div>
 
-      <div class="box">
-        <b id="seconds">00</b>
-        <span>SONIYA</span>
-      </div>
+<p class="text">
+Hayotimizdagi eng go'zal kunni
+siz bilan birga nishonlashdan
+mamnun bo'lamiz.
+</p>
 
-    </div>
 
-    <div class="buttons">
+<div
+  class="date"
+  id="eventDate">
+20 · SENTYABR · 2026
+</div>
 
-      <a
-        href="#location"
-        class="button">
-        MANZIL
-      </a>
 
-      <a
-        href="#rsvp"
-        class="button">
-        RSVP
-      </a>
+<div class="countdown">
 
-    </div>
+<div class="box">
+<b id="days">00</b>
+<span>KUN</span>
+</div>
 
-  </div>
+<div class="box">
+<b id="hours">00</b>
+<span>SOAT</span>
+</div>
+
+<div class="box">
+<b id="minutes">00</b>
+<span>DAQIQA</span>
+</div>
+
+<div class="box">
+<b id="seconds">00</b>
+<span>SONIYA</span>
+</div>
+
+</div>
+
+
+<div class="buttons">
+
+<a
+  href="#location"
+  class="button">
+  MANZIL
+</a>
+
+<a
+  href="#rsvp"
+  class="button">
+  RSVP
+</a>
+
+</div>
+
+</div>
 
 </section>
 
@@ -369,23 +412,38 @@ footer{
   class="section"
   id="location">
 
-  <h2>To'y manzili</h2>
+<h2>
+To'y manzili
+</h2>
 
-  <div class="location">
 
-    <p>Grand Wedding Palace</p>
-    <p>Toshkent shahri</p>
-    <p>20-sentyabr · 18:00</p>
+<div class="location">
 
-  </div>
+<p id="venue">
+Grand Wedding Palace
+</p>
 
-  <a
-    href="https://maps.google.com"
-    target="_blank"
-    rel="noopener"
-    class="button">
-    GOOGLE MAPS
-  </a>
+<p id="address">
+Toshkent shahri
+</p>
+
+<p id="locationDate">
+20-sentyabr · 18:00
+</p>
+
+</div>
+
+
+<a
+  id="mapsButton"
+  href="https://maps.google.com"
+  target="_blank"
+  rel="noopener"
+  class="button">
+
+GOOGLE MAPS
+
+</a>
 
 </section>
 
@@ -394,205 +452,465 @@ footer{
   class="section"
   id="rsvp">
 
-  <h2>Ishtirokingizni tasdiqlang</h2>
+<h2>
+Ishtirokingizni tasdiqlang
+</h2>
 
-  <p
-    class="text"
-    style="margin-bottom:25px;">
-    Sizni kutib qolamiz ❤️
-  </p>
 
-  <form
-    class="rsvp"
-    onsubmit="sendRSVP(event)">
+<p
+  class="text"
+  style="margin-bottom:25px;">
 
-    <input
-      type="text"
-      placeholder="Ismingiz"
-      required>
+Sizni kutib qolamiz ❤️
 
-    <select required>
+</p>
 
-      <option value="">
-        Ishtirokingiz
-      </option>
 
-      <option value="Albatta kelaman">
-        Albatta kelaman
-      </option>
+<form
+  class="rsvp"
+  onsubmit="sendRSVP(event)">
 
-      <option value="Kela olmayman">
-        Kela olmayman
-      </option>
 
-    </select>
+<input
+  type="text"
+  placeholder="Ismingiz"
+  required>
 
-    <textarea
-      placeholder="Tilak yoki izohingiz">
-    </textarea>
 
-    <button
-      class="button"
-      type="submit">
-      TASDIQLASH
-    </button>
+<select required>
 
-    <div
-      class="message"
-      id="message">
-    </div>
+<option value="">
+Ishtirokingiz
+</option>
 
-  </form>
+<option value="Albatta kelaman">
+Albatta kelaman
+</option>
+
+<option value="Kela olmayman">
+Kela olmayman
+</option>
+
+</select>
+
+
+<textarea
+  placeholder="Tilak yoki izohingiz">
+</textarea>
+
+
+<button
+  class="button"
+  type="submit">
+
+TASDIQLASH
+
+</button>
+
+
+<div
+  class="message"
+  id="message">
+</div>
+
+
+</form>
 
 </section>
 
 
 <footer>
-  MYINVITER · 2026
+MYINVITER · 2026
 </footer>
 
+</div>
 
-<!-- SUPABASE -->
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
+</script>
+
 
 <script>
 
+/* =========================
+   SUPABASE
+========================= */
+
 const SUPABASE_URL =
-  "https://bhqdkzeueunfhompvywm.supabase.co";
+"https://bhqdkzeueunfhompvywm.supabase.co";
 
 const SUPABASE_KEY =
-  "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
+"sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
 const db =
-  supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
+supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
 
 
-/* COUNTDOWN */
+/* =========================
+   INVITATION ID
+========================= */
 
-const weddingDate =
-  new Date(
-    "September 20, 2026 18:00:00"
-  ).getTime();
+const INVITATION_ID = 1;
 
-function countdown(){
 
-  const now =
-    new Date().getTime();
+/* =========================
+   LOAD INVITATION
+========================= */
 
-  const distance =
-    weddingDate - now;
+async function loadInvitation(){
 
-  if(distance <= 0){
+  const loading =
+  document.getElementById("loading");
 
-    document.getElementById("days").innerText = "00";
-    document.getElementById("hours").innerText = "00";
-    document.getElementById("minutes").innerText = "00";
-    document.getElementById("seconds").innerText = "00";
+  const invitation =
+  document.getElementById("invitation");
+
+
+  const { data, error } =
+  await db
+    .from("invitations")
+    .select("*")
+    .eq("id", INVITATION_ID)
+    .single();
+
+
+  if(error){
+
+    console.error(
+      "Invitation error:",
+      error
+    );
+
+    loading.innerText =
+      "Taklifnomani yuklashda xatolik yuz berdi.";
 
     return;
   }
 
-  document.getElementById("days").innerText =
-    String(
-      Math.floor(
-        distance / (1000 * 60 * 60 * 24)
-      )
-    ).padStart(2,"0");
 
-  document.getElementById("hours").innerText =
-    String(
-      Math.floor(
-        (distance / (1000 * 60 * 60)) % 24
-      )
-    ).padStart(2,"0");
+  if(!data){
 
-  document.getElementById("minutes").innerText =
-    String(
-      Math.floor(
-        (distance / (1000 * 60)) % 60
-      )
-    ).padStart(2,"0");
+    loading.innerText =
+      "Taklifnoma topilmadi.";
 
-  document.getElementById("seconds").innerText =
-    String(
-      Math.floor(
-        (distance / 1000) % 60
-      )
-    ).padStart(2,"0");
+    return;
+  }
+
+
+  /* NAMES */
+
+  document.getElementById(
+    "groomName"
+  ).innerText =
+    data.groom_name || "Aziz";
+
+
+  document.getElementById(
+    "brideName"
+  ).innerText =
+    data.bride_name || "Madina";
+
+
+  /* VENUE */
+
+  document.getElementById(
+    "venue"
+  ).innerText =
+    data.venue || "";
+
+
+  /* ADDRESS */
+
+  document.getElementById(
+    "address"
+  ).innerText =
+    data.address || "";
+
+
+  /* MAP */
+
+  if(data.maps_url){
+
+    document.getElementById(
+      "mapsButton"
+    ).href =
+      data.maps_url;
+
+  }
+
+
+  /* DATE */
+
+  if(data.event_date){
+
+    const date =
+      new Date(
+        data.event_date + "T18:00:00"
+      );
+
+    const months = [
+      "YANVAR",
+      "FEVRAL",
+      "MART",
+      "APREL",
+      "MAY",
+      "IYUN",
+      "IYUL",
+      "AVGUST",
+      "SENTYABR",
+      "OKTYABR",
+      "NOYABR",
+      "DEKABR"
+    ];
+
+
+    const day =
+      String(
+        date.getDate()
+      ).padStart(2,"0");
+
+
+    const month =
+      months[
+        date.getMonth()
+      ];
+
+
+    const year =
+      date.getFullYear();
+
+
+    document.getElementById(
+      "eventDate"
+    ).innerText =
+      day +
+      " · " +
+      month +
+      " · " +
+      year;
+
+
+    document.getElementById(
+      "locationDate"
+    ).innerText =
+      day +
+      "-" +
+      month.toLowerCase() +
+      " · 18:00";
+
+
+    startCountdown(
+      date.getTime()
+    );
+
+  }
+
+
+  loading.style.display =
+    "none";
+
+  invitation.style.display =
+    "block";
 
 }
 
-countdown();
 
-setInterval(
-  countdown,
-  1000
-);
+/* =========================
+   COUNTDOWN
+========================= */
+
+let countdownTimer;
 
 
-/* MUSIC */
+function startCountdown(
+  weddingDate
+){
+
+  if(countdownTimer){
+    clearInterval(
+      countdownTimer
+    );
+  }
+
+
+  function countdown(){
+
+    const now =
+      new Date().getTime();
+
+    const distance =
+      weddingDate - now;
+
+
+    if(distance <= 0){
+
+      document.getElementById(
+        "days"
+      ).innerText = "00";
+
+      document.getElementById(
+        "hours"
+      ).innerText = "00";
+
+      document.getElementById(
+        "minutes"
+      ).innerText = "00";
+
+      document.getElementById(
+        "seconds"
+      ).innerText = "00";
+
+      return;
+    }
+
+
+    document.getElementById(
+      "days"
+    ).innerText =
+      String(
+        Math.floor(
+          distance /
+          (1000*60*60*24)
+        )
+      ).padStart(2,"0");
+
+
+    document.getElementById(
+      "hours"
+    ).innerText =
+      String(
+        Math.floor(
+          (distance /
+          (1000*60*60)) % 24
+        )
+      ).padStart(2,"0");
+
+
+    document.getElementById(
+      "minutes"
+    ).innerText =
+      String(
+        Math.floor(
+          (distance /
+          (1000*60)) % 60
+        )
+      ).padStart(2,"0");
+
+
+    document.getElementById(
+      "seconds"
+    ).innerText =
+      String(
+        Math.floor(
+          (distance / 1000) % 60
+        )
+      ).padStart(2,"0");
+
+  }
+
+
+  countdown();
+
+  countdownTimer =
+    setInterval(
+      countdown,
+      1000
+    );
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
 
 const music =
-  document.getElementById("music");
+document.getElementById("music");
+
 
 function toggleMusic(){
 
   const button =
-    document.getElementById("musicButton");
+  document.getElementById(
+    "musicButton"
+  );
+
 
   if(music.paused){
 
     music.play()
       .then(() => {
-        button.innerText = "Ⅱ";
+
+        button.innerText =
+          "Ⅱ";
+
       })
       .catch(() => {
-        button.innerText = "♪";
+
+        button.innerText =
+          "♪";
+
       });
 
   }else{
 
     music.pause();
 
-    button.innerText = "♪";
+    button.innerText =
+      "♪";
 
   }
 
 }
 
 
-/* RSVP → SUPABASE */
+/* =========================
+   RSVP
+========================= */
 
 async function sendRSVP(event){
 
   event.preventDefault();
 
+
   const form =
-    event.target;
+  event.target;
+
 
   const guestName =
-    form.querySelector(
+  form
+    .querySelector(
       'input[type="text"]'
-    ).value.trim();
+    )
+    .value
+    .trim();
+
 
   const attendance =
-    form.querySelector(
+  form
+    .querySelector(
       "select"
-    ).value;
+    )
+    .value;
+
 
   const message =
-    form.querySelector(
+  form
+    .querySelector(
       "textarea"
-    ).value.trim();
+    )
+    .value
+    .trim();
+
 
   const messageBox =
-    document.getElementById(
-      "message"
-    );
+  document.getElementById(
+    "message"
+  );
+
 
   if(!guestName){
 
@@ -600,7 +918,9 @@ async function sendRSVP(event){
       "Iltimos, ismingizni kiriting.";
 
     return;
+
   }
+
 
   if(!attendance){
 
@@ -608,10 +928,13 @@ async function sendRSVP(event){
       "Iltimos, ishtirokingizni tanlang.";
 
     return;
+
   }
+
 
   messageBox.innerText =
     "Yuborilmoqda...";
+
 
   try{
 
@@ -619,29 +942,44 @@ async function sendRSVP(event){
       await db
         .from("rsvps")
         .insert({
-          invitation_id: 1,
-          guest_name: guestName,
-          attendance: attendance,
-          message: message
+
+          invitation_id:
+            INVITATION_ID,
+
+          guest_name:
+            guestName,
+
+          attendance:
+            attendance,
+
+          message:
+            message
+
         });
+
 
     if(error){
 
       console.error(
-        "Supabase RSVP error:",
+        "RSVP error:",
         error
       );
 
       messageBox.innerText =
-        "XATO: " + error.message;
+        "XATO: " +
+        error.message;
 
       return;
+
     }
+
 
     messageBox.innerText =
       "Rahmat! Ishtirokingiz qayd etildi ❤️";
 
+
     form.reset();
+
 
   }catch(error){
 
@@ -656,6 +994,13 @@ async function sendRSVP(event){
   }
 
 }
+
+
+/* =========================
+   START
+========================= */
+
+loadInvitation();
 
 </script>
 
