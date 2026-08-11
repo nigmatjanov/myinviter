@@ -2,38 +2,43 @@
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MyInviter — Admin</title>
+
 <style>
 *{
   box-sizing:border-box;
   margin:0;
   padding:0;
 }
+
 body{
   background:#f7f3ed;
   color:#40372f;
   font-family:Georgia,"Times New Roman",serif;
   padding:25px 15px 50px;
 }
+
 .container{
   max-width:600px;
-  margin:0 auto;
+  margin:auto;
 }
+
 h1{
   text-align:center;
   font-size:34px;
   font-weight:normal;
   margin:20px 0 10px;
 }
+
 .subtitle{
   text-align:center;
   color:#8d7a68;
   font-size:14px;
   margin-bottom:30px;
 }
+
 .card{
   background:#fffdf9;
   padding:25px;
@@ -41,20 +46,21 @@ h1{
   border:1px solid #e5dbcf;
   box-shadow:0 5px 20px rgba(70,50,35,.06);
 }
+
 .card h2{
   font-size:20px;
   font-weight:normal;
   margin-bottom:20px;
 }
+
 label{
   display:block;
   font-size:12px;
   color:#7d6b5a;
   margin-bottom:7px;
-  letter-spacing:.5px;
 }
-input,
-textarea{
+
+input{
   width:100%;
   padding:13px;
   margin-bottom:17px;
@@ -64,12 +70,9 @@ textarea{
   font-family:inherit;
   outline:none;
 }
-textarea{
-  min-height:80px;
-  resize:vertical;
-}
+
 .button{
-  display:inline-block;
+  display:block;
   width:100%;
   padding:14px;
   border:1px solid #9b836c;
@@ -81,19 +84,19 @@ textarea{
   letter-spacing:1px;
   cursor:pointer;
 }
-.button:hover{
-  opacity:.9;
-}
+
 .photos{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
   margin-bottom:20px;
 }
+
 .photo-option{
   position:relative;
   cursor:pointer;
 }
+
 .photo-option img{
   width:100%;
   aspect-ratio:9/12;
@@ -101,19 +104,22 @@ textarea{
   display:block;
   border:3px solid transparent;
 }
+
 .photo-option input{
   position:absolute;
   opacity:0;
 }
+
 .photo-option input:checked + img{
   border-color:#9b836c;
 }
+
 .upload-box{
   border:1px dashed #bda990;
   padding:20px;
   text-align:center;
-  margin-top:10px;
 }
+
 .preview{
   display:none;
   width:150px;
@@ -121,22 +127,23 @@ textarea{
   object-fit:cover;
   border-radius:50%;
   margin:15px auto;
-  border:5px solid white;
-  box-shadow:0 5px 20px rgba(0,0,0,.1);
 }
+
 .message{
   text-align:center;
   margin-top:15px;
   font-size:14px;
-  color:#7d6652;
   line-height:1.6;
 }
+
 .success{
   color:#527052;
 }
+
 .error{
   color:#9b4b4b;
 }
+
 .small{
   font-size:11px;
   color:#9b836c;
@@ -145,282 +152,363 @@ textarea{
 }
 </style>
 </head>
+
 <body>
+
 <div class="container">
+
 <h1>MyInviter</h1>
+
 <p class="subtitle">
 Taklifnoma boshqaruv paneli
 </p>
-<!-- =========================
-     INVITATION
-========================= -->
+
+
+<!-- TAKLIFNOMA -->
+
 <div class="card">
-<h2>
-💍 Taklifnoma
-</h2>
-<label>
-Kuyov ismi
-</label>
+
+<h2>💍 Taklifnoma</h2>
+
+<label>Kuyov ismi</label>
+
 <input
   id="groomName"
   type="text"
   placeholder="Masalan: Aziz">
-<label>
-Kelin ismi
-</label>
+
+
+<label>Kelin ismi</label>
+
 <input
   id="brideName"
   type="text"
   placeholder="Masalan: Madina">
-<label>
-To‘y sanasi
-</label>
+
+
+<label>To‘y sanasi</label>
+
 <input
   id="eventDate"
   type="date">
-<label>
-To‘y joyi
-</label>
+
+
+<label>To‘y joyi</label>
+
 <input
   id="venue"
   type="text"
-  placeholder="Masalan: Ozbegim restorani">
-<label>
-Manzil
-</label>
+  placeholder="Masalan: Ozbegim">
+
+
+<label>Manzil</label>
+
 <input
   id="address"
   type="text"
   placeholder="Masalan: Chirchiq">
-<label>
-Google Maps link
-</label>
+
+
+<label>Google Maps link</label>
+
 <input
   id="mapsUrl"
   type="url"
-  placeholder="https://maps.google.com/...">
+  placeholder="https://maps.google.com">
+
+
 </div>
-<!-- =========================
-     PHOTOS
-========================= -->
+
+
+<!-- RASMLAR -->
+
 <div class="card">
-<h2>
-🖼 Rasm tanlash
-</h2>
+
+<h2>🖼 Rasm</h2>
+
 <div class="photos">
+
 <label class="photo-option">
+
 <input
   type="radio"
   name="photoChoice"
   value="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
   checked>
+
 <img
-  src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-  alt="Classic">
+  src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80">
+
 </label>
+
+
 <label class="photo-option">
+
 <input
   type="radio"
   name="photoChoice"
   value="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
+
 <img
-  src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80"
-  alt="Romantic">
+  src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
+
 </label>
+
+
 <label class="photo-option">
+
 <input
   type="radio"
   name="photoChoice"
   value="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80">
+
 <img
-  src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80"
-  alt="Premium">
+  src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80">
+
 </label>
+
+
 <label class="photo-option">
+
 <input
   type="radio"
   name="photoChoice"
   value="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
+
 <img
-  src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80"
-  alt="Nature">
+  src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
+
 </label>
+
 </div>
+
+
 <div class="upload-box">
+
 <label>
 📸 O‘z rasmini yuklash
 </label>
+
 <input
   id="photoUpload"
   type="file"
   accept="image/*">
+
 <img
   id="preview"
-  class="preview"
-  alt="Preview">
+  class="preview">
+
 <p class="small">
-Agar o‘z rasmingizni yuklasangiz,
-yuqoridagi default rasm o‘rniga shu rasm ishlatiladi.
+O‘z rasmingizni tanlasangiz,
+default rasm o‘rniga shu rasm ishlatiladi.
 </p>
+
 </div>
+
 </div>
-<!-- =========================
-     MUSIC
-========================= -->
+
+
+<!-- MUSIQA -->
+
 <div class="card">
-<h2>
-🎵 Musiqa
-</h2>
+
+<h2>🎵 Musiqa</h2>
+
 <label>
 Musiqa URL
 </label>
+
 <input
   id="musicUrl"
   type="url"
   placeholder="https://example.com/music.mp3">
-<p class="small">
-MP3 faylga to‘g‘ridan-to‘g‘ri URL kiriting.
-Bo‘sh qoldirilsa demo musiqa ishlaydi.
-</p>
+
 </div>
-<!-- =========================
-     SAVE
-========================= -->
+
+
+<!-- SAQLASH -->
+
 <div class="card">
+
 <button
   class="button"
+  type="button"
   onclick="saveInvitation()">
+
 💾 TAKLIFNOMANI SAQLASH
+
 </button>
+
 <div
   id="message"
   class="message">
 </div>
+
 </div>
+
 </div>
+
+
 <script>
-/* =================================
+
+/* =========================
    SUPABASE
-================================= */
+========================= */
+
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
+
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
-const INVITATION_ID =
-1;
-/* =================================
-   PHOTO UPLOAD
-================================= */
-let uploadedPhotoUrl =
-null;
+
+const INVITATION_ID = 1;
+
+
+/* =========================
+   CUSTOM PHOTO
+========================= */
+
+let uploadedPhoto = null;
+
+
 document
-  .getElementById("photoUpload")
-  .addEventListener(
-    "change",
-    previewPhoto
-  );
-function previewPhoto(event){
-  const file =
-    event.target.files[0];
-  if(!file){
-    return;
+.getElementById("photoUpload")
+.addEventListener(
+  "change",
+  function(event){
+
+    const file =
+      event.target.files[0];
+
+    if(!file){
+      return;
+    }
+
+    if(!file.type.startsWith("image/")){
+
+      showMessage(
+        "Faqat rasm tanlang.",
+        true
+      );
+
+      return;
+    }
+
+    if(file.size > 5 * 1024 * 1024){
+
+      showMessage(
+        "Rasm 5 MB dan kichik bo‘lishi kerak.",
+        true
+      );
+
+      return;
+    }
+
+    uploadedPhoto = file;
+
+    const preview =
+      document.getElementById("preview");
+
+    preview.src =
+      URL.createObjectURL(file);
+
+    preview.style.display =
+      "block";
   }
-  if(!file.type.startsWith("image/")){
-    showMessage(
-      "Faqat rasm faylini tanlang.",
-      true
-    );
-    return;
-  }
-  if(file.size > 5 * 1024 * 1024){
-    showMessage(
-      "Rasm hajmi 5 MB dan katta bo‘lmasin.",
-      true
-    );
-    event.target.value = "";
-    return;
-  }
-  const preview =
-    document.getElementById(
-      "preview"
-    );
-  preview.src =
-    URL.createObjectURL(file);
-  preview.style.display =
-    "block";
-  uploadedPhotoUrl =
-    file;
-}
-/* =================================
-   SAVE INVITATION
-================================= */
+);
+
+
+/* =========================
+   SAVE
+========================= */
+
 async function saveInvitation(){
-  const message =
-    document.getElementById(
-      "message"
-    );
-  message.className =
+
+  const messageBox =
+    document.getElementById("message");
+
+  messageBox.className =
     "message";
-  message.innerText =
+
+  messageBox.innerText =
     "Saqlanmoqda...";
+
+
   try{
-    /* =========================
-       DATA
-    ========================= */
+
     const groomName =
       document
-        .getElementById("groomName")
-        .value
-        .trim();
+      .getElementById("groomName")
+      .value
+      .trim();
+
+
     const brideName =
       document
-        .getElementById("brideName")
-        .value
-        .trim();
+      .getElementById("brideName")
+      .value
+      .trim();
+
+
     const eventDate =
       document
-        .getElementById("eventDate")
-        .value;
+      .getElementById("eventDate")
+      .value;
+
+
     const venue =
       document
-        .getElementById("venue")
-        .value
-        .trim();
+      .getElementById("venue")
+      .value
+      .trim();
+
+
     const address =
       document
-        .getElementById("address")
-        .value
-        .trim();
+      .getElementById("address")
+      .value
+      .trim();
+
+
     const mapsUrl =
       document
-        .getElementById("mapsUrl")
-        .value
-        .trim();
+      .getElementById("mapsUrl")
+      .value
+      .trim();
+
+
     const musicUrl =
       document
-        .getElementById("musicUrl")
-        .value
-        .trim();
+      .getElementById("musicUrl")
+      .value
+      .trim();
+
+
     /* =========================
-       PHOTO
+       DEFAULT PHOTO
     ========================= */
+
     let photoUrl =
       document
-        .querySelector(
-          'input[name="photoChoice"]:checked'
-        )
-        .value;
+      .querySelector(
+        'input[name="photoChoice"]:checked'
+      )
+      .value;
+
+
     /* =========================
-       UPLOAD CUSTOM PHOTO
+       CUSTOM PHOTO UPLOAD
     ========================= */
-    if(uploadedPhotoUrl){
-      const file =
-        uploadedPhotoUrl;
+
+    if(uploadedPhoto){
+
       const extension =
-        file.name
-          .split(".")
-          .pop()
-          .toLowerCase();
+        uploadedPhoto.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+
       const fileName =
         "invitation-" +
         INVITATION_ID +
@@ -428,148 +516,266 @@ async function saveInvitation(){
         Date.now() +
         "." +
         extension;
-      const filePath =
-        fileName;
+
+
       const uploadResponse =
         await fetch(
+
           SUPABASE_URL +
           "/storage/v1/object/invitation-photos/" +
-          filePath,
+          fileName,
+
           {
             method:"POST",
+
             headers:{
               "apikey":
                 SUPABASE_KEY,
+
               "Authorization":
                 "Bearer " +
                 SUPABASE_KEY,
+
               "Content-Type":
-                file.type,
+                uploadedPhoto.type,
+
               "x-upsert":
                 "true"
             },
-            body:file
+
+            body:uploadedPhoto
           }
         );
+
+
       if(!uploadResponse.ok){
+
         const uploadError =
           await uploadResponse
-            .json()
-            .catch(
-              function(){
-                return {};
-              }
-            );
-        console.error(
-          "Upload error:",
-          uploadError
-        );
-        throw new Error(
-          uploadError.message ||
-          "Rasm yuklanmadi"
-        );
-      }
-      photoUrl =
-        SUPABASE_URL +
-        "/storage/v1/object/public/invitation-photos/" +
-        filePath;
-    }
-    /* =========================
-       UPDATE SUPABASE
-    ========================= */
-    const updateResponse =
-      await fetch(
-        SUPABASE_URL +
-        "/rest/v1/invitations?id=eq." +
-        INVITATION_ID,
-        {
-          method:"PATCH",
-          headers:{
-            "apikey":
-              SUPABASE_KEY,
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-            "Content-Type":
-              "application/json",
-            "Prefer":
-              "return=minimal"
-          },
-          body:
-            JSON.stringify({
-              groom_name:
-                groomName,
-              bride_name:
-                brideName,
-              event_date:
-                eventDate,
-              venue:
-                venue,
-              address:
-                address,
-              maps_url:
-                mapsUrl,
-              photo_url:
-                photoUrl,
-              music_url:
-                musicUrl
-            })
-        }
-      );
-    if(!updateResponse.ok){
-      const updateError =
-        await updateResponse
           .json()
           .catch(
             function(){
               return {};
             }
           );
-      console.error(
-        "Update error:",
-        updateError
+
+
+        throw new Error(
+          uploadError.message ||
+          "Rasm yuklanmadi"
+        );
+      }
+
+
+      photoUrl =
+        SUPABASE_URL +
+        "/storage/v1/object/public/invitation-photos/" +
+        fileName;
+    }
+
+
+    /* =========================
+       DATA OBJECT
+    ========================= */
+
+    const updateData = {
+
+      groom_name:
+        groomName,
+
+      bride_name:
+        brideName,
+
+      event_date:
+        eventDate,
+
+      venue:
+        venue,
+
+      address:
+        address,
+
+      maps_url:
+        mapsUrl,
+
+      photo_url:
+        photoUrl,
+
+      music_url:
+        musicUrl
+    };
+
+
+    console.log(
+      "SAQLANAYOTGAN DATA:",
+      updateData
+    );
+
+
+    /* =========================
+       PATCH SUPABASE
+    ========================= */
+
+    const updateResponse =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/invitations?id=eq." +
+        INVITATION_ID,
+
+        {
+
+          method:"PATCH",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify(
+              updateData
+            )
+        }
       );
+
+
+    const responseText =
+      await updateResponse.text();
+
+
+    console.log(
+      "SUPABASE STATUS:",
+      updateResponse.status
+    );
+
+
+    console.log(
+      "SUPABASE RESPONSE:",
+      responseText
+    );
+
+
+    if(!updateResponse.ok){
+
+      let errorData = {};
+
+      try{
+        errorData =
+          JSON.parse(
+            responseText
+          );
+      }catch(e){}
+
+
       throw new Error(
-        updateError.message ||
-        "Taklifnoma saqlanmadi"
+        errorData.message ||
+        errorData.hint ||
+        responseText ||
+        "Taklifnoma yangilanmadi"
       );
     }
-    message.className =
+
+
+    /* =========================
+       CHECK RESULT
+    ========================= */
+
+    let result = [];
+
+    try{
+      result =
+        JSON.parse(
+          responseText
+        );
+    }catch(e){}
+
+
+    console.log(
+      "YANGILANGAN QATOR:",
+      result
+    );
+
+
+    if(
+      !Array.isArray(result) ||
+      result.length === 0
+    ){
+
+      throw new Error(
+        "UPDATE ishladi, lekin hech qanday qator o‘zgarmadi. ID 1 mavjudligini tekshirish kerak."
+      );
+    }
+
+
+    messageBox.className =
       "message success";
-    message.innerText =
+
+
+    messageBox.innerText =
       "✅ Taklifnoma muvaffaqiyatli saqlandi!";
-    uploadedPhotoUrl =
+
+
+    uploadedPhoto =
       null;
+
+
   }catch(error){
+
     console.error(
-      "Save error:",
+      "SAVE ERROR:",
       error
     );
-    message.className =
+
+
+    messageBox.className =
       "message error";
-    message.innerText =
+
+
+    messageBox.innerText =
       "❌ Xatolik: " +
       error.message;
   }
+
 }
-/* =================================
+
+
+/* =========================
    MESSAGE
-================================= */
+========================= */
+
 function showMessage(
   text,
   isError
 ){
-  const message =
+
+  const messageBox =
     document.getElementById(
       "message"
     );
-  message.className =
+
+  messageBox.className =
     isError
       ? "message error"
       : "message";
-  message.innerText =
+
+  messageBox.innerText =
     text;
 }
+
 </script>
+
 </body>
 </html>
