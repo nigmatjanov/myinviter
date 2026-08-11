@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Aziz & Madina — MyInviter</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -28,8 +22,6 @@ body{
   color:#40372f;
   font-family:Georgia,"Times New Roman",serif;
 }
-
-/* HERO */
 
 .hero{
   min-height:100vh;
@@ -76,14 +68,11 @@ body{
     opacity:0;
     transform:translateY(30px);
   }
-
   to{
     opacity:1;
     transform:translateY(0);
   }
 }
-
-/* TEXT */
 
 .label{
   letter-spacing:4px;
@@ -135,8 +124,6 @@ h1{
   font-size:14px;
 }
 
-/* COUNTDOWN */
-
 .countdown{
   display:flex;
   justify-content:center;
@@ -164,8 +151,6 @@ h1{
   color:#9b836c;
 }
 
-/* BUTTONS */
-
 .buttons{
   display:flex;
   justify-content:center;
@@ -192,13 +177,6 @@ h1{
   color:white;
 }
 
-.button:disabled{
-  opacity:.5;
-  cursor:not-allowed;
-}
-
-/* MUSIC */
-
 .music{
   position:fixed;
   right:18px;
@@ -213,8 +191,6 @@ h1{
   cursor:pointer;
   box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-
-/* SECTION */
 
 .section{
   background:#fffdf9;
@@ -233,8 +209,6 @@ h1{
   color:#6d6259;
   margin-bottom:28px;
 }
-
-/* RSVP */
 
 .rsvp{
   max-width:430px;
@@ -261,12 +235,9 @@ h1{
 
 .message{
   margin-top:15px;
-  font-size:14px;
-  min-height:22px;
   color:#7d6652;
+  font-size:14px;
 }
-
-/* FOOTER */
 
 footer{
   text-align:center;
@@ -277,10 +248,7 @@ footer{
   color:#9b836c;
 }
 
-/* MOBILE */
-
 @media(max-width:500px){
-
   h1{
     font-size:43px;
   }
@@ -301,39 +269,25 @@ footer{
   .box b{
     font-size:19px;
   }
-
 }
-
 </style>
-
 </head>
-
 
 <body>
 
-
-<!-- MUSIC -->
-
 <button
   class="music"
-  id="musicButton"
-  type="button"
->
-♪
+  onclick="toggleMusic()"
+  id="musicButton">
+  ♪
 </button>
 
-
 <audio id="music">
-
   <source
     src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    type="audio/mpeg"
-  >
-
+    type="audio/mpeg">
 </audio>
 
-
-<!-- HERO -->
 
 <section class="hero">
 
@@ -343,31 +297,18 @@ footer{
       Sizni to'yimizga taklif qilamiz
     </div>
 
-
     <img
       class="photo"
       src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
-      alt="Aziz va Madina"
-    >
+      alt="Aziz va Madina">
 
+    <h1>Aziz</h1>
 
-    <h1>
-      Aziz
-    </h1>
+    <div class="and">&</div>
 
-
-    <div class="and">
-      &
-    </div>
-
-
-    <h1>
-      Madina
-    </h1>
-
+    <h1>Madina</h1>
 
     <div class="divider"></div>
-
 
     <p class="text">
       Hayotimizdagi eng go'zal kunni
@@ -375,13 +316,9 @@ footer{
       mamnun bo'lamiz.
     </p>
 
-
     <div class="date">
       20 · SENTYABR · 2026
     </div>
-
-
-    <!-- COUNTDOWN -->
 
     <div class="countdown">
 
@@ -407,20 +344,17 @@ footer{
 
     </div>
 
-
     <div class="buttons">
 
       <a
         href="#location"
-        class="button"
-      >
+        class="button">
         MANZIL
       </a>
 
       <a
         href="#rsvp"
-        class="button"
-      >
+        class="button">
         RSVP
       </a>
 
@@ -431,86 +365,53 @@ footer{
 </section>
 
 
-<!-- LOCATION -->
-
 <section
   class="section"
-  id="location"
->
+  id="location">
 
-  <h2>
-    To'y manzili
-  </h2>
-
+  <h2>To'y manzili</h2>
 
   <div class="location">
 
-    <p>
-      Grand Wedding Palace
-    </p>
-
-    <p>
-      Toshkent shahri
-    </p>
-
-    <p>
-      20-sentyabr · 18:00
-    </p>
+    <p>Grand Wedding Palace</p>
+    <p>Toshkent shahri</p>
+    <p>20-sentyabr · 18:00</p>
 
   </div>
-
 
   <a
     href="https://maps.google.com"
     target="_blank"
-    rel="noopener noreferrer"
-    class="button"
-  >
+    rel="noopener"
+    class="button">
     GOOGLE MAPS
   </a>
 
 </section>
 
 
-<!-- RSVP -->
-
 <section
   class="section"
-  id="rsvp"
->
+  id="rsvp">
 
-  <h2>
-    Ishtirokingizni tasdiqlang
-  </h2>
-
+  <h2>Ishtirokingizni tasdiqlang</h2>
 
   <p
     class="text"
-    style="margin-bottom:25px;"
-  >
+    style="margin-bottom:25px;">
     Sizni kutib qolamiz ❤️
   </p>
 
-
   <form
     class="rsvp"
-    id="rsvpForm"
-    novalidate
-  >
+    onsubmit="sendRSVP(event)">
 
     <input
       type="text"
-      id="guestName"
       placeholder="Ismingiz"
-      autocomplete="name"
-      required
-    >
+      required>
 
-
-    <select
-      id="attendance"
-      required
-    >
+    <select required>
 
       <option value="">
         Ishtirokingiz
@@ -526,27 +427,20 @@ footer{
 
     </select>
 
-
     <textarea
-      id="guestMessage"
-      placeholder="Tilak yoki izohingiz"
-    ></textarea>
-
+      placeholder="Tilak yoki izohingiz">
+    </textarea>
 
     <button
       class="button"
-      type="submit"
-      id="submitRSVP"
-    >
+      type="submit">
       TASDIQLASH
     </button>
 
-
     <div
       class="message"
-      id="message"
-      aria-live="polite"
-    ></div>
+      id="message">
+    </div>
 
   </form>
 
@@ -560,113 +454,79 @@ footer{
 
 <!-- SUPABASE -->
 
-<script
-  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-></script>
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
-/* =================================
-   SUPABASE
-================================= */
-
 const SUPABASE_URL =
-"https://bhqdkzeueunfhompvywm.supabase.co";
-
-
-/*
-  BU YERGA SENING SUPABASE
-  PUBLISHABLE KEYINGNI QO'Y.
-*/
+  "https://bhqdkzeueunfhompvywm.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
-
+  "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
 const db =
-supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 
-/* =================================
-   COUNTDOWN
-================================= */
+/* COUNTDOWN */
 
 const weddingDate =
-new Date(
-  "September 20, 2026 18:00:00"
-).getTime();
-
+  new Date(
+    "September 20, 2026 18:00:00"
+  ).getTime();
 
 function countdown(){
 
   const now =
-  new Date().getTime();
+    new Date().getTime();
 
   const distance =
-  weddingDate - now;
-
+    weddingDate - now;
 
   if(distance <= 0){
 
-    document.getElementById("days").innerText =
-    "00";
-
-    document.getElementById("hours").innerText =
-    "00";
-
-    document.getElementById("minutes").innerText =
-    "00";
-
-    document.getElementById("seconds").innerText =
-    "00";
+    document.getElementById("days").innerText = "00";
+    document.getElementById("hours").innerText = "00";
+    document.getElementById("minutes").innerText = "00";
+    document.getElementById("seconds").innerText = "00";
 
     return;
   }
 
-
   document.getElementById("days").innerText =
-  String(
-    Math.floor(
-      distance /
-      (1000 * 60 * 60 * 24)
-    )
-  ).padStart(2,"0");
-
+    String(
+      Math.floor(
+        distance / (1000 * 60 * 60 * 24)
+      )
+    ).padStart(2,"0");
 
   document.getElementById("hours").innerText =
-  String(
-    Math.floor(
-      (distance /
-      (1000 * 60 * 60)) % 24
-    )
-  ).padStart(2,"0");
-
+    String(
+      Math.floor(
+        (distance / (1000 * 60 * 60)) % 24
+      )
+    ).padStart(2,"0");
 
   document.getElementById("minutes").innerText =
-  String(
-    Math.floor(
-      (distance /
-      (1000 * 60)) % 60
-    )
-  ).padStart(2,"0");
-
+    String(
+      Math.floor(
+        (distance / (1000 * 60)) % 60
+      )
+    ).padStart(2,"0");
 
   document.getElementById("seconds").innerText =
-  String(
-    Math.floor(
-      (distance / 1000) % 60
-    )
-  ).padStart(2,"0");
+    String(
+      Math.floor(
+        (distance / 1000) % 60
+      )
+    ).padStart(2,"0");
 
 }
 
-
 countdown();
-
 
 setInterval(
   countdown,
@@ -674,225 +534,130 @@ setInterval(
 );
 
 
-/* =================================
-   MUSIC
-================================= */
+/* MUSIC */
 
 const music =
-document.getElementById("music");
+  document.getElementById("music");
 
+function toggleMusic(){
 
-const musicButton =
-document.getElementById("musicButton");
+  const button =
+    document.getElementById("musicButton");
 
+  if(music.paused){
 
-musicButton.addEventListener(
-  "click",
-  async function(){
+    music.play()
+      .then(() => {
+        button.innerText = "Ⅱ";
+      })
+      .catch(() => {
+        button.innerText = "♪";
+      });
 
-    try{
+  }else{
 
-      if(music.paused){
+    music.pause();
 
-        await music.play();
-
-        musicButton.innerText =
-        "Ⅱ";
-
-      }else{
-
-        music.pause();
-
-        musicButton.innerText =
-        "♪";
-
-      }
-
-    }catch(error){
-
-      console.error(
-        "Music error:",
-        error
-      );
-
-    }
+    button.innerText = "♪";
 
   }
-);
+
+}
 
 
-/* =================================
-   RSVP
-================================= */
+/* RSVP → SUPABASE */
 
-const rsvpForm =
-document.getElementById(
-  "rsvpForm"
-);
+async function sendRSVP(event){
 
+  event.preventDefault();
 
-const submitButton =
-document.getElementById(
-  "submitRSVP"
-);
+  const form =
+    event.target;
 
-
-const messageBox =
-document.getElementById(
-  "message"
-);
-
-
-rsvpForm.addEventListener(
-  "submit",
-  async function(event){
-
-    /*
-      ENG MUHIM:
-      sahifa refresh bo'lmaydi
-    */
-
-    event.preventDefault();
-
-
-    const guestName =
-    document.getElementById(
-      "guestName"
+  const guestName =
+    form.querySelector(
+      'input[type="text"]'
     ).value.trim();
 
-
-    const attendance =
-    document.getElementById(
-      "attendance"
+  const attendance =
+    form.querySelector(
+      "select"
     ).value;
 
-
-    const guestMessage =
-    document.getElementById(
-      "guestMessage"
+  const message =
+    form.querySelector(
+      "textarea"
     ).value.trim();
 
+  const messageBox =
+    document.getElementById(
+      "message"
+    );
 
-    /* VALIDATION */
-
-    if(guestName === ""){
-
-      messageBox.innerText =
-      "Iltimos, ismingizni kiriting.";
-
-      return;
-    }
-
-
-    if(attendance === ""){
-
-      messageBox.innerText =
-      "Iltimos, ishtirokingizni tanlang.";
-
-      return;
-    }
-
-
-    /* LOADING */
+  if(!guestName){
 
     messageBox.innerText =
+      "Iltimos, ismingizni kiriting.";
+
+    return;
+  }
+
+  if(!attendance){
+
+    messageBox.innerText =
+      "Iltimos, ishtirokingizni tanlang.";
+
+    return;
+  }
+
+  messageBox.innerText =
     "Yuborilmoqda...";
 
+  try{
 
-    submitButton.disabled =
-    true;
-
-
-    try{
-
-      /*
-        MUHIM:
-
-        invitation_id yuborilmaydi.
-        .select() ham ishlatilmaydi.
-
-        Faqat 3 ta ustun:
-        guest_name
-        attendance
-        message
-      */
-
-      const { error } =
+    const { error } =
       await db
         .from("rsvps")
         .insert({
-
-          guest_name:
-          guestName,
-
-          attendance:
-          attendance,
-
-          message:
-          guestMessage
-
+          invitation_id: 1,
+          guest_name: guestName,
+          attendance: attendance,
+          message: message
         });
 
-
-      if(error){
-
-        console.error(
-          "Supabase RSVP error:",
-          error
-        );
-
-
-        messageBox.innerText =
-        "XATO: " +
-        error.message;
-
-
-        submitButton.disabled =
-        false;
-
-
-        return;
-      }
-
-
-      /* SUCCESS */
-
-      messageBox.innerText =
-      "Rahmat! Ishtirokingiz qayd etildi ❤️";
-
-
-      rsvpForm.reset();
-
-
-      submitButton.disabled =
-      false;
-
-    }
-
-
-    catch(error){
+    if(error){
 
       console.error(
-        "Unexpected error:",
+        "Supabase RSVP error:",
         error
       );
 
-
       messageBox.innerText =
-      "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
+        "XATO: " + error.message;
 
-
-      submitButton.disabled =
-      false;
-
+      return;
     }
 
+    messageBox.innerText =
+      "Rahmat! Ishtirokingiz qayd etildi ❤️";
+
+    form.reset();
+
+  }catch(error){
+
+    console.error(
+      "Unexpected error:",
+      error
+    );
+
+    messageBox.innerText =
+      "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
+
   }
-);
+
+}
 
 </script>
 
-
 </body>
-
 </html>
