@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Aziz & Madina — MyInviter</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -269,14 +271,16 @@ footer{
   .box b{
     font-size:19px;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
 <button class="music" onclick="toggleMusic()" id="musicButton">
-♪ 
+♪
 </button>
 
 <audio id="music">
@@ -284,6 +288,7 @@ footer{
     src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
     type="audio/mpeg">
 </audio>
+
 
 <section class="hero">
 
@@ -395,13 +400,24 @@ placeholder="Ismingiz"
 required>
 
 <select required>
-<option value="">Ishtirokingiz</option>
-<option>Albatta kelaman</option>
-<option>Kela olmayman</option>
+
+<option value="">
+Ishtirokingiz
+</option>
+
+<option value="Albatta kelaman">
+Albatta kelaman
+</option>
+
+<option value="Kela olmayman">
+Kela olmayman
+</option>
+
 </select>
 
 <textarea
-placeholder="Tilak yoki izohingiz"></textarea>
+placeholder="Tilak yoki izohingiz">
+</textarea>
 
 <button class="button" type="submit">
 TASDIQLASH
@@ -419,124 +435,175 @@ MYINVITER · 2026
 </footer>
 
 
-<script>
+<!-- SUPABASE -->
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-const SUPABASE_URL = "https://bhqdkzeueunfhompvywm.supabase.co";
-const SUPABASE_KEY = "SENING_PUBLISHABLE_KEYING";
+
+const SUPABASE_URL =
+"https://bhqdkzeueunfhompvywm.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
 const db = supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
-</script>
+
+
+/* COUNTDOWN */
+
 const weddingDate =
 new Date("September 20, 2026 18:00:00").getTime();
 
 function countdown(){
 
-const now = new Date().getTime();
-const distance = weddingDate - now;
+  const now =
+  new Date().getTime();
 
-if(distance <= 0) return;
+  const distance =
+  weddingDate - now;
 
-document.getElementById("days").innerText =
-String(Math.floor(
-distance/(1000*60*60*24)
-)).padStart(2,"0");
+  if(distance <= 0) return;
 
-document.getElementById("hours").innerText =
-String(Math.floor(
-(distance/(1000*60*60))%24
-)).padStart(2,"0");
+  document.getElementById("days").innerText =
+  String(
+    Math.floor(
+      distance/(1000*60*60*24)
+    )
+  ).padStart(2,"0");
 
-document.getElementById("minutes").innerText =
-String(Math.floor(
-(distance/(1000*60))%60
-)).padStart(2,"0");
+  document.getElementById("hours").innerText =
+  String(
+    Math.floor(
+      (distance/(1000*60*60))%24
+    )
+  ).padStart(2,"0");
 
-document.getElementById("seconds").innerText =
-String(Math.floor(
-(distance/1000)%60
-)).padStart(2,"0");
+  document.getElementById("minutes").innerText =
+  String(
+    Math.floor(
+      (distance/(1000*60))%60
+    )
+  ).padStart(2,"0");
+
+  document.getElementById("seconds").innerText =
+  String(
+    Math.floor(
+      (distance/1000)%60
+    )
+  ).padStart(2,"0");
 
 }
 
 countdown();
-setInterval(countdown,1000);
 
+setInterval(
+  countdown,
+  1000
+);
+
+
+/* MUSIC */
 
 const music =
 document.getElementById("music");
 
 function toggleMusic(){
 
-if(music.paused){
+  if(music.paused){
 
-music.play();
+    music.play();
 
-document.getElementById("musicButton")
-.innerText="Ⅱ";
+    document.getElementById(
+      "musicButton"
+    ).innerText="Ⅱ";
 
-}else{
+  }else{
 
-music.pause();
+    music.pause();
 
-document.getElementById("musicButton")
-.innerText="♪";
+    document.getElementById(
+      "musicButton"
+    ).innerText="♪";
+
+  }
 
 }
 
-}
+
+/* RSVP → SUPABASE */
 
 async function sendRSVP(event){
 
-event.preventDefault();
+  event.preventDefault();
 
-const form = event.target;
+  const form =
+  event.target;
 
-const guestName =
-form.querySelector('input[type="text"]').value;
+  const guestName =
+  form.querySelector(
+    'input[type="text"]'
+  ).value;
 
-const attendance =
-form.querySelector('select').value;
+  const attendance =
+  form.querySelector(
+    'select'
+  ).value;
 
-const message =
-form.querySelector('textarea').value;
+  const message =
+  form.querySelector(
+    'textarea'
+  ).value;
 
-const messageBox =
-document.getElementById("message");
+  const messageBox =
+  document.getElementById(
+    "message"
+  );
 
-messageBox.innerText = "Yuborilmoqda...";
+  messageBox.innerText =
+  "Yuborilmoqda...";
 
-const { error } = await db
-.from("rsvps")
-.insert({
-  invitation_id: "aziz-madina",
-  guest_name: guestName,
-  attendance: attendance,
-  message: message
-});
+  const { error } =
+  await db
+  .from("rsvps")
+  .insert({
 
-if(error){
+    invitation_id:
+    "aziz-madina",
 
-console.error(error);
+    guest_name:
+    guestName,
 
-messageBox.innerText =
-"Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
+    attendance:
+    attendance,
 
-return;
+    message:
+    message
+
+  });
+
+
+  if(error){
+
+    console.error(error);
+
+    messageBox.innerText =
+    "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
+
+    return;
+
+  }
+
+
+  messageBox.innerText =
+  "Rahmat! Ishtirokingiz qayd etildi ❤️";
+
+  form.reset();
 
 }
-
-messageBox.innerText =
-"Rahmat! Ishtirokingiz qayd etildi ❤️";
-
-form.reset();
-
-}
-
 
 </script>
 
