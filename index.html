@@ -586,23 +586,14 @@ async function sendRSVP(event){
   });
 
 
-  if(error){
+if(error){
 
-    console.error(error);
-
-    messageBox.innerText =
-    "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
-
-    return;
-
-  }
-
+  console.error(error);
 
   messageBox.innerText =
-  "Rahmat! Ishtirokingiz qayd etildi ❤️";
+  error.message;
 
-  form.reset();
-
+  return;
 }
 
 </script>
