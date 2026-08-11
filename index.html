@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="uz">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0">
 
 <title>MyInviter — Taklifnoma</title>
 
@@ -92,7 +97,8 @@ body{
   border-radius:50%;
   object-fit:cover;
   border:7px solid #fffdf9;
-  box-shadow:0 8px 30px rgba(70,50,35,.12);
+  box-shadow:
+    0 8px 30px rgba(70,50,35,.12);
   margin-bottom:25px;
 }
 
@@ -140,7 +146,8 @@ h1{
   padding:13px 5px;
   background:#fffdf9;
   border:1px solid #e5dbcf;
-  box-shadow:0 5px 18px rgba(70,50,35,.06);
+  box-shadow:
+    0 5px 18px rgba(70,50,35,.06);
 }
 
 .box b{
@@ -193,7 +200,8 @@ h1{
   color:#5c4d40;
   z-index:20;
   cursor:pointer;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
+  box-shadow:
+    0 5px 20px rgba(0,0,0,.08);
 }
 
 .section{
@@ -288,6 +296,7 @@ footer{
 }
 
 </style>
+
 </head>
 
 
@@ -299,24 +308,24 @@ footer{
 </div>
 
 
-<div id="invitation" style="display:none;">
+<div
+  id="invitation"
+  style="display:none;">
 
 
 <button
   class="music"
   id="musicButton"
   onclick="toggleMusic()">
+
   ♪
+
 </button>
 
 
 <audio
   id="music"
-  loop>
-
-  <source
-    src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
-    type="audio/mpeg">
+  preload="auto">
 
 </audio>
 
@@ -327,7 +336,9 @@ footer{
 
 
 <div class="label">
+
 Sizni to'yimizga taklif qilamiz
+
 </div>
 
 
@@ -339,7 +350,7 @@ Sizni to'yimizga taklif qilamiz
 
 
 <h1 id="groomName">
-Aziz
+Ali
 </h1>
 
 
@@ -349,7 +360,7 @@ Aziz
 
 
 <h1 id="brideName">
-Madina
+Aliya
 </h1>
 
 
@@ -358,9 +369,11 @@ Madina
 
 
 <p class="text">
+
 Hayotimizdagi eng go'zal kunni
 siz bilan birga nishonlashdan
 mamnun bo'lamiz.
+
 </p>
 
 
@@ -474,12 +487,12 @@ To'y manzili
 
 
 <p id="venue">
-Ozbegim
+Aziya Grand
 </p>
 
 
 <p id="address">
-Chirchiq
+Gazalkent
 </p>
 
 
@@ -580,7 +593,9 @@ TASDIQLASH
 
 
 <footer>
+
 MYINVITER · 2026
+
 </footer>
 
 
@@ -589,10 +604,9 @@ MYINVITER · 2026
 
 <script>
 
-
-/* =================================
+/* =========================
    SUPABASE
-================================= */
+========================= */
 
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
@@ -606,29 +620,35 @@ const INVITATION_ID =
 1;
 
 
-/* =================================
-   DEFAULT PHOTOS
-================================= */
+/* =========================
+   DEFAULTS
+========================= */
 
-const defaultPhotos = [
-
-"https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80",
-
-"https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80",
-
-"https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80",
-
-"https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80"
-
-];
+const DEFAULT_PHOTO =
+"https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80";
 
 
-/* =================================
+const DEFAULT_MUSIC =
+"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
+
+
+/* =========================
+   ELEMENTS
+========================= */
+
+const music =
+document.getElementById("music");
+
+
+const musicButton =
+document.getElementById("musicButton");
+
+
+/* =========================
    LOAD INVITATION
-================================= */
+========================= */
 
 async function loadInvitation(){
-
 
   const loading =
     document.getElementById(
@@ -672,19 +692,12 @@ async function loadInvitation(){
 
 
     console.log(
-      "Invitation response:",
+      "Invitation:",
       data
     );
 
 
     if(!response.ok){
-
-
-      console.error(
-        "Supabase error:",
-        data
-      );
-
 
       loading.innerText =
         "Taklifnomani yuklashda xatolik: " +
@@ -692,7 +705,6 @@ async function loadInvitation(){
           data.message ||
           "Noma'lum xato"
         );
-
 
       return;
 
@@ -704,10 +716,8 @@ async function loadInvitation(){
       data.length === 0
     ){
 
-
       loading.innerText =
-        "ID 1 bo‘yicha taklifnoma topilmadi.";
-
+        "Taklifnoma topilmadi.";
 
       return;
 
@@ -716,6 +726,25 @@ async function loadInvitation(){
 
     const invitation =
       data[0];
+
+
+    /* =========================
+       NAMES
+    ========================= */
+
+
+    document.getElementById(
+      "groomName"
+    ).innerText =
+      invitation.groom_name ||
+      "Ali";
+
+
+    document.getElementById(
+      "brideName"
+    ).innerText =
+      invitation.bride_name ||
+      "Aliya";
 
 
     /* =========================
@@ -729,71 +758,31 @@ async function loadInvitation(){
       );
 
 
-    if(
-
-      invitation.photo_url &&
-
-      invitation.photo_url.trim() !== ""
-
-    ){
-
-      photo.src =
-        invitation.photo_url;
-
-    }else{
-
-
-      const randomPhoto =
-        defaultPhotos[
-          Math.floor(
-            Math.random() *
-            defaultPhotos.length
-          )
-        ];
-
-
-      photo.src =
-        randomPhoto;
-
-    }
-
-
-    /* =========================
-       PHOTO ERROR FALLBACK
-    ========================= */
+    photo.src =
+      invitation.photo_url ||
+      DEFAULT_PHOTO;
 
 
     photo.onerror =
       function(){
 
-        this.onerror =
-          null;
-
         this.src =
-          defaultPhotos[0];
+          DEFAULT_PHOTO;
 
       };
 
 
     /* =========================
-       NAMES
+       MUSIC
     ========================= */
 
 
-    document.getElementById(
-      "groomName"
-    ).innerText =
-
-      invitation.groom_name ||
-      "Aziz";
+    music.src =
+      invitation.music_url ||
+      DEFAULT_MUSIC;
 
 
-    document.getElementById(
-      "brideName"
-    ).innerText =
-
-      invitation.bride_name ||
-      "Madina";
+    music.load();
 
 
     /* =========================
@@ -804,7 +793,6 @@ async function loadInvitation(){
     document.getElementById(
       "venue"
     ).innerText =
-
       invitation.venue ||
       "";
 
@@ -817,31 +805,20 @@ async function loadInvitation(){
     document.getElementById(
       "address"
     ).innerText =
-
       invitation.address ||
       "";
 
 
     /* =========================
-       GOOGLE MAPS
+       MAP
     ========================= */
 
 
-    const mapsButton =
+    if(invitation.maps_url){
+
       document.getElementById(
         "mapsButton"
-      );
-
-
-    if(
-
-      invitation.maps_url &&
-
-      invitation.maps_url.trim() !== ""
-
-    ){
-
-      mapsButton.href =
+      ).href =
         invitation.maps_url;
 
     }
@@ -852,17 +829,16 @@ async function loadInvitation(){
     ========================= */
 
 
-    if(
-      invitation.event_date
-    ){
+    if(invitation.event_date){
+
+      const dateString =
+        invitation.event_date;
 
 
       const date =
         new Date(
-
-          invitation.event_date +
+          dateString +
           "T18:00:00"
-
         );
 
 
@@ -887,10 +863,7 @@ async function loadInvitation(){
       const day =
         String(
           date.getDate()
-        ).padStart(
-          2,
-          "0"
-        );
+        ).padStart(2,"0");
 
 
       const month =
@@ -932,34 +905,7 @@ async function loadInvitation(){
 
 
     /* =========================
-       MUSIC
-    ========================= */
-
-
-    const music =
-      document.getElementById(
-        "music"
-      );
-
-
-    if(
-
-      invitation.music_url &&
-
-      invitation.music_url.trim() !== ""
-
-    ){
-
-      music.src =
-        invitation.music_url;
-
-      music.load();
-
-    }
-
-
-    /* =========================
-       SHOW PAGE
+       SHOW
     ========================= */
 
 
@@ -975,7 +921,6 @@ async function loadInvitation(){
 
   }catch(error){
 
-
     console.error(
       "Connection error:",
       error
@@ -990,18 +935,17 @@ async function loadInvitation(){
 }
 
 
-/* =================================
+/* =========================
    COUNTDOWN
-================================= */
+========================= */
 
 let countdownTimer =
-  null;
+null;
 
 
 function startCountdown(
   weddingDate
 ){
-
 
   if(countdownTimer){
 
@@ -1014,7 +958,6 @@ function startCountdown(
 
   function countdown(){
 
-
     const now =
       new Date().getTime();
 
@@ -1025,7 +968,6 @@ function startCountdown(
 
 
     if(distance <= 0){
-
 
       document.getElementById(
         "days"
@@ -1065,14 +1007,11 @@ function startCountdown(
         Math.floor(
 
           distance /
-          (1000 * 60 * 60 * 24)
+          (1000*60*60*24)
 
         )
 
-      ).padStart(
-        2,
-        "0"
-      );
+      ).padStart(2,"0");
 
 
     document.getElementById(
@@ -1083,17 +1022,13 @@ function startCountdown(
 
         Math.floor(
 
-          (
-            distance /
-            (1000 * 60 * 60)
-          ) % 24
+          (distance /
+          (1000*60*60)) %
+          24
 
         )
 
-      ).padStart(
-        2,
-        "0"
-      );
+      ).padStart(2,"0");
 
 
     document.getElementById(
@@ -1104,17 +1039,13 @@ function startCountdown(
 
         Math.floor(
 
-          (
-            distance /
-            (1000 * 60)
-          ) % 60
+          (distance /
+          (1000*60)) %
+          60
 
         )
 
-      ).padStart(
-        2,
-        "0"
-      );
+      ).padStart(2,"0");
 
 
     document.getElementById(
@@ -1125,17 +1056,12 @@ function startCountdown(
 
         Math.floor(
 
-          (
-            distance /
-            1000
-          ) % 60
+          (distance / 1000) %
+          60
 
         )
 
-      ).padStart(
-        2,
-        "0"
-      );
+      ).padStart(2,"0");
 
   }
 
@@ -1152,52 +1078,44 @@ function startCountdown(
 }
 
 
-/* =================================
-   MUSIC BUTTON
-================================= */
-
-const music =
-  document.getElementById(
-    "music"
-  );
-
+/* =========================
+   MUSIC
+========================= */
 
 function toggleMusic(){
 
-
-  const button =
-    document.getElementById(
-      "musicButton"
-    );
-
-
   if(music.paused){
-
 
     music.play()
 
-      .then(function(){
+      .then(
+        function(){
 
-        button.innerText =
-          "Ⅱ";
+          musicButton.innerText =
+            "Ⅱ";
 
-      })
+        }
+      )
 
-      .catch(function(){
+      .catch(
+        function(error){
 
-        button.innerText =
-          "♪";
+          console.error(
+            "Music error:",
+            error
+          );
 
-      });
+          musicButton.innerText =
+            "♪";
 
+        }
+      );
 
   }else{
 
-
     music.pause();
 
-
-    button.innerText =
+    musicButton.innerText =
       "♪";
 
   }
@@ -1205,14 +1123,13 @@ function toggleMusic(){
 }
 
 
-/* =================================
+/* =========================
    RSVP
-================================= */
+========================= */
 
 async function sendRSVP(
   event
 ){
-
 
   event.preventDefault();
 
@@ -1223,28 +1140,28 @@ async function sendRSVP(
 
   const guestName =
     form
-      .querySelector(
-        'input[type="text"]'
-      )
-      .value
-      .trim();
+    .querySelector(
+      'input[type="text"]'
+    )
+    .value
+    .trim();
 
 
   const attendance =
     form
-      .querySelector(
-        "select"
-      )
-      .value;
+    .querySelector(
+      "select"
+    )
+    .value;
 
 
   const message =
     form
-      .querySelector(
-        "textarea"
-      )
-      .value
-      .trim();
+    .querySelector(
+      "textarea"
+    )
+    .value
+    .trim();
 
 
   const messageBox =
@@ -1255,10 +1172,8 @@ async function sendRSVP(
 
   if(!guestName){
 
-
     messageBox.innerText =
       "Iltimos, ismingizni kiriting.";
-
 
     return;
 
@@ -1267,10 +1182,8 @@ async function sendRSVP(
 
   if(!attendance){
 
-
     messageBox.innerText =
       "Iltimos, ishtirokingizni tanlang.";
-
 
     return;
 
@@ -1313,6 +1226,7 @@ async function sendRSVP(
 
 
           body:
+
             JSON.stringify({
 
               invitation_id:
@@ -1336,15 +1250,14 @@ async function sendRSVP(
 
     if(!response.ok){
 
-
       const errorData =
         await response
-          .json()
-          .catch(
-            function(){
-              return {};
-            }
-          );
+        .json()
+        .catch(
+          function(){
+            return {};
+          }
+        );
 
 
       console.error(
@@ -1375,9 +1288,8 @@ async function sendRSVP(
 
   }catch(error){
 
-
     console.error(
-      "RSVP connection error:",
+      "RSVP error:",
       error
     );
 
@@ -1390,14 +1302,13 @@ async function sendRSVP(
 }
 
 
-/* =================================
+/* =========================
    START
-================================= */
+========================= */
 
 loadInvitation();
 
 </script>
-
 
 </body>
 </html>
