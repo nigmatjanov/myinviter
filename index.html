@@ -6,14 +6,18 @@
 <meta charset="UTF-8">
 
 <meta
-name="viewport"
-content="width=device-width, initial-scale=1.0"
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
 >
 
 <title>Aziz & Madina — MyInviter</title>
 
 
 <style>
+
+/* =========================
+   GENERAL
+========================= */
 
 *{
   box-sizing:border-box;
@@ -32,9 +36,12 @@ body{
 }
 
 
-/* HERO */
+/* =========================
+   HERO
+========================= */
 
 .hero{
+
   min-height:100vh;
 
   display:flex;
@@ -46,8 +53,10 @@ body{
   padding:40px 20px;
 
   position:relative;
+
   overflow:hidden;
 }
+
 
 .hero::before,
 .hero::after{
@@ -66,45 +75,62 @@ body{
   opacity:.45;
 }
 
+
 .hero::before{
+
   top:-150px;
   left:-150px;
+
 }
 
+
 .hero::after{
+
   right:-150px;
   bottom:-150px;
+
 }
 
 
 .content{
 
   width:100%;
+
   max-width:600px;
 
   position:relative;
+
   z-index:2;
 
   animation:fadeUp 1.4s ease;
+
 }
 
 
 @keyframes fadeUp{
 
   from{
+
     opacity:0;
+
     transform:translateY(30px);
+
   }
 
   to{
+
     opacity:1;
+
     transform:translateY(0);
+
   }
 
 }
 
 
-/* TEXT */
+/* =========================
+   TEXT
+========================= */
 
 .label{
 
@@ -117,12 +143,14 @@ body{
   color:#9b836c;
 
   margin-bottom:25px;
+
 }
 
 
 .photo{
 
   width:180px;
+
   height:180px;
 
   border-radius:50%;
@@ -132,9 +160,10 @@ body{
   border:7px solid #fffdf9;
 
   box-shadow:
-  0 8px 30px rgba(70,50,35,.12);
+    0 8px 30px rgba(70,50,35,.12);
 
   margin-bottom:25px;
+
 }
 
 
@@ -145,6 +174,7 @@ h1{
   font-weight:normal;
 
   line-height:1.1;
+
 }
 
 
@@ -157,17 +187,20 @@ h1{
   color:#aa927b;
 
   margin:10px 0;
+
 }
 
 
 .divider{
 
   width:70px;
+
   height:1px;
 
   background:#bda990;
 
   margin:25px auto;
+
 }
 
 
@@ -178,6 +211,7 @@ h1{
   font-size:16px;
 
   color:#6d6259;
+
 }
 
 
@@ -188,10 +222,13 @@ h1{
   letter-spacing:3px;
 
   font-size:14px;
+
 }
 
 
-/* COUNTDOWN */
+/* =========================
+   COUNTDOWN
+========================= */
 
 .countdown{
 
@@ -202,6 +239,7 @@ h1{
   gap:8px;
 
   margin:30px 0;
+
 }
 
 
@@ -216,7 +254,8 @@ h1{
   border:1px solid #e5dbcf;
 
   box-shadow:
-  0 5px 18px rgba(70,50,35,.06);
+    0 5px 18px rgba(70,50,35,.06);
+
 }
 
 
@@ -227,6 +266,7 @@ h1{
   font-size:22px;
 
   font-weight:normal;
+
 }
 
 
@@ -237,10 +277,13 @@ h1{
   letter-spacing:1px;
 
   color:#9b836c;
+
 }
 
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
 
 .buttons{
 
@@ -253,6 +296,7 @@ h1{
   flex-wrap:wrap;
 
   margin-top:20px;
+
 }
 
 
@@ -277,6 +321,7 @@ h1{
   cursor:pointer;
 
   transition:.3s;
+
 }
 
 
@@ -289,7 +334,18 @@ h1{
 }
 
 
-/* MUSIC */
+.button:disabled{
+
+  opacity:.5;
+
+  cursor:not-allowed;
+
+}
+
+
+/* =========================
+   MUSIC
+========================= */
 
 .music{
 
@@ -316,11 +372,14 @@ h1{
   cursor:pointer;
 
   box-shadow:
-  0 5px 20px rgba(0,0,0,.08);
+    0 5px 20px rgba(0,0,0,.08);
+
 }
 
 
-/* SECTION */
+/* =========================
+   SECTIONS
+========================= */
 
 .section{
 
@@ -329,6 +388,7 @@ h1{
   text-align:center;
 
   padding:80px 22px;
+
 }
 
 
@@ -339,6 +399,7 @@ h1{
   font-weight:normal;
 
   margin-bottom:20px;
+
 }
 
 
@@ -349,16 +410,20 @@ h1{
   color:#6d6259;
 
   margin-bottom:28px;
+
 }
 
 
-/* RSVP */
+/* =========================
+   RSVP
+========================= */
 
 .rsvp{
 
   max-width:430px;
 
   margin:0 auto;
+
 }
 
 
@@ -381,6 +446,7 @@ h1{
   font-family:inherit;
 
   outline:none;
+
 }
 
 
@@ -389,6 +455,7 @@ h1{
   height:100px;
 
   resize:none;
+
 }
 
 
@@ -401,10 +468,13 @@ h1{
   font-size:14px;
 
   min-height:20px;
+
 }
 
 
-/* FOOTER */
+/* =========================
+   FOOTER
+========================= */
 
 footer{
 
@@ -419,16 +489,22 @@ footer{
   letter-spacing:2px;
 
   color:#9b836c;
+
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:500px){
 
   h1{
+
     font-size:43px;
+
   }
+
 
   .photo{
 
@@ -438,17 +514,20 @@ footer{
 
   }
 
+
   .countdown{
 
     gap:5px;
 
   }
 
+
   .box{
 
     width:62px;
 
   }
+
 
   .box b{
 
@@ -466,13 +545,14 @@ footer{
 <body>
 
 
-<!-- MUSIC BUTTON -->
+<!-- =========================
+     MUSIC
+========================= -->
 
 <button
-class="music"
-onclick="toggleMusic()"
-id="musicButton"
-type="button"
+  class="music"
+  id="musicButton"
+  type="button"
 >
 
 ♪
@@ -491,362 +571,358 @@ type="button"
 
 
 
-<!-- HERO -->
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
-<div class="content">
+  <div class="content">
 
 
-<div class="label">
+    <div class="label">
 
-Sizni to'yimizga taklif qilamiz
+      Sizni to'yimizga taklif qilamiz
 
-</div>
+    </div>
 
 
-<img
+    <img
 
-class="photo"
+      class="photo"
 
-src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
+      src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80"
 
-alt="Aziz va Madina"
+      alt="Aziz va Madina"
 
->
+    >
 
 
-<h1>
+    <h1>
 
-Aziz
+      Aziz
 
-</h1>
+    </h1>
 
 
-<div class="and">
+    <div class="and">
 
-&
+      &
 
-</div>
+    </div>
 
 
-<h1>
+    <h1>
 
-Madina
+      Madina
 
-</h1>
+    </h1>
 
 
-<div class="divider"></div>
+    <div class="divider"></div>
 
 
-<p class="text">
+    <p class="text">
 
-Hayotimizdagi eng go'zal kunni
+      Hayotimizdagi eng go'zal kunni
 
-siz bilan birga nishonlashdan
+      siz bilan birga nishonlashdan
 
-mamnun bo'lamiz.
+      mamnun bo'lamiz.
 
-</p>
+    </p>
 
 
-<div class="date">
+    <div class="date">
 
-20 · SENTYABR · 2026
+      20 · SENTYABR · 2026
 
-</div>
+    </div>
 
 
 
-<!-- COUNTDOWN -->
+    <!-- COUNTDOWN -->
 
-<div class="countdown">
+    <div class="countdown">
 
 
-<div class="box">
+      <div class="box">
 
-<b id="days">
-00
-</b>
+        <b id="days">00</b>
 
-<span>
-KUN
-</span>
+        <span>KUN</span>
 
-</div>
+      </div>
 
 
-<div class="box">
+      <div class="box">
 
-<b id="hours">
-00
-</b>
+        <b id="hours">00</b>
 
-<span>
-SOAT
-</span>
+        <span>SOAT</span>
 
-</div>
+      </div>
 
 
-<div class="box">
+      <div class="box">
 
-<b id="minutes">
-00
-</b>
+        <b id="minutes">00</b>
 
-<span>
-DAQIQA
-</span>
+        <span>DAQIQA</span>
 
-</div>
+      </div>
 
 
-<div class="box">
+      <div class="box">
 
-<b id="seconds">
-00
-</b>
+        <b id="seconds">00</b>
 
-<span>
-SONIYA
-</span>
+        <span>SONIYA</span>
 
-</div>
+      </div>
 
 
-</div>
+    </div>
 
 
 
-<div class="buttons">
+    <div class="buttons">
 
 
-<a
-href="#location"
-class="button"
->
+      <a
+        href="#location"
+        class="button"
+      >
 
-MANZIL
+        MANZIL
 
-</a>
+      </a>
 
 
-<a
-href="#rsvp"
-class="button"
->
+      <a
+        href="#rsvp"
+        class="button"
+      >
 
-RSVP
+        RSVP
 
-</a>
+      </a>
 
 
-</div>
+    </div>
 
 
-</div>
+  </div>
 
 </section>
 
 
 
-<!-- LOCATION -->
+<!-- =========================
+     LOCATION
+========================= -->
 
 <section
-class="section"
-id="location"
+  class="section"
+  id="location"
 >
 
 
-<h2>
+  <h2>
 
-To'y manzili
+    To'y manzili
 
-</h2>
-
-
-<div class="location">
+  </h2>
 
 
-<p>
-Grand Wedding Palace
-</p>
+  <div class="location">
 
 
-<p>
-Toshkent shahri
-</p>
+    <p>
+
+      Grand Wedding Palace
+
+    </p>
 
 
-<p>
-20-sentyabr · 18:00
-</p>
+    <p>
+
+      Toshkent shahri
+
+    </p>
 
 
-</div>
+    <p>
+
+      20-sentyabr · 18:00
+
+    </p>
 
 
-<a
+  </div>
 
-href="https://maps.google.com"
 
-target="_blank"
+  <a
 
-class="button"
+    href="https://maps.google.com"
 
->
+    target="_blank"
 
-GOOGLE MAPS
+    class="button"
 
-</a>
+  >
+
+    GOOGLE MAPS
+
+  </a>
 
 
 </section>
 
 
 
-<!-- RSVP -->
+<!-- =========================
+     RSVP
+========================= -->
 
 <section
-class="section"
-id="rsvp"
+  class="section"
+  id="rsvp"
 >
 
 
-<h2>
+  <h2>
 
-Ishtirokingizni tasdiqlang
+    Ishtirokingizni tasdiqlang
 
-</h2>
-
-
-<p
-class="text"
-style="margin-bottom:25px;"
->
-
-Sizni kutib qolamiz ❤️
-
-</p>
+  </h2>
 
 
+  <p
+    class="text"
+    style="margin-bottom:25px;"
+  >
 
-<form
-class="rsvp"
-id="rsvpForm"
->
+    Sizni kutib qolamiz ❤️
 
-
-<input
-
-type="text"
-
-id="guestName"
-
-placeholder="Ismingiz"
-
-required
-
->
+  </p>
 
 
-<select
 
-id="attendance"
-
-required
-
->
-
-<option value="">
-
-Ishtirokingiz
-
-</option>
+  <form
+    class="rsvp"
+    id="rsvpForm"
+  >
 
 
-<option value="Albatta kelaman">
+    <input
 
-Albatta kelaman
+      type="text"
 
-</option>
+      id="guestName"
 
+      placeholder="Ismingiz"
 
-<option value="Kela olmayman">
+      required
 
-Kela olmayman
-
-</option>
-
-
-</select>
+    >
 
 
-<textarea
+    <select
+      id="attendance"
+      required
+    >
 
-id="guestMessage"
+      <option value="">
 
-placeholder="Tilak yoki izohingiz"
+        Ishtirokingiz
 
-></textarea>
-
-
-<button
-
-class="button"
-
-type="submit"
-
->
-
-TASDIQLASH
-
-</button>
+      </option>
 
 
-<div
+      <option value="Albatta kelaman">
 
-class="message"
+        Albatta kelaman
 
-id="message"
-
-></div>
+      </option>
 
 
-</form>
+      <option value="Kela olmayman">
+
+        Kela olmayman
+
+      </option>
+
+    </select>
+
+
+    <textarea
+
+      id="guestMessage"
+
+      placeholder="Tilak yoki izohingiz"
+
+    ></textarea>
+
+
+    <button
+
+      class="button"
+
+      type="submit"
+
+      id="submitRSVP"
+
+    >
+
+      TASDIQLASH
+
+    </button>
+
+
+    <div
+
+      class="message"
+
+      id="message"
+
+    ></div>
+
+
+  </form>
 
 
 </section>
 
 
 
-<!-- FOOTER -->
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 
-MYINVITER · 2026
+  MYINVITER · 2026
 
 </footer>
 
 
 
-<!-- SUPABASE -->
+<!-- =========================
+     SUPABASE LIBRARY
+========================= -->
 
 <script
-src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
 ></script>
 
 
 
 <script>
 
-
 /* =========================
-   SUPABASE
+   SUPABASE CONFIG
 ========================= */
-
 
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
@@ -868,7 +944,6 @@ supabase.createClient(
    COUNTDOWN
 ========================= */
 
-
 const weddingDate =
 new Date(
   "September 20, 2026 18:00:00"
@@ -876,7 +951,6 @@ new Date(
 
 
 function countdown(){
-
 
   const now =
   new Date().getTime();
@@ -888,13 +962,17 @@ function countdown(){
 
   if(distance <= 0){
 
-    document.getElementById("days").innerText = "00";
+    document.getElementById("days").innerText =
+    "00";
 
-    document.getElementById("hours").innerText = "00";
+    document.getElementById("hours").innerText =
+    "00";
 
-    document.getElementById("minutes").innerText = "00";
+    document.getElementById("minutes").innerText =
+    "00";
 
-    document.getElementById("seconds").innerText = "00";
+    document.getElementById("seconds").innerText =
+    "00";
 
     return;
 
@@ -902,7 +980,6 @@ function countdown(){
 
 
   document.getElementById("days").innerText =
-
   String(
     Math.floor(
       distance /
@@ -912,7 +989,6 @@ function countdown(){
 
 
   document.getElementById("hours").innerText =
-
   String(
     Math.floor(
       (distance /
@@ -922,7 +998,6 @@ function countdown(){
 
 
   document.getElementById("minutes").innerText =
-
   String(
     Math.floor(
       (distance /
@@ -932,7 +1007,6 @@ function countdown(){
 
 
   document.getElementById("seconds").innerText =
-
   String(
     Math.floor(
       (distance / 1000) % 60
@@ -956,39 +1030,38 @@ setInterval(
    MUSIC
 ========================= */
 
-
 const music =
 document.getElementById("music");
 
 
-function toggleMusic(){
+const musicButton =
+document.getElementById(
+  "musicButton"
+);
 
 
-  if(music.paused){
+musicButton.addEventListener(
+  "click",
+  function(){
 
+    if(music.paused){
 
-    music.play();
+      music.play();
 
+      musicButton.innerText =
+      "Ⅱ";
 
-    document.getElementById(
-      "musicButton"
-    ).innerText = "Ⅱ";
+    }else{
 
+      music.pause();
 
-  }else{
+      musicButton.innerText =
+      "♪";
 
-
-    music.pause();
-
-
-    document.getElementById(
-      "musicButton"
-    ).innerText = "♪";
-
+    }
 
   }
-
-}
+);
 
 
 
@@ -996,123 +1069,151 @@ function toggleMusic(){
    RSVP
 ========================= */
 
-
 const rsvpForm =
 document.getElementById(
   "rsvpForm"
 );
 
 
-rsvpForm.addEventListener(
-  "submit",
-  sendRSVP
+const submitButton =
+document.getElementById(
+  "submitRSVP"
+);
+
+
+const messageBox =
+document.getElementById(
+  "message"
 );
 
 
 
-async function sendRSVP(event){
+rsvpForm.addEventListener(
+  "submit",
+  async function(event){
+
+    event.preventDefault();
 
 
-  event.preventDefault();
+    const guestName =
+    document.getElementById(
+      "guestName"
+    ).value.trim();
 
 
-  const guestName =
-  document.getElementById(
-    "guestName"
-  ).value.trim();
+    const attendance =
+    document.getElementById(
+      "attendance"
+    ).value;
 
 
-  const attendance =
-  document.getElementById(
-    "attendance"
-  ).value;
+    const guestMessage =
+    document.getElementById(
+      "guestMessage"
+    ).value.trim();
 
 
-  const guestMessage =
-  document.getElementById(
-    "guestMessage"
-  ).value.trim();
+    if(!guestName){
+
+      messageBox.innerText =
+      "Iltimos, ismingizni kiriting.";
+
+      return;
+
+    }
 
 
-  const messageBox =
-  document.getElementById(
-    "message"
-  );
+    if(!attendance){
+
+      messageBox.innerText =
+      "Iltimos, ishtirokingizni tanlang.";
+
+      return;
+
+    }
 
 
-  messageBox.innerText =
-  "Yuborilmoqda...";
+    messageBox.innerText =
+    "Yuborilmoqda...";
 
 
-  const submitButton =
-  rsvpForm.querySelector(
-    'button[type="submit"]'
-  );
+    submitButton.disabled =
+    true;
 
 
-  submitButton.disabled = true;
 
+    /*
 
-  const { data, error } =
-  await db
-  .from("rsvps")
-  .insert({
+      invitation_id HOZIRCHA YO'Q.
+
+      Shuning uchun faqat:
+
+      guest_name
+      attendance
+      message
+
+      yuboriladi.
+
+    */
+
 
     const { data, error } =
-  await db
-  .from("rsvps")
-  .insert({
-    guest_name: guestName,
-    attendance: attendance,
-    message: guestMessage
-  })
-  .select();
+    await db
+      .from("rsvps")
+      .insert({
 
-    attendance:
-    attendance,
+        guest_name:
+        guestName,
 
-    message:
-    guestMessage
+        attendance:
+        attendance,
 
-  })
-  .select();
+        message:
+        guestMessage
+
+      })
+      .select();
 
 
-  submitButton.disabled = false;
+
+    submitButton.disabled =
+    false;
 
 
-  if(error){
+
+    if(error){
+
+      console.error(
+        "SUPABASE ERROR:",
+        error
+      );
 
 
-    console.error(
-      "SUPABASE ERROR:",
-      error
+      messageBox.innerText =
+      "XATO: " +
+      error.message;
+
+
+      return;
+
+    }
+
+
+
+    console.log(
+      "RSVP SAVED:",
+      data
     );
 
 
     messageBox.innerText =
-    "XATO: " + error.message;
+    "Rahmat! Ishtirokingiz qayd etildi ❤️";
 
 
-    return;
+    rsvpForm.reset();
 
   }
-
-
-  console.log(
-    "RSVP SAVED:",
-    data
-  );
-
-
-  messageBox.innerText =
-  "Rahmat! Ishtirokingiz qayd etildi ❤️";
-
-
-  rsvpForm.reset();
-
-}
-
+);
 
 </script>
 
