@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyInviter — Online Taklifnoma</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: #f8f3ed;
+      color: #3b3028;
+      text-align: center;
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 80px 20px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .small {
+      font-size: 14px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      margin-bottom: 25px;
+    }
+
+    h1 {
+      font-size: 56px;
+      font-weight: normal;
+      margin-bottom: 15px;
+    }
+
+    .names {
+      font-size: 32px;
+      margin: 20px 0;
+    }
+
+    .date {
+      font-size: 18px;
+      margin: 20px 0 35px;
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: #8c7562;
+      margin: 20px auto;
+    }
+
+    .countdown {
+      display: flex;
+      gap: 12px;
+      margin: 25px 0;
+    }
+
+    .time {
+      background: white;
+      padding: 15px 10px;
+      min-width: 65px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,.08);
+    }
+
+    .time strong {
+      display: block;
+      font-size: 22px;
+    }
+
+    .time span {
+      font-size: 11px;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 14px 28px;
+      border-radius: 30px;
+      background: #3b3028;
+      color: white;
+      text-decoration: none;
+    }
+
+    .section {
+      padding: 70px 25px;
+      background: white;
+    }
+
+    .section h2 {
+      font-size: 30px;
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+
+    .location {
+      margin-top: 25px;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 30px;
+      font-size: 13px;
+      background: #f8f3ed;
+    }
+  </style>
+</head>
+
+<body>
+
+  <section class="hero">
+
+    <div class="small">To'y taklifnomasi</div>
+
+    <h1>Bizning to'yimiz</h1>
+
+    <div class="divider"></div>
+
+    <div class="names">
+      Aziz & Madina
+    </div>
+
+    <p>
+      Sizni hayotimizdagi eng baxtli kunimizga
+      taklif qilamiz.
+    </p>
+
+    <div class="date">
+      20 • SENTYABR • 2026
+    </div>
+
+    <div class="countdown">
+      <div class="time">
+        <strong id="days">0</strong>
+        <span>KUN</span>
+      </div>
+
+      <div class="time">
+        <strong id="hours">0</strong>
+        <span>SOAT</span>
+      </div>
+
+      <div class="time">
+        <strong id="minutes">0</strong>
+        <span>DAQIQA</span>
+      </div>
+
+      <div class="time">
+        <strong id="seconds">0</strong>
+        <span>SONIYA</span>
+      </div>
+    </div>
+
+    <a class="button" href="#location">
+      Manzilni ko'rish
+    </a>
+
+  </section>
+
+  <section class="section" id="location">
+
+    <h2>To'y manzili</h2>
+
+    <div class="location">
+      <p>Grand Wedding Palace</p>
+      <p>Toshkent shahri</p>
+      <p>Soat 18:00</p>
+    </div>
+
+    <a
+      class="button"
+      href="https://maps.google.com"
+      target="_blank">
+      Google Maps
+    </a>
+
+  </section>
+
+  <footer>
+    MyInviter © 2026
+  </footer>
+
+  <script>
+    const target = new Date("September 20, 2026 18:00:00").getTime();
+
+    setInterval(function () {
+
+      const now = new Date().getTime();
+      const difference = target - now;
+
+      if (difference <= 0) return;
+
+      const days = Math.floor(
+        difference / (1000 * 60 * 60 * 24)
+      );
+
+      const hours = Math.floor(
+        (difference / (1000 * 60 * 60)) % 24
+      );
+
+      const minutes = Math.floor(
+        (difference / (1000 * 60)) % 60
+      );
+
+      const seconds = Math.floor(
+        (difference / 1000) % 60
+      );
+
+      document.getElementById("days").textContent = days;
+      document.getElementById("hours").textContent = hours;
+      document.getElementById("minutes").textContent = minutes;
+      document.getElementById("seconds").textContent = seconds;
+
+    }, 1000);
+  </script>
+
+</body>
+</html>
