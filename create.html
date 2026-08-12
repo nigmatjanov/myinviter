@@ -762,7 +762,189 @@ audio{
 
 
 <script>
+/* =====================================================
+   ACCESS TOKEN CHECK
+===================================================== */
 
+(async function checkAccess() {
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const token =
+    params.get("token");
+
+  /*
+    Token bo‘lmasa saytga kiritmaymiz
+  */
+
+  if (!token) {
+
+    document.body.innerHTML = `
+      <div style="
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        padding:30px;
+        font-family:Georgia,serif;
+        background:#f5eee4;
+        color:#493d32;
+      ">
+
+        <div>
+
+          <h2>
+            🔒 Kirish taqiqlangan
+          </h2>
+
+          <p style="
+            margin-top:15px;
+            line-height:1.6;
+          ">
+            Taklifnoma yaratish uchun
+            avval to‘lovni amalga oshiring.
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+    return;
+  }
+
+
+  try {
+
+    /*
+      Server orqali tokenni tekshiramiz
+    */
+
+    const response =
+      await fetch(
+        `/api/check-access?token=${encodeURIComponent(token)}`
+      );
+
+
+    const data =
+      await response.json();
+
+
+    /*
+      Token noto‘g‘ri bo‘lsa
+    */
+
+    if (
+      !response.ok ||
+      !data.ok
+    ) {
+
+      document.body.innerHTML = `
+        <div style="
+          min-height:100vh;
+          display:flex;
+          align-items:center;
+          justify-content:center;
+          text-align:center;
+          padding:30px;
+          font-family:Georgia,serif;
+          background:#f5eee4;
+          color:#493d32;
+        ">
+
+          <div>
+
+            <h2>
+              ❌ Ruxsat yo‘q
+            </h2>
+
+            <p style="
+              margin-top:15px;
+              line-height:1.6;
+            ">
+              To‘lovingiz tasdiqlanmagan
+              yoki havola eskirgan.
+            </p>
+
+            <a
+              href="https://t.me/MyInviterUzBot"
+              style="
+                display:inline-block;
+                margin-top:20px;
+                padding:13px 20px;
+                background:#5c4d40;
+                color:white;
+                text-decoration:none;
+              "
+            >
+              🤖 Telegram botga qaytish
+            </a>
+
+          </div>
+
+        </div>
+      `;
+
+      return;
+    }
+
+
+    /*
+      Token to‘g‘ri.
+      Forma ishlashiga ruxsat.
+    */
+
+    console.log(
+      "ACCESS OK:",
+      data.payment
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "ACCESS CHECK ERROR:",
+      error
+    );
+
+
+    document.body.innerHTML = `
+      <div style="
+        min-height:100vh;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        text-align:center;
+        padding:30px;
+        font-family:Georgia,serif;
+        background:#f5eee4;
+        color:#493d32;
+      ">
+
+        <div>
+
+          <h2>
+            ⚠️ Server xatosi
+          </h2>
+
+          <p style="
+            margin-top:15px;
+          ">
+            Iltimos, birozdan keyin qayta urinib ko‘ring.
+          </p>
+
+        </div>
+
+      </div>
+    `;
+
+  }
+
+})();
 /* =====================================================
    SUPABASE
 ===================================================== */
