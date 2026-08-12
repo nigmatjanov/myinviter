@@ -10,24 +10,27 @@ export default async function handler(req, res) {
     });
   }
 
-  const token = req.query.access;
-
-  if (!token) {
-    return res.status(401).json({
-      ok: false,
-      error: "Access token kerak"
-    });
-  }
-
   try {
+    const token = req.query.token;
+
+    if (!token) {
+      return res.status(401).json({
+        ok: false,
+        error: "Token mavjud emas"
+      });
+    }
+
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/payments?access_token=eq.${encodeURIComponent(
-        token
-      )}&status=eq.paid&used=eq.false&select=id,access_token&limit=1`,
+      `${SUPABASE_URL}/rest/v1/payments` +
+      `?access_token=eq.${encodeURIComponent(token)}` +
+      `&status=eq.paid` +
+      `&select=id,telegram_user_id,status,access_token` +
+      `&limit=1`,
       {
         headers: {
           apikey: SUPABASE_SERVICE_ROLE_KEY,
-          Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
+          Authorization:
+            `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
         }
       }
     );
@@ -35,21 +38,25 @@ export default async function handler(req, res) {
     if (!response.ok) {
       return res.status(500).json({
         ok: false,
-        error: "Database error"
+        error: "Supabase xatosi"
       });
     }
 
     const payments = await response.json();
 
-    if (!payments.length) {
+    if (
+      !Array.isArray(payments) ||
+      payments.length === 0
+    ) {
       return res.status(403).json({
         ok: false,
-        error: "To‘lov topilmadi yoki access link ishlatilgan"
+        error: "To‘lov tasdiqlanmagan"
       });
     }
 
     return res.status(200).json({
-      ok: true
+      ok: true,
+      payment: payments[0]
     });
 
   } catch (error) {
@@ -57,7 +64,7 @@ export default async function handler(req, res) {
 
     return res.status(500).json({
       ok: false,
-      error: "Server error"
+      error: "Server xatosi"
     });
   }
 }
