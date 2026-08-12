@@ -25,10 +25,7 @@ body{
   font-family:Georgia,"Times New Roman",serif;
 }
 
-
-/* =====================================================
-   INTRO
-===================================================== */
+/* ================= INTRO ================= */
 
 #intro{
   position:fixed;
@@ -88,11 +85,6 @@ body{
     );
 }
 
-
-/* =====================================================
-   LIGHT
-===================================================== */
-
 .light{
   position:absolute;
   width:430px;
@@ -132,18 +124,11 @@ body{
 
 }
 
-
-/* =====================================================
-   ORBITS
-===================================================== */
-
 .orbit{
   position:absolute;
-
   border:
     1px solid
     rgba(139,108,78,.12);
-
   border-radius:50%;
   pointer-events:none;
 }
@@ -151,49 +136,32 @@ body{
 .orbit.one{
   width:560px;
   height:560px;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
+  transform:translate(-50%,-50%);
 }
 
 .orbit.two{
   width:720px;
   height:720px;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   opacity:.55;
 }
 
 .orbit.three{
   width:900px;
   height:900px;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   opacity:.25;
 }
-
-
-/* =====================================================
-   INTRO CONTENT
-===================================================== */
 
 .intro-content{
   position:relative;
   z-index:5;
-
   width:100%;
   height:100%;
 
@@ -210,9 +178,7 @@ body{
 .small-label{
   font-size:8px;
   letter-spacing:6px;
-
   color:#957d64;
-
   opacity:0;
 
   animation:
@@ -236,24 +202,17 @@ body{
 
 .intro-names .amp{
   display:inline-block;
-
-  margin:
-    0 9px;
-
+  margin:0 9px;
   font-size:21px;
-
   color:#ae8d69;
   font-style:italic;
 }
 
 .intro-subtitle{
   margin-top:16px;
-
   max-width:280px;
-
   font-size:11px;
   line-height:1.7;
-
   color:#8b7764;
 
   opacity:0;
@@ -266,22 +225,17 @@ body{
 
   from{
     opacity:0;
-    transform:
-      translateY(15px);
+    transform:translateY(15px);
   }
 
   to{
     opacity:1;
-    transform:
-      translateY(0);
+    transform:translateY(0);
   }
 
 }
 
-
-/* =====================================================
-   ENVELOPE SCENE
-===================================================== */
+/* ================= ENVELOPE ================= */
 
 .envelope-scene{
   position:relative;
@@ -299,7 +253,7 @@ body{
   opacity:0;
 
   animation:
-    sceneIn 1s .5s ease-out forwards;
+    sceneIn 1.2s .5s ease-out forwards;
 }
 
 @keyframes sceneIn{
@@ -313,11 +267,6 @@ body{
   }
 
 }
-
-
-/* =====================================================
-   ENVELOPE
-===================================================== */
 
 .envelope{
   position:absolute;
@@ -356,11 +305,6 @@ body{
     scale(.95);
 }
 
-
-/* =====================================================
-   ENVELOPE BACK
-===================================================== */
-
 .env-back{
   position:absolute;
   inset:0;
@@ -383,11 +327,6 @@ body{
     0 0 0 1px
     rgba(255,255,255,.25);
 }
-
-
-/* =====================================================
-   LETTER
-===================================================== */
 
 .letter{
   position:absolute;
@@ -416,9 +355,7 @@ body{
     rgba(63,43,27,.12);
 
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
   justify-content:center;
 
@@ -435,11 +372,8 @@ body{
 
 .letter-small{
   font-size:8px;
-
   letter-spacing:4px;
-
   color:#9b8268;
-
   margin-bottom:13px;
 }
 
@@ -450,16 +384,9 @@ body{
 .letter-line{
   width:50px;
   height:1px;
-
   margin-top:16px;
-
   background:#bca083;
 }
-
-
-/* =====================================================
-   FRONT
-===================================================== */
 
 .env-front{
   position:absolute;
@@ -484,11 +411,6 @@ body{
 
   border-radius:4px;
 }
-
-
-/* =====================================================
-   FLAP
-===================================================== */
 
 .flap{
   position:absolute;
@@ -529,11 +451,6 @@ body{
     cubic-bezier(.65,0,.2,1);
 }
 
-
-/* =====================================================
-   OPEN
-===================================================== */
-
 .envelope.open .flap{
   transform:
     rotateX(180deg);
@@ -544,14 +461,8 @@ body{
     translateY(-110px);
 }
 
-
-/* =====================================================
-   SEAL
-===================================================== */
-
 .seal-wrap{
   position:absolute;
-
   z-index:20;
 
   left:50%;
@@ -609,12 +520,9 @@ body{
 
 .seal::before{
   content:"";
-
   position:absolute;
   inset:7px;
-
   border-radius:50%;
-
   border:
     1px solid
     rgba(255,230,220,.4);
@@ -635,11 +543,6 @@ body{
   }
 
 }
-
-
-/* =====================================================
-   SEAL PRESS
-===================================================== */
 
 .seal-wrap.pressed{
   animation:
@@ -687,14 +590,8 @@ body{
 
 }
 
-
-/* =====================================================
-   OPEN TEXT
-===================================================== */
-
 .open-text{
   position:absolute;
-
   left:50%;
   bottom:0;
 
@@ -705,7 +602,6 @@ body{
 
   font-size:8px;
   letter-spacing:3px;
-
   color:#8a735d;
 
   animation:
@@ -725,11 +621,6 @@ body{
   }
 
 }
-
-
-/* =====================================================
-   PARTICLES
-===================================================== */
 
 .particle{
   position:absolute;
@@ -783,10 +674,7 @@ body{
 
 }
 
-
-/* =====================================================
-   LOADING
-===================================================== */
+/* ================= LOADING ================= */
 
 #loading{
   min-height:100vh;
@@ -801,10 +689,7 @@ body{
   color:#9a826b;
 }
 
-
-/* =====================================================
-   MAIN
-===================================================== */
+/* ================= MAIN ================= */
 
 #invitation{
   display:none;
@@ -859,11 +744,8 @@ body{
 
 .label{
   font-size:9px;
-
   letter-spacing:4px;
-
   color:#9b826b;
-
   margin-bottom:25px;
 }
 
@@ -888,65 +770,44 @@ body{
 
 h1{
   font-size:52px;
-
   font-weight:normal;
-
   line-height:1.04;
 }
 
 .and{
   font-size:25px;
-
   color:#aa8b6b;
-
   font-style:italic;
-
-  margin:
-    9px 0;
+  margin:9px 0;
 }
 
 .divider{
   width:65px;
   height:1px;
-
   background:#bca083;
-
-  margin:
-    28px auto;
+  margin:28px auto;
 }
 
 .description{
   color:#6d6259;
-
   line-height:1.8;
-
   font-size:15px;
 }
 
 .event-date{
   margin-top:25px;
-
   font-size:14px;
-
   letter-spacing:3px;
-
   color:#665648;
 }
 
-
-/* =====================================================
-   COUNTDOWN
-===================================================== */
+/* ================= COUNTDOWN ================= */
 
 .countdown{
   display:flex;
-
   justify-content:center;
-
   gap:8px;
-
-  margin:
-    32px 0;
+  margin:32px 0;
 }
 
 .count-box{
@@ -963,9 +824,7 @@ h1{
 
 .count-box b{
   display:block;
-
   font-size:22px;
-
   font-weight:normal;
 }
 
@@ -973,7 +832,6 @@ h1{
   display:block;
 
   font-size:8px;
-
   letter-spacing:1px;
 
   color:#9b836c;
@@ -981,10 +839,7 @@ h1{
   margin-top:5px;
 }
 
-
-/* =====================================================
-   BUTTON
-===================================================== */
+/* ================= BUTTON ================= */
 
 .button{
   display:inline-block;
@@ -1017,14 +872,10 @@ h1{
 
 .button:hover{
   background:#5c4d40;
-
   color:white;
 }
 
-
-/* =====================================================
-   MUSIC
-===================================================== */
+/* ================= MUSIC ================= */
 
 .music-button{
   position:fixed;
@@ -1053,10 +904,7 @@ h1{
     rgba(0,0,0,.08);
 }
 
-
-/* =====================================================
-   SECTION
-===================================================== */
+/* ================= SECTION ================= */
 
 .section{
   background:#fffdf9;
@@ -1069,28 +917,20 @@ h1{
 
 .section h2{
   font-size:31px;
-
   font-weight:normal;
-
   margin-bottom:20px;
 }
 
 .location{
   color:#6d6259;
-
   line-height:2;
-
   margin-bottom:25px;
 }
 
-
-/* =====================================================
-   RSVP
-===================================================== */
+/* ================= RSVP ================= */
 
 .rsvp{
   max-width:430px;
-
   margin:auto;
 }
 
@@ -1117,25 +957,18 @@ h1{
 
 .rsvp textarea{
   height:100px;
-
   resize:none;
 }
 
 .message{
   margin-top:15px;
-
   color:#6e8060;
-
   font-size:14px;
 }
 
-
-/* =====================================================
-   INSTAGRAM FOOTER
-===================================================== */
+/* ================= PREMIUM FOOTER ================= */
 
 .premium-footer{
-
   background:
     linear-gradient(
       180deg,
@@ -1154,18 +987,13 @@ h1{
 }
 
 .instagram-title{
-
   font-size:10px;
-
   letter-spacing:4px;
-
   color:#9b836c;
-
   margin-bottom:16px;
 }
 
 .instagram-link{
-
   display:inline-block;
 
   color:#493d32;
@@ -1186,14 +1014,11 @@ h1{
 }
 
 .instagram-link:hover{
-
   color:#9a5a50;
-
   border-color:#9a5a50;
 }
 
 .instagram-text{
-
   margin-top:25px;
 
   font-size:13px;
@@ -1206,7 +1031,6 @@ h1{
 }
 
 .create-invitation-button{
-
   display:inline-flex;
 
   align-items:center;
@@ -1243,7 +1067,6 @@ h1{
 }
 
 .create-invitation-button:hover{
-
   transform:
     translateY(-2px);
 
@@ -1255,18 +1078,13 @@ h1{
 }
 
 .create-invitation-button:active{
-
   transform:
     translateY(0);
 }
 
-
-/* =====================================================
-   FOOTER
-===================================================== */
+/* ================= FOOTER ================= */
 
 footer{
-
   text-align:center;
 
   padding:
@@ -1282,10 +1100,7 @@ footer{
   background:#eee3d5;
 }
 
-
-/* =====================================================
-   MOBILE
-===================================================== */
+/* ================= MOBILE ================= */
 
 @media(max-width:500px){
 
@@ -1294,9 +1109,7 @@ footer{
   }
 
   .intro-names{
-
     margin-top:18px;
-
     font-size:32px;
   }
 
@@ -1305,21 +1118,17 @@ footer{
   }
 
   .envelope-scene{
-
     height:310px;
-
     margin-top:22px;
   }
 
   .envelope{
-
     transform:
       translate(-50%,-50%)
       scale(.82);
   }
 
   .envelope.camera{
-
     transform:
       translate(-50%,-50%)
       scale(.88);
@@ -1330,7 +1139,6 @@ footer{
   }
 
   .photo{
-
     width:155px;
     height:155px;
   }
@@ -1344,11 +1152,6 @@ footer{
   }
 
 }
-
-
-/* =====================================================
-   SMALL HEIGHT
-===================================================== */
 
 @media(max-height:700px){
 
@@ -1371,11 +1174,6 @@ footer{
 
 }
 
-
-/* =====================================================
-   VERY SMALL PHONE
-===================================================== */
-
 @media(max-height:600px){
 
   .intro-content{
@@ -1383,32 +1181,21 @@ footer{
   }
 
   .intro-names{
-
     margin-top:12px;
-
     font-size:28px;
   }
 
   .intro-subtitle{
-
     margin-top:6px;
-
     font-size:10px;
   }
 
   .envelope-scene{
-
     height:260px;
-
     margin-top:-5px;
   }
 
 }
-
-
-/* =====================================================
-   ACCESSIBILITY
-===================================================== */
 
 @media(prefers-reduced-motion:reduce){
 
@@ -1423,6 +1210,7 @@ footer{
     transition-duration:.01ms !important;
 
     scroll-behavior:auto !important;
+
   }
 
 }
@@ -1430,13 +1218,9 @@ footer{
 </style>
 </head>
 
-
 <body>
 
-
-<!-- =====================================================
-     INTRO
-===================================================== -->
+<!-- ================= INTRO ================= -->
 
 <div id="intro">
 
@@ -1446,14 +1230,11 @@ footer{
   <div class="orbit two"></div>
   <div class="orbit three"></div>
 
-
   <div class="intro-content">
-
 
     <div class="small-label">
       TAKLIFNOMA
     </div>
-
 
     <div class="intro-names">
 
@@ -1471,7 +1252,6 @@ footer{
 
     </div>
 
-
     <div class="intro-subtitle">
 
       Bu taklifnoma siz uchun
@@ -1479,25 +1259,20 @@ footer{
 
     </div>
 
-
     <div class="envelope-scene">
-
 
       <div
         class="envelope"
         id="envelope"
         onclick="openInvitation()">
 
-
         <div class="env-back"></div>
-
 
         <div class="letter">
 
           <div class="letter-small">
             NIKOH TO‘YI
           </div>
-
 
           <div class="letter-names">
 
@@ -1513,17 +1288,13 @@ footer{
 
           </div>
 
-
           <div class="letter-line"></div>
 
         </div>
 
-
         <div class="env-front"></div>
 
-
         <div class="flap"></div>
-
 
         <div
           class="seal-wrap"
@@ -1535,42 +1306,29 @@ footer{
 
         </div>
 
-
       </div>
-
 
       <div class="open-text">
-
         OCHISH UCHUN MUHRNI BOSING
-
       </div>
 
-
     </div>
-
 
   </div>
 
 </div>
 
 
-<!-- =====================================================
-     LOADING
-===================================================== -->
+<!-- ================= LOADING ================= -->
 
 <div id="loading">
-
   Taklifnoma yuklanmoqda...
-
 </div>
 
 
-<!-- =====================================================
-     INVITATION
-===================================================== -->
+<!-- ================= INVITATION ================= -->
 
 <div id="invitation">
-
 
   <button
     class="music-button"
@@ -1580,7 +1338,6 @@ footer{
     ♪
 
   </button>
-
 
   <audio
     id="music"
@@ -1592,16 +1349,11 @@ footer{
 
   <section class="hero">
 
-
     <div class="hero-content">
 
-
       <div class="label">
-
         SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
-
       </div>
-
 
       <img
         id="photo"
@@ -1609,24 +1361,19 @@ footer{
         src=""
         alt="To‘y rasmi">
 
-
       <h1 id="groomName">
         Aziz
       </h1>
-
 
       <div class="and">
         &
       </div>
 
-
       <h1 id="brideName">
         Madina
       </h1>
 
-
       <div class="divider"></div>
-
 
       <p class="description">
 
@@ -1636,15 +1383,12 @@ footer{
 
       </p>
 
-
       <div
         class="event-date"
         id="eventDate">
       </div>
 
-
       <div class="countdown">
-
 
         <div class="count-box">
 
@@ -1658,7 +1402,6 @@ footer{
 
         </div>
 
-
         <div class="count-box">
 
           <b id="hours">
@@ -1670,7 +1413,6 @@ footer{
           </span>
 
         </div>
-
 
         <div class="count-box">
 
@@ -1684,7 +1426,6 @@ footer{
 
         </div>
 
-
         <div class="count-box">
 
           <b id="seconds">
@@ -1697,9 +1438,7 @@ footer{
 
         </div>
 
-
       </div>
-
 
       <a
         href="#location"
@@ -1709,7 +1448,6 @@ footer{
 
       </a>
 
-
       <a
         href="#rsvp"
         class="button">
@@ -1717,7 +1455,6 @@ footer{
         RSVP
 
       </a>
-
 
     </div>
 
@@ -1730,13 +1467,9 @@ footer{
     class="section"
     id="location">
 
-
     <h2>
-
       TANTANALI MAROSIM
-
     </h2>
-
 
     <div class="location">
 
@@ -1745,7 +1478,6 @@ footer{
       <div id="address"></div>
 
     </div>
-
 
     <a
       id="mapsButton"
@@ -1757,7 +1489,6 @@ footer{
 
     </a>
 
-
   </section>
 
 
@@ -1767,11 +1498,9 @@ footer{
     class="section"
     id="rsvp">
 
-
     <h2>
       Tilaklar
     </h2>
-
 
     <p
       class="description"
@@ -1782,18 +1511,15 @@ footer{
 
     </p>
 
-
     <form
       class="rsvp"
       onsubmit="sendRSVP(event)">
-
 
       <input
         id="guestName"
         type="text"
         placeholder="Ismingiz"
         required>
-
 
       <select
         id="attendance"
@@ -1813,12 +1539,10 @@ footer{
 
       </select>
 
-
       <textarea
         id="guestMessage"
         placeholder="Tilagingiz">
       </textarea>
-
 
       <button
         type="submit"
@@ -1828,15 +1552,12 @@ footer{
 
       </button>
 
-
       <div
         id="message"
         class="message">
       </div>
 
-
     </form>
-
 
   </section>
 
@@ -1845,13 +1566,9 @@ footer{
 
   <section class="premium-footer">
 
-
     <div class="instagram-title">
-
       📸 INSTAGRAM
-
     </div>
-
 
     <a
       href="https://www.instagram.com/my.inviter"
@@ -1863,7 +1580,6 @@ footer{
 
     </a>
 
-
     <div class="instagram-text">
 
       🤍 Sizning baxtli kuningiz —
@@ -1873,28 +1589,22 @@ footer{
     </div>
 
 
+    <!-- MUHIM: CREATE.HTML -->
+
     <a
-      href="https://www.instagram.com/my.inviter"
-      target="_blank"
-      rel="noopener noreferrer"
+      href="/create.html"
       class="create-invitation-button">
 
       TAKLIFNOMA YARATISH
 
     </a>
 
-
   </section>
 
 
-  <!-- FOOTER -->
-
   <footer>
-
     MYINVITER · 2026
-
   </footer>
-
 
 </div>
 
@@ -1913,39 +1623,16 @@ const SUPABASE_KEY =
 
 
 /* =====================================================
-   IMPORTANT
-   URLDAGI ID NI OLADI
+   INVITATION ID
 ===================================================== */
 
-const urlParams =
-  new URLSearchParams(
-    window.location.search
-  );
+const params =
+new URLSearchParams(
+  window.location.search
+);
 
-const invitationId =
-  urlParams.get("id");
-
-
-/*
-  Masalan:
-
-  invite.html?id=1
-  invite.html?id=2
-  invite.html?id=15
-
-  shu ID Supabase'dagi
-  invitations.id bilan mos keladi.
-*/
-
-
-if(!invitationId){
-
-  document.getElementById(
-    "loading"
-  ).innerText =
-    "Taklifnoma havolasi noto‘g‘ri.";
-
-}
+const INVITATION_ID =
+params.get("id") || "1";
 
 
 /* =====================================================
@@ -1953,19 +1640,19 @@ if(!invitationId){
 ===================================================== */
 
 const intro =
-  document.getElementById("intro");
+document.getElementById("intro");
 
 const envelope =
-  document.getElementById("envelope");
+document.getElementById("envelope");
 
 const sealWrap =
-  document.getElementById("sealWrap");
+document.getElementById("sealWrap");
 
 const music =
-  document.getElementById("music");
+document.getElementById("music");
 
 const musicButton =
-  document.getElementById("musicButton");
+document.getElementById("musicButton");
 
 
 /* =====================================================
@@ -1973,13 +1660,6 @@ const musicButton =
 ===================================================== */
 
 async function loadInvitation(){
-
-  if(!invitationId){
-
-    return;
-
-  }
-
 
   try{
 
@@ -1989,7 +1669,7 @@ async function loadInvitation(){
         SUPABASE_URL +
         "/rest/v1/invitations?id=eq." +
         encodeURIComponent(
-          invitationId
+          INVITATION_ID
         ) +
         "&select=*",
 
@@ -2043,13 +1723,10 @@ async function loadInvitation(){
       data[0];
 
 
-    /* =================================================
-       NAMES
-    ================================================= */
-
     const groom =
       invitation.groom_name ||
       "Aziz";
+
 
     const bride =
       invitation.bride_name ||
@@ -2092,32 +1769,19 @@ async function loadInvitation(){
       bride;
 
 
-    /* =================================================
-       PHOTO
-    ================================================= */
-
-    const photo =
-      document.getElementById(
-        "photo"
-      );
-
+    /* PHOTO */
 
     if(invitation.photo_url){
 
-      photo.src =
+      document.getElementById(
+        "photo"
+      ).src =
         invitation.photo_url;
-
-    }else{
-
-      photo.style.display =
-        "none";
 
     }
 
 
-    /* =================================================
-       MUSIC
-    ================================================= */
+    /* MUSIC */
 
     if(invitation.music_url){
 
@@ -2129,9 +1793,7 @@ async function loadInvitation(){
     }
 
 
-    /* =================================================
-       LOCATION
-    ================================================= */
+    /* LOCATION */
 
     document.getElementById(
       "venue"
@@ -2147,28 +1809,17 @@ async function loadInvitation(){
       "";
 
 
-    const mapsButton =
-      document.getElementById(
-        "mapsButton"
-      );
-
-
     if(invitation.maps_url){
 
-      mapsButton.href =
+      document.getElementById(
+        "mapsButton"
+      ).href =
         invitation.maps_url;
-
-    }else{
-
-      mapsButton.style.display =
-        "none";
 
     }
 
 
-    /* =================================================
-       DATE
-    ================================================= */
+    /* DATE */
 
     if(invitation.event_date){
 
@@ -2223,9 +1874,7 @@ async function loadInvitation(){
     }
 
 
-    /* =================================================
-       SHOW INVITATION
-    ================================================= */
+    /* SHOW */
 
     document.getElementById(
       "loading"
@@ -2241,11 +1890,7 @@ async function loadInvitation(){
 
   }catch(error){
 
-    console.error(
-      "LOAD ERROR:",
-      error
-    );
-
+    console.error(error);
 
     document.getElementById(
       "loading"
@@ -2354,19 +1999,17 @@ function createParticles(){
 
 
 /* =====================================================
-   OPEN INVITATION
+   OPEN
 ===================================================== */
 
 let opened =
-  false;
+false;
 
 
 function openInvitation(){
 
   if(opened){
-
     return;
-
   }
 
 
@@ -2472,9 +2115,7 @@ function openInvitation(){
 function toggleMusic(){
 
   if(!music.src){
-
     return;
-
   }
 
 
@@ -2487,17 +2128,6 @@ function toggleMusic(){
 
           musicButton.innerText =
             "Ⅱ";
-
-        }
-      )
-
-      .catch(
-        function(error){
-
-          console.log(
-            "Music error:",
-            error
-          );
 
         }
       );
@@ -2519,7 +2149,7 @@ function toggleMusic(){
 ===================================================== */
 
 let countdownTimer =
-  null;
+null;
 
 
 function startCountdown(
@@ -2715,7 +2345,9 @@ async function sendRSVP(
             JSON.stringify({
 
               invitation_id:
-                invitationId,
+                Number(
+                  INVITATION_ID
+                ),
 
               guest_name:
                 guestName,
@@ -2749,7 +2381,6 @@ async function sendRSVP(
 
       throw new Error(
         error.message ||
-        error.hint ||
         "RSVP yuborilmadi"
       );
 
@@ -2762,29 +2393,22 @@ async function sendRSVP(
 
     document.getElementById(
       "guestName"
-    ).value =
-      "";
+    ).value = "";
 
 
     document.getElementById(
       "attendance"
-    ).value =
-      "";
+    ).value = "";
 
 
     document.getElementById(
       "guestMessage"
-    ).value =
-      "";
+    ).value = "";
 
 
   }catch(error){
 
-    console.error(
-      "RSVP ERROR:",
-      error
-    );
-
+    console.error(error);
 
     message.innerText =
       "Xatolik: " +
