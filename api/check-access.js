@@ -21,12 +21,13 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(
-      `${SUPABASE_URL}/rest/v1/payments?access_token=eq.${encodeURIComponent(token)}&status=eq.paid&used=eq.false&limit=1`,
+      `${SUPABASE_URL}/rest/v1/payments?access_token=eq.${encodeURIComponent(
+        token
+      )}&status=eq.paid&used=eq.false&select=id,access_token&limit=1`,
       {
         headers: {
           apikey: SUPABASE_SERVICE_ROLE_KEY,
-          Authorization:
-            `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
+          Authorization: `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
         }
       }
     );
