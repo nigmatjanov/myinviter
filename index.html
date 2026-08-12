@@ -11,6 +11,7 @@
 
 <title>MyInviter — Taklifnoma</title>
 
+
 <style>
 
 *{
@@ -29,268 +30,684 @@ body{
   font-family:Georgia,"Times New Roman",serif;
 }
 
-.hero{
-  min-height:100vh;
+
+/* =========================
+   WELCOME SCREEN
+========================= */
+
+#welcomeScreen{
+
+  position:fixed;
+
+  inset:0;
+
+  background:#f7f3ed;
+
+  z-index:9999;
+
   display:flex;
+
   align-items:center;
+
   justify-content:center;
+
   text-align:center;
-  padding:40px 20px;
-  position:relative;
-  overflow:hidden;
+
+  padding:30px;
+
+  transition:
+    opacity .6s ease;
+
 }
 
-.hero::before,
-.hero::after{
-  content:"";
-  position:absolute;
-  width:280px;
-  height:280px;
-  border:1px solid #d8c8b7;
-  border-radius:50%;
-  opacity:.45;
-}
 
-.hero::before{
-  top:-150px;
-  left:-150px;
-}
+.welcome-content{
 
-.hero::after{
-  right:-150px;
-  bottom:-150px;
-}
+  max-width:500px;
 
-.content{
   width:100%;
-  max-width:600px;
-  position:relative;
-  z-index:2;
-  animation:fadeUp 1.2s ease;
+
+  animation:
+    fadeUp 1s ease;
+
 }
+
+
+.welcome-small{
+
+  font-size:10px;
+
+  letter-spacing:4px;
+
+  color:#9b836c;
+
+  margin-bottom:30px;
+
+}
+
+
+.welcome-title{
+
+  font-size:48px;
+
+  line-height:1.2;
+
+  color:#40372f;
+
+}
+
+
+.welcome-title span{
+
+  display:block;
+
+  font-size:24px;
+
+  font-style:italic;
+
+  color:#aa927b;
+
+  margin:8px 0;
+
+}
+
+
+.welcome-line{
+
+  width:60px;
+
+  height:1px;
+
+  background:#bda990;
+
+  margin:30px auto;
+
+}
+
+
+#openInvitation{
+
+  padding:15px 25px;
+
+  border:1px solid #9b836c;
+
+  background:#5c4d40;
+
+  color:white;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:11px;
+
+  letter-spacing:1px;
+
+  cursor:pointer;
+
+  transition:.3s;
+
+}
+
+
+#openInvitation:hover{
+
+  background:#40372f;
+
+}
+
+
+.welcome-music{
+
+  margin-top:20px;
+
+  font-size:11px;
+
+  color:#9b836c;
+
+}
+
+
+/* =========================
+   ANIMATION
+========================= */
 
 @keyframes fadeUp{
 
   from{
+
     opacity:0;
-    transform:translateY(30px);
+
+    transform:
+      translateY(30px);
+
   }
 
   to{
+
     opacity:1;
-    transform:translateY(0);
+
+    transform:
+      translateY(0);
+
   }
 
 }
 
-.label{
-  letter-spacing:4px;
-  font-size:11px;
-  text-transform:uppercase;
+
+/* =========================
+   LOADING
+========================= */
+
+#loading{
+
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:30px;
+
   color:#9b836c;
-  margin-bottom:25px;
+
 }
+
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  text-align:center;
+
+  padding:40px 20px;
+
+  position:relative;
+
+  overflow:hidden;
+
+}
+
+
+.hero::before,
+.hero::after{
+
+  content:"";
+
+  position:absolute;
+
+  width:280px;
+
+  height:280px;
+
+  border:
+    1px solid #d8c8b7;
+
+  border-radius:50%;
+
+  opacity:.45;
+
+}
+
+
+.hero::before{
+
+  top:-150px;
+
+  left:-150px;
+
+}
+
+
+.hero::after{
+
+  right:-150px;
+
+  bottom:-150px;
+
+}
+
+
+.content{
+
+  width:100%;
+
+  max-width:600px;
+
+  position:relative;
+
+  z-index:2;
+
+  animation:
+    fadeUp 1.2s ease;
+
+}
+
+
+.label{
+
+  letter-spacing:4px;
+
+  font-size:11px;
+
+  text-transform:uppercase;
+
+  color:#9b836c;
+
+  margin-bottom:25px;
+
+}
+
 
 .photo{
+
   width:180px;
+
   height:180px;
+
   border-radius:50%;
+
   object-fit:cover;
-  border:7px solid #fffdf9;
+
+  border:
+    7px solid #fffdf9;
+
   box-shadow:
-    0 8px 30px rgba(70,50,35,.12);
+    0 8px 30px
+    rgba(70,50,35,.12);
+
   margin-bottom:25px;
+
 }
+
 
 h1{
+
   font-size:52px;
+
   font-weight:normal;
+
   line-height:1.1;
+
 }
+
 
 .and{
+
   font-size:25px;
+
   font-style:italic;
+
   color:#aa927b;
+
   margin:10px 0;
+
 }
+
 
 .divider{
+
   width:70px;
+
   height:1px;
+
   background:#bda990;
+
   margin:25px auto;
+
 }
+
 
 .text{
+
   line-height:1.8;
+
   font-size:16px;
+
   color:#6d6259;
+
 }
+
 
 .date{
+
   margin-top:25px;
+
   letter-spacing:3px;
+
   font-size:14px;
+
 }
+
+
+/* =========================
+   COUNTDOWN
+========================= */
 
 .countdown{
+
   display:flex;
+
   justify-content:center;
+
   gap:8px;
+
   margin:30px 0;
+
 }
+
 
 .box{
+
   width:68px;
+
   padding:13px 5px;
+
   background:#fffdf9;
-  border:1px solid #e5dbcf;
+
+  border:
+    1px solid #e5dbcf;
+
   box-shadow:
-    0 5px 18px rgba(70,50,35,.06);
+    0 5px 18px
+    rgba(70,50,35,.06);
+
 }
+
 
 .box b{
+
   display:block;
+
   font-size:22px;
+
   font-weight:normal;
+
 }
+
 
 .box span{
+
   font-size:8px;
+
   letter-spacing:1px;
+
   color:#9b836c;
+
 }
+
+
+/* =========================
+   BUTTONS
+========================= */
 
 .buttons{
+
   display:flex;
+
   justify-content:center;
+
   gap:10px;
+
   flex-wrap:wrap;
+
   margin-top:20px;
+
 }
+
 
 .button{
+
   display:inline-block;
+
   padding:13px 23px;
-  border:1px solid #9b836c;
+
+  border:
+    1px solid #9b836c;
+
   color:#5c4d40;
+
   text-decoration:none;
+
   letter-spacing:1px;
+
   font-size:11px;
+
   background:transparent;
+
   cursor:pointer;
+
   transition:.3s;
+
 }
+
 
 .button:hover{
+
   background:#5c4d40;
+
   color:white;
+
 }
+
+
+/* =========================
+   MUSIC BUTTON
+========================= */
 
 .music{
+
   position:fixed;
+
   right:18px;
+
   top:18px;
+
   width:45px;
+
   height:45px;
+
   border-radius:50%;
-  border:1px solid #bda990;
+
+  border:
+    1px solid #bda990;
+
   background:#fffdf9;
+
   color:#5c4d40;
+
   z-index:20;
+
   cursor:pointer;
+
   box-shadow:
-    0 5px 20px rgba(0,0,0,.08);
+    0 5px 20px
+    rgba(0,0,0,.08);
+
 }
+
+
+/* =========================
+   SECTION
+========================= */
 
 .section{
+
   background:#fffdf9;
+
   text-align:center;
+
   padding:80px 22px;
+
 }
+
 
 .section h2{
+
   font-size:32px;
+
   font-weight:normal;
+
   margin-bottom:20px;
+
 }
+
+
+/* =========================
+   LOCATION
+========================= */
 
 .location{
+
   line-height:2;
+
   color:#6d6259;
+
   margin-bottom:28px;
+
 }
 
+
+/* =========================
+   RSVP
+========================= */
+
 .rsvp{
+
   max-width:430px;
+
   margin:0 auto;
+
 }
+
 
 .rsvp input,
 .rsvp select,
 .rsvp textarea{
+
   width:100%;
+
   padding:14px;
+
   margin-bottom:12px;
-  border:1px solid #dfd4c7;
+
+  border:
+    1px solid #dfd4c7;
+
   background:#fdfbf8;
+
   color:#40372f;
+
   font-family:inherit;
+
   outline:none;
+
 }
+
 
 .rsvp textarea{
+
   height:100px;
+
   resize:none;
+
 }
+
 
 .message{
+
   margin-top:15px;
+
   color:#7d6652;
+
   font-size:14px;
+
 }
 
-#loading{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:30px;
-  color:#9b836c;
-}
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
+
   text-align:center;
+
   padding:30px;
+
   background:#f7f3ed;
+
   font-size:11px;
+
   letter-spacing:2px;
+
   color:#9b836c;
+
 }
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:500px){
 
-  h1{
-    font-size:43px;
+  .welcome-title{
+
+    font-size:40px;
+
   }
+
+
+  h1{
+
+    font-size:43px;
+
+  }
+
 
   .photo{
+
     width:155px;
+
     height:155px;
+
   }
+
 
   .countdown{
+
     gap:5px;
+
   }
+
 
   .box{
+
     width:62px;
+
   }
 
+
   .box b{
+
     font-size:19px;
+
   }
 
 }
@@ -303,15 +720,85 @@ footer{
 <body>
 
 
-<div id="loading">
-  Taklifnoma yuklanmoqda...
+<!-- =========================
+     WELCOME
+========================= -->
+
+<div id="welcomeScreen">
+
+  <div class="welcome-content">
+
+
+    <div class="welcome-small">
+
+      SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
+
+    </div>
+
+
+    <div class="welcome-title">
+
+      <span id="welcomeGroom">
+        Aziz
+      </span>
+
+      <span>
+        &
+      </span>
+
+      <span id="welcomeBride">
+        Madina
+      </span>
+
+    </div>
+
+
+    <div class="welcome-line">
+    </div>
+
+
+    <button
+      id="openInvitation"
+      onclick="openInvitation()">
+
+      💌 TAKLIFNOMANI OCHISH
+
+    </button>
+
+
+    <div class="welcome-music">
+
+      🎵 Musiqa bilan
+
+    </div>
+
+
+  </div>
+
 </div>
 
+
+<!-- =========================
+     LOADING
+========================= -->
+
+<div id="loading">
+
+  Taklifnoma yuklanmoqda...
+
+</div>
+
+
+<!-- =========================
+     INVITATION
+========================= -->
 
 <div
   id="invitation"
   style="display:none;">
 
+
+<!-- MUSIC BUTTON -->
 
 <button
   class="music"
@@ -323,12 +810,18 @@ footer{
 </button>
 
 
+<!-- AUDIO -->
+
 <audio
   id="music"
   preload="auto">
 
 </audio>
 
+
+<!-- =========================
+     HERO
+========================= -->
 
 <section class="hero">
 
@@ -350,17 +843,23 @@ Sizni to'yimizga taklif qilamiz
 
 
 <h1 id="groomName">
-Ali
+
+Aziz
+
 </h1>
 
 
 <div class="and">
+
 &
+
 </div>
 
 
 <h1 id="brideName">
-Aliya
+
+Madina
+
 </h1>
 
 
@@ -385,6 +884,8 @@ mamnun bo'lamiz.
 
 </div>
 
+
+<!-- COUNTDOWN -->
 
 <div class="countdown">
 
@@ -444,6 +945,8 @@ SONIYA
 </div>
 
 
+<!-- BUTTONS -->
+
 <div class="buttons">
 
 
@@ -473,13 +976,19 @@ RSVP
 </section>
 
 
+<!-- =========================
+     LOCATION
+========================= -->
+
 <section
   class="section"
   id="location">
 
 
 <h2>
+
 To'y manzili
+
 </h2>
 
 
@@ -487,17 +996,23 @@ To'y manzili
 
 
 <p id="venue">
-Aziya Grand
+
+Ozbegim
+
 </p>
 
 
 <p id="address">
-Gazalkent
+
+Chirchiq
+
 </p>
 
 
 <p id="locationDate">
+
 29-sentyabr · 18:00
+
 </p>
 
 
@@ -519,13 +1034,19 @@ GOOGLE MAPS
 </section>
 
 
+<!-- =========================
+     RSVP
+========================= -->
+
 <section
   class="section"
   id="rsvp">
 
 
 <h2>
+
 Ishtirokingizni tasdiqlang
+
 </h2>
 
 
@@ -552,15 +1073,23 @@ Sizni kutib qolamiz ❤️
 <select required>
 
 <option value="">
+
 Ishtirokingiz
+
 </option>
+
 
 <option value="Albatta kelaman">
+
 Albatta kelaman
+
 </option>
 
+
 <option value="Kela olmayman">
+
 Kela olmayman
+
 </option>
 
 </select>
@@ -583,6 +1112,7 @@ TASDIQLASH
 <div
   class="message"
   id="message">
+
 </div>
 
 
@@ -591,6 +1121,8 @@ TASDIQLASH
 
 </section>
 
+
+<!-- FOOTER -->
 
 <footer>
 
@@ -603,6 +1135,7 @@ MYINVITER · 2026
 
 
 <script>
+
 
 /* =========================
    SUPABASE
@@ -637,11 +1170,15 @@ const DEFAULT_MUSIC =
 ========================= */
 
 const music =
-document.getElementById("music");
+document.getElementById(
+  "music"
+);
 
 
 const musicButton =
-document.getElementById("musicButton");
+document.getElementById(
+  "musicButton"
+);
 
 
 /* =========================
@@ -649,6 +1186,7 @@ document.getElementById("musicButton");
 ========================= */
 
 async function loadInvitation(){
+
 
   const loading =
     document.getElementById(
@@ -733,18 +1271,38 @@ async function loadInvitation(){
     ========================= */
 
 
+    const groom =
+      invitation.groom_name ||
+      "Aziz";
+
+
+    const bride =
+      invitation.bride_name ||
+      "Madina";
+
+
     document.getElementById(
       "groomName"
     ).innerText =
-      invitation.groom_name ||
-      "Ali";
+      groom;
 
 
     document.getElementById(
       "brideName"
     ).innerText =
-      invitation.bride_name ||
-      "Aliya";
+      bride;
+
+
+    document.getElementById(
+      "welcomeGroom"
+    ).innerText =
+      groom;
+
+
+    document.getElementById(
+      "welcomeBride"
+    ).innerText =
+      bride;
 
 
     /* =========================
@@ -814,7 +1372,9 @@ async function loadInvitation(){
     ========================= */
 
 
-    if(invitation.maps_url){
+    if(
+      invitation.maps_url
+    ){
 
       document.getElementById(
         "mapsButton"
@@ -829,7 +1389,9 @@ async function loadInvitation(){
     ========================= */
 
 
-    if(invitation.event_date){
+    if(
+      invitation.event_date
+    ){
 
       const dateString =
         invitation.event_date;
@@ -863,7 +1425,10 @@ async function loadInvitation(){
       const day =
         String(
           date.getDate()
-        ).padStart(2,"0");
+        ).padStart(
+          2,
+          "0"
+        );
 
 
       const month =
@@ -905,7 +1470,7 @@ async function loadInvitation(){
 
 
     /* =========================
-       SHOW
+       SHOW INVITATION
     ========================= */
 
 
@@ -920,6 +1485,7 @@ async function loadInvitation(){
 
 
   }catch(error){
+
 
     console.error(
       "Connection error:",
@@ -936,6 +1502,61 @@ async function loadInvitation(){
 
 
 /* =========================
+   OPEN INVITATION
+========================= */
+
+function openInvitation(){
+
+
+  const welcome =
+    document.getElementById(
+      "welcomeScreen"
+    );
+
+
+  welcome.style.opacity =
+    "0";
+
+
+  setTimeout(
+    function(){
+
+      welcome.style.display =
+        "none";
+
+    },
+    600
+  );
+
+
+  /* MUSIC START */
+
+  music.play()
+
+    .then(
+      function(){
+
+        musicButton.innerText =
+          "Ⅱ";
+
+      }
+    )
+
+    .catch(
+      function(error){
+
+        console.log(
+          "Music error:",
+          error
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================
    COUNTDOWN
 ========================= */
 
@@ -947,7 +1568,10 @@ function startCountdown(
   weddingDate
 ){
 
-  if(countdownTimer){
+
+  if(
+    countdownTimer
+  ){
 
     clearInterval(
       countdownTimer
@@ -958,6 +1582,7 @@ function startCountdown(
 
   function countdown(){
 
+
     const now =
       new Date().getTime();
 
@@ -967,7 +1592,9 @@ function startCountdown(
       now;
 
 
-    if(distance <= 0){
+    if(
+      distance <= 0
+    ){
 
       document.getElementById(
         "days"
@@ -1007,11 +1634,19 @@ function startCountdown(
         Math.floor(
 
           distance /
-          (1000*60*60*24)
+          (
+            1000 *
+            60 *
+            60 *
+            24
+          )
 
         )
 
-      ).padStart(2,"0");
+      ).padStart(
+        2,
+        "0"
+      );
 
 
     document.getElementById(
@@ -1022,13 +1657,21 @@ function startCountdown(
 
         Math.floor(
 
-          (distance /
-          (1000*60*60)) %
-          24
+          (
+            distance /
+            (
+              1000 *
+              60 *
+              60
+            )
+          ) % 24
 
         )
 
-      ).padStart(2,"0");
+      ).padStart(
+        2,
+        "0"
+      );
 
 
     document.getElementById(
@@ -1039,13 +1682,20 @@ function startCountdown(
 
         Math.floor(
 
-          (distance /
-          (1000*60)) %
-          60
+          (
+            distance /
+            (
+              1000 *
+              60
+            )
+          ) % 60
 
         )
 
-      ).padStart(2,"0");
+      ).padStart(
+        2,
+        "0"
+      );
 
 
     document.getElementById(
@@ -1056,12 +1706,17 @@ function startCountdown(
 
         Math.floor(
 
-          (distance / 1000) %
-          60
+          (
+            distance /
+            1000
+          ) % 60
 
         )
 
-      ).padStart(2,"0");
+      ).padStart(
+        2,
+        "0"
+      );
 
   }
 
@@ -1079,12 +1734,15 @@ function startCountdown(
 
 
 /* =========================
-   MUSIC
+   MUSIC TOGGLE
 ========================= */
 
 function toggleMusic(){
 
-  if(music.paused){
+
+  if(
+    music.paused
+  ){
 
     music.play()
 
@@ -1100,20 +1758,18 @@ function toggleMusic(){
       .catch(
         function(error){
 
-          console.error(
-            "Music error:",
+          console.log(
             error
           );
-
-          musicButton.innerText =
-            "♪";
 
         }
       );
 
   }else{
 
+
     music.pause();
+
 
     musicButton.innerText =
       "♪";
@@ -1131,6 +1787,7 @@ async function sendRSVP(
   event
 ){
 
+
   event.preventDefault();
 
 
@@ -1140,28 +1797,28 @@ async function sendRSVP(
 
   const guestName =
     form
-    .querySelector(
-      'input[type="text"]'
-    )
-    .value
-    .trim();
+      .querySelector(
+        'input[type="text"]'
+      )
+      .value
+      .trim();
 
 
   const attendance =
     form
-    .querySelector(
-      "select"
-    )
-    .value;
+      .querySelector(
+        "select"
+      )
+      .value;
 
 
   const message =
     form
-    .querySelector(
-      "textarea"
-    )
-    .value
-    .trim();
+      .querySelector(
+        "textarea"
+      )
+      .value
+      .trim();
 
 
   const messageBox =
@@ -1170,7 +1827,9 @@ async function sendRSVP(
     );
 
 
-  if(!guestName){
+  if(
+    !guestName
+  ){
 
     messageBox.innerText =
       "Iltimos, ismingizni kiriting.";
@@ -1180,7 +1839,9 @@ async function sendRSVP(
   }
 
 
-  if(!attendance){
+  if(
+    !attendance
+  ){
 
     messageBox.innerText =
       "Iltimos, ishtirokingizni tanlang.";
@@ -1248,22 +1909,20 @@ async function sendRSVP(
       );
 
 
-    if(!response.ok){
+    if(
+      !response.ok
+    ){
 
       const errorData =
         await response
-        .json()
-        .catch(
-          function(){
-            return {};
-          }
-        );
+          .json()
+          .catch(
+            function(){
 
+              return {};
 
-      console.error(
-        "RSVP error:",
-        errorData
-      );
+            }
+          );
 
 
       messageBox.innerText =
@@ -1288,6 +1947,7 @@ async function sendRSVP(
 
   }catch(error){
 
+
     console.error(
       "RSVP error:",
       error
@@ -1311,4 +1971,5 @@ loadInvitation();
 </script>
 
 </body>
+
 </html>
