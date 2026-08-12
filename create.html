@@ -1213,14 +1213,403 @@ document
 
 async function createInvitation(){
 
-  if(!accessGranted){
+  const button =
+    document.getElementById("createButton");
 
-    const ok =
-      await checkAccess();
+  const message =
+    document.getElementById("message");
 
-    if(!ok){
-      return;
+  message.className = "message";
+  message.innerText =
+    "Taklifnoma yaratilmoqda...";
+
+  button.disabled = true;
+
+  try {
+
+    /* =========================
+       TOKEN
+    ========================= */
+
+    const params =
+      new URLSearchParams(
+        window.location.search
+      );
+
+    const accessToken =
+      params.get("token");
+
+    if (!accessToken) {
+      throw new Error(
+        "Access token topilmadi."
+      );
     }
+
+
+    /* =========================
+       FORM
+    ========================= */
+
+    const groomName =
+      document
+      .getElementById("groomName")
+      .value
+      .trim();
+
+    const brideName =
+      document
+      .getElementById("brideName")
+      .value
+      .trim();
+
+    const eventDate =
+      document
+      .getElementById("eventDate")
+      .value;
+
+    const venue =
+      document
+      .getElementById("venue")
+      .value
+      .trim();
+
+    const address =
+      document
+      .getElementById("address")
+      .value
+      .trim();
+
+    const mapsUrl =
+      document
+      .getElementById("mapsUrl")
+      .value
+      .trim();
+
+
+    /* =========================
+       VALIDATION
+    ========================= */
+
+    if (!groomName) {
+      throw new Error(
+        "Kuyov ismini kiriting."
+      );
+    }
+
+    if (!brideName) {
+      throw new Error(
+        "Kelin ismini kiriting."
+      );
+    }
+
+    if (!eventDate) {
+      throw new Error(
+        "To‘y sanasini tanlang."
+      );
+    }
+
+
+    /* =========================
+       PHOTO
+    ========================= */
+
+    let photoChoice =
+      document.querySelector(
+        'input[name="photoChoice"]:checked'
+      );
+
+    let photoUrl =
+      photoChoice
+        ? photoChoice.value
+        : "";
+
+
+    /*
+      Agar custom rasm tanlangan bo‘lsa,
+      hozircha mavjud upload tizimidan foydalanamiz.
+    */
+
+    if (uploadedPhoto) {
+
+      const extension =
+        uploadedPhoto.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+      const fileName =
+        "invitation-" +
+        Date.now() +
+        "-" +
+        Math.random()
+        .toString(36)
+        .substring(2) +
+        "." +
+        extension;
+
+
+      const uploadResponse =
+        await fetch(
+
+          SUPABASE_URL +
+          "/storage/v1/object/invitation-photos/" +
+          fileName,
+
+          {
+            method: "POST",
+
+            headers: {
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                "Bearer " +
+                SUPABASE_KEY,
+
+              "Content-Type":
+                uploadedPhoto.type,
+
+              "x-upsert":
+                "true"
+            },
+
+            body:
+              uploadedPhoto
+          }
+        );
+
+
+      if (!uploadResponse.ok) {
+
+        const errorText =
+          await uploadResponse.text();
+
+        throw new Error(
+          "Rasm yuklanmadi: " +
+          errorText
+        );
+      }
+
+
+      photoUrl =
+        SUPABASE_URL +
+        "/storage/v1/object/public/invitation-photos/" +
+        fileName;
+    }
+
+
+    /* =========================
+       MUSIC
+    ========================= */
+
+    let musicUrl = "";
+
+    const selectedMusic =
+      document.querySelector(
+        'input[name="musicChoice"]:checked'
+      );
+
+
+    if (selectedMusic) {
+
+      musicUrl =
+        selectedMusic.value;
+    }
+
+
+    /* =========================
+       CUSTOM MUSIC
+    ========================= */
+
+    if (uploadedMusic) {
+
+      const extension =
+        uploadedMusic.name
+        .split(".")
+        .pop()
+        .toLowerCase();
+
+      const fileName =
+        "invitation-" +
+        Date.now() +
+        "-" +
+        Math.random()
+        .toString(36)
+        .substring(2) +
+        "." +
+        extension;
+
+
+      const uploadResponse =
+        await fetch(
+
+          SUPABASE_URL +
+          "/storage/v1/object/invitation-music/" +
+          fileName,
+
+          {
+            method: "POST",
+
+            headers: {
+              "apikey":
+                SUPABASE_KEY,
+
+              "Authorization":
+                "Bearer " +
+                SUPABASE_KEY,
+
+              "Content-Type":
+                uploadedMusic.type ||
+                "audio/mpeg",
+
+              "x-upsert":
+                "true"
+            },
+
+            body:
+              uploadedMusic
+          }
+        );
+
+
+      if (!uploadResponse.ok) {
+
+        const errorText =
+          await uploadResponse.text();
+
+        throw new Error(
+          "Qo‘shiq yuklanmadi: " +
+          errorText
+        );
+      }
+
+
+      musicUrl =
+        SUPABASE_URL +
+        "/storage/v1/object/public/invitation-music/" +
+        fileName;
+    }
+
+
+    /* =========================
+       CREATE VIA SERVER
+    ========================= */
+
+    const response =
+      await fetch(
+        "/api/create-invitation",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/json"
+          },
+
+          body: JSON.stringify({
+
+            accessToken,
+
+            groomName,
+
+            brideName,
+
+            eventDate,
+
+            venue,
+
+            address,
+
+            mapsUrl,
+
+            photoUrl,
+
+            musicUrl
+
+          })
+        }
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (
+      !response.ok ||
+      !data.ok
+    ) {
+
+      throw new Error(
+        data.error ||
+        "Taklifnoma yaratilmadi."
+      );
+    }
+
+
+    /* =========================
+       FINAL LINK
+    ========================= */
+
+    createdLink =
+      window.location.origin +
+      "/invite.html?id=" +
+      data.invitationId;
+
+
+    document
+    .getElementById(
+      "invitationLink"
+    )
+    .innerText =
+      createdLink;
+
+
+    document
+    .getElementById(
+      "openButton"
+    )
+    .href =
+      createdLink;
+
+
+    document
+    .getElementById(
+      "result"
+    )
+    .style.display =
+      "block";
+
+
+    message.className =
+      "message success";
+
+    message.innerText =
+      "✅ Taklifnoma muvaffaqiyatli yaratildi!";
+
+
+    button.disabled =
+      false;
+
+
+  } catch (error) {
+
+    console.error(
+      "CREATE ERROR:",
+      error
+    );
+
+    message.className =
+      "message error";
+
+    message.innerText =
+      "❌ Xatolik: " +
+      error.message;
+
+    button.disabled =
+      false;
+  }
+}
 
   }
 
