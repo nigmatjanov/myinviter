@@ -3,6 +3,7 @@ const SUPABASE_SERVICE_ROLE_KEY =
   process.env.SUPABASE_SERVICE_ROLE_KEY;
 
 export default async function handler(req, res) {
+
   if (req.method !== "POST") {
     return res.status(405).json({
       ok: false,
@@ -11,21 +12,40 @@ export default async function handler(req, res) {
   }
 
   try {
-    const {
-      accessToken,
-      groomName,
-      brideName,
-      eventDate,
-      venue,
-      address,
-      mapsUrl,
-      photoUrl,
-      musicUrl
-    } = req.body || {};
 
-    // =========================
-    // VALIDATION
-    // =========================
+    const body = req.body || {};
+
+    const accessToken =
+      body.accessToken;
+
+    const groomName =
+      body.groomName?.trim();
+
+    const brideName =
+      body.brideName?.trim();
+
+    const eventDate =
+      body.eventDate;
+
+    const venue =
+      body.venue?.trim() || "";
+
+    const address =
+      body.address?.trim() || "";
+
+    const mapsUrl =
+      body.mapsUrl?.trim() || "";
+
+    const photoUrl =
+      body.photoUrl || "";
+
+    const musicUrl =
+      body.musicUrl || "";
+
+
+    /* =========================
+       VALIDATION
+    ========================= */
 
     if (!accessToken) {
       return res.status(401).json({
@@ -55,47 +75,76 @@ export default async function handler(req, res) {
       });
     }
 
-    // =========================
-    // CHECK PAYMENT
-    // =========================
 
-    const paymentResponse = await fetch(
-      `${SUPABASE_URL}/rest/v1/payments` +
-      `?access_token=eq.${encodeURIComponent(accessToken)}` +
-      `&status=eq.paid` +
-      `&used=eq.false` +
-      `&select=id` +
-      `&limit=1`,
-      {
-        method: "GET",
+    /* =========================
+       CHECK PAYMENT
+    ========================= */
 
-        headers: {
-          apikey: SUPABASE_SERVICE_ROLE_KEY,
-          Authorization:
-            `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
+    const paymentResponse =
+      await fetch(
+        `${SUPABASE_URL}/rest/v1/payments` +
+        `?access_token=eq.${encodeURIComponent(accessToken)}` +
+        `&status=eq.paid` +
+        `&used=eq.false` +
+        `&select=id,telegram_user_id,access_token,status,used` +
+        `&limit=1`,
+        {
+          method: "GET",
+
+          headers: {
+            apikey:
+              SUPABASE_SERVICE_ROLE_KEY,
+
+            Authorization:
+              `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`
+          }
         }
-      }
-    );
+      );
+
+
+    const paymentText =
+      await paymentResponse.text();
+
 
     if (!paymentResponse.ok) {
-      const errorText =
-        await paymentResponse.text();
 
       console.error(
         "PAYMENT CHECK ERROR:",
-        errorText
+        paymentText
       );
 
       return res.status(500).json({
         ok: false,
-        error: "Database error"
+        error:
+          "Payment database error: " +
+          paymentText
       });
     }
 
-    const payments =
-      await paymentResponse.json();
 
-    if (!payments.length) {
+    let payments;
+
+    try {
+
+      payments =
+        JSON.parse(paymentText);
+
+    } catch {
+
+      return res.status(500).json({
+        ok: false,
+        error:
+          "Payment javobini o‘qib bo‘lmadi"
+      });
+
+    }
+
+
+    if (
+      !Array.isArray(payments) ||
+      payments.length === 0
+    ) {
+
       return res.status(403).json({
         ok: false,
         error:
@@ -103,12 +152,14 @@ export default async function handler(req, res) {
       });
     }
 
-    const paymentId =
-      payments[0].id;
 
-    // =========================
-    // CREATE INVITATION
-    // =========================
+    const payment =
+      payments[0];
+
+
+    /* =========================
+       CREATE INVITATION
+    ========================= */
 
     const invitationResponse =
       await fetch(
@@ -117,6 +168,7 @@ export default async function handler(req, res) {
           method: "POST",
 
           headers: {
+
             apikey:
               SUPABASE_SERVICE_ROLE_KEY,
 
@@ -130,36 +182,41 @@ export default async function handler(req, res) {
               "return=representation"
           },
 
-          body: JSON.stringify({
-            groom_name:
-              groomName,
+          body:
+            JSON.stringify({
 
-            bride_name:
-              brideName,
+              groom_name:
+                groomName,
 
-            event_date:
-              eventDate,
+              bride_name:
+                brideName,
 
-            venue:
-              venue || "",
+              event_date:
+                eventDate,
 
-            address:
-              address || "",
+              venue:
+                venue,
 
-            maps_url:
-              mapsUrl || "",
+              address:
+                address,
 
-            photo_url:
-              photoUrl || "",
+              maps_url:
+                mapsUrl,
 
-            music_url:
-              musicUrl || ""
-          })
+              photo_url:
+                photoUrl,
+
+              music_url:
+                musicUrl
+
+            })
         }
       );
 
+
     const invitationText =
       await invitationResponse.text();
+
 
     if (!invitationResponse.ok) {
 
@@ -171,9 +228,11 @@ export default async function handler(req, res) {
       return res.status(500).json({
         ok: false,
         error:
-          "Taklifnoma yaratilmadi"
+          "Taklifnoma yaratilmadi: " +
+          invitationText
       });
     }
+
 
     let invitationData;
 
@@ -184,22 +243,19 @@ export default async function handler(req, res) {
           invitationText
         );
 
-    } catch (error) {
-
-      console.error(
-        "JSON ERROR:",
-        invitationText
-      );
+    } catch {
 
       return res.status(500).json({
         ok: false,
         error:
-          "Database javobini o‘qib bo‘lmadi"
+          "Invitation javobini o‘qib bo‘lmadi"
       });
     }
 
+
     const invitationId =
       invitationData?.[0]?.id;
+
 
     if (!invitationId) {
 
@@ -210,17 +266,21 @@ export default async function handler(req, res) {
       });
     }
 
-    // =========================
-    // MARK PAYMENT AS USED
-    // =========================
+
+    /* =========================
+       MARK TOKEN USED
+    ========================= */
 
     const usedResponse =
       await fetch(
-        `${SUPABASE_URL}/rest/v1/payments?id=eq.${paymentId}`,
+
+        `${SUPABASE_URL}/rest/v1/payments?id=eq.${payment.id}`,
+
         {
           method: "PATCH",
 
           headers: {
+
             apikey:
               SUPABASE_SERVICE_ROLE_KEY,
 
@@ -234,38 +294,52 @@ export default async function handler(req, res) {
               "return=minimal"
           },
 
-          body: JSON.stringify({
-            used: true
-          })
+          body:
+            JSON.stringify({
+
+              used: true
+
+            })
         }
       );
 
-    if (!usedResponse.ok) {
 
-      const usedError =
-        await usedResponse.text();
+    const usedText =
+      await usedResponse.text();
+
+
+    if (!usedResponse.ok) {
 
       console.error(
         "USED UPDATE ERROR:",
-        usedError
+        usedText
       );
 
       return res.status(500).json({
         ok: false,
         error:
-          "Access tokenni yopib bo‘lmadi"
+          "Tokenni yopib bo‘lmadi: " +
+          usedText
       });
     }
 
-    // =========================
-    // SUCCESS
-    // =========================
+
+    /* =========================
+       SUCCESS
+    ========================= */
 
     return res.status(200).json({
+
       ok: true,
+
       invitationId:
-        invitationId
+        invitationId,
+
+      message:
+        "Taklifnoma muvaffaqiyatli yaratildi"
+
     });
+
 
   } catch (error) {
 
@@ -275,9 +349,15 @@ export default async function handler(req, res) {
     );
 
     return res.status(500).json({
+
       ok: false,
+
       error:
+        error.message ||
         "Server error"
+
     });
+
   }
+
 }
