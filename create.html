@@ -7,7 +7,6 @@
 <title>MyInviter — Taklifnoma yaratish</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -80,6 +79,8 @@ select:focus{
   border-color:#a88b6c;
 }
 
+/* PHOTOS */
+
 .photos{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -121,6 +122,8 @@ select:focus{
   object-fit:cover;
   margin:15px auto 0;
 }
+
+/* MUSIC */
 
 .music-option{
   border:1px solid #e2d7ca;
@@ -167,6 +170,8 @@ audio{
   margin-top:15px;
 }
 
+/* BUTTON */
+
 .button{
   width:100%;
   padding:16px;
@@ -199,6 +204,8 @@ audio{
   color:#9b4b4b;
 }
 
+/* RESULT */
+
 .result{
   display:none;
   margin-top:20px;
@@ -223,14 +230,26 @@ audio{
   margin-bottom:12px;
 }
 
-.copy-button{
+.copy-button,
+.open-button{
   width:100%;
   padding:13px;
   border:1px solid #9b836c;
-  background:#fffdf9;
-  color:#5c4d40;
   cursor:pointer;
   font-family:inherit;
+  margin-top:8px;
+}
+
+.copy-button{
+  background:#fffdf9;
+  color:#5c4d40;
+}
+
+.open-button{
+  background:#5c4d40;
+  color:#fff;
+  text-decoration:none;
+  display:block;
 }
 
 .small{
@@ -259,13 +278,14 @@ audio{
   }
 
 }
-
 </style>
 </head>
 
 <body>
 
 <div class="container">
+
+  <!-- HEADER -->
 
   <div class="header">
 
@@ -286,9 +306,7 @@ audio{
 
     <h2>💍 Taklifnoma ma’lumotlari</h2>
 
-    <label>
-      Kuyov ismi
-    </label>
+    <label>Kuyov ismi</label>
 
     <input
       id="groomName"
@@ -297,10 +315,7 @@ audio{
       required
     >
 
-
-    <label>
-      Kelin ismi
-    </label>
+    <label>Kelin ismi</label>
 
     <input
       id="brideName"
@@ -309,10 +324,7 @@ audio{
       required
     >
 
-
-    <label>
-      To‘y sanasi
-    </label>
+    <label>To‘y sanasi</label>
 
     <input
       id="eventDate"
@@ -320,10 +332,7 @@ audio{
       required
     >
 
-
-    <label>
-      To‘y joyi
-    </label>
+    <label>To‘y joyi</label>
 
     <input
       id="venue"
@@ -331,10 +340,7 @@ audio{
       placeholder="Masalan: Ozbegim"
     >
 
-
-    <label>
-      Manzil
-    </label>
+    <label>Manzil</label>
 
     <input
       id="address"
@@ -342,10 +348,7 @@ audio{
       placeholder="Masalan: Chirchiq"
     >
 
-
-    <label>
-      Google Maps link
-    </label>
+    <label>Google Maps link</label>
 
     <input
       id="mapsUrl"
@@ -364,7 +367,6 @@ audio{
 
     <div class="photos">
 
-
       <label class="photo-option">
 
         <input
@@ -376,6 +378,7 @@ audio{
 
         <img
           src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+          alt="Wedding photo"
         >
 
       </label>
@@ -391,6 +394,7 @@ audio{
 
         <img
           src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80"
+          alt="Wedding photo"
         >
 
       </label>
@@ -406,6 +410,7 @@ audio{
 
         <img
           src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80"
+          alt="Wedding photo"
         >
 
       </label>
@@ -421,6 +426,7 @@ audio{
 
         <img
           src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80"
+          alt="Wedding photo"
         >
 
       </label>
@@ -443,6 +449,7 @@ audio{
       <img
         id="photoPreview"
         class="preview"
+        alt="Preview"
       >
 
       <div class="small">
@@ -461,11 +468,16 @@ audio{
 
     <h2>🎵 Musiqa</h2>
 
-    <div class="small" style="margin-bottom:15px;">
+    <div
+      class="small"
+      style="margin-bottom:15px;"
+    >
       Tayyor qo‘shiqlardan birini tanlang
       yoki o‘z qo‘shig‘ingizni yuklang.
     </div>
 
+
+    <!-- 1 -->
 
     <div class="music-option">
 
@@ -494,6 +506,8 @@ audio{
     </div>
 
 
+    <!-- 2 -->
+
     <div class="music-option">
 
       <div class="music-row">
@@ -520,6 +534,8 @@ audio{
 
     </div>
 
+
+    <!-- 3 -->
 
     <div class="music-option">
 
@@ -548,6 +564,8 @@ audio{
     </div>
 
 
+    <!-- 4 -->
+
     <div class="music-option">
 
       <div class="music-row">
@@ -575,6 +593,8 @@ audio{
     </div>
 
 
+    <!-- 5 -->
+
     <div class="music-option">
 
       <div class="music-row">
@@ -601,6 +621,8 @@ audio{
 
     </div>
 
+
+    <!-- 6 -->
 
     <div class="music-option">
 
@@ -644,6 +666,8 @@ audio{
     </audio>
 
 
+    <!-- CUSTOM MUSIC -->
+
     <div class="upload-box">
 
       <label>
@@ -665,7 +689,7 @@ audio{
   </div>
 
 
-  <!-- YARATISH -->
+  <!-- CREATE -->
 
   <div class="card">
 
@@ -673,10 +697,9 @@ audio{
       id="createButton"
       class="button"
       type="button"
-      onclick="createInvitation()">
-
+      onclick="createInvitation()"
+    >
       💌 TAKLIFNOMA YARATISH
-
     </button>
 
 
@@ -686,6 +709,8 @@ audio{
     </div>
 
 
+    <!-- RESULT -->
+
     <div
       id="result"
       class="result">
@@ -694,21 +719,34 @@ audio{
         🎉 Taklifnomangiz tayyor!
       </div>
 
+
       <div
         id="invitationLink"
         class="link-box">
       </div>
 
+
       <button
+        id="copyButton"
         class="copy-button"
-        onclick="copyLink()">
-
+        type="button"
+        onclick="copyLink()"
+      >
         📋 LINKNI NUSXALASH
-
       </button>
 
+
+      <a
+        id="openButton"
+        class="open-button"
+        href="#"
+      >
+        💌 TAKLIFNOMANI OCHISH
+      </a>
+
+
       <div class="small">
-        Ushbu linkni mehmonlaringizga yuborishingiz mumkin.
+        Linkni mehmonlaringizga yuborishingiz mumkin.
       </div>
 
     </div>
@@ -746,7 +784,7 @@ let createdLink = "";
 
 
 /* =====================================================
-   PHOTO
+   PHOTO UPLOAD
 ===================================================== */
 
 document
@@ -762,7 +800,10 @@ document
       return;
     }
 
-    if(!file.type.startsWith("image/")){
+
+    if(
+      !file.type.startsWith("image/")
+    ){
 
       showMessage(
         "Faqat rasm tanlang.",
@@ -771,10 +812,16 @@ document
 
       this.value = "";
 
+      uploadedPhoto = null;
+
       return;
     }
 
-    if(file.size > 10 * 1024 * 1024){
+
+    if(
+      file.size >
+      10 * 1024 * 1024
+    ){
 
       showMessage(
         "Rasm 10 MB dan kichik bo‘lishi kerak.",
@@ -783,21 +830,33 @@ document
 
       this.value = "";
 
+      uploadedPhoto = null;
+
       return;
     }
 
+
     uploadedPhoto = file;
+
 
     const preview =
       document.getElementById(
         "photoPreview"
       );
 
+
     preview.src =
       URL.createObjectURL(file);
 
+
     preview.style.display =
       "block";
+
+
+    showMessage(
+      "📸 Rasm tanlandi.",
+      false
+    );
 
   }
 );
@@ -820,9 +879,12 @@ document
       return;
     }
 
+
     if(
       !file.type.startsWith("audio/") &&
-      !file.name.toLowerCase().endsWith(".mp3")
+      !file.name
+        .toLowerCase()
+        .endsWith(".mp3")
     ){
 
       showMessage(
@@ -832,10 +894,16 @@ document
 
       this.value = "";
 
+      uploadedMusic = null;
+
       return;
     }
 
-    if(file.size > 30 * 1024 * 1024){
+
+    if(
+      file.size >
+      30 * 1024 * 1024
+    ){
 
       showMessage(
         "Qo‘shiq 30 MB dan kichik bo‘lishi kerak.",
@@ -844,26 +912,33 @@ document
 
       this.value = "";
 
+      uploadedMusic = null;
+
       return;
     }
 
+
     uploadedMusic = file;
 
-    document
-      .querySelectorAll(
-        'input[name="musicChoice"]'
-      )
-      .forEach(
-        function(input){
-          input.checked = false;
-        }
-      );
 
     document
-      .getElementById(
-        "selectedMusic"
-      )
-      .innerText =
+    .querySelectorAll(
+      'input[name="musicChoice"]'
+    )
+    .forEach(
+      function(input){
+
+        input.checked = false;
+
+      }
+    );
+
+
+    document
+    .getElementById(
+      "selectedMusic"
+    )
+    .innerText =
       "📱 Tanlangan fayl: " +
       file.name;
 
@@ -885,6 +960,7 @@ function previewMusic(
       "musicPreview"
     );
 
+
   if(
     audio.src === url &&
     !audio.paused
@@ -896,24 +972,29 @@ function previewMusic(
       "▶️";
 
     return;
+
   }
 
 
   document
-    .querySelectorAll(
-      ".play-btn"
-    )
-    .forEach(
-      function(btn){
-        btn.innerText =
-          "▶️";
-      }
-    );
+  .querySelectorAll(
+    ".play-btn"
+  )
+  .forEach(
+    function(btn){
+
+      btn.innerText =
+        "▶️";
+
+    }
+  );
 
 
-  audio.src = url;
+  audio.src =
+    url;
 
   audio.load();
+
 
   audio.play()
     .then(
@@ -937,10 +1018,10 @@ function previewMusic(
 
 
   document
-    .getElementById(
-      "selectedMusic"
-    )
-    .innerText =
+  .getElementById(
+    "selectedMusic"
+  )
+  .innerText =
     "🎵 Tanlash uchun radio tugmasini bosing.";
 
 }
@@ -964,11 +1045,12 @@ document
         uploadedMusic =
           null;
 
+
         document
-          .getElementById(
-            "musicUpload"
-          )
-          .value = "";
+        .getElementById(
+          "musicUpload"
+        )
+        .value = "";
 
 
         const name =
@@ -981,10 +1063,10 @@ document
 
 
         document
-          .getElementById(
-            "selectedMusic"
-          )
-          .innerText =
+        .getElementById(
+          "selectedMusic"
+        )
+        .innerText =
           "🎵 Tanlangan: " +
           name;
 
@@ -1006,6 +1088,7 @@ async function createInvitation(){
       "createButton"
     );
 
+
   const message =
     document.getElementById(
       "message"
@@ -1026,9 +1109,9 @@ async function createInvitation(){
 
   try{
 
-    /* =====================
-       FORM
-    ===================== */
+    /* =========================
+       FORM VALUES
+    ========================= */
 
     const groomName =
       document
@@ -1083,6 +1166,10 @@ async function createInvitation(){
       .trim();
 
 
+    /* =========================
+       VALIDATION
+    ========================= */
+
     if(!groomName){
 
       throw new Error(
@@ -1110,22 +1197,25 @@ async function createInvitation(){
     }
 
 
-    /* =====================
-       DEFAULT PHOTO
-    ===================== */
+    /* =========================
+       PHOTO
+    ========================= */
+
+    let photoChoice =
+      document.querySelector(
+        'input[name="photoChoice"]:checked'
+      );
+
 
     let photoUrl =
-      document
-      .querySelector(
-        'input[name="photoChoice"]:checked'
-      )
-      .value;
+      photoChoice
+      ? photoChoice.value
+      : "";
 
 
-    /* =====================
-       CREATE FIRST
-       GET NEW ID
-    ===================== */
+    /* =========================
+       CREATE DATABASE ROW
+    ========================= */
 
     const createResponse =
       await fetch(
@@ -1153,6 +1243,7 @@ async function createInvitation(){
               "return=representation"
 
           },
+
 
           body:
             JSON.stringify({
@@ -1196,6 +1287,7 @@ async function createInvitation(){
 
       let errorData = {};
 
+
       try{
 
         errorData =
@@ -1236,7 +1328,9 @@ async function createInvitation(){
 
 
     if(
-      !Array.isArray(createdData) ||
+      !Array.isArray(
+        createdData
+      ) ||
       createdData.length === 0
     ){
 
@@ -1251,9 +1345,9 @@ async function createInvitation(){
       createdData[0].id;
 
 
-    /* =====================
-       CUSTOM PHOTO
-    ===================== */
+    /* =========================
+       CUSTOM PHOTO UPLOAD
+    ========================= */
 
     if(uploadedPhoto){
 
@@ -1309,20 +1403,29 @@ async function createInvitation(){
         );
 
 
+      const uploadText =
+        await uploadResponse.text();
+
+
       if(!uploadResponse.ok){
 
-        const error =
-          await uploadResponse
-          .json()
-          .catch(
-            function(){
-              return {};
-            }
-          );
+        let errorData = {};
+
+
+        try{
+
+          errorData =
+            JSON.parse(
+              uploadText
+            );
+
+        }catch(e){}
 
 
         throw new Error(
-          error.message ||
+          errorData.message ||
+          errorData.error ||
+          uploadText ||
           "Rasm yuklanmadi."
         );
 
@@ -1337,11 +1440,12 @@ async function createInvitation(){
     }
 
 
-    /* =====================
+    /* =========================
        MUSIC
-    ===================== */
+    ========================= */
 
-    let musicUrl = "";
+    let musicUrl =
+      "";
 
 
     const selectedMusic =
@@ -1358,9 +1462,9 @@ async function createInvitation(){
     }
 
 
-    /* =====================
-       CUSTOM MUSIC
-    ===================== */
+    /* =========================
+       CUSTOM MUSIC UPLOAD
+    ========================= */
 
     if(uploadedMusic){
 
@@ -1417,20 +1521,29 @@ async function createInvitation(){
         );
 
 
+      const uploadText =
+        await uploadResponse.text();
+
+
       if(!uploadResponse.ok){
 
-        const error =
-          await uploadResponse
-          .json()
-          .catch(
-            function(){
-              return {};
-            }
-          );
+        let errorData = {};
+
+
+        try{
+
+          errorData =
+            JSON.parse(
+              uploadText
+            );
+
+        }catch(e){}
 
 
         throw new Error(
-          error.message ||
+          errorData.message ||
+          errorData.error ||
+          uploadText ||
           "Qo‘shiq yuklanmadi."
         );
 
@@ -1445,9 +1558,9 @@ async function createInvitation(){
     }
 
 
-    /* =====================
-       UPDATE CREATED ROW
-    ===================== */
+    /* =========================
+       UPDATE INVITATION
+    ========================= */
 
     const updateResponse =
       await fetch(
@@ -1477,6 +1590,7 @@ async function createInvitation(){
 
           },
 
+
           body:
             JSON.stringify({
 
@@ -1493,29 +1607,38 @@ async function createInvitation(){
       );
 
 
+    const updateText =
+      await updateResponse.text();
+
+
     if(!updateResponse.ok){
 
-      const error =
-        await updateResponse
-        .json()
-        .catch(
-          function(){
-            return {};
-          }
-        );
+      let errorData = {};
+
+
+      try{
+
+        errorData =
+          JSON.parse(
+            updateText
+          );
+
+      }catch(e){}
 
 
       throw new Error(
-        error.message ||
+        errorData.message ||
+        errorData.error ||
+        updateText ||
         "Taklifnoma ma’lumotlari saqlanmadi."
       );
 
     }
 
 
-    /* =====================
+    /* =========================
        FINAL LINK
-    ===================== */
+    ========================= */
 
     createdLink =
       window.location.origin +
@@ -1523,19 +1646,31 @@ async function createInvitation(){
       invitationId;
 
 
+    /* =========================
+       SHOW RESULT
+    ========================= */
+
     document
-      .getElementById(
-        "invitationLink"
-      )
-      .innerText =
+    .getElementById(
+      "invitationLink"
+    )
+    .innerText =
       createdLink;
 
 
     document
-      .getElementById(
-        "result"
-      )
-      .style.display =
+    .getElementById(
+      "openButton"
+    )
+    .href =
+      createdLink;
+
+
+    document
+    .getElementById(
+      "result"
+    )
+    .style.display =
       "block";
 
 
@@ -1551,20 +1686,13 @@ async function createInvitation(){
       false;
 
 
-    /* =====================
-       OPEN AFTER 1.5 SEC
-    ===================== */
-
-    setTimeout(
-      function(){
-
-        window.location.href =
-          createdLink;
-
-      },
-      1500
-    );
-
+    /*
+      MUHIM:
+      Bu yerda endi avtomatik redirect YO‘Q.
+      Foydalanuvchi o‘zi
+      "TAKLIFNOMANI OCHISH"
+      tugmasini bosadi.
+    */
 
   }catch(error){
 
@@ -1598,37 +1726,41 @@ async function createInvitation(){
 async function copyLink(){
 
   if(!createdLink){
+
     return;
+
   }
 
 
   try{
 
-    await navigator.clipboard.writeText(
-      createdLink
-    );
+    await navigator
+      .clipboard
+      .writeText(
+        createdLink
+      );
 
 
-    document
-      .querySelector(
-        ".copy-button"
-      )
-      .innerText =
+    const button =
+      document.getElementById(
+        "copyButton"
+      );
+
+
+    button.innerText =
       "✅ LINK NUSXALAND";
+
 
     setTimeout(
       function(){
 
-        document
-          .querySelector(
-            ".copy-button"
-          )
-          .innerText =
+        button.innerText =
           "📋 LINKNI NUSXALASH";
 
       },
       2000
     );
+
 
   }catch(error){
 
