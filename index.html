@@ -103,7 +103,7 @@ body{
   height:430px;
 
   left:50%;
-  top:43%;
+  top:47%;
 
   transform:
     translate(-50%,-50%);
@@ -208,7 +208,7 @@ body{
   align-items:center;
 
   padding-top:
-    clamp(42px,8vh,75px);
+    clamp(100px,16vh,145px);
 
   text-align:center;
 }
@@ -228,7 +228,7 @@ body{
 
 
 .intro-names{
-  margin-top:17px;
+  margin-top:22px;
 
   font-size:
     clamp(31px,8vw,45px);
@@ -259,7 +259,7 @@ body{
 
 
 .intro-subtitle{
-  margin-top:14px;
+  margin-top:16px;
 
   max-width:280px;
 
@@ -303,10 +303,10 @@ body{
   width:
     min(360px,90vw);
 
-  height:300px;
+  height:320px;
 
   margin-top:
-    clamp(8px,3vh,28px);
+    clamp(20px,5vh,42px);
 
   perspective:1200px;
 
@@ -364,7 +364,6 @@ body{
     1.35s
     cubic-bezier(.16,1,.3,1);
 }
-
 
 .envelope.camera{
   transform:
@@ -755,99 +754,6 @@ body{
 
   50%{
     opacity:1;
-  }
-
-}
-
-
-/* =====================================================
-   INSTAGRAM UNDER ENVELOPE
-===================================================== */
-
-.intro-instagram{
-  position:absolute;
-
-  left:50%;
-
-  bottom:26px;
-
-  transform:
-    translateX(-50%);
-
-  z-index:50;
-
-  text-align:center;
-
-  opacity:0;
-
-  animation:
-    instagramIntroIn
-    1.2s
-    1.2s
-    ease-out
-    forwards;
-}
-
-
-.intro-instagram a{
-  display:inline-flex;
-
-  align-items:center;
-  justify-content:center;
-
-  gap:7px;
-
-  color:#806b58;
-
-  text-decoration:none;
-
-  font-size:9px;
-
-  letter-spacing:2px;
-
-  transition:
-    .3s ease;
-}
-
-
-.intro-instagram a:hover{
-  opacity:.65;
-}
-
-
-.intro-instagram-icon{
-  width:19px;
-  height:19px;
-
-  border:
-    1px solid
-    #a38a72;
-
-  border-radius:6px;
-
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  font-size:13px;
-}
-
-
-@keyframes instagramIntroIn{
-
-  from{
-    opacity:0;
-
-    transform:
-      translate(-50%,10px);
-  }
-
-  to{
-    opacity:1;
-
-    transform:
-      translate(-50%,0);
   }
 
 }
@@ -1278,160 +1184,172 @@ h1{
 
 
 /* =====================================================
-   PREMIUM FOOTER
+   INSTAGRAM FOOTER
 ===================================================== */
 
 .premium-footer{
-  text-align:center;
-
-  padding:
-    100px 20px 45px;
 
   background:
     linear-gradient(
       180deg,
-      #fffdf9 0%,
-      #f5eee4 100%
+      #f5eee4,
+      #eee3d5
     );
 
+  text-align:center;
+
+  padding:
+    75px 20px
+    45px;
+
   border-top:
-    1px solid
-    rgba(155,131,108,.12);
+    1px solid #dfd2c2;
+
 }
 
 
-.footer-instagram{
-  display:flex;
+.instagram-title{
 
-  flex-direction:column;
+  font-size:10px;
 
-  align-items:center;
+  letter-spacing:4px;
 
-  margin-bottom:32px;
+  color:#9b836c;
+
+  margin-bottom:16px;
+
 }
 
 
 .instagram-link{
-  display:inline-flex;
 
-  align-items:center;
+  display:inline-block;
 
-  gap:8px;
-
-  color:#5c4d40;
+  color:#493d32;
 
   text-decoration:none;
 
-  font-size:12px;
+  font-size:17px;
 
-  letter-spacing:2px;
+  letter-spacing:1px;
+
+  padding-bottom:6px;
+
+  border-bottom:
+    1px solid #bca083;
 
   transition:
     .3s ease;
+
 }
 
 
 .instagram-link:hover{
-  opacity:.65;
+
+  color:#9a5a50;
+
+  border-color:#9a5a50;
+
 }
 
 
-.instagram-icon{
-  width:25px;
-  height:25px;
+.instagram-text{
 
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  border:
-    1px solid
-    #9b836c;
-
-  border-radius:8px;
-
-  font-size:17px;
-
-  line-height:1;
-}
-
-
-.instagram-username{
-  margin-top:13px;
+  margin-top:25px;
 
   font-size:13px;
 
-  letter-spacing:2px;
+  font-style:italic;
 
-  color:#806d5c;
-}
-
-
-.instagram-slogan{
-  margin-top:12px;
-
-  max-width:300px;
-
-  font-size:11px;
+  color:#806f5e;
 
   line-height:1.8;
 
-  color:#a08b77;
-
-  font-style:italic;
 }
 
 
-.create-invitation{
+.create-invitation-button{
+
   display:inline-flex;
 
   align-items:center;
+
   justify-content:center;
 
-  min-width:190px;
+  margin-top:25px;
 
-  padding:13px 24px;
+  padding:
+    14px 28px;
 
   border:
-    1px solid
-    #9b836c;
+    1px solid #9b836c;
 
-  color:#5c4d40;
-
-  text-decoration:none;
-
-  font-family:Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:9px;
-
-  letter-spacing:2px;
-
-  transition:
-    .35s ease;
-}
-
-
-.create-invitation:hover{
   background:#5c4d40;
 
   color:#fff;
 
-  transform:
-    translateY(-2px);
+  text-decoration:none;
+
+  font-family:inherit;
+
+  font-size:10px;
+
+  letter-spacing:2px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(60,40,25,.12);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+
 }
 
 
-.footer-copy{
-  margin-top:38px;
+.create-invitation-button:hover{
 
-  font-size:9px;
+  transform:
+    translateY(-2px);
 
-  letter-spacing:3px;
+  background:#493d32;
 
-  color:#ad9984;
+  box-shadow:
+    0 12px 30px
+    rgba(60,40,25,.18);
+
+}
+
+
+.create-invitation-button:active{
+
+  transform:
+    translateY(0);
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer{
+
+  text-align:center;
+
+  padding:
+    25px 20px
+    30px;
+
+  font-size:10px;
+
+  letter-spacing:2px;
+
+  color:#9b836c;
+
+  background:#eee3d5;
+
 }
 
 
@@ -1442,45 +1360,72 @@ h1{
 @media(max-width:500px){
 
   .intro-content{
-    padding-top:38px;
+
+    padding-top:90px;
+
+  }
+
+  .intro-names{
+
+    margin-top:18px;
+
+    font-size:32px;
+
+  }
+
+  .intro-subtitle{
+
+    margin-top:12px;
+
+  }
+
+  .envelope-scene{
+
+    height:310px;
+
+    margin-top:22px;
+
   }
 
   .envelope{
+
     transform:
       translate(-50%,-50%)
       scale(.82);
+
   }
 
   .envelope.camera{
+
     transform:
       translate(-50%,-50%)
       scale(.88);
+
   }
 
   h1{
+
     font-size:43px;
+
   }
 
   .photo{
+
     width:155px;
     height:155px;
+
   }
 
   .count-box{
+
     width:62px;
+
   }
 
   .count-box b{
+
     font-size:19px;
-  }
 
-  .premium-footer{
-    padding:
-      90px 18px 38px;
-  }
-
-  .instagram-slogan{
-    font-size:10px;
   }
 
 }
@@ -1493,26 +1438,91 @@ h1{
 @media(max-height:700px){
 
   .intro-content{
-    padding-top:22px;
+
+    padding-top:60px;
+
   }
 
   .intro-names{
+
     font-size:30px;
+
   }
 
   .intro-subtitle{
+
     margin-top:7px;
+
   }
 
   .envelope-scene{
-    height:270px;
 
-    margin-top:-8px;
-    margin-bottom:-20px;
+    height:290px;
+
+    margin-top:0;
+
   }
 
-  .intro-instagram{
-    bottom:18px;
+}
+
+
+/* =====================================================
+   VERY SMALL PHONE
+===================================================== */
+
+@media(max-height:600px){
+
+  .intro-content{
+
+    padding-top:35px;
+
+  }
+
+  .intro-names{
+
+    margin-top:12px;
+
+    font-size:28px;
+
+  }
+
+  .intro-subtitle{
+
+    margin-top:6px;
+
+    font-size:10px;
+
+  }
+
+  .envelope-scene{
+
+    height:260px;
+
+    margin-top:-5px;
+
+  }
+
+}
+
+
+/* =====================================================
+   ACCESSIBILITY
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+
+    animation-duration:.01ms !important;
+
+    animation-iteration-count:1 !important;
+
+    transition-duration:.01ms !important;
+
+    scroll-behavior:auto !important;
+
   }
 
 }
@@ -1563,8 +1573,10 @@ h1{
 
 
     <div class="intro-subtitle">
+
       Bu taklifnoma siz uchun
       maxsus tayyorlandi
+
     </div>
 
 
@@ -1628,7 +1640,9 @@ h1{
 
 
       <div class="open-text">
+
         OCHISH UCHUN MUHRNI BOSING
+
       </div>
 
 
@@ -1637,31 +1651,7 @@ h1{
 
   </div>
 
-
-  <!-- INSTAGRAM KONVERT OSTIDA -->
-
-  <div class="intro-instagram">
-
-    <a
-      href="https://www.instagram.com/my.inviter/"
-      target="_blank"
-      rel="noopener noreferrer">
-
-      <span class="intro-instagram-icon">
-        ◎
-      </span>
-
-      <span>
-        @myinviter.uz
-      </span>
-
-    </a>
-
-  </div>
-
-
 </div>
-
 
 
 <!-- =====================================================
@@ -1669,9 +1659,10 @@ h1{
 ===================================================== -->
 
 <div id="loading">
-  Taklifnoma yuklanmoqda...
-</div>
 
+  Taklifnoma yuklanmoqda...
+
+</div>
 
 
 <!-- =====================================================
@@ -1697,6 +1688,8 @@ h1{
   </audio>
 
 
+  <!-- HERO -->
+
   <section class="hero">
 
 
@@ -1704,7 +1697,9 @@ h1{
 
 
       <div class="label">
+
         SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
+
       </div>
 
 
@@ -1734,9 +1729,11 @@ h1{
 
 
       <p class="description">
+
         Hayotimizdagi eng go‘zal kunni
         siz bilan birga nishonlashdan
         mamnun bo‘lamiz.
+
       </p>
 
 
@@ -1750,26 +1747,54 @@ h1{
 
 
         <div class="count-box">
-          <b id="days">00</b>
-          <span>KUN</span>
+
+          <b id="days">
+            00
+          </b>
+
+          <span>
+            KUN
+          </span>
+
         </div>
 
 
         <div class="count-box">
-          <b id="hours">00</b>
-          <span>SOAT</span>
+
+          <b id="hours">
+            00
+          </b>
+
+          <span>
+            SOAT
+          </span>
+
         </div>
 
 
         <div class="count-box">
-          <b id="minutes">00</b>
-          <span>DAQIQA</span>
+
+          <b id="minutes">
+            00
+          </b>
+
+          <span>
+            DAQIQA
+          </span>
+
         </div>
 
 
         <div class="count-box">
-          <b id="seconds">00</b>
-          <span>SONIYA</span>
+
+          <b id="seconds">
+            00
+          </b>
+
+          <span>
+            SONIYA
+          </span>
+
         </div>
 
 
@@ -1779,14 +1804,18 @@ h1{
       <a
         href="#location"
         class="button">
+
         MANZIL
+
       </a>
 
 
       <a
         href="#rsvp"
         class="button">
+
         RSVP
+
       </a>
 
 
@@ -1795,10 +1824,7 @@ h1{
   </section>
 
 
-
-  <!-- =====================================================
-       LOCATION
-  ===================================================== -->
+  <!-- LOCATION -->
 
   <section
     class="section"
@@ -1806,7 +1832,9 @@ h1{
 
 
     <h2>
+
       TANTANALI MAROSIM
+
     </h2>
 
 
@@ -1833,10 +1861,7 @@ h1{
   </section>
 
 
-
-  <!-- =====================================================
-       RSVP
-  ===================================================== -->
+  <!-- RSVP -->
 
   <section
     class="section"
@@ -1916,67 +1941,61 @@ h1{
   </section>
 
 
-
   <!-- =====================================================
-       PREMIUM FOOTER — ENG PASTI
+       PREMIUM INSTAGRAM
   ===================================================== -->
 
-  <footer class="premium-footer">
+  <section class="premium-footer">
 
 
-    <div class="footer-instagram">
+    <div class="instagram-title">
 
-
-      <a
-        href="https://www.instagram.com/my.inviter/"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="instagram-link">
-
-
-        <span class="instagram-icon">
-          ◎
-        </span>
-
-
-        <span>
-          Instagram
-        </span>
-
-
-      </a>
-
-
-      <div class="instagram-username">
-        @myinviter.uz
-      </div>
-
-
-      <div class="instagram-slogan">
-        Sizning baxtli kuningiz — bizning ilhomimiz
-      </div>
-
+      📸 INSTAGRAM
 
     </div>
 
 
+    <a
+      href="https://www.instagram.com/my.inviter"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="instagram-link">
 
-    <!-- TAKLIFNOMA YARATISH -->
+      @my.inviter
+
+    </a>
+
+
+    <div class="instagram-text">
+
+      🤍 Sizning baxtli kuningiz —
+      <br>
+      bizning ilhomimiz
+
+    </div>
+
 
     <a
-      href="https://myinviter.vercel.app/"
-      class="create-invitation">
+      href="https://www.instagram.com/my.inviter"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="create-invitation-button">
 
       TAKLIFNOMA YARATISH
 
     </a>
 
 
+  </section>
 
-    <div class="footer-copy">
-      MYINVITER · 2026
-    </div>
 
+  <!-- =====================================================
+       FINAL FOOTER
+  ===================================================== -->
+
+  <footer>
+
+    MYINVITER · 2026
 
   </footer>
 
@@ -1984,9 +2003,7 @@ h1{
 </div>
 
 
-
 <script>
-
 
 /* =====================================================
    SUPABASE
@@ -2038,15 +2055,18 @@ async function loadInvitation(){
         "&select=*",
 
         {
+
           method:"GET",
 
           headers:{
+
             "apikey":
               SUPABASE_KEY,
 
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
+
           }
 
         }
@@ -2184,6 +2204,7 @@ async function loadInvitation(){
 
 
       const months = [
+
         "YANVAR",
         "FEVRAL",
         "MART",
@@ -2196,6 +2217,7 @@ async function loadInvitation(){
         "OKTYABR",
         "NOYABR",
         "DEKABR"
+
       ];
 
 
@@ -2266,7 +2288,7 @@ function createParticles(){
 
   for(
     let i=0;
-    i<24;
+    i<28;
     i++
   ){
 
@@ -2289,7 +2311,7 @@ function createParticles(){
     const distance =
       80 +
       Math.random() *
-      170;
+      190;
 
 
     particle.style.setProperty(
@@ -2358,7 +2380,9 @@ false;
 function openInvitation(){
 
   if(opened){
+
     return;
+
   }
 
 
@@ -2366,29 +2390,21 @@ function openInvitation(){
     true;
 
 
-  /* camera */
-
   envelope.classList.add(
     "camera"
   );
 
-
-  /* seal */
 
   sealWrap.classList.add(
     "pressed"
   );
 
 
-  /* particles */
-
   setTimeout(
     createParticles,
     280
   );
 
-
-  /* flap */
 
   setTimeout(
     function(){
@@ -2401,8 +2417,6 @@ function openInvitation(){
     500
   );
 
-
-  /* music */
 
   setTimeout(
     function(){
@@ -2438,8 +2452,6 @@ function openInvitation(){
   );
 
 
-  /* hide intro */
-
   setTimeout(
     function(){
 
@@ -2451,8 +2463,6 @@ function openInvitation(){
     2500
   );
 
-
-  /* remove intro */
 
   setTimeout(
     function(){
@@ -2478,13 +2488,16 @@ function openInvitation(){
 function toggleMusic(){
 
   if(!music.src){
+
     return;
+
   }
 
 
   if(music.paused){
 
     music.play()
+
       .then(
         function(){
 
@@ -2538,19 +2551,23 @@ function startCountdown(
 
       document.getElementById(
         "days"
-      ).innerText = "00";
+      ).innerText =
+        "00";
 
       document.getElementById(
         "hours"
-      ).innerText = "00";
+      ).innerText =
+        "00";
 
       document.getElementById(
         "minutes"
-      ).innerText = "00";
+      ).innerText =
+        "00";
 
       document.getElementById(
         "seconds"
-      ).innerText = "00";
+      ).innerText =
+        "00";
 
       return;
 
@@ -2728,7 +2745,9 @@ async function sendRSVP(
           .json()
           .catch(
             function(){
+
               return {};
+
             }
           );
 
