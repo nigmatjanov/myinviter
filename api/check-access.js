@@ -1,7 +1,3 @@
-const SUPABASE_URL = process.env.SUPABASE_URL;
-const SUPABASE_SERVICE_ROLE_KEY =
-  process.env.SUPABASE_SERVICE_ROLE_KEY;
-
 export default async function handler(req, res) {
   if (req.method !== "GET") {
     return res.status(405).json({
@@ -14,17 +10,24 @@ export default async function handler(req, res) {
     const token = req.query.token;
 
     if (!token) {
-      return res.status(401).json({
+      return res.status(400).json({
         ok: false,
-        error: "Token mavjud emas"
+        error: "Token topilmadi"
       });
     }
+
+    const SUPABASE_URL =
+      process.env.SUPABASE_URL;
+
+    const SUPABASE_SERVICE_ROLE_KEY =
+      process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     const response = await fetch(
       `${SUPABASE_URL}/rest/v1/payments` +
       `?access_token=eq.${encodeURIComponent(token)}` +
       `&status=eq.paid` +
-      `&select=id,telegram_user_id,status,access_token` +
+      `&used=eq.false` +
+      `&select=id,telegram_user_id,status,used` +
       `&limit=1`,
       {
         headers: {
@@ -42,7 +45,8 @@ export default async function handler(req, res) {
       });
     }
 
-    const payments = await response.json();
+    const payments =
+      await response.json();
 
     if (
       !Array.isArray(payments) ||
@@ -50,7 +54,8 @@ export default async function handler(req, res) {
     ) {
       return res.status(403).json({
         ok: false,
-        error: "To‘lov tasdiqlanmagan"
+        error:
+          "To‘lov tasdiqlanmagan yoki token eskirgan"
       });
     }
 
@@ -60,7 +65,11 @@ export default async function handler(req, res) {
     });
 
   } catch (error) {
-    console.error(error);
+
+    console.error(
+      "CHECK ACCESS ERROR:",
+      error
+    );
 
     return res.status(500).json({
       ok: false,
