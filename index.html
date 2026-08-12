@@ -8,6 +8,7 @@
 <title>MyInviter</title>
 
 <style>
+
 *{
   box-sizing:border-box;
   margin:0;
@@ -46,15 +47,29 @@ body{
   opacity:1;
   visibility:visible;
 
+  transform:scale(1);
+  filter:blur(0);
+
   transition:
-    opacity 1.2s ease,
-    visibility 1.2s ease;
+    opacity 1.5s cubic-bezier(.22,1,.36,1),
+    transform 1.8s cubic-bezier(.22,1,.36,1),
+    filter 1.5s ease,
+    visibility 0s;
 }
 
 #intro.hide{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
+
+  transform:scale(1.08);
+  filter:blur(8px);
+
+  transition:
+    opacity 1.5s cubic-bezier(.22,1,.36,1),
+    transform 1.8s cubic-bezier(.22,1,.36,1),
+    filter 1.5s ease,
+    visibility 0s linear 1.5s;
 }
 
 #intro::before{
@@ -320,10 +335,12 @@ body{
 
   from{
     opacity:0;
+    transform:translateY(15px);
   }
 
   to{
     opacity:1;
+    transform:translateY(0);
   }
 
 }
@@ -361,7 +378,9 @@ body{
   transition:
     transform
     1.35s
-    cubic-bezier(.16,1,.3,1);
+    cubic-bezier(.16,1,.3,1),
+    filter
+    1.35s ease;
 }
 
 
@@ -369,6 +388,19 @@ body{
   transform:
     translate(-50%,-50%)
     scale(.95);
+}
+
+
+.envelope.final-camera{
+  transform:
+    translate(-50%,-50%)
+    scale(1.18);
+
+  filter:
+    drop-shadow(
+      0 35px 35px
+      rgba(66,45,29,.24)
+    );
 }
 
 
@@ -686,20 +718,20 @@ body{
       scale(1);
   }
 
-  25%{
+  20%{
     transform:
       translateX(-50%)
       scale(.82);
   }
 
-  50%{
+  40%{
     transform:
       translateX(-50%)
       scale(1.07)
       rotate(-3deg);
   }
 
-  75%{
+  60%{
     transform:
       translateX(-50%)
       scale(.95)
@@ -743,6 +775,14 @@ body{
     breathe 2.2s
     ease-in-out
     infinite;
+
+  transition:
+    opacity .6s ease;
+}
+
+
+.envelope.open ~ .open-text{
+  opacity:0;
 }
 
 
@@ -845,6 +885,43 @@ body{
   min-height:100vh;
 
   background:#f5eee4;
+
+  opacity:0;
+  transform:scale(1.035);
+  filter:blur(6px);
+}
+
+#invitation.show{
+  display:block;
+
+  animation:
+    invitationReveal
+    1.5s
+    cubic-bezier(.22,1,.36,1)
+    forwards;
+}
+
+
+@keyframes invitationReveal{
+
+  0%{
+    opacity:0;
+    transform:scale(1.035);
+    filter:blur(6px);
+  }
+
+  45%{
+    opacity:.35;
+    transform:scale(1.015);
+    filter:blur(3px);
+  }
+
+  100%{
+    opacity:1;
+    transform:scale(1);
+    filter:blur(0);
+  }
+
 }
 
 
@@ -1222,6 +1299,12 @@ footer{
       scale(.88);
   }
 
+  .envelope.final-camera{
+    transform:
+      translate(-50%,-50%)
+      scale(.98);
+  }
+
   h1{
     font-size:43px;
   }
@@ -1268,6 +1351,7 @@ footer{
   }
 
 }
+
 </style>
 </head>
 
@@ -1280,7 +1364,6 @@ footer{
 ===================================================== -->
 
 <div id="intro">
-
 
   <div class="light"></div>
 
@@ -1892,11 +1975,16 @@ async function loadInvitation(){
       "none";
 
 
-    document.getElementById(
-      "invitation"
-    ).style.display =
-      "block";
+    /*
+      MUHIM:
 
+      invitationni darhol
+      ko‘rsatmaymiz.
+
+      display:block qilib,
+      animatsiya boshlanishini
+      kutamiz.
+    */
 
   }catch(error){
 
@@ -1927,7 +2015,7 @@ function createParticles(){
 
   for(
     let i=0;
-    i<24;
+    i<32;
     i++
   ){
 
@@ -1950,7 +2038,7 @@ function createParticles(){
     const distance =
       80 +
       Math.random() *
-      170;
+      190;
 
 
     particle.style.setProperty(
@@ -1977,6 +2065,15 @@ function createParticles(){
       "48%";
 
 
+    particle.style.width =
+      (2 + Math.random()*3) +
+      "px";
+
+
+    particle.style.height =
+      particle.style.width;
+
+
     scene.appendChild(
       particle
     );
@@ -1990,7 +2087,7 @@ function createParticles(){
         );
 
       },
-      Math.random()*250
+      Math.random()*300
     );
 
 
@@ -2000,7 +2097,7 @@ function createParticles(){
         particle.remove();
 
       },
-      1900
+      2000
     );
 
   }
@@ -2027,29 +2124,41 @@ function openInvitation(){
     true;
 
 
-  /* camera */
+  /* =========================================
+     1. KAMERA YAQINLASHADI
+  ========================================= */
 
   envelope.classList.add(
     "camera"
   );
 
 
-  /* seal */
+  /* =========================================
+     2. MUHR BOSILADI
+  ========================================= */
 
   sealWrap.classList.add(
     "pressed"
   );
 
 
-  /* particles */
+  /* =========================================
+     3. PARTICLES
+  ========================================= */
 
   setTimeout(
-    createParticles,
-    280
+    function(){
+
+      createParticles();
+
+    },
+    300
   );
 
 
-  /* flap */
+  /* =========================================
+     4. KONVERT OCHILADI
+  ========================================= */
 
   setTimeout(
     function(){
@@ -2059,11 +2168,13 @@ function openInvitation(){
       );
 
     },
-    500
+    600
   );
 
 
-  /* music */
+  /* =========================================
+     5. MUSIC
+  ========================================= */
 
   setTimeout(
     function(){
@@ -2095,11 +2206,50 @@ function openInvitation(){
       }
 
     },
-    850
+    900
   );
 
 
-  /* hide intro */
+  /* =========================================
+     6. KARTAGA YAQINLASHISH
+  ========================================= */
+
+  setTimeout(
+    function(){
+
+      envelope.classList.add(
+        "final-camera"
+      );
+
+    },
+    1200
+  );
+
+
+  /* =========================================
+     7. ASOSIY SAHIFANI TAYYORLASH
+  ========================================= */
+
+  setTimeout(
+    function(){
+
+      const invitation =
+        document.getElementById(
+          "invitation"
+        );
+
+      invitation.classList.add(
+        "show"
+      );
+
+    },
+    1900
+  );
+
+
+  /* =========================================
+     8. INTRO SILLIQ YO‘QOLADI
+  ========================================= */
 
   setTimeout(
     function(){
@@ -2109,15 +2259,13 @@ function openInvitation(){
       );
 
     },
-    2500
+    2100
   );
 
 
-  /*
-     IMPORTANT:
-     Intro yo'qolgandan keyin
-     DOMda qolmaydi.
-  */
+  /* =========================================
+     9. INTRONI O‘CHIRISH
+  ========================================= */
 
   setTimeout(
     function(){
