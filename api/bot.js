@@ -1,3 +1,5 @@
+import crypto from "node:crypto";
+
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const ADMIN_ID = process.env.ADMIN_ID;
 
@@ -365,9 +367,6 @@ export default async function handler(
 
 
       /*
-      Oldingi pending paymentlarni
-      hisobga olmaymiz.
-
       Yangi payment yaratamiz.
       */
 
@@ -400,7 +399,10 @@ export default async function handler(
                   "pending",
 
                 access_token:
-                  null
+                  null,
+
+                used:
+                  false
 
               })
 
@@ -599,6 +601,20 @@ export default async function handler(
         );
 
 
+      if (!findResponse.ok) {
+
+        console.error(
+          "PAYMENT FIND ERROR:",
+          await findResponse.text()
+        );
+
+        throw new Error(
+          "Paymentni topishda xatolik."
+        );
+
+      }
+
+
       const payments =
         await findResponse.json();
 
@@ -646,7 +662,7 @@ export default async function handler(
 
 
       /* ===============================================
-         ACCESS TOKEN
+         GENERATE ACCESS TOKEN
       =============================================== */
 
       const accessToken =
@@ -685,7 +701,10 @@ export default async function handler(
                   new Date().toISOString(),
 
                 access_token:
-                  accessToken
+                  accessToken,
+
+                used:
+                  false
 
               })
 
@@ -719,7 +738,15 @@ export default async function handler(
 
 
       /* ===============================================
-         ADMIN BUTTON
+         CREATE URL
+      =============================================== */
+
+      const createUrl =
+        `${SITE_URL}/create.html?token=${encodeURIComponent(accessToken)}`;
+
+
+      /* ===============================================
+         ADMIN CALLBACK
       =============================================== */
 
       await telegram(
@@ -740,53 +767,52 @@ export default async function handler(
 
 
       /* ===============================================
-         CREATE URL
-      =============================================== */
-
-      const createUrl =
-        `${SITE_URL}/create.html?token=${encodeURIComponent(accessToken)}`;
-
-
-      /* ===============================================
          USER ACCESS
       =============================================== */
 
-      await sendMessage(
+      const userMessage =
+        await sendMessage(
 
-        userId,
+          userId,
 
-        "✅ <b>To‘lovingiz tasdiqlandi!</b>\n\n" +
+          "✅ <b>To‘lovingiz tasdiqlandi!</b>\n\n" +
 
-        "Endi taklifnomangizni yaratishingiz mumkin.\n\n" +
+          "Endi taklifnomangizni yaratishingiz mumkin.\n\n" +
 
-        "Quyidagi tugmani bosing:",
+          "Quyidagi tugmani bosing:",
 
-        {
+          {
 
-          reply_markup: {
+            reply_markup: {
 
-            inline_keyboard: [
+              inline_keyboard: [
 
-              [
+                [
 
-                {
+                  {
 
-                  text:
-                    "💌 Taklifnoma yaratish",
+                    text:
+                      "💌 Taklifnoma yaratish",
 
-                  url:
-                    createUrl
+                    url:
+                      createUrl
 
-                }
+                  }
+
+                ]
 
               ]
 
-            ]
+            }
 
           }
 
-        }
+        );
 
+
+      console.log(
+        "USER ACCESS SENT:",
+        userMessage
       );
 
 
@@ -804,9 +830,13 @@ export default async function handler(
 
         `💰 199 000 so‘m\n` +
 
-        `🗄 Status: <b>paid</b>\n\n` +
+        `🗄 Status: <b>paid</b>\n` +
 
-        `🔐 Access token yaratildi.`
+        `🔒 Used: <b>false</b>\n\n` +
+
+        `🔐 Access token yaratildi.\n\n` +
+
+        `🔗 <code>${createUrl}</code>`
 
       );
 
