@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MyInviter — Taklifnoma yaratish</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+body{
+  background:#f7f3ed;
+  color:#40372f;
+  font-family:Georgia,"Times New Roman",serif;
+  padding:25px 15px 60px;
+}
+
+.container{
+  max-width:600px;
+  margin:auto;
+}
+
+.header{
+  text-align:center;
+  padding:25px 0 30px;
+}
+
+.logo{
+  font-size:34px;
+  font-weight:normal;
+}
+
+.subtitle{
+  color:#8d7a68;
+  font-size:13px;
+  margin-top:8px;
+}
+
+.card{
+  background:#fffdf9;
+  padding:25px;
+  margin-bottom:18px;
+  border:1px solid #e5dbcf;
+  box-shadow:0 5px 20px rgba(70,50,35,.06);
+}
+
+.card h2{
+  font-size:20px;
+  font-weight:normal;
+  margin-bottom:20px;
+}
+
+label{
+  display:block;
+  font-size:12px;
+  color:#7d6b5a;
+  margin-bottom:7px;
+}
+
+input{
+  width:100%;
+  padding:14px;
+  margin-bottom:17px;
+  border:1px solid #dfd4c7;
+  background:#fdfbf8;
+  color:#40372f;
+  font-family:inherit;
+  outline:none;
+}
+
+input:focus{
+  border-color:#a99076;
+}
+
+.button{
+  width:100%;
+  padding:15px;
+  border:1px solid #9b836c;
+  background:#5c4d40;
+  color:white;
+  font-family:inherit;
+  font-size:12px;
+  letter-spacing:1px;
+  cursor:pointer;
+}
+
+.button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
+.photos{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.photo-option{
+  position:relative;
+  cursor:pointer;
+}
+
+.photo-option input{
+  position:absolute;
+  opacity:0;
+  width:0;
+  height:0;
+}
+
+.photo-option img{
+  width:100%;
+  aspect-ratio:9/12;
+  object-fit:cover;
+  display:block;
+  border:3px solid transparent;
+}
+
+.photo-option input:checked + img{
+  border-color:#9b836c;
+}
+
+.music-option{
+  border:1px solid #e1d6ca;
+  padding:14px;
+  margin-bottom:10px;
+  background:#fdfbf8;
+}
+
+.music-row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.music-row input{
+  width:auto;
+  margin:0;
+}
+
+.music-name{
+  flex:1;
+  font-size:13px;
+}
+
+.play-btn{
+  width:auto;
+  padding:7px 11px;
+  border:1px solid #bda990;
+  background:#fffdf9;
+  color:#5c4d40;
+  cursor:pointer;
+}
+
+audio{
+  width:100%;
+  margin-top:15px;
+}
+
+.message{
+  text-align:center;
+  margin-top:15px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+.error{
+  color:#9b4b4b;
+}
+
+.success{
+  color:#527052;
+}
+
+.result{
+  display:none;
+  text-align:center;
+}
+
+.result h2{
+  font-weight:normal;
+  font-size:24px;
+  margin-bottom:15px;
+}
+
+.link-box{
+  background:#f7f3ed;
+  padding:14px;
+  word-break:break-all;
+  margin:15px 0;
+  font-size:13px;
+}
+
+.copy-button{
+  width:100%;
+  padding:13px;
+  border:1px solid #9b836c;
+  background:#fffdf9;
+  color:#5c4d40;
+  font-family:inherit;
+  cursor:pointer;
+}
+
+.small{
+  font-size:11px;
+  color:#9b836c;
+  line-height:1.6;
+  margin-top:10px;
+}
+
+@media(max-width:500px){
+
+  .card{
+    padding:20px;
+  }
+
+  .photos{
+    gap:8px;
+  }
+
+  .logo{
+    font-size:30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header">
+
+<div class="logo">
+MyInviter
+</div>
+
+<div class="subtitle">
+Sizning maxsus kuningiz uchun premium taklifnoma
+</div>
+
+</div>
+
+
+<!-- MA'LUMOTLAR -->
+
+<div class="card">
+
+<h2>💍 Taklifnoma</h2>
+
+<label>Kuyov ismi</label>
+
+<input
+id="groomName"
+type="text"
+placeholder="Masalan: Aziz"
+required>
+
+
+<label>Kelin ismi</label>
+
+<input
+id="brideName"
+type="text"
+placeholder="Masalan: Madina"
+required>
+
+
+<label>To‘y sanasi</label>
+
+<input
+id="eventDate"
+type="date"
+required>
+
+
+<label>To‘y joyi</label>
+
+<input
+id="venue"
+type="text"
+placeholder="Masalan: Ozbegim"
+required>
+
+
+<label>Manzil</label>
+
+<input
+id="address"
+type="text"
+placeholder="Masalan: Toshkent"
+required>
+
+
+<label>Google Maps link</label>
+
+<input
+id="mapsUrl"
+type="url"
+placeholder="https://maps.google.com">
+
+</div>
+
+
+<!-- RASM -->
+
+<div class="card">
+
+<h2>🖼 Rasm tanlang</h2>
+
+<div class="photos">
+
+<label class="photo-option">
+
+<input
+type="radio"
+name="photoChoice"
+value="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
+checked>
+
+<img
+src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80">
+
+</label>
+
+
+<label class="photo-option">
+
+<input
+type="radio"
+name="photoChoice"
+value="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
+
+<img
+src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
+
+</label>
+
+
+<label class="photo-option">
+
+<input
+type="radio"
+name="photoChoice"
+value="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80">
+
+<img
+src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80">
+
+</label>
+
+
+<label class="photo-option">
+
+<input
+type="radio"
+name="photoChoice"
+value="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
+
+<img
+src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
+
+</label>
+
+</div>
+
+</div>
+
+
+<!-- MUSIQA -->
+
+<div class="card">
+
+<h2>🎵 Musiqa</h2>
+
+<p class="small">
+Taklifnomangiz uchun musiqa tanlang.
+</p>
+
+
+<div class="music-option">
+
+<div class="music-row">
+
+<input
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Bojalar%20-%20To%20ylar%20muborak%203.mp3">
+
+<div class="music-name">
+Bojalar — To‘ylar muborak
+</div>
+
+<button
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
+▶️
+</button>
+
+</div>
+
+</div>
+
+
+<div class="music-option">
+
+<div class="music-row">
+
+<input
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ed%20Sheeran%20-%20Perfect%20(Official%20Music%20Video).mp3">
+
+<div class="music-name">
+Ed Sheeran — Perfect
+</div>
+
+<button
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
+▶️
+</button>
+
+</div>
+
+</div>
+
+
+<div class="music-option">
+
+<div class="music-row">
+
+<input
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Indila%20-%20Love%20Story%20(Official%20Music%20Video).mp3">
+
+<div class="music-name">
+Indila — Love Story
+</div>
+
+<button
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
+▶️
+</button>
+
+</div>
+
+</div>
+
+
+<div class="music-option">
+
+<div class="music-row">
+
+<input
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/King%20Macarella,Dilnoz%20-%20Kelibdi%20(VIP%20mix)%202.mp3">
+
+<div class="music-name">
+King Macarella, Dilnoz — Kelibdi
+</div>
+
+<button
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
+▶️
+</button>
+
+</div>
+
+</div>
+
+
+<div class="music-option">
+
+<div class="music-row">
+
+<input
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Sam%20Smith%20-%20Fire%20On%20Fire.mp3">
+
+<div class="music-name">
+Sam Smith — Fire On Fire
+</div>
+
+<button
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
+▶️
+</button>
+
+</div>
+
+</div>
+
+
+<div class="music-option">
+
+<div class="music-row">
+
+<input
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ziyoda%20-%20Kelibdi%20%20%20%20%20Uzbek%20music.mp3">
+
+<div class="music-name">
+Ziyoda — Kelibdi
+</div>
+
+<button
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
+▶️
+</button>
+
+</div>
+
+</div>
+
+
+<audio
+id="musicPreview"
+controls>
+</audio>
+
+</div>
+
+
+<!-- YARATISH -->
+
+<div class="card">
+
+<button
+id="createButton"
+class="button"
+type="button"
+onclick="createInvitation()">
+
+TAKLIFNOMANI YARATISH
+
+</button>
+
+<div
+id="message"
+class="message">
+</div>
+
+</div>
+
+
+<!-- NATIJA -->
+
+<div
+id="result"
+class="card result">
+
+<h2>
+🎉 Taklifnomangiz tayyor!
+</h2>
+
+<p>
+Quyidagi linkni mehmonlaringizga yuborishingiz mumkin.
+</p>
+
+<div
+id="invitationLink"
+class="link-box">
+</div>
+
+<button
+class="copy-button"
+onclick="copyLink()">
+
+📋 LINKNI NUSXALASH
+
+</button>
+
+<br><br>
+
+<a
+id="openLink"
+class="button"
+target="_blank">
+
+TAKLIFNOMANI KO‘RISH
+
+</a>
+
+</div>
+
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://bhqdkzeueunfhompvywm.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
+
+
+/* =========================
+   RANDOM SLUG
+========================= */
+
+function generateSlug(){
+
+  const chars =
+  "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789";
+
+  let result = "";
+
+  for(let i=0;i<6;i++){
+
+    result +=
+      chars[
+        Math.floor(
+          Math.random() *
+          chars.length
+        )
+      ];
+
+  }
+
+  return result;
+}
+
+
+/* =========================
+   MUSIC PREVIEW
+========================= */
+
+function previewMusic(
+  button,
+  url
+){
+
+  const audio =
+    document.getElementById(
+      "musicPreview"
+    );
+
+
+  if(
+    audio.src === url &&
+    !audio.paused
+  ){
+
+    audio.pause();
+
+    button.innerText =
+      "▶️";
+
+    return;
+
+  }
+
+
+  document
+  .querySelectorAll(
+    ".play-btn"
+  )
+  .forEach(
+    function(btn){
+
+      btn.innerText =
+        "▶️";
+
+    }
+  );
+
+
+  audio.src =
+    url;
+
+  audio.load();
+
+
+  audio.play()
+  .then(
+    function(){
+
+      button.innerText =
+        "⏸";
+
+    }
+  )
+  .catch(
+    function(error){
+
+      console.error(error);
+
+    }
+  );
+
+}
+
+
+/* =========================
+   CREATE
+========================= */
+
+async function createInvitation(){
+
+  const button =
+    document.getElementById(
+      "createButton"
+    );
+
+  const message =
+    document.getElementById(
+      "message"
+    );
+
+
+  const groom =
+    document
+    .getElementById(
+      "groomName"
+    )
+    .value
+    .trim();
+
+
+  const bride =
+    document
+    .getElementById(
+      "brideName"
+    )
+    .value
+    .trim();
+
+
+  const eventDate =
+    document
+    .getElementById(
+      "eventDate"
+    )
+    .value;
+
+
+  const venue =
+    document
+    .getElementById(
+      "venue"
+    )
+    .value
+    .trim();
+
+
+  const address =
+    document
+    .getElementById(
+      "address"
+    )
+    .value
+    .trim();
+
+
+  const mapsUrl =
+    document
+    .getElementById(
+      "mapsUrl"
+    )
+    .value
+    .trim();
+
+
+  const photo =
+    document.querySelector(
+      'input[name="photoChoice"]:checked'
+    );
+
+
+  const music =
+    document.querySelector(
+      'input[name="musicChoice"]:checked'
+    );
+
+
+  if(
+    !groom ||
+    !bride ||
+    !eventDate ||
+    !venue ||
+    !address
+  ){
+
+    message.className =
+      "message error";
+
+    message.innerText =
+      "❌ Barcha majburiy maydonlarni to‘ldiring.";
+
+    return;
+
+  }
+
+
+  button.disabled =
+    true;
+
+  button.innerText =
+    "YARATILMOQDA...";
+
+
+  message.className =
+    "message";
+
+  message.innerText =
+    "Taklifnoma tayyorlanmoqda...";
+
+
+  try{
+
+    let slug =
+      generateSlug();
+
+
+    /* =========================
+       INSERT
+    ========================= */
+
+    const response =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/invitations",
+
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=representation"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              slug:
+                slug,
+
+              groom_name:
+                groom,
+
+              bride_name:
+                bride,
+
+              event_date:
+                eventDate,
+
+              venue:
+                venue,
+
+              address:
+                address,
+
+              maps_url:
+                mapsUrl,
+
+              photo_url:
+                photo
+                  ? photo.value
+                  : "",
+
+              music_url:
+                music
+                  ? music.value
+                  : ""
+
+            })
+
+        }
+
+      );
+
+
+    const text =
+      await response.text();
+
+
+    console.log(
+      response.status,
+      text
+    );
+
+
+    if(!response.ok){
+
+      let error = {};
+
+      try{
+        error =
+          JSON.parse(text);
+      }catch(e){}
+
+
+      throw new Error(
+        error.message ||
+        error.hint ||
+        text ||
+        "Taklifnoma yaratilmadi"
+      );
+
+    }
+
+
+    let data;
+
+    try{
+
+      data =
+        JSON.parse(text);
+
+    }catch(e){
+
+      throw new Error(
+        "Supabase javobi noto‘g‘ri."
+      );
+
+    }
+
+
+    if(
+      !Array.isArray(data) ||
+      !data.length
+    ){
+
+      throw new Error(
+        "Taklifnoma yaratilmadi."
+      );
+
+    }
+
+
+    const created =
+      data[0];
+
+
+    const finalSlug =
+      created.slug ||
+      slug;
+
+
+    const link =
+      window.location.origin +
+      "/i/" +
+      finalSlug;
+
+
+    document.getElementById(
+      "invitationLink"
+    ).innerText =
+      link;
+
+
+    document.getElementById(
+      "openLink"
+    ).href =
+      link;
+
+
+    document.getElementById(
+      "result"
+    ).style.display =
+      "block";
+
+
+    message.className =
+      "message success";
+
+    message.innerText =
+      "✅ Taklifnoma muvaffaqiyatli yaratildi!";
+
+
+    button.innerText =
+      "TAKLIFNOMA YARATILDI";
+
+
+    document.getElementById(
+      "result"
+    ).scrollIntoView({
+      behavior:"smooth"
+    });
+
+
+  }catch(error){
+
+    console.error(error);
+
+
+    message.className =
+      "message error";
+
+
+    message.innerText =
+      "❌ Xatolik: " +
+      error.message;
+
+
+    button.disabled =
+      false;
+
+
+    button.innerText =
+      "TAKLIFNOMANI YARATISH";
+
+  }
+
+}
+
+
+/* =========================
+   COPY LINK
+========================= */
+
+async function copyLink(){
+
+  const link =
+    document.getElementById(
+      "invitationLink"
+    ).innerText;
+
+
+  try{
+
+    await navigator.clipboard.writeText(
+      link
+    );
+
+
+    alert(
+      "✅ Link nusxalandi!"
+    );
+
+  }catch(error){
+
+    alert(
+      "Linkni qo‘lda nusxalang:\n\n" +
+      link
+    );
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
