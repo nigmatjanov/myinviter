@@ -8,7 +8,6 @@
 <title>MyInviter</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -47,36 +46,21 @@ body{
   opacity:1;
   visibility:visible;
 
-  transform:scale(1);
-  filter:blur(0);
-
   transition:
-    opacity 1.5s cubic-bezier(.22,1,.36,1),
-    transform 1.8s cubic-bezier(.22,1,.36,1),
-    filter 1.5s ease,
-    visibility 0s;
+    opacity 1.2s ease,
+    visibility 1.2s ease;
 }
 
 #intro.hide{
   opacity:0;
   visibility:hidden;
   pointer-events:none;
-
-  transform:scale(1.08);
-  filter:blur(8px);
-
-  transition:
-    opacity 1.5s cubic-bezier(.22,1,.36,1),
-    transform 1.8s cubic-bezier(.22,1,.36,1),
-    filter 1.5s ease,
-    visibility 0s linear 1.5s;
 }
 
 #intro::before{
   content:"";
   position:absolute;
   inset:0;
-
   opacity:.18;
 
   background-image:
@@ -86,7 +70,6 @@ body{
     );
 
   background-size:4px 4px;
-
   pointer-events:none;
 }
 
@@ -94,7 +77,6 @@ body{
   content:"";
   position:absolute;
   inset:0;
-
   pointer-events:none;
 
   background:
@@ -112,15 +94,13 @@ body{
 
 .light{
   position:absolute;
-
   width:430px;
   height:430px;
 
   left:50%;
   top:43%;
 
-  transform:
-    translate(-50%,-50%);
+  transform:translate(-50%,-50%);
 
   background:
     radial-gradient(
@@ -136,7 +116,6 @@ body{
 }
 
 @keyframes lightMove{
-
   0%,100%{
     transform:
       translate(-50%,-50%)
@@ -148,7 +127,6 @@ body{
       translate(-50%,-52%)
       scale(1.1);
   }
-
 }
 
 
@@ -164,44 +142,32 @@ body{
     rgba(139,108,78,.12);
 
   border-radius:50%;
-
   pointer-events:none;
 }
 
 .orbit.one{
   width:560px;
   height:560px;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
+  transform:translate(-50%,-50%);
 }
 
 .orbit.two{
   width:720px;
   height:720px;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   opacity:.55;
 }
 
 .orbit.three{
   width:900px;
   height:900px;
-
   left:50%;
   top:50%;
-
-  transform:
-    translate(-50%,-50%);
-
+  transform:translate(-50%,-50%);
   opacity:.25;
 }
 
@@ -227,11 +193,9 @@ body{
   text-align:center;
 }
 
-
 .small-label{
   font-size:8px;
   letter-spacing:6px;
-
   color:#957d64;
 
   opacity:0;
@@ -240,7 +204,6 @@ body{
     textIn 1s .2s ease-out forwards;
 }
 
-
 .intro-names{
   margin-top:17px;
 
@@ -248,7 +211,6 @@ body{
     clamp(31px,8vw,45px);
 
   line-height:1.05;
-
   color:#4d4034;
 
   opacity:0;
@@ -257,28 +219,20 @@ body{
     textIn 1s .35s ease-out forwards;
 }
 
-
 .intro-names .amp{
   display:inline-block;
-
-  margin:
-    0 9px;
+  margin:0 9px;
 
   font-size:21px;
-
   color:#ae8d69;
-
   font-style:italic;
 }
 
-
 .intro-subtitle{
   margin-top:14px;
-
   max-width:280px;
 
   font-size:11px;
-
   line-height:1.7;
 
   color:#8b7764;
@@ -289,21 +243,16 @@ body{
     textIn 1s .5s ease-out forwards;
 }
 
-
 @keyframes textIn{
-
   from{
     opacity:0;
-    transform:
-      translateY(15px);
+    transform:translateY(15px);
   }
 
   to{
     opacity:1;
-    transform:
-      translateY(0);
+    transform:translateY(0);
   }
-
 }
 
 
@@ -314,9 +263,7 @@ body{
 .envelope-scene{
   position:relative;
 
-  width:
-    min(360px,90vw);
-
+  width:min(360px,90vw);
   height:300px;
 
   margin-top:
@@ -330,19 +277,14 @@ body{
     sceneIn 1.2s .5s ease-out forwards;
 }
 
-
 @keyframes sceneIn{
-
   from{
     opacity:0;
-    transform:translateY(15px);
   }
 
   to{
     opacity:1;
-    transform:translateY(0);
   }
-
 }
 
 
@@ -353,9 +295,7 @@ body{
 .envelope{
   position:absolute;
 
-  width:
-    min(330px,86vw);
-
+  width:min(330px,86vw);
   height:215px;
 
   left:50%;
@@ -378,29 +318,13 @@ body{
   transition:
     transform
     1.35s
-    cubic-bezier(.16,1,.3,1),
-    filter
-    1.35s ease;
+    cubic-bezier(.16,1,.3,1);
 }
-
 
 .envelope.camera{
   transform:
     translate(-50%,-50%)
     scale(.95);
-}
-
-
-.envelope.final-camera{
-  transform:
-    translate(-50%,-50%)
-    scale(1.18);
-
-  filter:
-    drop-shadow(
-      0 35px 35px
-      rgba(66,45,29,.24)
-    );
 }
 
 
@@ -410,9 +334,7 @@ body{
 
 .env-back{
   position:absolute;
-
   inset:0;
-
   z-index:1;
 
   border-radius:4px;
@@ -445,7 +367,6 @@ body{
 
   left:25px;
   right:25px;
-
   bottom:12px;
 
   height:183px;
@@ -465,15 +386,11 @@ body{
     rgba(63,43,27,.12);
 
   display:flex;
-
   flex-direction:column;
-
   align-items:center;
-
   justify-content:center;
 
-  transform:
-    translateY(5px);
+  transform:translateY(5px);
 
   transition:
     transform
@@ -483,22 +400,17 @@ body{
   color:#655547;
 }
 
-
 .letter-small{
   font-size:8px;
-
   letter-spacing:4px;
 
   color:#9b8268;
-
   margin-bottom:13px;
 }
-
 
 .letter-names{
   font-size:27px;
 }
-
 
 .letter-line{
   width:50px;
@@ -516,9 +428,7 @@ body{
 
 .env-front{
   position:absolute;
-
   inset:0;
-
   z-index:5;
 
   background:
@@ -570,11 +480,9 @@ body{
       50% 100%
     );
 
-  transform-origin:
-    top center;
+  transform-origin:top center;
 
-  transform:
-    rotateX(0deg);
+  transform:rotateX(0deg);
 
   backface-visibility:hidden;
 
@@ -590,13 +498,11 @@ body{
 ===================================================== */
 
 .envelope.open .flap{
-  transform:
-    rotateX(180deg);
+  transform:rotateX(180deg);
 }
 
 .envelope.open .letter{
-  transform:
-    translateY(-110px);
+  transform:translateY(-110px);
 }
 
 
@@ -612,13 +518,11 @@ body{
   left:50%;
   top:93px;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   transition:
     transform .35s ease;
 }
-
 
 .seal{
   position:relative;
@@ -629,9 +533,7 @@ body{
   border-radius:50%;
 
   display:flex;
-
   align-items:center;
-
   justify-content:center;
 
   background:
@@ -652,9 +554,11 @@ body{
   box-shadow:
     0 10px 18px
     rgba(66,32,25,.28),
+
     inset
     0 2px 4px
     rgba(255,255,255,.2),
+
     inset
     0 -4px 5px
     rgba(50,20,15,.12);
@@ -665,12 +569,10 @@ body{
     infinite;
 }
 
-
 .seal::before{
   content:"";
 
   position:absolute;
-
   inset:7px;
 
   border-radius:50%;
@@ -680,9 +582,7 @@ body{
     rgba(255,230,220,.4);
 }
 
-
 @keyframes sealFloat{
-
   0%,100%{
     transform:
       translateY(0)
@@ -694,7 +594,6 @@ body{
       translateY(-3px)
       scale(1.02);
   }
-
 }
 
 
@@ -709,29 +608,27 @@ body{
     forwards;
 }
 
-
 @keyframes sealPress{
-
   0%{
     transform:
       translateX(-50%)
       scale(1);
   }
 
-  20%{
+  25%{
     transform:
       translateX(-50%)
       scale(.82);
   }
 
-  40%{
+  50%{
     transform:
       translateX(-50%)
       scale(1.07)
       rotate(-3deg);
   }
 
-  60%{
+  75%{
     transform:
       translateX(-50%)
       scale(.95)
@@ -746,7 +643,6 @@ body{
 
     opacity:0;
   }
-
 }
 
 
@@ -760,13 +656,11 @@ body{
   left:50%;
   bottom:0;
 
-  transform:
-    translateX(-50%);
+  transform:translateX(-50%);
 
   width:100%;
 
   font-size:8px;
-
   letter-spacing:3px;
 
   color:#8a735d;
@@ -775,19 +669,9 @@ body{
     breathe 2.2s
     ease-in-out
     infinite;
-
-  transition:
-    opacity .6s ease;
 }
-
-
-.envelope.open ~ .open-text{
-  opacity:0;
-}
-
 
 @keyframes breathe{
-
   0%,100%{
     opacity:.55;
   }
@@ -795,7 +679,6 @@ body{
   50%{
     opacity:1;
   }
-
 }
 
 
@@ -828,9 +711,7 @@ body{
     forwards;
 }
 
-
 @keyframes particleFly{
-
   0%{
     opacity:0;
 
@@ -853,7 +734,6 @@ body{
       )
       scale(0);
   }
-
 }
 
 
@@ -865,7 +745,6 @@ body{
   min-height:100vh;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
@@ -885,51 +764,12 @@ body{
   min-height:100vh;
 
   background:#f5eee4;
-
-  opacity:0;
-  transform:scale(1.035);
-  filter:blur(6px);
 }
-
-#invitation.show{
-  display:block;
-
-  animation:
-    invitationReveal
-    1.5s
-    cubic-bezier(.22,1,.36,1)
-    forwards;
-}
-
-
-@keyframes invitationReveal{
-
-  0%{
-    opacity:0;
-    transform:scale(1.035);
-    filter:blur(6px);
-  }
-
-  45%{
-    opacity:.35;
-    transform:scale(1.015);
-    filter:blur(3px);
-  }
-
-  100%{
-    opacity:1;
-    transform:scale(1);
-    filter:blur(0);
-  }
-
-}
-
 
 .hero{
   min-height:100vh;
 
   display:flex;
-
   align-items:center;
   justify-content:center;
 
@@ -939,10 +779,8 @@ body{
     70px 20px;
 }
 
-
 .hero-content{
   width:100%;
-
   max-width:600px;
 
   animation:
@@ -952,43 +790,31 @@ body{
     both;
 }
 
-
 @keyframes mainAppear{
-
   from{
     opacity:0;
-
-    transform:
-      translateY(25px);
+    transform:translateY(25px);
   }
 
   to{
     opacity:1;
-
-    transform:
-      translateY(0);
+    transform:translateY(0);
   }
-
 }
-
 
 .label{
   font-size:9px;
-
   letter-spacing:4px;
 
   color:#9b826b;
-
   margin-bottom:25px;
 }
-
 
 .photo{
   width:185px;
   height:185px;
 
   object-fit:cover;
-
   border-radius:50%;
 
   border:
@@ -1002,27 +828,21 @@ body{
   margin-bottom:25px;
 }
 
-
 h1{
   font-size:52px;
-
   font-weight:normal;
-
   line-height:1.04;
 }
-
 
 .and{
   font-size:25px;
 
   color:#aa8b6b;
-
   font-style:italic;
 
   margin:
     9px 0;
 }
-
 
 .divider{
   width:65px;
@@ -1034,21 +854,17 @@ h1{
     28px auto;
 }
 
-
 .description{
   color:#6d6259;
 
   line-height:1.8;
-
   font-size:15px;
 }
-
 
 .event-date{
   margin-top:25px;
 
   font-size:14px;
-
   letter-spacing:3px;
 
   color:#665648;
@@ -1070,7 +886,6 @@ h1{
     32px 0;
 }
 
-
 .count-box{
   width:68px;
 
@@ -1083,21 +898,17 @@ h1{
     1px solid #e5dbcf;
 }
 
-
 .count-box b{
   display:block;
 
   font-size:22px;
-
   font-weight:normal;
 }
-
 
 .count-box span{
   display:block;
 
   font-size:8px;
-
   letter-spacing:1px;
 
   color:#9b836c;
@@ -1124,7 +935,6 @@ h1{
   text-decoration:none;
 
   font-size:10px;
-
   letter-spacing:1px;
 
   background:transparent;
@@ -1139,10 +949,8 @@ h1{
     .25s ease;
 }
 
-
 .button:hover{
   background:#5c4d40;
-
   color:white;
 }
 
@@ -1192,7 +1000,6 @@ h1{
     80px 22px;
 }
 
-
 .section h2{
   font-size:31px;
 
@@ -1200,7 +1007,6 @@ h1{
 
   margin-bottom:20px;
 }
-
 
 .location{
   color:#6d6259;
@@ -1217,10 +1023,8 @@ h1{
 
 .rsvp{
   max-width:430px;
-
   margin:auto;
 }
-
 
 .rsvp input,
 .rsvp select,
@@ -1243,35 +1047,293 @@ h1{
   outline:none;
 }
 
-
 .rsvp textarea{
   height:100px;
-
   resize:none;
 }
-
 
 .message{
   margin-top:15px;
 
   color:#6e8060;
-
   font-size:14px;
 }
 
 
 /* =====================================================
-   FOOTER
+   PREMIUM FOOTER
 ===================================================== */
 
-footer{
+.site-footer{
+  position:relative;
+
+  overflow:hidden;
+
   text-align:center;
 
-  padding:30px;
+  padding:
+    95px 22px 42px;
+
+  background:
+    radial-gradient(
+      ellipse at center top,
+      #fffdf9 0%,
+      #f5eee4 55%,
+      #eee1d2 100%
+    );
+
+  border-top:
+    1px solid
+    rgba(188,160,131,.25);
+}
+
+
+/* decorative glow */
+
+.site-footer::before{
+  content:"";
+
+  position:absolute;
+
+  width:420px;
+  height:420px;
+
+  left:50%;
+  top:-250px;
+
+  transform:translateX(-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.8),
+      transparent 68%
+    );
+
+  pointer-events:none;
+}
+
+
+/* top ornament */
+
+.footer-ornament{
+  position:relative;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:14px;
+
+  margin-bottom:30px;
+}
+
+.footer-ornament::before,
+.footer-ornament::after{
+  content:"";
+
+  width:45px;
+  height:1px;
+
+  background:
+    linear-gradient(
+      to right,
+      transparent,
+      #bca083
+    );
+}
+
+.footer-ornament::after{
+  background:
+    linear-gradient(
+      to left,
+      transparent,
+      #bca083
+    );
+}
+
+.footer-heart{
+  color:#a97869;
+
+  font-size:16px;
+
+  animation:
+    footerHeart 2.5s
+    ease-in-out
+    infinite;
+}
+
+@keyframes footerHeart{
+
+  0%,100%{
+    transform:scale(1);
+    opacity:.75;
+  }
+
+  50%{
+    transform:scale(1.12);
+    opacity:1;
+  }
+}
+
+
+/* main text */
+
+.footer-title{
+  position:relative;
+
+  font-size:11px;
+
+  letter-spacing:4px;
+
+  color:#8e7761;
+
+  margin-bottom:16px;
+}
+
+.footer-quote{
+  position:relative;
+
+  max-width:330px;
+
+  margin:0 auto 28px;
+
+  font-size:17px;
+
+  line-height:1.7;
+
+  color:#5f5145;
+
+  font-style:italic;
+}
+
+
+/* instagram */
+
+.footer-instagram{
+  position:relative;
+
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  gap:10px;
+
+  min-width:190px;
+
+  padding:
+    13px 25px;
+
+  border:
+    1px solid #bca083;
+
+  color:#5c4d40;
+
+  text-decoration:none;
 
   font-size:10px;
 
   letter-spacing:2px;
+
+  background:
+    rgba(255,253,249,.55);
+
+  box-shadow:
+    0 8px 25px
+    rgba(90,65,45,.06);
+
+  transition:
+    .35s ease;
+}
+
+.footer-instagram:hover{
+  background:#5c4d40;
+
+  color:#fff;
+
+  transform:
+    translateY(-3px);
+
+  box-shadow:
+    0 12px 28px
+    rgba(60,40,25,.15);
+}
+
+.instagram-symbol{
+  font-size:19px;
+
+  line-height:1;
+}
+
+
+/* CTA */
+
+.footer-cta{
+  position:relative;
+
+  display:inline-block;
+
+  margin-top:14px;
+
+  padding:
+    14px 28px;
+
+  border:
+    1px solid #5c4d40;
+
+  background:#5c4d40;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-size:9px;
+
+  letter-spacing:2px;
+
+  transition:
+    .35s ease;
+
+  box-shadow:
+    0 10px 25px
+    rgba(60,40,25,.12);
+}
+
+.footer-cta:hover{
+  background:transparent;
+
+  color:#5c4d40;
+
+  transform:
+    translateY(-3px);
+}
+
+
+/* footer line */
+
+.footer-divider{
+  position:relative;
+
+  width:55px;
+  height:1px;
+
+  background:#cbb59c;
+
+  margin:
+    38px auto 20px;
+}
+
+
+/* brand */
+
+.footer-brand{
+  position:relative;
+
+  font-size:9px;
+
+  letter-spacing:4px;
 
   color:#9b836c;
 }
@@ -1299,12 +1361,6 @@ footer{
       scale(.88);
   }
 
-  .envelope.final-camera{
-    transform:
-      translate(-50%,-50%)
-      scale(.98);
-  }
-
   h1{
     font-size:43px;
   }
@@ -1322,6 +1378,14 @@ footer{
     font-size:19px;
   }
 
+  .site-footer{
+    padding:
+      75px 18px 35px;
+  }
+
+  .footer-quote{
+    font-size:15px;
+  }
 }
 
 
@@ -1349,7 +1413,6 @@ footer{
     margin-top:-8px;
     margin-bottom:-20px;
   }
-
 }
 
 </style>
@@ -1373,7 +1436,6 @@ footer{
 
 
   <div class="intro-content">
-
 
     <div class="small-label">
       TAKLIFNOMA
@@ -1404,7 +1466,6 @@ footer{
 
 
     <div class="envelope-scene">
-
 
       <div
         class="envelope"
@@ -1444,7 +1505,6 @@ footer{
 
         <div class="env-front"></div>
 
-
         <div class="flap"></div>
 
 
@@ -1468,7 +1528,6 @@ footer{
 
 
     </div>
-
 
   </div>
 
@@ -1509,11 +1568,11 @@ footer{
   </audio>
 
 
+  <!-- HERO -->
+
   <section class="hero">
 
-
     <div class="hero-content">
-
 
       <div class="label">
         SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
@@ -1560,30 +1619,25 @@ footer{
 
       <div class="countdown">
 
-
         <div class="count-box">
           <b id="days">00</b>
           <span>KUN</span>
         </div>
-
 
         <div class="count-box">
           <b id="hours">00</b>
           <span>SOAT</span>
         </div>
 
-
         <div class="count-box">
           <b id="minutes">00</b>
           <span>DAQIQA</span>
         </div>
 
-
         <div class="count-box">
           <b id="seconds">00</b>
           <span>SONIYA</span>
         </div>
-
 
       </div>
 
@@ -1608,10 +1662,11 @@ footer{
 
 
 
+  <!-- LOCATION -->
+
   <section
     class="section"
     id="location">
-
 
     <h2>
       TANTANALI MAROSIM
@@ -1637,15 +1692,15 @@ footer{
 
     </a>
 
-
   </section>
 
 
 
+  <!-- RSVP -->
+
   <section
     class="section"
     id="rsvp">
-
 
     <h2>
       Tilaklar
@@ -1716,13 +1771,76 @@ footer{
 
     </form>
 
-
   </section>
 
 
 
-  <footer>
-    MYINVITER · 2026
+  <!-- =====================================================
+       PREMIUM MYINVITER FOOTER
+  ===================================================== -->
+
+  <footer class="site-footer">
+
+
+    <div class="footer-ornament">
+
+      <div class="footer-heart">
+        ♡
+      </div>
+
+    </div>
+
+
+    <div class="footer-title">
+      MYINVITER
+    </div>
+
+
+    <div class="footer-quote">
+      “Sizning baxtli kuningiz —
+      bizning ilhomimiz”
+    </div>
+
+
+    <a
+      href="https://www.instagram.com/my.inviter/"
+      target="_blank"
+      rel="noopener"
+      class="footer-instagram">
+
+      <span class="instagram-symbol">
+        ◎
+      </span>
+
+      <span>
+        @my.inviter
+      </span>
+
+    </a>
+
+
+    <br>
+
+
+    <a
+      href="https://www.instagram.com/my.inviter/"
+      target="_blank"
+      rel="noopener"
+      class="footer-cta">
+
+      TAKLIFNOMA YARATISH
+
+    </a>
+
+
+    <div class="footer-divider"></div>
+
+
+    <div class="footer-brand">
+      MYINVITER · 2026
+    </div>
+
+
   </footer>
 
 
@@ -1975,16 +2093,11 @@ async function loadInvitation(){
       "none";
 
 
-    /*
-      MUHIM:
+    document.getElementById(
+      "invitation"
+    ).style.display =
+      "block";
 
-      invitationni darhol
-      ko‘rsatmaymiz.
-
-      display:block qilib,
-      animatsiya boshlanishini
-      kutamiz.
-    */
 
   }catch(error){
 
@@ -2015,7 +2128,7 @@ function createParticles(){
 
   for(
     let i=0;
-    i<32;
+    i<24;
     i++
   ){
 
@@ -2038,7 +2151,7 @@ function createParticles(){
     const distance =
       80 +
       Math.random() *
-      190;
+      170;
 
 
     particle.style.setProperty(
@@ -2065,15 +2178,6 @@ function createParticles(){
       "48%";
 
 
-    particle.style.width =
-      (2 + Math.random()*3) +
-      "px";
-
-
-    particle.style.height =
-      particle.style.width;
-
-
     scene.appendChild(
       particle
     );
@@ -2087,7 +2191,7 @@ function createParticles(){
         );
 
       },
-      Math.random()*300
+      Math.random()*250
     );
 
 
@@ -2097,7 +2201,7 @@ function createParticles(){
         particle.remove();
 
       },
-      2000
+      1900
     );
 
   }
@@ -2124,41 +2228,21 @@ function openInvitation(){
     true;
 
 
-  /* =========================================
-     1. KAMERA YAQINLASHADI
-  ========================================= */
-
   envelope.classList.add(
     "camera"
   );
 
-
-  /* =========================================
-     2. MUHR BOSILADI
-  ========================================= */
 
   sealWrap.classList.add(
     "pressed"
   );
 
 
-  /* =========================================
-     3. PARTICLES
-  ========================================= */
-
   setTimeout(
-    function(){
-
-      createParticles();
-
-    },
-    300
+    createParticles,
+    280
   );
 
-
-  /* =========================================
-     4. KONVERT OCHILADI
-  ========================================= */
 
   setTimeout(
     function(){
@@ -2168,13 +2252,9 @@ function openInvitation(){
       );
 
     },
-    600
+    500
   );
 
-
-  /* =========================================
-     5. MUSIC
-  ========================================= */
 
   setTimeout(
     function(){
@@ -2206,50 +2286,9 @@ function openInvitation(){
       }
 
     },
-    900
+    850
   );
 
-
-  /* =========================================
-     6. KARTAGA YAQINLASHISH
-  ========================================= */
-
-  setTimeout(
-    function(){
-
-      envelope.classList.add(
-        "final-camera"
-      );
-
-    },
-    1200
-  );
-
-
-  /* =========================================
-     7. ASOSIY SAHIFANI TAYYORLASH
-  ========================================= */
-
-  setTimeout(
-    function(){
-
-      const invitation =
-        document.getElementById(
-          "invitation"
-        );
-
-      invitation.classList.add(
-        "show"
-      );
-
-    },
-    1900
-  );
-
-
-  /* =========================================
-     8. INTRO SILLIQ YO‘QOLADI
-  ========================================= */
 
   setTimeout(
     function(){
@@ -2259,13 +2298,9 @@ function openInvitation(){
       );
 
     },
-    2100
+    2500
   );
 
-
-  /* =========================================
-     9. INTRONI O‘CHIRISH
-  ========================================= */
 
   setTimeout(
     function(){
