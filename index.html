@@ -1,19 +1,11 @@
 <!DOCTYPE html>
 <html lang="uz">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta
-  name="viewport"
-  content="width=device-width, initial-scale=1.0">
-
-<title>MyInviter — Taklifnoma</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MyInviter</title>
 
 <style>
-
 *{
   box-sizing:border-box;
   margin:0;
@@ -25,373 +17,335 @@ html{
 }
 
 body{
-  background:#f7f3ed;
+  background:#f7f1e8;
   color:#40372f;
   font-family:Georgia,"Times New Roman",serif;
 }
 
-
 /* =========================
-   WELCOME SCREEN
+   INTRO
 ========================= */
 
-#welcomeScreen{
-
+#intro{
   position:fixed;
-
   inset:0;
-
-  background:#f7f3ed;
-
-  z-index:9999;
-
+  z-index:99999;
+  background:
+    radial-gradient(circle at center,#fffaf3 0%,#f4eadc 100%);
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
-  text-align:center;
-
-  padding:30px;
-
+  overflow:hidden;
   transition:
-    opacity .6s ease;
-
+    opacity 1s ease,
+    visibility 1s ease;
 }
 
+#intro.hide{
+  opacity:0;
+  visibility:hidden;
+}
 
-.welcome-content{
-
-  max-width:500px;
-
+.intro-inner{
   width:100%;
-
-  animation:
-    fadeUp 1s ease;
-
+  max-width:500px;
+  text-align:center;
+  padding:30px;
+  position:relative;
 }
 
-
-.welcome-small{
-
+.intro-top{
   font-size:10px;
-
   letter-spacing:4px;
-
-  color:#9b836c;
-
-  margin-bottom:30px;
-
+  color:#9a8065;
+  margin-bottom:22px;
+  text-transform:uppercase;
 }
 
-
-.welcome-title{
-
-  font-size:48px;
-
-  line-height:1.2;
-
-  color:#40372f;
-
+.intro-names{
+  font-size:42px;
+  line-height:1.25;
+  color:#514337;
+  margin-bottom:10px;
 }
 
-
-.welcome-title span{
-
+.intro-names span{
   display:block;
-
-  font-size:24px;
-
-  font-style:italic;
-
-  color:#aa927b;
-
-  margin:8px 0;
-
 }
 
-
-.welcome-line{
-
-  width:60px;
-
-  height:1px;
-
-  background:#bda990;
-
-  margin:30px auto;
-
+.intro-heart{
+  color:#a88a6c;
+  font-size:22px;
+  margin:10px 0 25px;
 }
 
+.intro-text{
+  font-size:14px;
+  color:#806f5e;
+  margin-bottom:35px;
+}
 
-#openInvitation{
+/* Envelope */
 
-  padding:15px 25px;
-
-  border:1px solid #9b836c;
-
-  background:#5c4d40;
-
-  color:white;
-
-  font-family:
-    Georgia,
-    "Times New Roman",
-    serif;
-
-  font-size:11px;
-
-  letter-spacing:1px;
-
+.envelope{
+  position:relative;
+  width:290px;
+  height:190px;
+  margin:0 auto 35px;
   cursor:pointer;
-
-  transition:.3s;
-
+  perspective:1000px;
 }
 
-
-#openInvitation:hover{
-
-  background:#40372f;
-
+.envelope-body{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:145px;
+  background:#eee0ce;
+  border:1px solid #cbb397;
+  box-shadow:0 15px 35px rgba(75,50,30,.12);
+  z-index:2;
 }
 
+.envelope-body:before{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:0;
+  height:0;
+  border-left:145px solid #e3d2bc;
+  border-top:145px solid transparent;
+}
 
-.welcome-music{
+.envelope-body:after{
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:0;
+  width:0;
+  height:0;
+  border-right:145px solid #e3d2bc;
+  border-top:145px solid transparent;
+}
 
-  margin-top:20px;
+.envelope-flap{
+  position:absolute;
+  top:0;
+  left:0;
+  width:0;
+  height:0;
+  border-left:145px solid transparent;
+  border-right:145px solid transparent;
+  border-top:105px solid #d9c4aa;
+  transform-origin:top center;
+  z-index:4;
+  transition:
+    transform 1s cubic-bezier(.77,0,.18,1);
+}
 
-  font-size:11px;
+.envelope.open .envelope-flap{
+  transform:
+    rotateX(180deg);
+  z-index:1;
+}
 
-  color:#9b836c;
+.letter{
+  position:absolute;
+  left:30px;
+  right:30px;
+  bottom:15px;
+  height:145px;
+  background:#fffdf9;
+  border:1px solid #dfd2c2;
+  z-index:1;
+  transition:
+    transform 1s ease .2s;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#756452;
+  font-size:12px;
+  letter-spacing:1px;
+}
 
+.envelope.open .letter{
+  transform:
+    translateY(-65px);
+}
+
+/* Seal */
+
+.seal{
+  position:absolute;
+  width:64px;
+  height:64px;
+  border-radius:50%;
+  background:#8b4f45;
+  border:4px solid #a86c5e;
+  left:50%;
+  top:76px;
+  transform:translateX(-50%);
+  z-index:8;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#f8e9dc;
+  font-size:24px;
+  box-shadow:
+    0 5px 15px rgba(70,35,25,.2);
+  transition:
+    transform .6s ease,
+    opacity .5s ease;
+}
+
+.seal:hover{
+  transform:
+    translateX(-50%)
+    scale(1.06);
+}
+
+.envelope.open .seal{
+  transform:
+    translateX(-50%)
+    scale(.5);
+  opacity:0;
+}
+
+.open-text{
+  font-size:10px;
+  letter-spacing:2px;
+  color:#806c58;
+  margin-top:5px;
+}
+
+.tap{
+  animation:pulse 1.8s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.04);
+  }
 }
 
 
 /* =========================
-   ANIMATION
-========================= */
-
-@keyframes fadeUp{
-
-  from{
-
-    opacity:0;
-
-    transform:
-      translateY(30px);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:
-      translateY(0);
-
-  }
-
-}
-
-
-/* =========================
-   LOADING
+   MAIN
 ========================= */
 
 #loading{
-
   min-height:100vh;
-
   display:flex;
-
   align-items:center;
-
   justify-content:center;
-
   text-align:center;
-
-  padding:30px;
-
   color:#9b836c;
+}
 
+#invitation{
+  display:none;
+}
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:60px 20px;
+}
+
+.hero-content{
+  max-width:600px;
+  width:100%;
+  animation:fadeUp 1.2s ease;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+.label{
+  font-size:10px;
+  letter-spacing:4px;
+  color:#9b836c;
+  margin-bottom:25px;
+}
+
+.photo{
+  width:185px;
+  height:185px;
+  object-fit:cover;
+  border-radius:50%;
+  border:7px solid #fffdf9;
+  box-shadow:0 10px 35px rgba(60,40,25,.13);
+  margin-bottom:25px;
+}
+
+h1{
+  font-size:52px;
+  font-weight:normal;
+  line-height:1.05;
+}
+
+.and{
+  font-size:25px;
+  color:#a78b70;
+  font-style:italic;
+  margin:10px 0;
+}
+
+.divider{
+  width:65px;
+  height:1px;
+  background:#bda990;
+  margin:28px auto;
+}
+
+.description{
+  color:#6d6259;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.event-date{
+  margin-top:25px;
+  font-size:14px;
+  letter-spacing:3px;
+  color:#665648;
 }
 
 
 /* =========================
-   HERO
+   MUSIC
 ========================= */
 
-.hero{
-
-  min-height:100vh;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  text-align:center;
-
-  padding:40px 20px;
-
-  position:relative;
-
-  overflow:hidden;
-
-}
-
-
-.hero::before,
-.hero::after{
-
-  content:"";
-
-  position:absolute;
-
-  width:280px;
-
-  height:280px;
-
-  border:
-    1px solid #d8c8b7;
-
+.music-button{
+  position:fixed;
+  right:18px;
+  top:18px;
+  z-index:100;
+  width:46px;
+  height:46px;
   border-radius:50%;
-
-  opacity:.45;
-
-}
-
-
-.hero::before{
-
-  top:-150px;
-
-  left:-150px;
-
-}
-
-
-.hero::after{
-
-  right:-150px;
-
-  bottom:-150px;
-
-}
-
-
-.content{
-
-  width:100%;
-
-  max-width:600px;
-
-  position:relative;
-
-  z-index:2;
-
-  animation:
-    fadeUp 1.2s ease;
-
-}
-
-
-.label{
-
-  letter-spacing:4px;
-
-  font-size:11px;
-
-  text-transform:uppercase;
-
-  color:#9b836c;
-
-  margin-bottom:25px;
-
-}
-
-
-.photo{
-
-  width:180px;
-
-  height:180px;
-
-  border-radius:50%;
-
-  object-fit:cover;
-
-  border:
-    7px solid #fffdf9;
-
-  box-shadow:
-    0 8px 30px
-    rgba(70,50,35,.12);
-
-  margin-bottom:25px;
-
-}
-
-
-h1{
-
-  font-size:52px;
-
-  font-weight:normal;
-
-  line-height:1.1;
-
-}
-
-
-.and{
-
-  font-size:25px;
-
-  font-style:italic;
-
-  color:#aa927b;
-
-  margin:10px 0;
-
-}
-
-
-.divider{
-
-  width:70px;
-
-  height:1px;
-
-  background:#bda990;
-
-  margin:25px auto;
-
-}
-
-
-.text{
-
-  line-height:1.8;
-
-  font-size:16px;
-
-  color:#6d6259;
-
-}
-
-
-.date{
-
-  margin-top:25px;
-
-  letter-spacing:3px;
-
-  font-size:14px;
-
+  border:1px solid #bda990;
+  background:#fffdf9;
+  color:#5c4d40;
+  cursor:pointer;
+  box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 
@@ -400,186 +354,77 @@ h1{
 ========================= */
 
 .countdown{
-
   display:flex;
-
   justify-content:center;
-
   gap:8px;
-
-  margin:30px 0;
-
+  margin:32px 0;
 }
 
-
-.box{
-
+.count-box{
   width:68px;
-
   padding:13px 5px;
-
   background:#fffdf9;
-
-  border:
-    1px solid #e5dbcf;
-
-  box-shadow:
-    0 5px 18px
-    rgba(70,50,35,.06);
-
+  border:1px solid #e5dbcf;
 }
 
-
-.box b{
-
+.count-box b{
   display:block;
-
   font-size:22px;
-
   font-weight:normal;
-
 }
 
-
-.box span{
-
+.count-box span{
+  display:block;
   font-size:8px;
-
   letter-spacing:1px;
-
   color:#9b836c;
-
+  margin-top:5px;
 }
 
 
 /* =========================
-   BUTTONS
+   BUTTON
 ========================= */
-
-.buttons{
-
-  display:flex;
-
-  justify-content:center;
-
-  gap:10px;
-
-  flex-wrap:wrap;
-
-  margin-top:20px;
-
-}
-
 
 .button{
-
   display:inline-block;
-
-  padding:13px 23px;
-
-  border:
-    1px solid #9b836c;
-
+  padding:13px 24px;
+  border:1px solid #9b836c;
   color:#5c4d40;
-
   text-decoration:none;
-
+  font-size:10px;
   letter-spacing:1px;
-
-  font-size:11px;
-
   background:transparent;
-
   cursor:pointer;
-
-  transition:.3s;
-
+  font-family:inherit;
 }
-
 
 .button:hover{
-
   background:#5c4d40;
-
-  color:white;
-
+  color:#fff;
 }
 
 
 /* =========================
-   MUSIC BUTTON
-========================= */
-
-.music{
-
-  position:fixed;
-
-  right:18px;
-
-  top:18px;
-
-  width:45px;
-
-  height:45px;
-
-  border-radius:50%;
-
-  border:
-    1px solid #bda990;
-
-  background:#fffdf9;
-
-  color:#5c4d40;
-
-  z-index:20;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 5px 20px
-    rgba(0,0,0,.08);
-
-}
-
-
-/* =========================
-   SECTION
+   SECTIONS
 ========================= */
 
 .section{
-
   background:#fffdf9;
-
   text-align:center;
-
   padding:80px 22px;
-
 }
-
 
 .section h2{
-
-  font-size:32px;
-
+  font-size:31px;
   font-weight:normal;
-
   margin-bottom:20px;
-
 }
 
-
-/* =========================
-   LOCATION
-========================= */
-
 .location{
-
-  line-height:2;
-
   color:#6d6259;
-
-  margin-bottom:28px;
-
+  line-height:2;
+  margin-bottom:25px;
 }
 
 
@@ -588,55 +433,32 @@ h1{
 ========================= */
 
 .rsvp{
-
   max-width:430px;
-
-  margin:0 auto;
-
+  margin:auto;
 }
-
 
 .rsvp input,
 .rsvp select,
 .rsvp textarea{
-
   width:100%;
-
   padding:14px;
-
   margin-bottom:12px;
-
-  border:
-    1px solid #dfd4c7;
-
+  border:1px solid #dfd4c7;
   background:#fdfbf8;
-
   color:#40372f;
-
   font-family:inherit;
-
   outline:none;
-
 }
-
 
 .rsvp textarea{
-
   height:100px;
-
   resize:none;
-
 }
 
-
 .message{
-
   margin-top:15px;
-
-  color:#7d6652;
-
+  color:#6e8060;
   font-size:14px;
-
 }
 
 
@@ -645,19 +467,11 @@ h1{
 ========================= */
 
 footer{
-
   text-align:center;
-
   padding:30px;
-
-  background:#f7f3ed;
-
-  font-size:11px;
-
+  font-size:10px;
   letter-spacing:2px;
-
   color:#9b836c;
-
 }
 
 
@@ -667,535 +481,462 @@ footer{
 
 @media(max-width:500px){
 
-  .welcome-title{
-
-    font-size:40px;
-
+  .intro-names{
+    font-size:36px;
   }
 
+  .envelope{
+    width:270px;
+    height:180px;
+  }
+
+  .envelope-flap{
+    border-left-width:135px;
+    border-right-width:135px;
+  }
+
+  .envelope-body:before{
+    border-left-width:135px;
+    border-top-width:135px;
+  }
+
+  .envelope-body:after{
+    border-right-width:135px;
+    border-top-width:135px;
+  }
 
   h1{
-
     font-size:43px;
-
   }
-
 
   .photo{
-
     width:155px;
-
     height:155px;
-
   }
 
-
-  .countdown{
-
-    gap:5px;
-
-  }
-
-
-  .box{
-
+  .count-box{
     width:62px;
-
   }
 
-
-  .box b{
-
+  .count-box b{
     font-size:19px;
-
   }
-
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =========================
-     WELCOME
-========================= -->
+<!-- ==================================================
+     INTRO
+================================================== -->
 
-<div id="welcomeScreen">
+<div id="intro">
 
-  <div class="welcome-content">
+  <div class="intro-inner">
 
-
-    <div class="welcome-small">
-
-      SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
-
+    <div class="intro-top">
+      TAKLIFNOMA
     </div>
 
+    <div class="intro-names">
 
-    <div class="welcome-title">
-
-      <span id="welcomeGroom">
+      <span id="introGroom">
         Aziz
       </span>
 
-      <span>
-        &
-      </span>
+      <div class="intro-heart">
+        ♡
+      </div>
 
-      <span id="welcomeBride">
+      <span id="introBride">
         Madina
       </span>
 
     </div>
 
-
-    <div class="welcome-line">
+    <div class="intro-text">
+      Bu taklifnoma siz uchun maxsus
     </div>
 
 
-    <button
-      id="openInvitation"
+    <div
+      class="envelope tap"
+      id="envelope"
       onclick="openInvitation()">
 
-      💌 TAKLIFNOMANI OCHISH
 
-    </button>
+      <div class="letter">
+        <span>
+          NIKOH TO‘YI TANTANASI
+        </span>
+      </div>
 
 
-    <div class="welcome-music">
+      <div class="envelope-body"></div>
 
-      🎵 Musiqa bilan
+
+      <div class="envelope-flap"></div>
+
+
+      <div class="seal">
+        ♡
+      </div>
+
 
     </div>
 
+
+    <div class="open-text">
+      OCHISH UCHUN MUHRNI BOSING
+    </div>
 
   </div>
 
 </div>
 
 
-<!-- =========================
+
+<!-- ==================================================
      LOADING
-========================= -->
+================================================== -->
 
 <div id="loading">
-
   Taklifnoma yuklanmoqda...
-
 </div>
 
 
-<!-- =========================
+
+<!-- ==================================================
      INVITATION
-========================= -->
+================================================== -->
 
-<div
-  id="invitation"
-  style="display:none;">
+<div id="invitation">
 
-
-<!-- MUSIC BUTTON -->
 
 <button
-  class="music"
+  class="music-button"
   id="musicButton"
   onclick="toggleMusic()">
-
   ♪
-
 </button>
 
-
-<!-- AUDIO -->
 
 <audio
   id="music"
   preload="auto">
-
 </audio>
 
 
-<!-- =========================
+
+<!-- ==================================================
      HERO
-========================= -->
+================================================== -->
 
 <section class="hero">
 
-<div class="content">
+  <div class="hero-content">
 
 
-<div class="label">
+    <div class="label">
+      SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
+    </div>
 
-Sizni to'yimizga taklif qilamiz
 
-</div>
+    <img
+      id="photo"
+      class="photo"
+      src=""
+      alt="To‘y rasmi">
 
 
-<img
-  id="photo"
-  class="photo"
-  src=""
-  alt="To'y rasmi">
+    <h1 id="groomName">
+      Aziz
+    </h1>
 
 
-<h1 id="groomName">
+    <div class="and">
+      &
+    </div>
 
-Aziz
 
-</h1>
+    <h1 id="brideName">
+      Madina
+    </h1>
 
 
-<div class="and">
+    <div class="divider"></div>
 
-&
 
-</div>
+    <p class="description">
 
+      Hayotimizdagi eng go‘zal kunni
+      siz bilan birga nishonlashdan
+      mamnun bo‘lamiz.
 
-<h1 id="brideName">
+    </p>
 
-Madina
 
-</h1>
+    <div
+      class="event-date"
+      id="eventDate">
+    </div>
 
 
-<div class="divider">
-</div>
+    <div class="countdown">
 
 
-<p class="text">
+      <div class="count-box">
 
-Hayotimizdagi eng go'zal kunni
-siz bilan birga nishonlashdan
-mamnun bo'lamiz.
+        <b id="days">
+          00
+        </b>
 
-</p>
+        <span>
+          KUN
+        </span>
 
+      </div>
 
-<div
-  class="date"
-  id="eventDate">
 
-20 · SENTYABR · 2026
+      <div class="count-box">
 
-</div>
+        <b id="hours">
+          00
+        </b>
 
+        <span>
+          SOAT
+        </span>
 
-<!-- COUNTDOWN -->
+      </div>
 
-<div class="countdown">
 
+      <div class="count-box">
 
-<div class="box">
+        <b id="minutes">
+          00
+        </b>
 
-<b id="days">
-00
-</b>
+        <span>
+          DAQIQA
+        </span>
 
-<span>
-KUN
-</span>
+      </div>
 
-</div>
 
+      <div class="count-box">
 
-<div class="box">
+        <b id="seconds">
+          00
+        </b>
 
-<b id="hours">
-00
-</b>
+        <span>
+          SONIYA
+        </span>
 
-<span>
-SOAT
-</span>
+      </div>
 
-</div>
 
+    </div>
 
-<div class="box">
 
-<b id="minutes">
-00
-</b>
+    <div>
 
-<span>
-DAQIQA
-</span>
+      <a
+        href="#location"
+        class="button">
+        MANZIL
+      </a>
 
-</div>
+      <a
+        href="#rsvp"
+        class="button">
+        RSVP
+      </a>
 
+    </div>
 
-<div class="box">
 
-<b id="seconds">
-00
-</b>
-
-<span>
-SONIYA
-</span>
-
-</div>
-
-
-</div>
-
-
-<!-- BUTTONS -->
-
-<div class="buttons">
-
-
-<a
-  href="#location"
-  class="button">
-
-MANZIL
-
-</a>
-
-
-<a
-  href="#rsvp"
-  class="button">
-
-RSVP
-
-</a>
-
-
-</div>
-
-
-</div>
+  </div>
 
 </section>
 
 
-<!-- =========================
+
+<!-- ==================================================
      LOCATION
-========================= -->
+================================================== -->
 
 <section
   class="section"
   id="location">
 
 
-<h2>
-
-To'y manzili
-
-</h2>
+  <h2>
+    TANTANALI MAROSIM
+  </h2>
 
 
-<div class="location">
+  <div class="location">
+
+    <div id="venue">
+    </div>
+
+    <div id="address">
+    </div>
+
+  </div>
 
 
-<p id="venue">
+  <a
+    id="mapsButton"
+    class="button"
+    target="_blank"
+    rel="noopener">
 
-Ozbegim
+    XARITADA KO‘RISH
 
-</p>
-
-
-<p id="address">
-
-Chirchiq
-
-</p>
-
-
-<p id="locationDate">
-
-29-sentyabr · 18:00
-
-</p>
-
-
-</div>
-
-
-<a
-  id="mapsButton"
-  href="https://maps.google.com"
-  target="_blank"
-  rel="noopener"
-  class="button">
-
-GOOGLE MAPS
-
-</a>
+  </a>
 
 
 </section>
 
 
-<!-- =========================
+
+<!-- ==================================================
      RSVP
-========================= -->
+================================================== -->
 
 <section
   class="section"
   id="rsvp">
 
 
-<h2>
-
-Ishtirokingizni tasdiqlang
-
-</h2>
+  <h2>
+    Tilaklar
+  </h2>
 
 
-<p
-  class="text"
-  style="margin-bottom:25px;">
+  <p
+    class="description"
+    style="margin-bottom:25px;">
 
-Sizni kutib qolamiz ❤️
+    Egalariga issiq tilaklaringizni
+    qoldiring ❤️
 
-</p>
-
-
-<form
-  class="rsvp"
-  onsubmit="sendRSVP(event)">
+  </p>
 
 
-<input
-  type="text"
-  placeholder="Ismingiz"
-  required>
+  <form
+    class="rsvp"
+    onsubmit="sendRSVP(event)">
 
 
-<select required>
-
-<option value="">
-
-Ishtirokingiz
-
-</option>
+    <input
+      id="guestName"
+      type="text"
+      placeholder="Ismingiz"
+      required>
 
 
-<option value="Albatta kelaman">
+    <select
+      id="attendance"
+      required>
 
-Albatta kelaman
+      <option value="">
+        Iltimos, javob bering
+      </option>
 
-</option>
+      <option value="Albatta kelaman">
+        Albatta kelaman
+      </option>
 
+      <option value="Kela olmayman">
+        Kela olmayman
+      </option>
 
-<option value="Kela olmayman">
-
-Kela olmayman
-
-</option>
-
-</select>
-
-
-<textarea
-  placeholder="Tilak yoki izohingiz">
-</textarea>
+    </select>
 
 
-<button
-  class="button"
-  type="submit">
-
-TASDIQLASH
-
-</button>
+    <textarea
+      id="guestMessage"
+      placeholder="Tilagingiz">
+    </textarea>
 
 
-<div
-  class="message"
-  id="message">
+    <button
+      type="submit"
+      class="button">
 
-</div>
+      TILAK QOLDIRISH
+
+    </button>
 
 
-</form>
+    <div
+      id="message"
+      class="message">
+    </div>
 
+
+  </form>
 
 </section>
 
 
-<!-- FOOTER -->
 
 <footer>
-
-MYINVITER · 2026
-
+  MYINVITER · 2026
 </footer>
 
 
 </div>
 
 
+
 <script>
 
-
-/* =========================
+/* ==================================================
    SUPABASE
-========================= */
+================================================== */
 
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
-
-const INVITATION_ID =
-1;
+const INVITATION_ID = 1;
 
 
-/* =========================
-   DEFAULTS
-========================= */
-
-const DEFAULT_PHOTO =
-"https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80";
-
-
-const DEFAULT_MUSIC =
-"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3";
-
-
-/* =========================
+/* ==================================================
    ELEMENTS
-========================= */
+================================================== */
+
+const intro =
+document.getElementById("intro");
+
+const envelope =
+document.getElementById("envelope");
 
 const music =
-document.getElementById(
-  "music"
-);
-
+document.getElementById("music");
 
 const musicButton =
-document.getElementById(
-  "musicButton"
-);
+document.getElementById("musicButton");
 
 
-/* =========================
-   LOAD INVITATION
-========================= */
+/* ==================================================
+   LOAD
+================================================== */
 
 async function loadInvitation(){
 
-
-  const loading =
-    document.getElementById(
-      "loading"
-    );
-
-
   try{
-
 
     const response =
       await fetch(
@@ -1207,17 +948,13 @@ async function loadInvitation(){
 
         {
 
-          method:"GET",
-
           headers:{
-
             "apikey":
               SUPABASE_KEY,
 
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
-
           }
 
         }
@@ -1229,22 +966,12 @@ async function loadInvitation(){
       await response.json();
 
 
-    console.log(
-      "Invitation:",
-      data
-    );
-
-
     if(!response.ok){
 
-      loading.innerText =
-        "Taklifnomani yuklashda xatolik: " +
-        (
-          data.message ||
-          "Noma'lum xato"
-        );
-
-      return;
+      throw new Error(
+        data.message ||
+        "Taklifnoma yuklanmadi"
+      );
 
     }
 
@@ -1254,10 +981,9 @@ async function loadInvitation(){
       data.length === 0
     ){
 
-      loading.innerText =
-        "Taklifnoma topilmadi.";
-
-      return;
+      throw new Error(
+        "Taklifnoma topilmadi"
+      );
 
     }
 
@@ -1270,11 +996,9 @@ async function loadInvitation(){
        NAMES
     ========================= */
 
-
     const groom =
       invitation.groom_name ||
       "Aziz";
-
 
     const bride =
       invitation.bride_name ||
@@ -1294,13 +1018,13 @@ async function loadInvitation(){
 
 
     document.getElementById(
-      "welcomeGroom"
+      "introGroom"
     ).innerText =
       groom;
 
 
     document.getElementById(
-      "welcomeBride"
+      "introBride"
     ).innerText =
       bride;
 
@@ -1309,55 +1033,43 @@ async function loadInvitation(){
        PHOTO
     ========================= */
 
-
     const photo =
       document.getElementById(
         "photo"
       );
 
 
-    photo.src =
-      invitation.photo_url ||
-      DEFAULT_PHOTO;
+    if(invitation.photo_url){
 
+      photo.src =
+        invitation.photo_url;
 
-    photo.onerror =
-      function(){
-
-        this.src =
-          DEFAULT_PHOTO;
-
-      };
+    }
 
 
     /* =========================
        MUSIC
     ========================= */
 
+    if(invitation.music_url){
 
-    music.src =
-      invitation.music_url ||
-      DEFAULT_MUSIC;
+      music.src =
+        invitation.music_url;
 
+      music.load();
 
-    music.load();
+    }
 
 
     /* =========================
        VENUE
     ========================= */
 
-
     document.getElementById(
       "venue"
     ).innerText =
       invitation.venue ||
       "";
-
-
-    /* =========================
-       ADDRESS
-    ========================= */
 
 
     document.getElementById(
@@ -1371,10 +1083,7 @@ async function loadInvitation(){
        MAP
     ========================= */
 
-
-    if(
-      invitation.maps_url
-    ){
+    if(invitation.maps_url){
 
       document.getElementById(
         "mapsButton"
@@ -1388,18 +1097,11 @@ async function loadInvitation(){
        DATE
     ========================= */
 
-
-    if(
-      invitation.event_date
-    ){
-
-      const dateString =
-        invitation.event_date;
-
+    if(invitation.event_date){
 
       const date =
         new Date(
-          dateString +
+          invitation.event_date +
           "T18:00:00"
         );
 
@@ -1452,16 +1154,6 @@ async function loadInvitation(){
         year;
 
 
-      document.getElementById(
-        "locationDate"
-      ).innerText =
-
-        day +
-        "-" +
-        month.toLowerCase() +
-        " · 18:00";
-
-
       startCountdown(
         date.getTime()
       );
@@ -1470,11 +1162,12 @@ async function loadInvitation(){
 
 
     /* =========================
-       SHOW INVITATION
+       SHOW
     ========================= */
 
-
-    loading.style.display =
+    document.getElementById(
+      "loading"
+    ).style.display =
       "none";
 
 
@@ -1486,92 +1179,142 @@ async function loadInvitation(){
 
   }catch(error){
 
+    console.error(error);
 
-    console.error(
-      "Connection error:",
-      error
-    );
-
-
-    loading.innerText =
-      "Internet yoki Supabase ulanishida xatolik.";
+    document.getElementById(
+      "loading"
+    ).innerText =
+      "Xatolik: " +
+      error.message;
 
   }
 
 }
 
 
-/* =========================
-   OPEN INVITATION
-========================= */
+/* ==================================================
+   OPEN ENVELOPE
+================================================== */
 
 function openInvitation(){
 
-
-  const welcome =
-    document.getElementById(
-      "welcomeScreen"
-    );
+  envelope.classList.remove(
+    "tap"
+  );
 
 
-  welcome.style.opacity =
-    "0";
+  envelope.classList.add(
+    "open"
+  );
+
+
+  /*
+    Muhim:
+    click foydalanuvchidan kelgani uchun
+    telefon brauzeri audio play qilishga
+    ruxsat beradi.
+  */
+
+  if(music.src){
+
+    music.play()
+
+      .then(function(){
+
+        musicButton.innerText =
+          "Ⅱ";
+
+      })
+
+      .catch(function(error){
+
+        console.log(
+          "Music autoplay:",
+          error
+        );
+
+      });
+
+  }
 
 
   setTimeout(
     function(){
 
-      welcome.style.display =
-        "none";
+      intro.classList.add(
+        "hide"
+      );
+
+
+      setTimeout(
+        function(){
+
+          intro.style.display =
+            "none";
+
+
+          window.scrollTo(
+            0,
+            0
+          );
+
+        },
+        1000
+      );
 
     },
-    600
+    1200
   );
-
-
-  /* MUSIC START */
-
-  music.play()
-
-    .then(
-      function(){
-
-        musicButton.innerText =
-          "Ⅱ";
-
-      }
-    )
-
-    .catch(
-      function(error){
-
-        console.log(
-          "Music error:",
-          error
-        );
-
-      }
-    );
 
 }
 
 
-/* =========================
-   COUNTDOWN
-========================= */
+/* ==================================================
+   MUSIC
+================================================== */
 
-let countdownTimer =
-null;
+function toggleMusic(){
+
+  if(!music.src){
+    return;
+  }
+
+
+  if(music.paused){
+
+    music.play()
+
+      .then(function(){
+
+        musicButton.innerText =
+          "Ⅱ";
+
+      });
+
+  }else{
+
+    music.pause();
+
+    musicButton.innerText =
+      "♪";
+
+  }
+
+}
+
+
+/* ==================================================
+   COUNTDOWN
+================================================== */
+
+let countdownTimer = null;
 
 
 function startCountdown(
   weddingDate
 ){
 
-
-  if(
-    countdownTimer
-  ){
+  if(countdownTimer){
 
     clearInterval(
       countdownTimer
@@ -1580,8 +1323,7 @@ function startCountdown(
   }
 
 
-  function countdown(){
-
+  function update(){
 
     const now =
       new Date().getTime();
@@ -1592,33 +1334,23 @@ function startCountdown(
       now;
 
 
-    if(
-      distance <= 0
-    ){
+    if(distance <= 0){
 
       document.getElementById(
         "days"
-      ).innerText =
-        "00";
-
+      ).innerText = "00";
 
       document.getElementById(
         "hours"
-      ).innerText =
-        "00";
-
+      ).innerText = "00";
 
       document.getElementById(
         "minutes"
-      ).innerText =
-        "00";
-
+      ).innerText = "00";
 
       document.getElementById(
         "seconds"
-      ).innerText =
-        "00";
-
+      ).innerText = "00";
 
       return;
 
@@ -1634,12 +1366,7 @@ function startCountdown(
         Math.floor(
 
           distance /
-          (
-            1000 *
-            60 *
-            60 *
-            24
-          )
+          86400000
 
         )
 
@@ -1659,11 +1386,7 @@ function startCountdown(
 
           (
             distance /
-            (
-              1000 *
-              60 *
-              60
-            )
+            3600000
           ) % 24
 
         )
@@ -1684,10 +1407,7 @@ function startCountdown(
 
           (
             distance /
-            (
-              1000 *
-              60
-            )
+            60000
           ) % 60
 
         )
@@ -1721,142 +1441,56 @@ function startCountdown(
   }
 
 
-  countdown();
+  update();
 
 
   countdownTimer =
     setInterval(
-      countdown,
+      update,
       1000
     );
 
 }
 
 
-/* =========================
-   MUSIC TOGGLE
-========================= */
-
-function toggleMusic(){
-
-
-  if(
-    music.paused
-  ){
-
-    music.play()
-
-      .then(
-        function(){
-
-          musicButton.innerText =
-            "Ⅱ";
-
-        }
-      )
-
-      .catch(
-        function(error){
-
-          console.log(
-            error
-          );
-
-        }
-      );
-
-  }else{
-
-
-    music.pause();
-
-
-    musicButton.innerText =
-      "♪";
-
-  }
-
-}
-
-
-/* =========================
+/* ==================================================
    RSVP
-========================= */
+================================================== */
 
-async function sendRSVP(
-  event
-){
-
+async function sendRSVP(event){
 
   event.preventDefault();
 
 
-  const form =
-    event.target;
-
-
-  const guestName =
-    form
-      .querySelector(
-        'input[type="text"]'
-      )
-      .value
-      .trim();
-
-
-  const attendance =
-    form
-      .querySelector(
-        "select"
-      )
-      .value;
-
-
   const message =
-    form
-      .querySelector(
-        "textarea"
-      )
-      .value
-      .trim();
-
-
-  const messageBox =
     document.getElementById(
       "message"
     );
 
 
-  if(
-    !guestName
-  ){
-
-    messageBox.innerText =
-      "Iltimos, ismingizni kiriting.";
-
-    return;
-
-  }
+  const guestName =
+    document.getElementById(
+      "guestName"
+    ).value.trim();
 
 
-  if(
-    !attendance
-  ){
-
-    messageBox.innerText =
-      "Iltimos, ishtirokingizni tanlang.";
-
-    return;
-
-  }
+  const attendance =
+    document.getElementById(
+      "attendance"
+    ).value;
 
 
-  messageBox.innerText =
+  const guestMessage =
+    document.getElementById(
+      "guestMessage"
+    ).value.trim();
+
+
+  message.innerText =
     "Yuborilmoqda...";
 
 
   try{
-
 
     const response =
       await fetch(
@@ -1885,9 +1519,7 @@ async function sendRSVP(
 
           },
 
-
           body:
-
             JSON.stringify({
 
               invitation_id:
@@ -1900,7 +1532,7 @@ async function sendRSVP(
                 attendance,
 
               message:
-                message
+                guestMessage
 
             })
 
@@ -1909,67 +1541,65 @@ async function sendRSVP(
       );
 
 
-    if(
-      !response.ok
-    ){
+    if(!response.ok){
 
-      const errorData =
+      const error =
         await response
           .json()
           .catch(
             function(){
-
               return {};
-
             }
           );
 
 
-      messageBox.innerText =
-        "XATO: " +
-        (
-          errorData.message ||
-          "RSVP yuborilmadi"
-        );
-
-
-      return;
+      throw new Error(
+        error.message ||
+        "RSVP yuborilmadi"
+      );
 
     }
 
 
-    messageBox.innerText =
-      "Rahmat! Ishtirokingiz qayd etildi ❤️";
+    message.innerText =
+      "❤️ Rahmat! Javobingiz saqlandi.";
 
 
-    form.reset();
+    document.getElementById(
+      "guestName"
+    ).value = "";
+
+
+    document.getElementById(
+      "attendance"
+    ).value = "";
+
+
+    document.getElementById(
+      "guestMessage"
+    ).value = "";
 
 
   }catch(error){
 
+    console.error(error);
 
-    console.error(
-      "RSVP error:",
-      error
-    );
-
-
-    messageBox.innerText =
-      "Xatolik yuz berdi. Qaytadan urinib ko‘ring.";
+    message.innerText =
+      "Xatolik: " +
+      error.message;
 
   }
 
 }
 
 
-/* =========================
+/* ==================================================
    START
-========================= */
+================================================== */
 
 loadInvitation();
 
 </script>
 
 </body>
-
 </html>
