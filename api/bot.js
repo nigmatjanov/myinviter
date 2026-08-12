@@ -147,7 +147,7 @@ export default async function handler(req, res) {
 
         "Karta raqami:\n" +
 
-        "<code>XXXX XXXX XXXX XXXX</code>\n\n" +
+        "<code>9860 6067 4864 5904</code>\n\n" +
 
         "To‘lovni amalga oshirgandan so‘ng " +
         "chekni shu botga yuboring.",
