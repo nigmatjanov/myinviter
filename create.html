@@ -477,8 +477,6 @@ audio{
     </div>
 
 
-    <!-- 1 -->
-
     <div class="music-option">
 
       <div class="music-row">
@@ -505,8 +503,6 @@ audio{
 
     </div>
 
-
-    <!-- 2 -->
 
     <div class="music-option">
 
@@ -535,8 +531,6 @@ audio{
     </div>
 
 
-    <!-- 3 -->
-
     <div class="music-option">
 
       <div class="music-row">
@@ -563,8 +557,6 @@ audio{
 
     </div>
 
-
-    <!-- 4 -->
 
     <div class="music-option">
 
@@ -593,8 +585,6 @@ audio{
     </div>
 
 
-    <!-- 5 -->
-
     <div class="music-option">
 
       <div class="music-row">
@@ -621,8 +611,6 @@ audio{
 
     </div>
 
-
-    <!-- 6 -->
 
     <div class="music-option">
 
@@ -666,8 +654,6 @@ audio{
     </audio>
 
 
-    <!-- CUSTOM MUSIC -->
-
     <div class="upload-box">
 
       <label>
@@ -708,8 +694,6 @@ audio{
       class="message">
     </div>
 
-
-    <!-- RESULT -->
 
     <div
       id="result"
@@ -762,189 +746,7 @@ audio{
 
 
 <script>
-/* =====================================================
-   ACCESS TOKEN CHECK
-===================================================== */
 
-(async function checkAccess() {
-
-  const params =
-    new URLSearchParams(
-      window.location.search
-    );
-
-  const token =
-    params.get("token");
-
-  /*
-    Token bo‘lmasa saytga kiritmaymiz
-  */
-
-  if (!token) {
-
-    document.body.innerHTML = `
-      <div style="
-        min-height:100vh;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        text-align:center;
-        padding:30px;
-        font-family:Georgia,serif;
-        background:#f5eee4;
-        color:#493d32;
-      ">
-
-        <div>
-
-          <h2>
-            🔒 Kirish taqiqlangan
-          </h2>
-
-          <p style="
-            margin-top:15px;
-            line-height:1.6;
-          ">
-            Taklifnoma yaratish uchun
-            avval to‘lovni amalga oshiring.
-          </p>
-
-        </div>
-
-      </div>
-    `;
-
-    return;
-  }
-
-
-  try {
-
-    /*
-      Server orqali tokenni tekshiramiz
-    */
-
-    const response =
-      await fetch(
-        `/api/check-access?token=${encodeURIComponent(token)}`
-      );
-
-
-    const data =
-      await response.json();
-
-
-    /*
-      Token noto‘g‘ri bo‘lsa
-    */
-
-    if (
-      !response.ok ||
-      !data.ok
-    ) {
-
-      document.body.innerHTML = `
-        <div style="
-          min-height:100vh;
-          display:flex;
-          align-items:center;
-          justify-content:center;
-          text-align:center;
-          padding:30px;
-          font-family:Georgia,serif;
-          background:#f5eee4;
-          color:#493d32;
-        ">
-
-          <div>
-
-            <h2>
-              ❌ Ruxsat yo‘q
-            </h2>
-
-            <p style="
-              margin-top:15px;
-              line-height:1.6;
-            ">
-              To‘lovingiz tasdiqlanmagan
-              yoki havola eskirgan.
-            </p>
-
-            <a
-              href="https://t.me/MyInviterUzBot"
-              style="
-                display:inline-block;
-                margin-top:20px;
-                padding:13px 20px;
-                background:#5c4d40;
-                color:white;
-                text-decoration:none;
-              "
-            >
-              🤖 Telegram botga qaytish
-            </a>
-
-          </div>
-
-        </div>
-      `;
-
-      return;
-    }
-
-
-    /*
-      Token to‘g‘ri.
-      Forma ishlashiga ruxsat.
-    */
-
-    console.log(
-      "ACCESS OK:",
-      data.payment
-    );
-
-
-  } catch (error) {
-
-    console.error(
-      "ACCESS CHECK ERROR:",
-      error
-    );
-
-
-    document.body.innerHTML = `
-      <div style="
-        min-height:100vh;
-        display:flex;
-        align-items:center;
-        justify-content:center;
-        text-align:center;
-        padding:30px;
-        font-family:Georgia,serif;
-        background:#f5eee4;
-        color:#493d32;
-      ">
-
-        <div>
-
-          <h2>
-            ⚠️ Server xatosi
-          </h2>
-
-          <p style="
-            margin-top:15px;
-          ">
-            Iltimos, birozdan keyin qayta urinib ko‘ring.
-          </p>
-
-        </div>
-
-      </div>
-    `;
-
-  }
-
-})();
 /* =====================================================
    SUPABASE
 ===================================================== */
@@ -954,6 +756,152 @@ const SUPABASE_URL =
 
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
+
+
+/* =====================================================
+   ACCESS TOKEN
+===================================================== */
+
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
+
+const ACCESS_TOKEN =
+  urlParams.get("token");
+
+
+let accessGranted = false;
+
+
+/* =====================================================
+   CHECK ACCESS
+===================================================== */
+
+async function checkAccess(){
+
+  if(!ACCESS_TOKEN){
+
+    showAccessDenied(
+      "Taklifnoma yaratish uchun maxsus havoladan kiring."
+    );
+
+    return false;
+
+  }
+
+
+  try{
+
+    const response =
+      await fetch(
+        `/api/check-access?token=${encodeURIComponent(ACCESS_TOKEN)}`
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if(
+      !response.ok ||
+      !data.ok
+    ){
+
+      showAccessDenied(
+        "To‘lovingiz tasdiqlanmagan yoki havola eskirgan."
+      );
+
+      return false;
+
+    }
+
+
+    accessGranted = true;
+
+    console.log(
+      "ACCESS GRANTED",
+      data.payment
+    );
+
+    return true;
+
+
+  }catch(error){
+
+    console.error(
+      "ACCESS ERROR:",
+      error
+    );
+
+
+    showAccessDenied(
+      "Server bilan bog‘lanishda xatolik yuz berdi."
+    );
+
+    return false;
+
+  }
+
+}
+
+
+/* =====================================================
+   ACCESS DENIED
+===================================================== */
+
+function showAccessDenied(
+  text
+){
+
+  document.body.innerHTML = `
+
+    <div style="
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding:30px;
+      font-family:Georgia,serif;
+      background:#f5eee4;
+      color:#493d32;
+    ">
+
+      <div>
+
+        <h2>
+          ❌ Ruxsat yo‘q
+        </h2>
+
+        <p style="
+          margin-top:15px;
+          line-height:1.7;
+        ">
+          ${text}
+        </p>
+
+        <a
+          href="/"
+          style="
+            display:inline-block;
+            margin-top:20px;
+            padding:13px 20px;
+            background:#5c4d40;
+            color:white;
+            text-decoration:none;
+          "
+        >
+          🌐 MyInviter
+        </a>
+
+      </div>
+
+    </div>
+
+  `;
+
+}
 
 
 /* =====================================================
@@ -1265,6 +1213,18 @@ document
 
 async function createInvitation(){
 
+  if(!accessGranted){
+
+    const ok =
+      await checkAccess();
+
+    if(!ok){
+      return;
+    }
+
+  }
+
+
   const button =
     document.getElementById(
       "createButton"
@@ -1383,7 +1343,7 @@ async function createInvitation(){
        PHOTO
     ========================= */
 
-    let photoChoice =
+    const photoChoice =
       document.querySelector(
         'input[name="photoChoice"]:checked'
       );
@@ -1867,15 +1827,6 @@ async function createInvitation(){
     button.disabled =
       false;
 
-
-    /*
-      MUHIM:
-      Bu yerda endi avtomatik redirect YO‘Q.
-      Foydalanuvchi o‘zi
-      "TAKLIFNOMANI OCHISH"
-      tugmasini bosadi.
-    */
-
   }catch(error){
 
     console.error(
@@ -1908,9 +1859,7 @@ async function createInvitation(){
 async function copyLink(){
 
   if(!createdLink){
-
     return;
-
   }
 
 
@@ -1981,6 +1930,13 @@ function showMessage(
     text;
 
 }
+
+
+/* =====================================================
+   START ACCESS CHECK
+===================================================== */
+
+checkAccess();
 
 </script>
 
