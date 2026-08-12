@@ -23,9 +23,9 @@ export default async function handler(req, res) {
       musicUrl
     } = req.body || {};
 
-    // ============================
-    // VALIDATION
-    // ============================
+    // =========================
+    // BASIC VALIDATION
+    // =========================
 
     if (!accessToken) {
       return res.status(401).json({
@@ -55,17 +55,21 @@ export default async function handler(req, res) {
       });
     }
 
-    // ============================
+    // =========================
     // CHECK PAYMENT
-    // ============================
+    // =========================
 
-    const paymentResponse = await fetch(
+    const paymentUrl =
       `${SUPABASE_URL}/rest/v1/payments` +
       `?access_token=eq.${encodeURIComponent(accessToken)}` +
       `&status=eq.paid` +
       `&used=eq.false` +
-      `&limit=1`,
+      `&limit=1`;
+
+    const paymentResponse = await fetch(
+      paymentUrl,
       {
+        method: "GET",
         headers: {
           apikey: SUPABASE_SERVICE_ROLE_KEY,
           Authorization:
@@ -74,10 +78,13 @@ export default async function handler(req, res) {
       }
     );
 
+    const paymentText =
+      await paymentResponse.text();
+
     if (!paymentResponse.ok) {
       console.error(
-        "PAYMENT CHECK:",
-        await paymentResponse.text()
+        "PAYMENT CHECK ERROR:",
+        paymentText
       );
 
       return res.status(500).json({
@@ -86,8 +93,16 @@ export default async function handler(req, res) {
       });
     }
 
-    const payments =
-      await paymentResponse.json();
+    let payments;
+
+    try {
+      payments = JSON.parse(paymentText);
+    } catch (error) {
+      return res.status(500).json({
+        ok: false,
+        error: "To‘lov ma’lumotlarini o‘qib bo‘lmadi."
+      });
+    }
 
     if (
       !Array.isArray(payments) ||
@@ -96,15 +111,15 @@ export default async function handler(req, res) {
       return res.status(403).json({
         ok: false,
         error:
-          "To‘lov topilmadi yoki bu link allaqachon ishlatilgan."
+          "To‘lov topilmadi yoki access link allaqachon ishlatilgan."
       });
     }
 
     const payment = payments[0];
 
-    // ============================
+    // =========================
     // CREATE INVITATION
-    // ============================
+    // =========================
 
     const invitationResponse =
       await fetch(
@@ -127,29 +142,14 @@ export default async function handler(req, res) {
           },
 
           body: JSON.stringify({
-            groom_name:
-              groomName,
-
-            bride_name:
-              brideName,
-
-            event_date:
-              eventDate,
-
-            venue:
-              venue || "",
-
-            address:
-              address || "",
-
-            maps_url:
-              mapsUrl || "",
-
-            photo_url:
-              photoUrl || "",
-
-            music_url:
-              musicUrl || ""
+            groom_name: groomName,
+            bride_name: brideName,
+            event_date: eventDate,
+            venue: venue || "",
+            address: address || "",
+            maps_url: mapsUrl || "",
+            photo_url: photoUrl || "",
+            music_url: musicUrl || ""
           })
         }
       );
@@ -159,14 +159,28 @@ export default async function handler(req, res) {
 
     if (!invitationResponse.ok) {
       console.error(
-        "INVITATION CREATE:",
+        "INVITATION CREATE ERROR:",
         invitationText
       );
 
+      let errorMessage =
+        "Taklifnoma yaratilmadi.";
+
+      try {
+        const errorData =
+          JSON.parse(invitationText);
+
+        errorMessage =
+          errorData.message ||
+          errorData.hint ||
+          errorData.error ||
+          errorMessage;
+
+      } catch (error) {}
+
       return res.status(500).json({
         ok: false,
-        error:
-          "Taklifnoma yaratilmadi."
+        error: errorMessage
       });
     }
 
@@ -175,11 +189,11 @@ export default async function handler(req, res) {
     try {
       invitationData =
         JSON.parse(invitationText);
-    } catch {
+    } catch (error) {
       return res.status(500).json({
         ok: false,
         error:
-          "Server javobini o‘qib bo‘lmadi."
+          "Taklifnoma javobini o‘qib bo‘lmadi."
       });
     }
 
@@ -197,11 +211,11 @@ export default async function handler(req, res) {
     const invitationId =
       invitationData[0].id;
 
-    // ============================
-    // MARK ACCESS AS USED
-    // ============================
+    // =========================
+    // MARK PAYMENT AS USED
+    // =========================
 
-    const usedResponse =
+    const updatePaymentResponse =
       await fetch(
         `${SUPABASE_URL}/rest/v1/payments?id=eq.${payment.id}`,
         {
@@ -223,32 +237,34 @@ export default async function handler(req, res) {
 
           body: JSON.stringify({
             used: true,
-            invitation_id:
-              invitationId
+            invitation_id: invitationId
           })
         }
       );
 
-    if (!usedResponse.ok) {
+    const updatePaymentText =
+      await updatePaymentResponse.text();
+
+    if (!updatePaymentResponse.ok) {
       console.error(
-        "ACCESS UPDATE:",
-        await usedResponse.text()
+        "PAYMENT UPDATE ERROR:",
+        updatePaymentText
       );
 
       return res.status(500).json({
         ok: false,
         error:
-          "Access holatini yangilab bo‘lmadi."
+          "To‘lov holatini yangilab bo‘lmadi."
       });
     }
 
-    // ============================
+    // =========================
     // SUCCESS
-    // ============================
+    // =========================
 
     return res.status(200).json({
       ok: true,
-      invitationId
+      invitationId: invitationId
     });
 
   } catch (error) {
@@ -261,7 +277,7 @@ export default async function handler(req, res) {
     return res.status(500).json({
       ok: false,
       error:
-        "Serverda xatolik yuz berdi."
+        "Serverda kutilmagan xatolik yuz berdi."
     });
   }
 }
