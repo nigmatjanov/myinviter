@@ -1,10 +1,10 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="uz">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MyInviter — Admin</title>
+<title>MyInviter — Taklifnoma yaratish</title>
 
 <style>
 *{
@@ -17,7 +17,7 @@ body{
   background:#f7f3ed;
   color:#40372f;
   font-family:Georgia,"Times New Roman",serif;
-  padding:25px 15px 50px;
+  padding:25px 15px 60px;
 }
 
 .container{
@@ -29,20 +29,20 @@ h1{
   text-align:center;
   font-size:34px;
   font-weight:normal;
-  margin:20px 0 10px;
+  margin:20px 0 8px;
 }
 
 .subtitle{
   text-align:center;
   color:#8d7a68;
-  font-size:14px;
+  font-size:13px;
   margin-bottom:30px;
 }
 
 .card{
   background:#fffdf9;
   padding:25px;
-  margin-bottom:20px;
+  margin-bottom:18px;
   border:1px solid #e5dbcf;
   box-shadow:0 5px 20px rgba(70,50,35,.06);
 }
@@ -89,7 +89,6 @@ input{
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:12px;
-  margin-bottom:20px;
 }
 
 .photo-option{
@@ -108,6 +107,7 @@ input{
 .photo-option input{
   position:absolute;
   opacity:0;
+  margin:0;
 }
 
 .photo-option input:checked + img{
@@ -118,6 +118,7 @@ input{
   border:1px dashed #bda990;
   padding:20px;
   text-align:center;
+  margin-top:18px;
 }
 
 .preview{
@@ -162,20 +163,24 @@ input{
   font-family:inherit;
 }
 
-.selected-music{
+.selected{
   margin-top:15px;
   padding:12px;
   background:#f7f3ed;
   text-align:center;
   font-size:13px;
-  color:#6d6259;
+}
+
+.small{
+  font-size:11px;
+  color:#9b836c;
+  line-height:1.6;
 }
 
 .message{
   text-align:center;
-  margin-top:15px;
-  font-size:14px;
-  line-height:1.6;
+  margin-top:18px;
+  line-height:1.7;
 }
 
 .success{
@@ -186,22 +191,27 @@ input{
   color:#9b4b4b;
 }
 
-.small{
-  font-size:11px;
-  color:#9b836c;
-  line-height:1.6;
+.result{
+  display:none;
+  text-align:center;
+}
+
+.link-box{
+  background:#f7f3ed;
+  border:1px solid #e1d6ca;
+  padding:15px;
+  margin:18px 0;
+  word-break:break-all;
+  font-size:13px;
+}
+
+.copy{
   margin-top:10px;
 }
 
 audio{
   width:100%;
   margin-top:15px;
-}
-
-@media(max-width:500px){
-  .photos{
-    gap:8px;
-  }
 }
 </style>
 </head>
@@ -213,8 +223,11 @@ audio{
 <h1>MyInviter</h1>
 
 <p class="subtitle">
-Taklifnoma boshqaruv paneli
+Sizning baxtli kuningiz uchun premium taklifnoma
 </p>
+
+
+<div id="formArea">
 
 
 <!-- TAKLIFNOMA -->
@@ -224,19 +237,19 @@ Taklifnoma boshqaruv paneli
 <h2>💍 Taklifnoma</h2>
 
 <label>Kuyov ismi</label>
-<input id="groomName" type="text" placeholder="Masalan: Aziz">
+<input id="groomName" placeholder="Masalan: Aziz">
 
 <label>Kelin ismi</label>
-<input id="brideName" type="text" placeholder="Masalan: Madina">
+<input id="brideName" placeholder="Masalan: Madina">
 
 <label>To‘y sanasi</label>
 <input id="eventDate" type="date">
 
 <label>To‘y joyi</label>
-<input id="venue" type="text" placeholder="Masalan: Ozbegim">
+<input id="venue" placeholder="Masalan: Ozbegim to‘yxonasi">
 
 <label>Manzil</label>
-<input id="address" type="text" placeholder="Masalan: Chirchiq">
+<input id="address" placeholder="Masalan: Toshkent">
 
 <label>Google Maps link</label>
 <input id="mapsUrl" type="url" placeholder="https://maps.google.com">
@@ -254,56 +267,52 @@ Taklifnoma boshqaruv paneli
 
 <label class="photo-option">
 <input
-  type="radio"
-  name="photoChoice"
-  value="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-  checked>
+type="radio"
+name="photoChoice"
+checked
+value="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80">
 <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80">
 </label>
 
 <label class="photo-option">
 <input
-  type="radio"
-  name="photoChoice"
-  value="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
+type="radio"
+name="photoChoice"
+value="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
 <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=800&q=80">
 </label>
 
 <label class="photo-option">
 <input
-  type="radio"
-  name="photoChoice"
-  value="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80">
+type="radio"
+name="photoChoice"
+value="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80">
 <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0e4a6?auto=format&fit=crop&w=800&q=80">
 </label>
 
 <label class="photo-option">
 <input
-  type="radio"
-  name="photoChoice"
-  value="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
+type="radio"
+name="photoChoice"
+value="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
 <img src="https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=800&q=80">
 </label>
 
 </div>
-
 
 <div class="upload-box">
 
 <label>📸 O‘z rasmini yuklash</label>
 
 <input
-  id="photoUpload"
-  type="file"
-  accept="image/*">
+id="photoUpload"
+type="file"
+accept="image/*">
 
-<img
-  id="preview"
-  class="preview">
+<img id="preview" class="preview">
 
 <p class="small">
-O‘z rasmingizni tanlasangiz,
-tayyor rasmlar o‘rniga shu rasm ishlatiladi.
+O‘z rasmingizni tanlasangiz, shu rasm ishlatiladi.
 </p>
 
 </div>
@@ -317,205 +326,166 @@ tayyor rasmlar o‘rniga shu rasm ishlatiladi.
 
 <h2>🎵 Musiqa</h2>
 
-<p class="small" style="margin-bottom:15px;">
+<p class="small">
 Tayyor qo‘shiqlardan birini tanlang yoki o‘z qo‘shig‘ingizni yuklang.
 </p>
 
-
-<!-- 1 -->
-
 <div class="music-option">
-
 <div class="music-row">
 
 <input
-  type="radio"
-  name="musicChoice"
-  value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Bojalar%20-%20To%20ylar%20muborak%203.mp3">
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Bojalar%20-%20To%20ylar%20muborak%203.mp3">
 
 <div class="music-name">
 Bojalar — To‘ylar muborak
 </div>
 
 <button
-  type="button"
-  class="play-btn"
-  onclick="previewMusic(this, 'https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Bojalar%20-%20To%20ylar%20muborak%203.mp3')">
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
 ▶️
 </button>
 
 </div>
-
 </div>
 
 
-<!-- 2 -->
-
 <div class="music-option">
-
 <div class="music-row">
 
 <input
-  type="radio"
-  name="musicChoice"
-  value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ed%20Sheeran%20-%20Perfect%20(Official%20Music%20Video).mp3">
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ed%20Sheeran%20-%20Perfect%20(Official%20Music%20Video).mp3">
 
 <div class="music-name">
 Ed Sheeran — Perfect
 </div>
 
 <button
-  type="button"
-  class="play-btn"
-  onclick="previewMusic(this, 'https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ed%20Sheeran%20-%20Perfect%20(Official%20Music%20Video).mp3')">
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
 ▶️
 </button>
 
 </div>
-
 </div>
 
 
-<!-- 3 -->
-
 <div class="music-option">
-
 <div class="music-row">
 
 <input
-  type="radio"
-  name="musicChoice"
-  value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Indila%20-%20Love%20Story%20(Official%20Music%20Video).mp3">
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Indila%20-%20Love%20Story%20(Official%20Music%20Video).mp3">
 
 <div class="music-name">
 Indila — Love Story
 </div>
 
 <button
-  type="button"
-  class="play-btn"
-  onclick="previewMusic(this, 'https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Indila%20-%20Love%20Story%20(Official%20Music%20Video).mp3')">
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
 ▶️
 </button>
 
 </div>
-
 </div>
 
 
-<!-- 4 -->
-
 <div class="music-option">
-
 <div class="music-row">
 
 <input
-  type="radio"
-  name="musicChoice"
-  value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/King%20Macarella,Dilnoz%20-%20Kelibdi%20(VIP%20mix)%202.mp3">
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/King%20Macarella,Dilnoz%20-%20Kelibdi%20(VIP%20mix)%202.mp3">
 
 <div class="music-name">
 King Macarella, Dilnoz — Kelibdi
 </div>
 
 <button
-  type="button"
-  class="play-btn"
-  onclick="previewMusic(this, 'https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/King%20Macarella,Dilnoz%20-%20Kelibdi%20(VIP%20mix)%202.mp3')">
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
 ▶️
 </button>
 
 </div>
-
 </div>
 
 
-<!-- 5 -->
-
 <div class="music-option">
-
 <div class="music-row">
 
 <input
-  type="radio"
-  name="musicChoice"
-  value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Sam%20Smith%20-%20Fire%20On%20Fire.mp3">
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Sam%20Smith%20-%20Fire%20On%20Fire.mp3">
 
 <div class="music-name">
 Sam Smith — Fire On Fire
 </div>
 
 <button
-  type="button"
-  class="play-btn"
-  onclick="previewMusic(this, 'https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Sam%20Smith%20-%20Fire%20On%20Fire.mp3')">
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
 ▶️
 </button>
 
 </div>
-
 </div>
 
 
-<!-- 6 -->
-
 <div class="music-option">
-
 <div class="music-row">
 
 <input
-  type="radio"
-  name="musicChoice"
-  value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ziyoda%20-%20Kelibdi%20%20%20%20%20Uzbek%20music.mp3">
+type="radio"
+name="musicChoice"
+value="https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ziyoda%20-%20Kelibdi%20%20%20%20%20Uzbek%20music.mp3">
 
 <div class="music-name">
 Ziyoda — Kelibdi
 </div>
 
 <button
-  type="button"
-  class="play-btn"
-  onclick="previewMusic(this, 'https://bhqdkzeueunfhompvywm.supabase.co/storage/v1/object/public/invitation-music/Ziyoda%20-%20Kelibdi%20%20%20%20%20Uzbek%20music.mp3')">
+type="button"
+class="play-btn"
+onclick="previewMusic(this,this.previousElementSibling.previousElementSibling.value)">
 ▶️
 </button>
 
 </div>
-
 </div>
 
 
-<div
-  id="selectedMusic"
-  class="selected-music">
-
+<div id="selectedMusic" class="selected">
 Musiqa tanlanmagan
-
 </div>
 
-
-<audio
-  id="musicPreview"
-  controls>
-</audio>
-
-
-<br>
+<audio id="musicPreview" controls></audio>
 
 
 <div class="upload-box">
 
-<label>
-📱 O‘z qo‘shig‘ingizni yuklang
-</label>
+<label>📱 O‘z qo‘shig‘ingizni yuklang</label>
 
 <input
-  id="musicUpload"
-  type="file"
-  accept="audio/mpeg,audio/mp3,audio/*">
+id="musicUpload"
+type="file"
+accept="audio/*,.mp3">
 
 <p class="small">
-MP3 faylni tanlang. Yuklangandan keyin
-u avtomatik ravishda taklifnomaga biriktiriladi.
+MP3 fayl 30 MB dan kichik bo‘lishi kerak.
 </p>
 
 </div>
@@ -523,23 +493,58 @@ u avtomatik ravishda taklifnomaga biriktiriladi.
 </div>
 
 
-<!-- SAQLASH -->
-
 <div class="card">
 
 <button
-  class="button"
-  type="button"
-  onclick="saveInvitation()">
+class="button"
+onclick="createInvitation()">
 
-💾 TAKLIFNOMANI SAQLASH
+💌 TAKLIFNOMANI YARATISH
 
 </button>
 
-<div
-  id="message"
-  class="message">
+<div id="message" class="message"></div>
+
 </div>
+
+</div>
+
+
+<!-- NATIJA -->
+
+<div id="result" class="card result">
+
+<h2>🎉 Taklifnomangiz tayyor!</h2>
+
+<p class="small">
+Quyidagi linkni mehmonlaringizga yuborishingiz mumkin.
+</p>
+
+<div id="invitationLink" class="link-box"></div>
+
+<button
+class="button"
+onclick="copyLink()">
+
+📋 LINKNI NUSXALASH
+
+</button>
+
+<br>
+
+<a
+id="openLink"
+class="button"
+target="_blank">
+
+💌 TAKLIFNOMANI KO‘RISH
+
+</a>
+
+<p
+id="copyMessage"
+class="message success">
+</p>
 
 </div>
 
@@ -548,726 +553,399 @@ u avtomatik ravishda taklifnomaga biriktiriladi.
 
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
-
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
-const INVITATION_ID = 1;
-
-
-/* =========================
-   VARIABLES
-========================= */
-
 let uploadedPhoto = null;
 let uploadedMusic = null;
+let finalLink = "";
 
 
-/* =========================
-   PHOTO UPLOAD SELECT
-========================= */
+/* PHOTO */
 
 document
 .getElementById("photoUpload")
-.addEventListener(
-  "change",
-  function(event){
+.addEventListener("change",function(e){
 
-    const file =
-      event.target.files[0];
+const file=e.target.files[0];
 
-    if(!file){
-      return;
-    }
+if(!file)return;
 
-    if(!file.type.startsWith("image/")){
+if(!file.type.startsWith("image/")){
+alert("Faqat rasm tanlang.");
+return;
+}
 
-      showMessage(
-        "Faqat rasm tanlang.",
-        true
-      );
+if(file.size>10*1024*1024){
+alert("Rasm 10 MB dan kichik bo‘lishi kerak.");
+return;
+}
 
-      return;
-    }
+uploadedPhoto=file;
 
-    if(file.size > 10 * 1024 * 1024){
+const preview=document.getElementById("preview");
 
-      showMessage(
-        "Rasm 10 MB dan kichik bo‘lishi kerak.",
-        true
-      );
+preview.src=URL.createObjectURL(file);
+preview.style.display="block";
 
-      return;
-    }
-
-    uploadedPhoto = file;
-
-    const preview =
-      document.getElementById("preview");
-
-    preview.src =
-      URL.createObjectURL(file);
-
-    preview.style.display =
-      "block";
-
-  }
-);
+});
 
 
-/* =========================
-   MUSIC UPLOAD SELECT
-========================= */
+/* MUSIC */
 
 document
 .getElementById("musicUpload")
-.addEventListener(
-  "change",
-  function(event){
+.addEventListener("change",function(e){
 
-    const file =
-      event.target.files[0];
+const file=e.target.files[0];
 
-    if(!file){
-      return;
-    }
+if(!file)return;
 
-    if(
-      !file.type.startsWith("audio/") &&
-      !file.name.toLowerCase().endsWith(".mp3")
-    ){
-
-      showMessage(
-        "Faqat MP3 yoki audio fayl tanlang.",
-        true
-      );
-
-      return;
-    }
-
-    if(file.size > 30 * 1024 * 1024){
-
-      showMessage(
-        "Qo‘shiq 30 MB dan kichik bo‘lishi kerak.",
-        true
-      );
-
-      return;
-    }
-
-    uploadedMusic = file;
-
-    document
-      .querySelectorAll(
-        'input[name="musicChoice"]'
-      )
-      .forEach(
-        function(input){
-          input.checked = false;
-        }
-      );
-
-    const selected =
-      document.getElementById(
-        "selectedMusic"
-      );
-
-    selected.innerText =
-      "📱 Tanlangan fayl: " +
-      file.name;
-
-  }
-);
-
-
-/* =========================
-   MUSIC PREVIEW
-========================= */
-
-function previewMusic(
-  button,
-  url
-){
-
-  const audio =
-    document.getElementById(
-      "musicPreview"
-    );
-
-  if(
-    audio.src === url &&
-    !audio.paused
-  ){
-
-    audio.pause();
-
-    button.innerText =
-      "▶️";
-
-    return;
-  }
-
-
-  document
-    .querySelectorAll(
-      ".play-btn"
-    )
-    .forEach(
-      function(btn){
-        btn.innerText =
-          "▶️";
-      }
-    );
-
-
-  audio.src = url;
-
-  audio.load();
-
-  audio.play()
-    .then(
-      function(){
-        button.innerText =
-          "⏸";
-      }
-    )
-    .catch(
-      function(error){
-        console.error(
-          "Preview error:",
-          error
-        );
-      }
-    );
-
-
-  const selected =
-    document.getElementById(
-      "selectedMusic"
-    );
-
-  selected.innerText =
-    "🎵 Tanlash uchun radio tugmasini bosing.";
-
+if(file.size>30*1024*1024){
+alert("Qo‘shiq 30 MB dan kichik bo‘lishi kerak.");
+return;
 }
 
-
-/* =========================
-   RADIO CHANGE
-========================= */
+uploadedMusic=file;
 
 document
-.querySelectorAll(
-  'input[name="musicChoice"]'
-)
-.forEach(
-  function(input){
+.querySelectorAll('input[name="musicChoice"]')
+.forEach(x=>x.checked=false);
 
-    input.addEventListener(
-      "change",
-      function(){
+document.getElementById("selectedMusic").innerText=
+"📱 "+file.name;
 
-        uploadedMusic =
-          null;
+});
 
-        document
-          .getElementById(
-            "musicUpload"
-          )
-          .value = "";
 
+document
+.querySelectorAll('input[name="musicChoice"]')
+.forEach(input=>{
 
-        const selected =
-          document.getElementById(
-            "selectedMusic"
-          );
+input.addEventListener("change",function(){
 
+uploadedMusic=null;
 
-        selected.innerText =
-          "🎵 Tanlangan: " +
-          this.parentElement
-            .querySelector(
-              ".music-name"
-            )
-            .innerText;
+document.getElementById("musicUpload").value="";
 
-      }
-    );
+document.getElementById("selectedMusic").innerText=
+"🎵 Tanlangan: "+
+this.parentElement.querySelector(".music-name").innerText;
 
-  }
-);
+});
 
+});
 
-/* =========================
-   SAVE INVITATION
-========================= */
 
-async function saveInvitation(){
+function previewMusic(button,url){
 
-  const messageBox =
-    document.getElementById(
-      "message"
-    );
+const audio=document.getElementById("musicPreview");
 
+document
+.querySelectorAll(".play-btn")
+.forEach(x=>x.innerText="▶️");
 
-  messageBox.className =
-    "message";
+audio.src=url;
+audio.load();
 
-
-  messageBox.innerText =
-    "Saqlanmoqda...";
-
-
-  try{
-
-    const groomName =
-      document
-      .getElementById("groomName")
-      .value
-      .trim();
-
-
-    const brideName =
-      document
-      .getElementById("brideName")
-      .value
-      .trim();
-
-
-    const eventDate =
-      document
-      .getElementById("eventDate")
-      .value;
-
-
-    const venue =
-      document
-      .getElementById("venue")
-      .value
-      .trim();
-
-
-    const address =
-      document
-      .getElementById("address")
-      .value
-      .trim();
-
-
-    const mapsUrl =
-      document
-      .getElementById("mapsUrl")
-      .value
-      .trim();
-
-
-    /* =========================
-       PHOTO
-    ========================= */
-
-    let photoUrl =
-      document
-      .querySelector(
-        'input[name="photoChoice"]:checked'
-      )
-      .value;
-
-
-    /* =========================
-       UPLOAD CUSTOM PHOTO
-    ========================= */
-
-    if(uploadedPhoto){
-
-      const extension =
-        uploadedPhoto.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-      const fileName =
-        "invitation-" +
-        INVITATION_ID +
-        "-" +
-        Date.now() +
-        "." +
-        extension;
-
-
-      const uploadResponse =
-        await fetch(
-
-          SUPABASE_URL +
-          "/storage/v1/object/invitation-photos/" +
-          fileName,
-
-          {
-
-            method:"POST",
-
-            headers:{
-
-              "apikey":
-                SUPABASE_KEY,
-
-              "Authorization":
-                "Bearer " +
-                SUPABASE_KEY,
-
-              "Content-Type":
-                uploadedPhoto.type,
-
-              "x-upsert":
-                "true"
-
-            },
-
-            body:
-              uploadedPhoto
-
-          }
-
-        );
-
-
-      if(!uploadResponse.ok){
-
-        const error =
-          await uploadResponse
-          .json()
-          .catch(
-            function(){
-              return {};
-            }
-          );
-
-
-        throw new Error(
-          error.message ||
-          "Rasm yuklanmadi"
-        );
-
-      }
-
-
-      photoUrl =
-        SUPABASE_URL +
-        "/storage/v1/object/public/invitation-photos/" +
-        fileName;
-
-    }
-
-
-    /* =========================
-       MUSIC
-    ========================= */
-
-    let musicUrl = "";
-
-
-    const selectedMusic =
-      document.querySelector(
-        'input[name="musicChoice"]:checked'
-      );
-
-
-    if(selectedMusic){
-
-      musicUrl =
-        selectedMusic.value;
-
-    }
-
-
-    /* =========================
-       UPLOAD CUSTOM MUSIC
-    ========================= */
-
-    if(uploadedMusic){
-
-      const extension =
-        uploadedMusic.name
-        .split(".")
-        .pop()
-        .toLowerCase();
-
-
-      const fileName =
-        "invitation-" +
-        INVITATION_ID +
-        "-" +
-        Date.now() +
-        "." +
-        extension;
-
-
-      const uploadResponse =
-        await fetch(
-
-          SUPABASE_URL +
-          "/storage/v1/object/invitation-music/" +
-          fileName,
-
-          {
-
-            method:"POST",
-
-            headers:{
-
-              "apikey":
-                SUPABASE_KEY,
-
-              "Authorization":
-                "Bearer " +
-                SUPABASE_KEY,
-
-              "Content-Type":
-                uploadedMusic.type ||
-                "audio/mpeg",
-
-              "x-upsert":
-                "true"
-
-            },
-
-            body:
-              uploadedMusic
-
-          }
-
-        );
-
-
-      if(!uploadResponse.ok){
-
-        const error =
-          await uploadResponse
-          .json()
-          .catch(
-            function(){
-              return {};
-            }
-          );
-
-
-        throw new Error(
-          error.message ||
-          "Qo‘shiq yuklanmadi"
-        );
-
-      }
-
-
-      musicUrl =
-        SUPABASE_URL +
-        "/storage/v1/object/public/invitation-music/" +
-        fileName;
-
-    }
-
-
-    /* =========================
-       DATA
-    ========================= */
-
-    const updateData = {
-
-      groom_name:
-        groomName,
-
-      bride_name:
-        brideName,
-
-      event_date:
-        eventDate,
-
-      venue:
-        venue,
-
-      address:
-        address,
-
-      maps_url:
-        mapsUrl,
-
-      photo_url:
-        photoUrl,
-
-      music_url:
-        musicUrl
-
-    };
-
-
-    console.log(
-      "SAQLANAYOTGAN DATA:",
-      updateData
-    );
-
-
-    /* =========================
-       UPDATE
-    ========================= */
-
-    const response =
-      await fetch(
-
-        SUPABASE_URL +
-        "/rest/v1/invitations?id=eq." +
-        INVITATION_ID,
-
-        {
-
-          method:"PATCH",
-
-          headers:{
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=representation"
-
-          },
-
-          body:
-            JSON.stringify(
-              updateData
-            )
-
-        }
-
-      );
-
-
-    const text =
-      await response.text();
-
-
-    console.log(
-      "SUPABASE:",
-      response.status,
-      text
-    );
-
-
-    if(!response.ok){
-
-      let errorData = {};
-
-      try{
-
-        errorData =
-          JSON.parse(text);
-
-      }catch(e){}
-
-
-      throw new Error(
-        errorData.message ||
-        errorData.hint ||
-        text ||
-        "Saqlashda xatolik"
-      );
-
-    }
-
-
-    let result = [];
-
-    try{
-
-      result =
-        JSON.parse(text);
-
-    }catch(e){}
-
-
-    if(
-      !Array.isArray(result) ||
-      result.length === 0
-    ){
-
-      throw new Error(
-        "Taklifnoma yangilanmadi."
-      );
-
-    }
-
-
-    messageBox.className =
-      "message success";
-
-
-    messageBox.innerText =
-      "✅ Taklifnoma muvaffaqiyatli saqlandi!";
-
-
-    uploadedPhoto =
-      null;
-
-    uploadedMusic =
-      null;
-
-
-  }catch(error){
-
-    console.error(
-      "SAVE ERROR:",
-      error
-    );
-
-
-    messageBox.className =
-      "message error";
-
-
-    messageBox.innerText =
-      "❌ Xatolik: " +
-      error.message;
-
-  }
+audio.play()
+.then(()=>{
+button.innerText="⏸";
+})
+.catch(console.error);
 
 }
 
 
-/* =========================
-   MESSAGE
-========================= */
+/* CREATE */
 
-function showMessage(
-  text,
-  isError
-){
+async function createInvitation(){
 
-  const box =
-    document.getElementById(
-      "message"
-    );
+const message=document.getElementById("message");
+
+message.className="message";
+message.innerText="⏳ Taklifnoma yaratilmoqda...";
 
 
-  box.className =
-    isError
-      ? "message error"
-      : "message";
+try{
+
+const groom=document.getElementById("groomName").value.trim();
+const bride=document.getElementById("brideName").value.trim();
+const eventDate=document.getElementById("eventDate").value;
+const venue=document.getElementById("venue").value.trim();
+const address=document.getElementById("address").value.trim();
+const mapsUrl=document.getElementById("mapsUrl").value.trim();
+
+if(!groom || !bride || !eventDate){
+
+throw new Error(
+"Kuyov, kelin ismi va to‘y sanasini kiriting."
+);
+
+}
 
 
-  box.innerText =
-    text;
+/* PHOTO */
+
+let photoUrl=
+document.querySelector(
+'input[name="photoChoice"]:checked'
+).value;
+
+
+if(uploadedPhoto){
+
+const ext=
+uploadedPhoto.name
+.split(".")
+.pop()
+.toLowerCase();
+
+const fileName=
+"invitation-"+Date.now()+"."+ext;
+
+const upload=
+await fetch(
+SUPABASE_URL+
+"/storage/v1/object/invitation-photos/"+
+fileName,
+{
+method:"POST",
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:"Bearer "+SUPABASE_KEY,
+"Content-Type":uploadedPhoto.type,
+"x-upsert":"true"
+},
+body:uploadedPhoto
+}
+);
+
+if(!upload.ok){
+
+const err=await upload.json().catch(()=>({}));
+
+throw new Error(
+err.message||"Rasm yuklanmadi"
+);
+
+}
+
+photoUrl=
+SUPABASE_URL+
+"/storage/v1/object/public/invitation-photos/"+
+fileName;
+
+}
+
+
+/* MUSIC */
+
+let musicUrl="";
+
+const selectedMusic=
+document.querySelector(
+'input[name="musicChoice"]:checked'
+);
+
+if(selectedMusic){
+
+musicUrl=selectedMusic.value;
+
+}
+
+
+if(uploadedMusic){
+
+const ext=
+uploadedMusic.name
+.split(".")
+.pop()
+.toLowerCase();
+
+const fileName=
+"invitation-"+Date.now()+"."+ext;
+
+const upload=
+await fetch(
+SUPABASE_URL+
+"/storage/v1/object/invitation-music/"+
+fileName,
+{
+method:"POST",
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:"Bearer "+SUPABASE_KEY,
+"Content-Type":
+uploadedMusic.type||"audio/mpeg",
+"x-upsert":"true"
+},
+body:uploadedMusic
+}
+);
+
+if(!upload.ok){
+
+const err=await upload.json().catch(()=>({}));
+
+throw new Error(
+err.message||"Qo‘shiq yuklanmadi"
+);
+
+}
+
+musicUrl=
+SUPABASE_URL+
+"/storage/v1/object/public/invitation-music/"+
+fileName;
+
+}
+
+
+/* RANDOM SLUG */
+
+const slug=
+Math.random()
+.toString(36)
+.substring(2,8)+
+Date.now()
+.toString(36)
+.slice(-3);
+
+
+/* CREATE DATABASE ROW */
+
+const response=
+await fetch(
+SUPABASE_URL+
+"/rest/v1/invitations",
+{
+method:"POST",
+
+headers:{
+apikey:SUPABASE_KEY,
+Authorization:"Bearer "+SUPABASE_KEY,
+"Content-Type":"application/json",
+Prefer:"return=representation"
+},
+
+body:JSON.stringify({
+
+slug:slug,
+
+groom_name:groom,
+
+bride_name:bride,
+
+event_date:eventDate,
+
+venue:venue,
+
+address:address,
+
+maps_url:mapsUrl,
+
+photo_url:photoUrl,
+
+music_url:musicUrl
+
+})
+
+}
+);
+
+
+const text=await response.text();
+
+
+if(!response.ok){
+
+let error={};
+
+try{
+error=JSON.parse(text);
+}catch(e){}
+
+throw new Error(
+error.message||
+error.hint||
+text||
+"Taklifnoma yaratilmadi"
+);
+
+}
+
+
+const data=JSON.parse(text);
+
+if(!data.length){
+
+throw new Error(
+"Taklifnoma yaratilmadi."
+);
+
+}
+
+
+/* FINAL LINK */
+
+finalLink=
+window.location.origin+
+"/i/"+
+slug;
+
+
+/* SHOW RESULT */
+
+document.getElementById("formArea").style.display="none";
+
+document.getElementById("result").style.display="block";
+
+document.getElementById("invitationLink").innerText=
+finalLink;
+
+document.getElementById("openLink").href=
+finalLink;
+
+message.innerText="";
+
+
+}catch(error){
+
+console.error(error);
+
+message.className="message error";
+
+message.innerText=
+"❌ "+error.message;
+
+}
+
+}
+
+
+/* COPY */
+
+async function copyLink(){
+
+try{
+
+await navigator.clipboard.writeText(finalLink);
+
+document.getElementById("copyMessage").innerText=
+"❤️ Link nusxalandi!";
+
+}catch(e){
+
+prompt(
+"Linkni nusxalang:",
+finalLink
+);
+
+}
 
 }
 
