@@ -1,5 +1,6 @@
 const BOT_TOKEN = process.env.BOT_TOKEN;
 const ADMIN_ID = process.env.ADMIN_ID;
+
 const SITE_URL =
   process.env.SITE_URL || "https://myinviter.vercel.app";
 
@@ -10,14 +11,22 @@ const SUPABASE_SERVICE_ROLE_KEY =
 const TELEGRAM_API =
   `https://api.telegram.org/bot${BOT_TOKEN}`;
 
+
+/* =====================================================
+   TELEGRAM
+===================================================== */
+
 async function telegram(method, data) {
+
   const response = await fetch(
     `${TELEGRAM_API}/${method}`,
     {
       method: "POST",
+
       headers: {
         "Content-Type": "application/json"
       },
+
       body: JSON.stringify(data)
     }
   );
@@ -25,211 +34,330 @@ async function telegram(method, data) {
   return response.json();
 }
 
-async function sendMessage(chatId, text, extra = {}) {
-  return telegram("sendMessage", {
-    chat_id: chatId,
-    text,
-    parse_mode: "HTML",
-    ...extra
-  });
+
+async function sendMessage(
+  chatId,
+  text,
+  extra = {}
+) {
+
+  return telegram(
+    "sendMessage",
+    {
+      chat_id: chatId,
+      text,
+      parse_mode: "HTML",
+      ...extra
+    }
+  );
+
 }
 
-async function supabaseRequest(path, options = {}) {
+
+/* =====================================================
+   SUPABASE
+===================================================== */
+
+async function supabaseRequest(
+  path,
+  options = {}
+) {
+
   return fetch(
     `${SUPABASE_URL}/rest/v1/${path}`,
     {
+
       ...options,
+
       headers: {
-        "apikey": SUPABASE_SERVICE_ROLE_KEY,
+
+        "apikey":
+          SUPABASE_SERVICE_ROLE_KEY,
+
         "Authorization":
           `Bearer ${SUPABASE_SERVICE_ROLE_KEY}`,
-        "Content-Type": "application/json",
+
+        "Content-Type":
+          "application/json",
+
         ...(options.headers || {})
+
       }
+
     }
   );
+
 }
 
+
+/* =====================================================
+   MAIN MENU
+===================================================== */
+
 function mainMenu() {
+
   return {
+
     inline_keyboard: [
+
       [
         {
           text: "💳 To‘lov qilish",
           callback_data: "payment"
         }
       ],
+
       [
         {
           text: "📸 Chek yuborish",
           callback_data: "receipt"
         }
       ],
+
       [
         {
           text: "🌐 Saytga qaytish",
           url: SITE_URL
         }
       ]
+
     ]
+
   };
+
 }
 
-export default async function handler(req, res) {
+
+/* =====================================================
+   HANDLER
+===================================================== */
+
+export default async function handler(
+  req,
+  res
+) {
 
   if (req.method !== "POST") {
+
     return res.status(200).json({
+
       ok: true,
-      message: "MyInviter bot ishlayapti"
+
+      message:
+        "MyInviter bot ishlayapti"
+
     });
+
   }
+
 
   try {
 
     const update = req.body;
 
-    /*
-    ============================
-    START
-    ============================
-    */
 
-    if (update.message?.text === "/start") {
+    /* =================================================
+       START
+    ================================================= */
+
+    if (
+      update.message?.text === "/start"
+    ) {
 
       const chatId =
         update.message.chat.id;
 
+
       await sendMessage(
+
         chatId,
 
         "💌 <b>MyInviter</b> botiga xush kelibsiz!\n\n" +
+
         "Taklifnoma yaratish uchun avval to‘lovni amalga oshiring.\n\n" +
+
         "Quyidagi tugmalardan foydalaning:",
 
         {
-          reply_markup: mainMenu()
+
+          reply_markup:
+            mainMenu()
+
         }
+
       );
+
 
       return res.status(200).json({
         ok: true
       });
+
     }
 
 
-    /*
-    ============================
-    PAYMENT BUTTON
-    ============================
-    */
+    /* =================================================
+       PAYMENT
+    ================================================= */
 
     if (
-      update.callback_query?.data === "payment"
+      update.callback_query?.data ===
+      "payment"
     ) {
 
       const chatId =
         update.callback_query.message.chat.id;
 
+
       await telegram(
+
         "answerCallbackQuery",
+
         {
+
           callback_query_id:
             update.callback_query.id
+
         }
+
       );
 
+
       await sendMessage(
+
         chatId,
 
         "💳 <b>To‘lov</b>\n\n" +
 
         "Taklifnoma narxi: <b>199 000 so‘m</b>\n\n" +
 
-        "Karta raqami:\n" +
+        "Karta raqami:\n\n" +
 
         "<code>9860 6067 4864 5904</code>\n\n" +
 
         "To‘lovni amalga oshirgandan so‘ng " +
+
         "chekni shu botga yuboring.",
 
         {
+
           reply_markup: {
+
             inline_keyboard: [
+
               [
+
                 {
-                  text: "📸 Chek yuborish",
-                  callback_data: "receipt"
+
+                  text:
+                    "📸 Chek yuborish",
+
+                  callback_data:
+                    "receipt"
+
                 }
+
               ],
+
               [
+
                 {
-                  text: "🌐 Saytga qaytish",
-                  url: SITE_URL
+
+                  text:
+                    "🌐 Saytga qaytish",
+
+                  url:
+                    SITE_URL
+
                 }
+
               ]
+
             ]
+
           }
+
         }
+
       );
+
 
       return res.status(200).json({
         ok: true
       });
+
     }
 
 
-    /*
-    ============================
-    RECEIPT BUTTON
-    ============================
-    */
+    /* =================================================
+       RECEIPT BUTTON
+    ================================================= */
 
     if (
-      update.callback_query?.data === "receipt"
+      update.callback_query?.data ===
+      "receipt"
     ) {
 
       const chatId =
         update.callback_query.message.chat.id;
 
+
       await telegram(
+
         "answerCallbackQuery",
+
         {
+
           callback_query_id:
             update.callback_query.id
+
         }
+
       );
 
+
       await sendMessage(
+
         chatId,
 
         "📸 <b>Chekni yuboring</b>\n\n" +
+
         "To‘lov qilganingizdan keyin " +
+
         "bank ilovasidagi chekni rasm sifatida " +
+
         "shu yerga yuboring."
+
       );
+
 
       return res.status(200).json({
         ok: true
       });
+
     }
 
 
-    /*
-    ============================
-    PHOTO / RECEIPT
-    ============================
-    */
+    /* =================================================
+       PHOTO / RECEIPT
+    ================================================= */
 
-    if (update.message?.photo) {
+    if (
+      update.message?.photo
+    ) {
 
       const chatId =
         update.message.chat.id;
 
+
       const photos =
         update.message.photo;
 
+
       const biggestPhoto =
-        photos[photos.length - 1];
+        photos[
+          photos.length - 1
+        ];
+
 
       const caption =
         update.message.caption ||
@@ -237,61 +365,88 @@ export default async function handler(req, res) {
 
 
       /*
-      Save pending payment
+      Oldingi pending paymentlarni
+      hisobga olmaymiz.
+
+      Yangi payment yaratamiz.
       */
 
       const paymentResponse =
         await supabaseRequest(
+
           "payments",
+
           {
+
             method: "POST",
 
             headers: {
+
               "Prefer":
                 "return=minimal"
+
             },
 
-            body: JSON.stringify({
-              telegram_user_id:
-                chatId,
+            body:
+              JSON.stringify({
 
-              amount:
-                199000,
+                telegram_user_id:
+                  chatId,
 
-              status:
-                "pending"
-            })
+                amount:
+                  199000,
+
+                status:
+                  "pending",
+
+                access_token:
+                  null
+
+              })
+
           }
+
         );
 
 
-      if (!paymentResponse.ok) {
+      if (
+        !paymentResponse.ok
+      ) {
 
         console.error(
+
           "PAYMENT INSERT ERROR:",
+
           await paymentResponse.text()
+
         );
 
       }
 
 
       await sendMessage(
+
         chatId,
 
         "📸 <b>Chekingiz qabul qilindi.</b>\n\n" +
+
         "⏳ To‘lov tekshirilmoqda..."
+
       );
 
 
-      /*
-      Send receipt to admin
-      */
+      /* ===============================================
+         ADMIN
+      =============================================== */
 
       if (ADMIN_ID) {
 
         await telegram(
+
           "sendPhoto",
+
           {
+
             chat_id:
               ADMIN_ID,
 
@@ -312,38 +467,54 @@ export default async function handler(req, res) {
               "HTML",
 
             reply_markup: {
+
               inline_keyboard: [
+
                 [
+
                   {
-                    text: "✅ Tasdiqlash",
+
+                    text:
+                      "✅ Tasdiqlash",
+
                     callback_data:
                       `approve_${chatId}`
+
                   },
 
                   {
-                    text: "❌ Rad etish",
+
+                    text:
+                      "❌ Rad etish",
+
                     callback_data:
                       `reject_${chatId}`
+
                   }
+
                 ]
+
               ]
+
             }
+
           }
+
         );
 
       }
 
+
       return res.status(200).json({
         ok: true
       });
+
     }
 
 
-    /*
-    ============================
-    APPROVE
-    ============================
-    */
+    /* =================================================
+       APPROVE
+    ================================================= */
 
     if (
       update.callback_query?.data?.startsWith(
@@ -354,8 +525,14 @@ export default async function handler(req, res) {
       const query =
         update.callback_query;
 
+
       const adminId =
         query.message.chat.id;
+
+
+      /* ===============================================
+         ADMIN CHECK
+      =============================================== */
 
       if (
         String(adminId) !==
@@ -363,21 +540,32 @@ export default async function handler(req, res) {
       ) {
 
         await telegram(
+
           "answerCallbackQuery",
+
           {
+
             callback_query_id:
               query.id,
 
             text:
               "Siz admin emassiz."
+
           }
+
         );
+
 
         return res.status(200).json({
           ok: true
         });
+
       }
 
+
+      /* ===============================================
+         USER ID
+      =============================================== */
 
       const userId =
         query.data.replace(
@@ -386,19 +574,28 @@ export default async function handler(req, res) {
         );
 
 
-      /*
-      Find pending payment
-      */
+      /* ===============================================
+         FIND PAYMENT
+      =============================================== */
 
       const findResponse =
         await supabaseRequest(
+
           `payments?telegram_user_id=eq.${userId}` +
+
           `&status=eq.pending` +
+
           `&order=created_at.desc` +
+
           `&limit=1`,
+
           {
-            method: "GET"
+
+            method:
+              "GET"
+
           }
+
         );
 
 
@@ -411,15 +608,36 @@ export default async function handler(req, res) {
         payments.length === 0
       ) {
 
+        await telegram(
+
+          "answerCallbackQuery",
+
+          {
+
+            callback_query_id:
+              query.id,
+
+            text:
+              "Pending to‘lov topilmadi."
+
+          }
+
+        );
+
+
         await sendMessage(
+
           adminId,
 
           "⚠️ Bu foydalanuvchi uchun pending to‘lov topilmadi."
+
         );
+
 
         return res.status(200).json({
           ok: true
         });
+
       }
 
 
@@ -427,113 +645,182 @@ export default async function handler(req, res) {
         payments[0];
 
 
-      /*
-      Mark as PAID
-      */
+      /* ===============================================
+         ACCESS TOKEN
+      =============================================== */
+
+      const accessToken =
+        crypto.randomUUID();
+
+
+      /* ===============================================
+         MARK AS PAID
+      =============================================== */
 
       const updateResponse =
         await supabaseRequest(
+
           `payments?id=eq.${payment.id}`,
+
           {
-            method: "PATCH",
+
+            method:
+              "PATCH",
 
             headers: {
+
               "Prefer":
                 "return=minimal"
+
             },
 
-            body: JSON.stringify({
-              status:
-                "paid",
+            body:
 
-              approved_at:
-                new Date().toISOString()
-            })
+              JSON.stringify({
+
+                status:
+                  "paid",
+
+                approved_at:
+                  new Date().toISOString(),
+
+                access_token:
+                  accessToken
+
+              })
+
           }
+
         );
 
 
-      if (!updateResponse.ok) {
+      if (
+        !updateResponse.ok
+      ) {
 
         const errorText =
           await updateResponse.text();
 
+
         console.error(
+
           "PAYMENT UPDATE ERROR:",
+
           errorText
+
         );
+
 
         throw new Error(
           "To‘lov statusini saqlab bo‘lmadi."
         );
+
       }
 
 
-      /*
-      Answer admin button
-      */
+      /* ===============================================
+         ADMIN BUTTON
+      =============================================== */
 
       await telegram(
+
         "answerCallbackQuery",
+
         {
+
           callback_query_id:
             query.id,
 
           text:
             "To‘lov tasdiqlandi ✅"
+
         }
+
       );
 
 
-      /*
-      User gets access
-      */
+      /* ===============================================
+         CREATE URL
+      =============================================== */
+
+      const createUrl =
+        `${SITE_URL}/create.html?token=${encodeURIComponent(accessToken)}`;
+
+
+      /* ===============================================
+         USER ACCESS
+      =============================================== */
 
       await sendMessage(
+
         userId,
 
         "✅ <b>To‘lovingiz tasdiqlandi!</b>\n\n" +
 
-        "Endi taklifnomangizni yaratishingiz mumkin.",
+        "Endi taklifnomangizni yaratishingiz mumkin.\n\n" +
+
+        "Quyidagi tugmani bosing:",
 
         {
+
           reply_markup: {
+
             inline_keyboard: [
+
               [
+
                 {
+
                   text:
                     "💌 Taklifnoma yaratish",
 
                   url:
-                    `${SITE_URL}/create.html`
+                    createUrl
+
                 }
+
               ]
+
             ]
+
           }
+
         }
+
       );
 
 
+      /* ===============================================
+         ADMIN MESSAGE
+      =============================================== */
+
       await sendMessage(
+
         adminId,
 
         `✅ <b>To‘lov tasdiqlandi.</b>\n\n` +
+
         `👤 User ID: <code>${userId}</code>\n` +
+
         `💰 199 000 so‘m\n` +
-        `🗄 Status: <b>paid</b>`,
+
+        `🗄 Status: <b>paid</b>\n\n` +
+
+        `🔐 Access token yaratildi.`
+
       );
+
 
       return res.status(200).json({
         ok: true
       });
+
     }
 
 
-    /*
-    ============================
-    REJECT
-    ============================
-    */
+    /* =================================================
+       REJECT
+    ================================================= */
 
     if (
       update.callback_query?.data?.startsWith(
@@ -544,8 +831,10 @@ export default async function handler(req, res) {
       const query =
         update.callback_query;
 
+
       const adminId =
         query.message.chat.id;
+
 
       if (
         String(adminId) !==
@@ -555,6 +844,7 @@ export default async function handler(req, res) {
         return res.status(200).json({
           ok: true
         });
+
       }
 
 
@@ -565,19 +855,28 @@ export default async function handler(req, res) {
         );
 
 
-      /*
-      Find pending payment
-      */
+      /* ===============================================
+         FIND PAYMENT
+      =============================================== */
 
       const findResponse =
         await supabaseRequest(
+
           `payments?telegram_user_id=eq.${userId}` +
+
           `&status=eq.pending` +
+
           `&order=created_at.desc` +
+
           `&limit=1`,
+
           {
-            method: "GET"
+
+            method:
+              "GET"
+
           }
+
         );
 
 
@@ -595,57 +894,86 @@ export default async function handler(req, res) {
 
 
         await supabaseRequest(
+
           `payments?id=eq.${payment.id}`,
+
           {
-            method: "PATCH",
+
+            method:
+              "PATCH",
 
             headers: {
+
               "Prefer":
                 "return=minimal"
+
             },
 
-            body: JSON.stringify({
-              status:
-                "rejected"
-            })
+            body:
+
+              JSON.stringify({
+
+                status:
+                  "rejected"
+
+              })
+
           }
+
         );
+
       }
 
 
       await telegram(
+
         "answerCallbackQuery",
+
         {
+
           callback_query_id:
             query.id,
 
           text:
             "To‘lov rad etildi ❌"
+
         }
+
       );
 
 
       await sendMessage(
+
         userId,
 
         "❌ <b>To‘lov tasdiqlanmadi.</b>\n\n" +
+
         "Iltimos, to‘lov chekini qayta yuboring."
+
       );
 
 
       await sendMessage(
+
         adminId,
 
         `❌ To‘lov rad etildi.\n\n` +
+
         `👤 User ID: <code>${userId}</code>`
+
       );
 
 
       return res.status(200).json({
         ok: true
       });
+
     }
 
+
+    /* =================================================
+       DEFAULT
+    ================================================= */
 
     return res.status(200).json({
       ok: true
@@ -659,9 +987,16 @@ export default async function handler(req, res) {
       error
     );
 
+
     return res.status(500).json({
+
       ok: false,
-      error: error.message
+
+      error:
+        error.message
+
     });
+
   }
+
 }
