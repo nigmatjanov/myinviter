@@ -253,7 +253,7 @@ body{
   opacity:0;
 
   animation:
-    sceneIn 1.2s .5s ease-out forwards;
+    sceneIn 1s .5s ease-out forwards;
 }
 
 @keyframes sceneIn{
@@ -1345,7 +1345,7 @@ footer{
   </audio>
 
 
-  <!-- HERO -->
+  <!-- ================= HERO ================= -->
 
   <section class="hero">
 
@@ -1461,7 +1461,7 @@ footer{
   </section>
 
 
-  <!-- LOCATION -->
+  <!-- ================= LOCATION ================= -->
 
   <section
     class="section"
@@ -1492,7 +1492,7 @@ footer{
   </section>
 
 
-  <!-- RSVP -->
+  <!-- ================= RSVP ================= -->
 
   <section
     class="section"
@@ -1562,7 +1562,7 @@ footer{
   </section>
 
 
-  <!-- PREMIUM FOOTER -->
+  <!-- ================= PREMIUM FOOTER ================= -->
 
   <section class="premium-footer">
 
@@ -1587,9 +1587,6 @@ footer{
       bizning ilhomimiz
 
     </div>
-
-
-    <!-- MUHIM: CREATE.HTML -->
 
     <a
       href="/create.html"
@@ -1769,7 +1766,7 @@ async function loadInvitation(){
       bride;
 
 
-    /* PHOTO */
+    /* ================= PHOTO ================= */
 
     if(invitation.photo_url){
 
@@ -1781,7 +1778,7 @@ async function loadInvitation(){
     }
 
 
-    /* MUSIC */
+    /* ================= MUSIC ================= */
 
     if(invitation.music_url){
 
@@ -1793,7 +1790,7 @@ async function loadInvitation(){
     }
 
 
-    /* LOCATION */
+    /* ================= LOCATION ================= */
 
     document.getElementById(
       "venue"
@@ -1819,7 +1816,7 @@ async function loadInvitation(){
     }
 
 
-    /* DATE */
+    /* ================= DATE ================= */
 
     if(invitation.event_date){
 
@@ -1874,7 +1871,7 @@ async function loadInvitation(){
     }
 
 
-    /* SHOW */
+    /* ================= SHOW ================= */
 
     document.getElementById(
       "loading"
@@ -2275,11 +2272,10 @@ function startCountdown(
 
 /* =====================================================
    RSVP
+   SUPABASE + TELEGRAM
 ===================================================== */
 
-async function sendRSVP(
-  event
-){
+async function sendRSVP(event){
 
   event.preventDefault();
 
@@ -2308,11 +2304,35 @@ async function sendRSVP(
     ).value.trim();
 
 
+  if(!guestName){
+
+    message.innerText =
+      "Ismingizni kiriting.";
+
+    return;
+
+  }
+
+
+  if(!attendance){
+
+    message.innerText =
+      "Iltimos, ishtirokingizni tanlang.";
+
+    return;
+
+  }
+
+
   message.innerText =
     "Yuborilmoqda...";
 
 
   try{
+
+    /* ===============================================
+       1. SUPABASE
+    =============================================== */
 
     const response =
       await fetch(
@@ -2372,9 +2392,7 @@ async function sendRSVP(
           .json()
           .catch(
             function(){
-
               return {};
-
             }
           );
 
@@ -2387,9 +2405,87 @@ async function sendRSVP(
     }
 
 
-    message.innerText =
-      "❤️ Rahmat! Javobingiz saqlandi.";
+    /* ===============================================
+       2. TELEGRAM
+    =============================================== */
 
+    const telegramResponse =
+      await fetch(
+
+        "/api/rsvp",
+
+        {
+
+          method:"POST",
+
+          headers:{
+
+            "Content-Type":
+              "application/json"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              invitationId:
+                Number(
+                  INVITATION_ID
+                ),
+
+              guestName:
+                guestName,
+
+              attendance:
+                attendance,
+
+              message:
+                guestMessage
+
+            })
+
+        }
+
+      );
+
+
+    const telegramData =
+      await telegramResponse
+        .json()
+        .catch(
+          function(){
+            return {};
+          }
+        );
+
+
+    /*
+      RSVP Supabase'ga saqlangan bo‘lsa,
+      Telegram xatosi sabab mehmonni
+      xatolik bilan qo‘rqitmaymiz.
+    */
+
+    if(!telegramResponse.ok){
+
+      console.error(
+        "RSVP TELEGRAM ERROR:",
+        telegramData
+      );
+
+      message.innerText =
+        "❤️ Rahmat! Javobingiz saqlandi.";
+
+    }else{
+
+      message.innerText =
+        "❤️ Rahmat! Javobingiz saqlandi.";
+
+    }
+
+
+    /* ===============================================
+       3. FORM TOZALASH
+    =============================================== */
 
     document.getElementById(
       "guestName"
@@ -2408,7 +2504,11 @@ async function sendRSVP(
 
   }catch(error){
 
-    console.error(error);
+    console.error(
+      "RSVP ERROR:",
+      error
+    );
+
 
     message.innerText =
       "Xatolik: " +
