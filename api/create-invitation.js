@@ -209,6 +209,9 @@ export default async function handler(req, res) {
               music_url:
                 musicUrl
 
+             telegram_user_id:
+                payment.telegram_user_id
+  
             })
         }
       );
