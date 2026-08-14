@@ -3,366 +3,1419 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f5eadb">
+<meta name="theme-color" content="#eee2d2">
+
 <title>MyInviter</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
 body{
-  background:#f7eee2;
-  color:#554337;
+  background:#f5eee4;
+  color:#493d32;
   font-family:Georgia,"Times New Roman",serif;
-  overflow-x:hidden;
-}
-:root{
-  --cream:#f7eee2;
-  --paper:#fffaf2;
-  --gold:#b88948;
-  --gold2:#d7b37a;
-  --brown:#554337;
-  --muted:#8d7865;
 }
 
-/* ---------- INTRO ---------- */
+/* =====================================================
+   INTRO
+===================================================== */
+
 #intro{
- position:fixed;inset:0;z-index:99999;
- background:
-   radial-gradient(circle at 50% 35%,rgba(255,255,255,.95),transparent 38%),
-   linear-gradient(145deg,#f9f1e6,#ead9c1);
- display:flex;align-items:center;justify-content:center;
- transition:opacity 1s ease,visibility 1s ease;
- overflow:hidden;
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  overflow:hidden;
+
+  background:
+    radial-gradient(
+      ellipse at center 42%,
+      #fffdf8 0%,
+      #f6ede1 42%,
+      #e4d4c0 100%
+    );
+
+  opacity:1;
+  visibility:visible;
+
+  transition:
+    opacity 1.2s ease,
+    visibility 1.2s ease;
 }
-#intro.hide{opacity:0;visibility:hidden;pointer-events:none}
-#intro:before,#intro:after{
- content:"";position:absolute;border-radius:50%;
- border:1px solid rgba(184,137,72,.16);
+
+#intro.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
 }
-#intro:before{width:560px;height:560px}
-#intro:after{width:780px;height:780px}
-.intro-inner{position:relative;z-index:2;text-align:center;padding:30px}
-.intro-small{font-size:9px;letter-spacing:5px;color:#a4835e}
-.intro-title{font-size:38px;margin:18px 0 10px}
-.intro-sub{font-size:12px;color:#907965;line-height:1.8}
+
+#intro::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  opacity:.18;
+
+  background-image:
+    radial-gradient(
+      rgba(90,65,45,.16) .65px,
+      transparent .65px
+    );
+
+  background-size:4px 4px;
+  pointer-events:none;
+}
+
+#intro::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 40%,
+      rgba(82,60,42,.14) 100%
+    );
+}
+
+.light{
+  position:absolute;
+  width:430px;
+  height:430px;
+  left:50%;
+  top:47%;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,248,229,.7),
+      transparent 68%
+    );
+
+  filter:blur(20px);
+
+  animation:
+    lightMove 5s ease-in-out infinite;
+}
+
+@keyframes lightMove{
+
+  0%,100%{
+    transform:
+      translate(-50%,-50%)
+      scale(1);
+  }
+
+  50%{
+    transform:
+      translate(-50%,-52%)
+      scale(1.1);
+  }
+
+}
+
+.orbit{
+  position:absolute;
+  border:
+    1px solid
+    rgba(139,108,78,.12);
+  border-radius:50%;
+  pointer-events:none;
+}
+
+.orbit.one{
+  width:560px;
+  height:560px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+}
+
+.orbit.two{
+  width:720px;
+  height:720px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  opacity:.55;
+}
+
+.orbit.three{
+  width:900px;
+  height:900px;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  opacity:.25;
+}
+
+.intro-content{
+  position:relative;
+  z-index:5;
+  width:100%;
+  height:100%;
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  padding-top:
+    clamp(100px,16vh,145px);
+
+  text-align:center;
+}
+
+.small-label{
+  font-size:8px;
+  letter-spacing:6px;
+  color:#957d64;
+  opacity:0;
+
+  animation:
+    textIn 1s .2s ease-out forwards;
+}
+
+.intro-names{
+  margin-top:22px;
+
+  font-size:
+    clamp(31px,8vw,45px);
+
+  line-height:1.05;
+  color:#4d4034;
+
+  opacity:0;
+
+  animation:
+    textIn 1s .35s ease-out forwards;
+}
+
+.intro-names .amp{
+  display:inline-block;
+  margin:0 9px;
+  font-size:21px;
+  color:#ae8d69;
+  font-style:italic;
+}
+
+.intro-subtitle{
+  margin-top:16px;
+  max-width:280px;
+  font-size:11px;
+  line-height:1.7;
+  color:#8b7764;
+
+  opacity:0;
+
+  animation:
+    textIn 1s .5s ease-out forwards;
+}
+
+@keyframes textIn{
+
+  from{
+    opacity:0;
+    transform:translateY(15px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+/* =====================================================
+   ENVELOPE
+===================================================== */
+
+.envelope-scene{
+  position:relative;
+
+  width:
+    min(360px,90vw);
+
+  height:320px;
+
+  margin-top:
+    clamp(20px,5vh,42px);
+
+  perspective:1200px;
+
+  opacity:0;
+
+  animation:
+    sceneIn 1s .5s ease-out forwards;
+}
+
+@keyframes sceneIn{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
+}
+
 .envelope{
- width:min(330px,86vw);height:215px;margin:45px auto 15px;
- position:relative;cursor:pointer;filter:drop-shadow(0 25px 22px rgba(70,45,25,.2));
+  position:absolute;
+
+  width:
+    min(330px,86vw);
+
+  height:215px;
+
+  left:50%;
+  top:48%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.88);
+
+  cursor:pointer;
+
+  transform-style:preserve-3d;
+
+  filter:
+    drop-shadow(
+      0 28px 25px
+      rgba(66,45,29,.20)
+    );
+
+  transition:
+    transform
+    1.35s
+    cubic-bezier(.16,1,.3,1);
 }
+
+.envelope.camera{
+  transform:
+    translate(-50%,-50%)
+    scale(.95);
+}
+
 .env-back{
- position:absolute;inset:0;background:linear-gradient(145deg,#f0dfca,#d9c0a1);
- border:1px solid #c7aa88;border-radius:5px;
+  position:absolute;
+  inset:0;
+  z-index:1;
+
+  border-radius:4px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #efe0ce,
+      #dfc9ad
+    );
+
+  border:
+    1px solid #cbb496;
+
+  box-shadow:
+    inset
+    0 0 0 1px
+    rgba(255,255,255,.25);
 }
+
 .letter{
- position:absolute;left:25px;right:25px;bottom:10px;height:180px;
- background:#fffdf8;border:1px solid #dfd2c2;
- display:flex;flex-direction:column;align-items:center;justify-content:center;
- z-index:2;transition:transform 1.2s cubic-bezier(.16,1,.3,1);
+  position:absolute;
+
+  z-index:2;
+
+  left:25px;
+  right:25px;
+
+  bottom:12px;
+
+  height:183px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffefa,
+      #f8f1e7
+    );
+
+  border:
+    1px solid #ded0bd;
+
+  box-shadow:
+    0 4px 20px
+    rgba(63,43,27,.12);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  transform:
+    translateY(5px);
+
+  transition:
+    transform
+    1.25s
+    cubic-bezier(.16,1,.3,1);
+
+  color:#655547;
 }
+
+.letter-small{
+  font-size:8px;
+  letter-spacing:4px;
+  color:#9b8268;
+  margin-bottom:13px;
+}
+
+.letter-names{
+  font-size:27px;
+}
+
+.letter-line{
+  width:50px;
+  height:1px;
+  margin-top:16px;
+  background:#bca083;
+}
+
 .env-front{
- position:absolute;inset:0;z-index:5;
- background:linear-gradient(145deg,#ead8c0,#d6bb99);
- clip-path:polygon(0 0,50% 53%,100% 0,100% 100%,0 100%);
- border-radius:5px;
+  position:absolute;
+  inset:0;
+  z-index:5;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e8d6bf,
+      #d9c1a3
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      50% 53%,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+
+  border-radius:4px;
 }
+
 .flap{
- position:absolute;z-index:8;left:0;top:0;width:100%;height:130px;
- background:linear-gradient(145deg,#f2e0cb,#d9c1a2);
- clip-path:polygon(0 0,100% 0,50% 100%);
- transform-origin:top center;transition:transform 1.15s cubic-bezier(.65,0,.2,1);
- backface-visibility:hidden;
+  position:absolute;
+
+  z-index:8;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:130px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f0dfcb,
+      #dcc4a5
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+
+  transform-origin:
+    top center;
+
+  transform:
+    rotateX(0deg);
+
+  backface-visibility:hidden;
+
+  transition:
+    transform
+    1.2s
+    cubic-bezier(.65,0,.2,1);
 }
-.envelope.open .flap{transform:rotateX(180deg)}
-.envelope.open .letter{transform:translateY(-105px)}
+
+.envelope.open .flap{
+  transform:
+    rotateX(180deg);
+}
+
+.envelope.open .letter{
+  transform:
+    translateY(-110px);
+}
+
+.seal-wrap{
+  position:absolute;
+  z-index:20;
+
+  left:50%;
+  top:93px;
+
+  transform:
+    translateX(-50%);
+
+  transition:
+    transform .35s ease;
+}
+
 .seal{
- position:absolute;z-index:20;left:50%;top:92px;transform:translateX(-50%);
- width:78px;height:78px;border-radius:50%;
- display:flex;align-items:center;justify-content:center;
- color:#fbe8df;font-size:28px;
- background:radial-gradient(circle at 30% 25%,#b87567,#78443c);
- border:3px solid #a96558;
- box-shadow:0 10px 20px rgba(70,35,25,.25);
- transition:.6s;
-}
-.envelope.open .seal{transform:translateX(-50%) scale(0) rotate(20deg);opacity:0}
-.open-hint{font-size:8px;letter-spacing:3px;color:#8e755e}
+  position:relative;
 
-/* ---------- COMMON ---------- */
-.page{
- position:relative;
- background:
-   radial-gradient(circle at 8% 18%,rgba(255,255,255,.9),transparent 22%),
-   radial-gradient(circle at 92% 55%,rgba(255,255,255,.75),transparent 24%),
-   linear-gradient(180deg,#faf1e5,#f4e7d7);
-}
-.flower{
- position:absolute;z-index:0;pointer-events:none;
- font-size:76px;line-height:1;opacity:.55;
- filter:drop-shadow(0 5px 8px rgba(140,100,50,.1));
-}
-.flower.a{left:-20px;top:25px;transform:rotate(-15deg)}
-.flower.b{right:-18px;top:230px;transform:rotate(18deg)}
-.flower.c{left:-25px;bottom:80px;transform:rotate(15deg)}
-.flower.d{right:-25px;bottom:0;transform:rotate(-15deg)}
-.flower span{display:block;color:#d8bd8f}
-.section-inner{position:relative;z-index:2;max-width:720px;margin:auto}
-.ornament{
- display:flex;align-items:center;justify-content:center;gap:10px;
- color:var(--gold);margin:12px auto 22px;
-}
-.ornament:before,.ornament:after{
- content:"";width:58px;height:1px;background:linear-gradient(90deg,transparent,var(--gold2));
-}
-.ornament:after{transform:rotate(180deg)}
-.ornament b{font-size:16px;font-weight:normal}
+  width:80px;
+  height:80px;
 
-/* ---------- HERO ---------- */
+  border-radius:50%;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:
+    radial-gradient(
+      circle at 32% 27%,
+      #b16c60 0%,
+      #884b43 48%,
+      #673731 100%
+    );
+
+  border:
+    3px solid #9a5a50;
+
+  color:#f5ddd4;
+
+  font-size:27px;
+
+  box-shadow:
+    0 10px 18px
+    rgba(66,32,25,.28),
+    inset
+    0 2px 4px
+    rgba(255,255,255,.2),
+    inset
+    0 -4px 5px
+    rgba(50,20,15,.12);
+
+  animation:
+    sealFloat 2.6s
+    ease-in-out
+    infinite;
+}
+
+.seal::before{
+  content:"";
+  position:absolute;
+  inset:7px;
+  border-radius:50%;
+  border:
+    1px solid
+    rgba(255,230,220,.4);
+}
+
+@keyframes sealFloat{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  50%{
+    transform:
+      translateY(-3px)
+      scale(1.02);
+  }
+
+}
+
+.seal-wrap.pressed{
+  animation:
+    sealPress .65s
+    cubic-bezier(.2,.9,.3,1)
+    forwards;
+}
+
+@keyframes sealPress{
+
+  0%{
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+  25%{
+    transform:
+      translateX(-50%)
+      scale(.82);
+  }
+
+  50%{
+    transform:
+      translateX(-50%)
+      scale(1.07)
+      rotate(-3deg);
+  }
+
+  75%{
+    transform:
+      translateX(-50%)
+      scale(.95)
+      rotate(2deg);
+  }
+
+  100%{
+    transform:
+      translateX(-50%)
+      scale(0)
+      rotate(18deg);
+
+    opacity:0;
+  }
+
+}
+
+.open-text{
+  position:absolute;
+  left:50%;
+  bottom:0;
+
+  transform:
+    translateX(-50%);
+
+  width:100%;
+
+  font-size:8px;
+  letter-spacing:3px;
+  color:#8a735d;
+
+  animation:
+    breathe 2.2s
+    ease-in-out
+    infinite;
+}
+
+@keyframes breathe{
+
+  0%,100%{
+    opacity:.55;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+.particle{
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:#b99b72;
+
+  pointer-events:none;
+
+  opacity:0;
+
+  z-index:30;
+}
+
+.particle.fly{
+  animation:
+    particleFly
+    1.6s
+    ease-out
+    forwards;
+}
+
+@keyframes particleFly{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translate(0,0)
+      scale(.2);
+  }
+
+  15%{
+    opacity:.8;
+  }
+
+  100%{
+    opacity:0;
+
+    transform:
+      translate(
+        var(--x),
+        var(--y)
+      )
+      scale(0);
+  }
+
+}
+
+/* =====================================================
+   LOADING
+===================================================== */
+
+#loading{
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  color:#9a826b;
+}
+
+/* =====================================================
+   MAIN
+===================================================== */
+
+#invitation{
+  display:none;
+
+  min-height:100vh;
+
+  background:#f5eee4;
+}
+
 .hero{
- min-height:100vh;padding:65px 18px 45px;
- text-align:center;display:flex;align-items:center;justify-content:center;
- position:relative;overflow:hidden;
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:
+    70px 20px;
 }
-.hero-content{width:100%;max-width:650px;position:relative;z-index:2}
-.top-label{font-size:9px;letter-spacing:4px;color:#a37d50;margin-bottom:20px}
-.hero h1{
- font-size:clamp(42px,11vw,68px);font-weight:normal;line-height:1.02;
+
+.hero-content{
+  width:100%;
+  max-width:600px;
+
+  animation:
+    mainAppear
+    1.2s
+    ease-out
+    both;
 }
-.hero .amp{font-size:30px;color:var(--gold);font-style:italic;margin:10px}
-.photo-wrap{
- width:230px;height:230px;margin:5px auto 24px;position:relative;
+
+@keyframes mainAppear{
+
+  from{
+    opacity:0;
+
+    transform:
+      translateY(25px);
+  }
+
+  to{
+    opacity:1;
+
+    transform:
+      translateY(0);
+  }
+
 }
-.photo-wrap:before{
- content:"";position:absolute;inset:-16px;border:1px solid #d7b37a;border-radius:50%;
- box-shadow:0 0 0 8px rgba(255,255,255,.3);
+
+.label{
+  font-size:9px;
+  letter-spacing:4px;
+  color:#9b826b;
+  margin-bottom:25px;
 }
+
 .photo{
- width:100%;height:100%;object-fit:cover;border-radius:50%;
- border:6px solid #fffaf2;box-shadow:0 18px 45px rgba(80,50,25,.16);
- background:#ead9c1;
+  width:185px;
+  height:185px;
+
+  object-fit:cover;
+
+  border-radius:50%;
+
+  border:
+    7px solid
+    #fffdf9;
+
+  box-shadow:
+    0 12px 38px
+    rgba(60,40,25,.14);
+
+  margin-bottom:25px;
+
+  display:none;
 }
-.hero-text{font-size:14px;line-height:1.8;color:#746253;max-width:430px;margin:20px auto}
-.event-date{font-size:14px;letter-spacing:4px;color:#a57945;margin:20px 0}
-.countdown{display:flex;justify-content:center;gap:8px;margin:24px 0 28px}
+
+.photo.show{
+  display:inline-block;
+}
+
+h1{
+  font-size:52px;
+  font-weight:normal;
+  line-height:1.04;
+}
+
+.and{
+  font-size:25px;
+  color:#aa8b6b;
+  font-style:italic;
+  margin:9px 0;
+}
+
+.divider{
+  width:65px;
+  height:1px;
+  background:#bca083;
+  margin:28px auto;
+}
+
+.description{
+  color:#6d6259;
+  line-height:1.8;
+  font-size:15px;
+}
+
+.event-date{
+  margin-top:25px;
+  font-size:14px;
+  letter-spacing:3px;
+  color:#665648;
+}
+
+/* =====================================================
+   COUNTDOWN
+===================================================== */
+
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:32px 0;
+}
+
 .count-box{
- width:72px;padding:12px 4px;background:rgba(255,250,242,.75);
- border:1px solid #dfcdb4;border-radius:8px;
+  width:68px;
+
+  padding:
+    13px 5px;
+
+  background:#fffdf9;
+
+  border:
+    1px solid #e5dbcf;
 }
-.count-box b{display:block;font-size:23px;font-weight:normal}
-.count-box span{font-size:8px;letter-spacing:1px;color:#9a8067}
+
+.count-box b{
+  display:block;
+  font-size:22px;
+  font-weight:normal;
+}
+
+.count-box span{
+  display:block;
+
+  font-size:8px;
+  letter-spacing:1px;
+
+  color:#9b836c;
+
+  margin-top:5px;
+}
+
+/* =====================================================
+   BUTTON
+===================================================== */
+
 .button{
- display:inline-flex;align-items:center;justify-content:center;
- padding:13px 25px;border:1px solid #b58a55;color:#6c5137;
- background:rgba(255,250,242,.55);text-decoration:none;
- font-size:10px;letter-spacing:2px;font-family:inherit;
- transition:.25s;cursor:pointer;border-radius:3px;
-}
-.button:hover{background:#b88948;color:white}
-.music{
- position:fixed;right:17px;top:17px;z-index:1000;width:50px;height:50px;
- border-radius:50%;border:1px solid #c8a574;background:rgba(255,250,242,.9);
- color:#8a6235;font-size:18px;box-shadow:0 8px 25px rgba(80,50,25,.12);cursor:pointer;
+  display:inline-block;
+
+  padding:
+    13px 24px;
+
+  border:
+    1px solid #9b836c;
+
+  color:#5c4d40;
+
+  text-decoration:none;
+
+  font-size:10px;
+
+  letter-spacing:1px;
+
+  background:transparent;
+
+  cursor:pointer;
+
+  font-family:inherit;
+
+  margin:3px;
+
+  transition:
+    .25s ease;
 }
 
-/* ---------- MAP ---------- */
-.map-section{
- position:relative;padding:0 0 55px;overflow:hidden;
- background:#f4e9dc;
-}
-.map-head{text-align:center;padding:35px 20px 22px}
-.map-head h2,.wishes h2{font-size:34px;font-weight:normal}
-.map-frame{
- width:100%;height:300px;border:0;display:block;
- filter:saturate(.7) sepia(.12) contrast(.92);
-}
-.map-card{
- max-width:580px;margin:-35px auto 0;position:relative;z-index:5;
- background:rgba(255,251,245,.96);border:1px solid #ead9c1;
- border-radius:18px;padding:22px 25px;
- box-shadow:0 15px 40px rgba(80,50,25,.13);
- display:flex;align-items:center;gap:18px;
-}
-.map-icon{
- width:54px;height:54px;border:1px solid #d2ae78;border-radius:50%;
- display:flex;align-items:center;justify-content:center;font-size:25px;color:#b07d3f;flex:none;
-}
-.map-info{flex:1;text-align:left;line-height:1.6}
-.map-info strong{font-size:17px}
-.map-info div{font-size:14px;color:#756354}
-.map-arrow{
- width:50px;height:50px;border:1px solid #c59b64;border-radius:50%;
- display:flex;align-items:center;justify-content:center;text-decoration:none;color:#8b6236;
- font-size:20px;
+.button:hover{
+  background:#5c4d40;
+  color:white;
 }
 
-/* ---------- WISHES ---------- */
-.wishes{
- position:relative;padding:75px 20px 80px;text-align:center;overflow:hidden;
-}
-.wishes .description{font-size:15px;color:#806e5d;margin:12px 0 30px}
-.rsvp{max-width:600px;margin:auto;text-align:left}
-.field{position:relative;margin-bottom:13px}
-.rsvp input,.rsvp select,.rsvp textarea{
- width:100%;padding:17px 18px;border:1px solid #e4d5c2;border-radius:13px;
- background:rgba(255,252,248,.7);color:#544539;font:16px Georgia,serif;outline:none;
-}
-.rsvp textarea{height:125px;resize:none}
-.rsvp input:focus,.rsvp select:focus,.rsvp textarea:focus{border-color:#c59b64}
-.submit-wrap{text-align:center;margin-top:20px}
-.submit{background:linear-gradient(180deg,#ddb77e,#bd8d4d);color:white;border:0;border-radius:10px;min-width:250px}
-.message{text-align:center;color:#6c8561;font-size:14px;margin-top:15px;min-height:20px}
+/* =====================================================
+   MUSIC
+===================================================== */
 
-/* ---------- FOOTER ---------- */
-.footer{
- text-align:center;padding:35px 20px 25px;
- background:linear-gradient(180deg,#ead7bc,#e3c89f);color:#6d5238;
-}
-.footer .ig-title{font-size:9px;letter-spacing:3px;margin-bottom:9px}
-.footer .ig{font-size:20px;color:#5b4635;text-decoration:none}
-.footer p{font-size:12px;font-style:italic;margin:12px 0 20px}
-.create{border-color:#987042;background:transparent}
-.copy{margin-top:24px;font-size:9px;letter-spacing:2px;opacity:.75}
+.music-button{
+  position:fixed;
 
-/* ---------- ANIMATION ---------- */
-.reveal{opacity:0;transform:translateY(25px);transition:opacity .9s,transform .9s}
-.reveal.show{opacity:1;transform:none}
-.spark{
- position:absolute;width:4px;height:4px;border-radius:50%;background:#d7ad70;
- animation:float 4s ease-in-out infinite;opacity:.65;
+  right:18px;
+  top:18px;
+
+  z-index:100;
+
+  width:46px;
+  height:46px;
+
+  border-radius:50%;
+
+  border:
+    1px solid #bda990;
+
+  background:#fffdf9;
+
+  color:#5c4d40;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 5px 20px
+    rgba(0,0,0,.08);
 }
-@keyframes float{0%,100%{transform:translateY(0) scale(.8);opacity:.2}50%{transform:translateY(-18px) scale(1);opacity:.8}}
+
+/* =====================================================
+   LOCATION
+===================================================== */
+
+.section{
+  background:#fffdf9;
+
+  text-align:center;
+
+  padding:
+    80px 22px;
+}
+
+.section h2{
+  font-size:31px;
+  font-weight:normal;
+  margin-bottom:20px;
+}
+
+.location{
+  color:#6d6259;
+  line-height:2;
+  margin-bottom:25px;
+}
+
+/* =====================================================
+   RSVP
+===================================================== */
+
+.rsvp{
+  max-width:430px;
+  margin:auto;
+}
+
+.rsvp input,
+.rsvp select,
+.rsvp textarea{
+  width:100%;
+
+  padding:14px;
+
+  margin-bottom:12px;
+
+  border:
+    1px solid #dfd4c7;
+
+  background:#fdfbf8;
+
+  color:#40372f;
+
+  font-family:inherit;
+
+  outline:none;
+}
+
+.rsvp textarea{
+  height:100px;
+  resize:none;
+}
+
+.message{
+  margin-top:15px;
+  color:#6e8060;
+  font-size:14px;
+}
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+.premium-footer{
+  background:
+    linear-gradient(
+      180deg,
+      #f5eee4,
+      #eee3d5
+    );
+
+  text-align:center;
+
+  padding:
+    75px 20px
+    45px;
+
+  border-top:
+    1px solid #dfd2c2;
+}
+
+.instagram-title{
+  font-size:10px;
+  letter-spacing:4px;
+  color:#9b836c;
+  margin-bottom:16px;
+}
+
+.instagram-link{
+  display:inline-block;
+
+  color:#493d32;
+
+  text-decoration:none;
+
+  font-size:17px;
+
+  letter-spacing:1px;
+
+  padding-bottom:6px;
+
+  border-bottom:
+    1px solid #bca083;
+
+  transition:
+    .3s ease;
+}
+
+.instagram-link:hover{
+  color:#9a5a50;
+  border-color:#9a5a50;
+}
+
+.instagram-text{
+  margin-top:25px;
+
+  font-size:13px;
+
+  font-style:italic;
+
+  color:#806f5e;
+
+  line-height:1.8;
+}
+
+.create-invitation-button{
+  display:inline-flex;
+
+  align-items:center;
+  justify-content:center;
+
+  margin-top:25px;
+
+  padding:
+    14px 28px;
+
+  border:
+    1px solid #9b836c;
+
+  background:#5c4d40;
+
+  color:#fff;
+
+  text-decoration:none;
+
+  font-family:inherit;
+
+  font-size:10px;
+
+  letter-spacing:2px;
+
+  box-shadow:
+    0 8px 25px
+    rgba(60,40,25,.12);
+
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+.create-invitation-button:hover{
+  transform:
+    translateY(-2px);
+
+  background:#493d32;
+
+  box-shadow:
+    0 12px 30px
+    rgba(60,40,25,.18);
+}
+
+.create-invitation-button:active{
+  transform:
+    translateY(0);
+}
+
+footer{
+  text-align:center;
+
+  padding:
+    25px 20px
+    30px;
+
+  font-size:10px;
+
+  letter-spacing:2px;
+
+  color:#9b836c;
+
+  background:#eee3d5;
+}
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
 @media(max-width:500px){
- .hero{padding-top:70px}
- .photo-wrap{width:190px;height:190px}
- .hero h1{font-size:43px}
- .count-box{width:65px}
- .map-card{margin:-25px 18px 0;padding:18px}
- .map-frame{height:260px}
- .map-info strong{font-size:15px}
- .map-info div{font-size:13px}
- .wishes h2,.map-head h2{font-size:31px}
+
+  .intro-content{
+    padding-top:90px;
+  }
+
+  .intro-names{
+    margin-top:18px;
+    font-size:32px;
+  }
+
+  .intro-subtitle{
+    margin-top:12px;
+  }
+
+  .envelope-scene{
+    height:310px;
+    margin-top:22px;
+  }
+
+  .envelope{
+    transform:
+      translate(-50%,-50%)
+      scale(.82);
+  }
+
+  .envelope.camera{
+    transform:
+      translate(-50%,-50%)
+      scale(.88);
+  }
+
+  h1{
+    font-size:43px;
+  }
+
+  .photo{
+    width:155px;
+    height:155px;
+  }
+
+  .count-box{
+    width:62px;
+  }
+
+  .count-box b{
+    font-size:19px;
+  }
+
 }
+
+@media(max-height:700px){
+
+  .intro-content{
+    padding-top:60px;
+  }
+
+  .intro-names{
+    font-size:30px;
+  }
+
+  .intro-subtitle{
+    margin-top:7px;
+  }
+
+  .envelope-scene{
+    height:290px;
+    margin-top:0;
+  }
+
+}
+
+@media(max-height:600px){
+
+  .intro-content{
+    padding-top:35px;
+  }
+
+  .intro-names{
+    margin-top:12px;
+    font-size:28px;
+  }
+
+  .intro-subtitle{
+    margin-top:6px;
+    font-size:10px;
+  }
+
+  .envelope-scene{
+    height:260px;
+    margin-top:-5px;
+  }
+
+}
+
 @media(prefers-reduced-motion:reduce){
- *,*::before,*::after{animation:none!important;transition:none!important}
+
+  *,
+  *::before,
+  *::after{
+
+    animation-duration:.01ms !important;
+
+    animation-iteration-count:1 !important;
+
+    transition-duration:.01ms !important;
+
+    scroll-behavior:auto !important;
+
+  }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
+<!-- =====================================================
+     INTRO
+===================================================== -->
+
 <div id="intro">
-  <div class="intro-inner">
-    <div class="intro-small">TAKLIFNOMA</div>
-    <div class="intro-title">
-      <span id="introGroom">Aziz</span> &
-      <span id="introBride">Madina</span>
+
+  <div class="light"></div>
+
+  <div class="orbit one"></div>
+  <div class="orbit two"></div>
+  <div class="orbit three"></div>
+
+  <div class="intro-content">
+
+    <div class="small-label">
+      TAKLIFNOMA
     </div>
 
-    <div class="intro-sub">
-      Bu taklifnoma siz uchun<br>
+    <div class="intro-names">
+
+      <span id="introGroom">
+        Aziz
+      </span>
+
+      <span class="amp">
+        &
+      </span>
+
+      <span id="introBride">
+        Madina
+      </span>
+
+    </div>
+
+    <div class="intro-subtitle">
+      Bu taklifnoma siz uchun
       maxsus tayyorlandi
     </div>
 
-    <div class="envelope" id="envelope" onclick="openInvitation()">
+    <div class="envelope-scene">
 
-      <div class="env-back"></div>
+      <div
+        class="envelope"
+        id="envelope"
+        onclick="openInvitation()">
 
-      <div class="letter">
-        <div style="font-size:8px;letter-spacing:4px;color:#9b8268;margin-bottom:12px">
-          NIKOH TO‘YI
+        <div class="env-back"></div>
+
+        <div class="letter">
+
+          <div class="letter-small">
+            NIKOH TO‘YI
+          </div>
+
+          <div class="letter-names">
+
+            <span id="letterGroom">
+              Aziz
+            </span>
+
+            &
+
+            <span id="letterBride">
+              Madina
+            </span>
+
+          </div>
+
+          <div class="letter-line"></div>
+
         </div>
 
-        <div style="font-size:25px">
-          <span id="letterGroom">Aziz</span>
-          &
-          <span id="letterBride">Madina</span>
+        <div class="env-front"></div>
+
+        <div class="flap"></div>
+
+        <div
+          class="seal-wrap"
+          id="sealWrap">
+
+          <div class="seal">
+            ♡
+          </div>
+
         </div>
 
-        <div style="width:50px;height:1px;background:#bca083;margin-top:15px"></div>
       </div>
 
-      <div class="env-front"></div>
-      <div class="flap"></div>
-      <div class="seal">♡</div>
+      <div class="open-text">
+        OCHISH UCHUN MUHRNI BOSING
+      </div>
 
     </div>
 
-    <div class="open-hint">
-      OCHISH UCHUN MUHRNI BOSING
-    </div>
   </div>
+
 </div>
 
-<div id="loading"
-style="min-height:100vh;display:flex;align-items:center;justify-content:center;color:#9a826b">
 
+<!-- =====================================================
+     LOADING
+===================================================== -->
+
+<div id="loading">
   Taklifnoma yuklanmoqda...
-
 </div>
 
-<main id="invitation" class="page" style="display:none">
+
+<!-- =====================================================
+     INVITATION
+===================================================== -->
+
+<div id="invitation">
 
   <button
-    class="music"
+    class="music-button"
     id="musicButton"
     onclick="toggleMusic()">
+
     ♪
+
   </button>
 
-  <audio id="music" preload="auto"></audio>
+  <audio
+    id="music"
+    preload="auto">
+  </audio>
 
-  <!-- HERO -->
+
+  <!-- ===================================================
+       HERO
+  =================================================== -->
 
   <section class="hero">
 
-    <div class="flower a">❀</div>
-    <div class="flower b">❀</div>
-    <div class="flower c">❀</div>
-    <div class="flower d">❀</div>
+    <div class="hero-content">
 
-    <div class="hero-content reveal">
-
-      <div class="top-label">
-        TANTANALI MAROSIM
+      <div class="label">
+        SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
       </div>
 
-      <div class="ornament">
-        <b>✦</b>
-      </div>
-
-      <div class="photo-wrap">
-        <img
-          id="photo"
-          class="photo"
-          src=""
-          alt="To‘y rasmi">
-      </div>
+      <img
+        id="photo"
+        class="photo"
+        src=""
+        alt="To‘y rasmi">
 
       <h1 id="groomName">
         Aziz
       </h1>
 
-      <div class="amp">
-        &amp;
+      <div class="and">
+        &
       </div>
 
       <h1 id="brideName">
         Madina
       </h1>
 
-      <div class="ornament">
-        <b>✦</b>
-      </div>
+      <div class="divider"></div>
 
-      <p class="hero-text">
-        Hayotimizdagi eng go‘zal kunni siz bilan birga
-        nishonlashdan mamnun bo‘lamiz.
+      <p class="description">
+        Hayotimizdagi eng go‘zal kunni
+        siz bilan birga nishonlashdan
+        mamnun bo‘lamiz.
       </p>
 
       <div
         class="event-date"
         id="eventDate">
-        24 · MAY · 2026
       </div>
 
       <div class="countdown">
@@ -392,196 +1445,170 @@ style="min-height:100vh;display:flex;align-items:center;justify-content:center;c
       <a
         href="#location"
         class="button">
-        XARITADA KO‘RISH　⌖
+        MANZIL
       </a>
-
-    </div>
-
-  </section>
-
-  <!-- MAP -->
-
-  <section
-    id="location"
-    class="map-section">
-
-    <div class="map-head reveal">
-
-      <h2 id="mapTitle">
-        TANTANALI MAROSIM
-      </h2>
-
-      <div class="ornament">
-        <b>✦</b>
-      </div>
-
-      <p style="color:#806e5d">
-        Sizni kutib qolamiz
-      </p>
-
-    </div>
-
-    <iframe
-      id="mapFrame"
-      class="map-frame"
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade"
-      src="https://www.google.com/maps?q=Toshkent%20shahri&output=embed">
-    </iframe>
-
-    <div class="map-card reveal">
-
-      <div class="map-icon">
-        ♜
-      </div>
-
-      <div class="map-info">
-
-        <strong id="venue">
-          Tantanali marosim
-        </strong>
-
-        <div id="address">
-          Toshkent shahri, Amir Temur ko‘chasi, 123
-        </div>
-
-      </div>
 
       <a
-        id="mapsButton"
-        class="map-arrow"
-        target="_blank"
-        rel="noopener">
-        ➤
+        href="#rsvp"
+        class="button">
+        RSVP
       </a>
 
     </div>
 
   </section>
 
-  <!-- WISHES -->
+
+  <!-- ===================================================
+       LOCATION
+  =================================================== -->
 
   <section
-    id="rsvp"
-    class="wishes">
+    class="section"
+    id="location">
 
-    <div class="flower c">❀</div>
-    <div class="flower d">❀</div>
+    <h2>
+      TANTANALI MAROSIM
+    </h2>
 
-    <div class="section-inner reveal">
+    <div class="location">
 
-      <h2>
-        Tilaklar
-      </h2>
+      <div id="venue"></div>
 
-      <div class="ornament">
-        <b>✦</b>
-      </div>
-
-      <p class="description">
-        Egalariga issiq tilaklaringizni qoldiring ❤️
-      </p>
-
-      <form
-        class="rsvp"
-        onsubmit="sendRSVP(event)">
-
-        <div class="field">
-
-          <input
-            id="guestName"
-            type="text"
-            placeholder="Ismingiz"
-            required>
-
-        </div>
-
-        <div class="field">
-
-          <select
-            id="attendance"
-            required>
-
-            <option value="">
-              Iltimos, javob bering
-            </option>
-
-            <option value="Albatta kelaman">
-              Albatta kelaman
-            </option>
-
-            <option value="Kela olmayman">
-              Kela olmayman
-            </option>
-
-          </select>
-
-        </div>
-
-        <div class="field">
-
-          <textarea
-            id="guestMessage"
-            placeholder="Tilagingiz (ixtiyoriy)">
-          </textarea>
-
-        </div>
-
-        <div class="submit-wrap">
-
-          <button
-            class="button submit"
-            type="submit">
-            TILAK QOLDIRISH
-          </button>
-
-        </div>
-
-        <div
-          id="message"
-          class="message">
-        </div>
-
-      </form>
+      <div id="address"></div>
 
     </div>
 
+    <a
+      id="mapsButton"
+      class="button"
+      target="_blank"
+      rel="noopener">
+
+      XARITADA KO‘RISH
+
+    </a>
+
   </section>
 
-  <!-- FOOTER -->
 
-  <footer class="footer">
+  <!-- ===================================================
+       RSVP
+  =================================================== -->
 
-    <div class="ig-title">
+  <section
+    class="section"
+    id="rsvp">
+
+    <h2>
+      Tilaklar
+    </h2>
+
+    <p
+      class="description"
+      style="margin-bottom:25px;">
+
+      Egalariga issiq tilaklaringizni
+      qoldiring ❤️
+
+    </p>
+
+    <form
+      class="rsvp"
+      onsubmit="sendRSVP(event)">
+
+      <input
+        id="guestName"
+        type="text"
+        placeholder="Ismingiz"
+        required>
+
+      <select
+        id="attendance"
+        required>
+
+        <option value="">
+          Iltimos, javob bering
+        </option>
+
+        <option value="Albatta kelaman">
+          Albatta kelaman
+        </option>
+
+        <option value="Kela olmayman">
+          Kela olmayman
+        </option>
+
+      </select>
+
+      <textarea
+        id="guestMessage"
+        placeholder="Tilagingiz">
+      </textarea>
+
+      <button
+        type="submit"
+        class="button">
+
+        TILAK QOLDIRISH
+
+      </button>
+
+      <div
+        id="message"
+        class="message">
+      </div>
+
+    </form>
+
+  </section>
+
+
+  <!-- ===================================================
+       PREMIUM FOOTER
+  =================================================== -->
+
+  <section class="premium-footer">
+
+    <div class="instagram-title">
       📸 INSTAGRAM
     </div>
 
     <a
-      class="ig"
       href="https://www.instagram.com/my.inviter"
       target="_blank"
-      rel="noopener">
+      rel="noopener noreferrer"
+      class="instagram-link">
+
       @my.inviter
+
     </a>
 
-    <p>
+    <div class="instagram-text">
+
       🤍 Sizning baxtli kuningiz —
+      <br>
       bizning ilhomimiz
-    </p>
+
+    </div>
 
     <a
       href="/create.html"
-      class="button create">
-      TAKLIFNOMA YARATISH　✎
+      class="create-invitation-button">
+
+      TAKLIFNOMA YARATISH
+
     </a>
 
-    <div class="copy">
-      MYINVITER　·　2026　♡
-    </div>
+  </section>
 
+
+  <footer>
+    MYINVITER · 2026
   </footer>
 
-</main>
+</div>
+
 
 <script>
 
@@ -598,15 +1625,18 @@ const SUPABASE_KEY =
 
 /* =====================================================
    INVITATION ID
+   MUHIM:
+   Endi 1 ga default qilinmaydi.
+   URLdagi ID olinadi.
 ===================================================== */
 
 const params =
 new URLSearchParams(
-  location.search
+  window.location.search
 );
 
 const INVITATION_ID =
-params.get("id") || "1";
+params.get("id");
 
 
 /* =====================================================
@@ -619,6 +1649,9 @@ document.getElementById("intro");
 const envelope =
 document.getElementById("envelope");
 
+const sealWrap =
+document.getElementById("sealWrap");
+
 const music =
 document.getElementById("music");
 
@@ -627,10 +1660,82 @@ document.getElementById("musicButton");
 
 
 /* =====================================================
+   CHECK ID
+===================================================== */
+
+function checkInvitationId(){
+
+  if(!INVITATION_ID){
+
+    document.getElementById(
+      "loading"
+    ).innerHTML =
+      `
+      <div>
+        <div style="
+          font-size:24px;
+          margin-bottom:12px;
+        ">
+          ❌
+        </div>
+
+        <div>
+          Taklifnoma havolasi noto‘g‘ri.
+        </div>
+      </div>
+      `;
+
+    return false;
+  }
+
+
+  /*
+    ID faqat raqam bo‘lishi kerak.
+    Masalan:
+    25
+    26
+    27
+  */
+
+  if(!/^\d+$/.test(INVITATION_ID)){
+
+    document.getElementById(
+      "loading"
+    ).innerHTML =
+      `
+      <div>
+        <div style="
+          font-size:24px;
+          margin-bottom:12px;
+        ">
+          ❌
+        </div>
+
+        <div>
+          Taklifnoma ID noto‘g‘ri.
+        </div>
+      </div>
+      `;
+
+    return false;
+  }
+
+
+  return true;
+
+}
+
+
+/* =====================================================
    LOAD INVITATION
 ===================================================== */
 
 async function loadInvitation(){
+
+  if(!checkInvitationId()){
+    return;
+  }
+
 
   try{
 
@@ -645,14 +1750,20 @@ async function loadInvitation(){
         "&select=*",
 
         {
+
+          method:"GET",
+
           headers:{
-            apikey:
+
+            "apikey":
               SUPABASE_KEY,
 
-            Authorization:
+            "Authorization":
               "Bearer " +
               SUPABASE_KEY
+
           }
+
         }
 
       );
@@ -674,7 +1785,7 @@ async function loadInvitation(){
 
     if(
       !Array.isArray(data) ||
-      !data.length
+      data.length === 0
     ){
 
       throw new Error(
@@ -684,154 +1795,164 @@ async function loadInvitation(){
     }
 
 
-    const inv =
+    /*
+      MUHIM:
+
+      Bu yerda aynan URLdagi ID
+      olinadi.
+
+      /invite.html?id=25
+      → invitations.id = 25
+
+      /invite.html?id=26
+      → invitations.id = 26
+    */
+
+    const invitation =
       data[0];
 
 
+    /* =================================================
+       NAMES
+    ================================================= */
+
     const groom =
-      inv.groom_name ||
+      invitation.groom_name ||
       "Aziz";
 
 
     const bride =
-      inv.bride_name ||
+      invitation.bride_name ||
       "Madina";
 
 
-    [
-      "groomName",
-      "introGroom",
+    document.getElementById(
+      "groomName"
+    ).innerText =
+      groom;
+
+
+    document.getElementById(
+      "brideName"
+    ).innerText =
+      bride;
+
+
+    document.getElementById(
+      "introGroom"
+    ).innerText =
+      groom;
+
+
+    document.getElementById(
+      "introBride"
+    ).innerText =
+      bride;
+
+
+    document.getElementById(
       "letterGroom"
-    ].forEach(
-      id =>
-        document.getElementById(
-          id
-        ).innerText =
-          groom
-    );
+    ).innerText =
+      groom;
 
 
-    [
-      "brideName",
-      "introBride",
+    document.getElementById(
       "letterBride"
-    ].forEach(
-      id =>
-        document.getElementById(
-          id
-        ).innerText =
-          bride
-    );
+    ).innerText =
+      bride;
 
 
-    /* ================= PHOTO ================= */
+    /* =================================================
+       PHOTO
+    ================================================= */
 
-    if(inv.photo_url){
-
+    const photo =
       document.getElementById(
         "photo"
-      ).src =
-        inv.photo_url;
+      );
 
-    }else{
 
-      document.getElementById(
-        "photo"
-      ).style.display =
-        "none";
+    if(
+      invitation.photo_url &&
+      invitation.photo_url.trim() !== ""
+    ){
 
-      document.querySelector(
-        ".photo-wrap"
-      ).style.display =
-        "none";
+      photo.src =
+        invitation.photo_url;
+
+      photo.classList.add(
+        "show"
+      );
 
     }
 
 
-    /* ================= MUSIC ================= */
+    /* =================================================
+       MUSIC
+    ================================================= */
 
-    if(inv.music_url){
+    if(
+      invitation.music_url &&
+      invitation.music_url.trim() !== ""
+    ){
 
       music.src =
-        inv.music_url;
+        invitation.music_url;
 
       music.load();
 
     }
 
 
-    /* ================= LOCATION ================= */
-
-    const venue =
-      inv.venue ||
-      "Tantanali marosim";
-
-
-    const address =
-      inv.address ||
-      "";
-
+    /* =================================================
+       LOCATION
+    ================================================= */
 
     document.getElementById(
       "venue"
     ).innerText =
-      venue;
+      invitation.venue ||
+      "";
 
 
     document.getElementById(
       "address"
     ).innerText =
-      address;
+      invitation.address ||
+      "";
 
 
-    document.getElementById(
-      "mapTitle"
-    ).innerText =
-      venue;
-
-
-    if(inv.maps_url){
-
+    const mapsButton =
       document.getElementById(
         "mapsButton"
-      ).href =
-        inv.maps_url;
+      );
 
-    }
-
-
-    /* ================= GOOGLE MAP ================= */
 
     if(
-      address ||
-      venue
+      invitation.maps_url &&
+      invitation.maps_url.trim() !== ""
     ){
 
-      const q =
-        encodeURIComponent(
-          venue +
-          " " +
-          address
-        );
+      mapsButton.href =
+        invitation.maps_url;
 
+    }else{
 
-      document.getElementById(
-        "mapFrame"
-      ).src =
-        "https://www.google.com/maps?q=" +
-        q +
-        "&output=embed";
+      mapsButton.style.display =
+        "none";
 
     }
 
 
-    /* ================= DATE ================= */
+    /* =================================================
+       DATE
+    ================================================= */
 
-    if(inv.event_date){
+    if(invitation.event_date){
 
       const date =
         new Date(
-          inv.event_date +
+          invitation.event_date +
           "T18:00:00"
         );
 
@@ -860,23 +1981,16 @@ async function loadInvitation(){
 
         String(
           date.getDate()
-        ).padStart(
-          2,
-          "0"
-        )
+        ).padStart(2,"0")
 
-        +
-        " · "
+        + " · " +
 
-        +
         months[
           date.getMonth()
         ]
 
-        +
-        " · "
+        + " · " +
 
-        +
         date.getFullYear();
 
 
@@ -887,7 +2001,9 @@ async function loadInvitation(){
     }
 
 
-    /* ================= SHOW ================= */
+    /* =================================================
+       SHOW INVITATION
+    ================================================= */
 
     document.getElementById(
       "loading"
@@ -901,43 +2017,126 @@ async function loadInvitation(){
       "block";
 
 
-    requestAnimationFrame(
-      () => {
-
-        document
-          .querySelectorAll(
-            ".reveal"
-          )
-          .forEach(
-            (el,i) => {
-
-              setTimeout(
-                () =>
-                  el.classList.add(
-                    "show"
-                  ),
-                100 +
-                i * 120
-              );
-
-            }
-          );
-
-      }
-    );
-
-
   }catch(error){
 
     console.error(
+      "LOAD INVITATION ERROR:",
       error
     );
 
+
     document.getElementById(
       "loading"
-    ).innerText =
-      "Xatolik: " +
-      error.message;
+    ).innerHTML =
+      `
+      <div>
+        <div style="
+          font-size:24px;
+          margin-bottom:12px;
+        ">
+          ❌
+        </div>
+
+        <div>
+          ${error.message}
+        </div>
+      </div>
+      `;
+
+  }
+
+}
+
+
+/* =====================================================
+   PARTICLES
+===================================================== */
+
+function createParticles(){
+
+  const scene =
+    document.querySelector(
+      ".envelope-scene"
+    );
+
+
+  for(
+    let i=0;
+    i<28;
+    i++
+  ){
+
+    const particle =
+      document.createElement(
+        "div"
+      );
+
+
+    particle.className =
+      "particle";
+
+
+    const angle =
+      Math.random() *
+      Math.PI *
+      2;
+
+
+    const distance =
+      80 +
+      Math.random() *
+      190;
+
+
+    particle.style.setProperty(
+      "--x",
+      Math.cos(angle) *
+      distance +
+      "px"
+    );
+
+
+    particle.style.setProperty(
+      "--y",
+      Math.sin(angle) *
+      distance +
+      "px"
+    );
+
+
+    particle.style.left =
+      "50%";
+
+
+    particle.style.top =
+      "48%";
+
+
+    scene.appendChild(
+      particle
+    );
+
+
+    setTimeout(
+      function(){
+
+        particle.classList.add(
+          "fly"
+        );
+
+      },
+      Math.random()*250
+    );
+
+
+    setTimeout(
+      function(){
+
+        particle.remove();
+
+      },
+      1900
+    );
 
   }
 
@@ -964,47 +2163,91 @@ function openInvitation(){
 
 
   envelope.classList.add(
-    "open"
+    "camera"
+  );
+
+
+  sealWrap.classList.add(
+    "pressed"
   );
 
 
   setTimeout(
-    () => {
+    createParticles,
+    280
+  );
+
+
+  setTimeout(
+    function(){
+
+      envelope.classList.add(
+        "open"
+      );
+
+    },
+    500
+  );
+
+
+  setTimeout(
+    function(){
 
       if(music.src){
 
         music.play()
 
           .then(
-            () =>
+            function(){
+
               musicButton.innerText =
-                "Ⅱ"
+                "Ⅱ";
+
+            }
           )
 
           .catch(
-            () => {}
+            function(error){
+
+              console.log(
+                "Autoplay:",
+                error
+              );
+
+            }
           );
 
       }
 
     },
-    900
+    850
   );
 
 
   setTimeout(
-    () =>
+    function(){
+
       intro.classList.add(
         "hide"
-      ),
-    2200
+      );
+
+    },
+    2500
   );
 
 
   setTimeout(
-    () =>
-      intro.remove(),
-    3400
+    function(){
+
+      intro.remove();
+
+      window.scrollTo(
+        0,
+        0
+      );
+
+    },
+    3900
   );
 
 }
@@ -1026,13 +2269,23 @@ function toggleMusic(){
     music.play()
 
       .then(
-        () =>
+        function(){
+
           musicButton.innerText =
-            "Ⅱ"
+            "Ⅱ";
+
+        }
       )
 
       .catch(
-        () => {}
+        function(error){
+
+          console.log(
+            "Music error:",
+            error
+          );
+
+        }
       );
 
   }else{
@@ -1070,26 +2323,32 @@ function startCountdown(
 
   function update(){
 
-    const d =
+    const distance =
       weddingDate -
       Date.now();
 
 
-    if(d <= 0){
+    if(distance <= 0){
 
-      [
-        "days",
-        "hours",
-        "minutes",
+      document.getElementById(
+        "days"
+      ).innerText =
+        "00";
+
+      document.getElementById(
+        "hours"
+      ).innerText =
+        "00";
+
+      document.getElementById(
+        "minutes"
+      ).innerText =
+        "00";
+
+      document.getElementById(
         "seconds"
-      ].forEach(
-        id =>
-          document.getElementById(
-            id
-          ).innerText =
-            "00"
-      );
-
+      ).innerText =
+        "00";
 
       clearInterval(
         countdownTimer
@@ -1106,7 +2365,7 @@ function startCountdown(
 
       String(
         Math.floor(
-          d /
+          distance /
           86400000
         )
       ).padStart(
@@ -1121,7 +2380,7 @@ function startCountdown(
 
       String(
         Math.floor(
-          d /
+          distance /
           3600000
         ) % 24
       ).padStart(
@@ -1136,7 +2395,7 @@ function startCountdown(
 
       String(
         Math.floor(
-          d /
+          distance /
           60000
         ) % 60
       ).padStart(
@@ -1151,7 +2410,7 @@ function startCountdown(
 
       String(
         Math.floor(
-          d /
+          distance /
           1000
         ) % 60
       ).padStart(
@@ -1178,9 +2437,7 @@ function startCountdown(
    RSVP
 ===================================================== */
 
-async function sendRSVP(
-  event
-){
+async function sendRSVP(event){
 
   event.preventDefault();
 
@@ -1235,7 +2492,9 @@ async function sendRSVP(
 
   try{
 
-    /* ================= SUPABASE ================= */
+    /* ===============================================
+       SUPABASE RSVP
+    =============================================== */
 
     const response =
       await fetch(
@@ -1249,17 +2508,17 @@ async function sendRSVP(
 
           headers:{
 
-            apikey:
+            "apikey":
               SUPABASE_KEY,
 
-            Authorization:
+            "Authorization":
               "Bearer " +
               SUPABASE_KEY,
 
             "Content-Type":
               "application/json",
 
-            Prefer:
+            "Prefer":
               "return=minimal"
 
           },
@@ -1290,87 +2549,115 @@ async function sendRSVP(
 
     if(!response.ok){
 
-      const err =
+      const error =
         await response
           .json()
           .catch(
-            () => ({})
+            function(){
+              return {};
+            }
           );
 
 
       throw new Error(
-        err.message ||
+        error.message ||
         "RSVP yuborilmadi"
       );
 
     }
 
 
-    /* ================= TELEGRAM ================= */
+    /* ===============================================
+       TELEGRAM
+    =============================================== */
 
-    fetch(
-      "/api/rsvp",
-      {
+    const telegramResponse =
+      await fetch(
 
-        method:"POST",
+        "/api/rsvp",
 
-        headers:{
-          "Content-Type":
-            "application/json"
-        },
+        {
 
-        body:
-          JSON.stringify({
+          method:"POST",
 
-            invitationId:
-              Number(
-                INVITATION_ID
-              ),
+          headers:{
 
-            guestName:
-              guestName,
+            "Content-Type":
+              "application/json"
 
-            attendance:
-              attendance,
+          },
 
-            message:
-              guestMessage
+          body:
+            JSON.stringify({
 
-          })
+              invitationId:
+                Number(
+                  INVITATION_ID
+                ),
 
-      }
-    ).catch(
-      () => {}
-    );
+              guestName:
+                guestName,
 
+              attendance:
+                attendance,
+
+              message:
+                guestMessage
+
+            })
+
+        }
+
+      );
+
+
+    const telegramData =
+      await telegramResponse
+        .json()
+        .catch(
+          function(){
+            return {};
+          }
+        );
+
+
+    if(!telegramResponse.ok){
+
+      console.error(
+        "RSVP TELEGRAM ERROR:",
+        telegramData
+      );
+
+    }
+
+
+    /* ===============================================
+       SUCCESS
+    =============================================== */
 
     message.innerText =
       "❤️ Rahmat! Javobingiz saqlandi.";
 
 
-    /* ================= CLEAR ================= */
-
     document.getElementById(
       "guestName"
-    ).value =
-      "";
+    ).value = "";
 
 
     document.getElementById(
       "attendance"
-    ).value =
-      "";
+    ).value = "";
 
 
     document.getElementById(
       "guestMessage"
-    ).value =
-      "";
+    ).value = "";
 
 
   }catch(error){
 
     console.error(
+      "RSVP ERROR:",
       error
     );
 
