@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f7efe3">
+<meta name="theme-color" content="#f5eee5">
 
 <title>MyInviter</title>
 
 <style>
 
-/* =====================================================
+/* =========================================================
    RESET
-===================================================== */
+========================================================= */
 
 *{
   box-sizing:border-box;
@@ -24,404 +24,227 @@ html{
 }
 
 body{
-  background:#f7efe3;
-  color:#55463a;
+  background:#f7f0e7;
+  color:#55473b;
   font-family:Georgia,"Times New Roman",serif;
   overflow-x:hidden;
 }
 
-
-/* =====================================================
-   ROOT
-===================================================== */
-
-:root{
-  --cream:#f7efe3;
-  --cream-light:#fffaf2;
-  --cream-dark:#ead8bd;
-  --brown:#55463a;
-  --brown-light:#806f5e;
-  --gold:#c6a273;
-  --line:#dfcdb3;
+button,
+input,
+select,
+textarea{
+  font-family:inherit;
 }
 
 
-/* =====================================================
-   LOADING
-===================================================== */
+/* =========================================================
+   INTRO
+========================================================= */
 
-#loading{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:#f7efe3;
-  color:#a48c70;
-  font-size:13px;
-  letter-spacing:2px;
-}
-
-
-/* =====================================================
-   INVITATION
-===================================================== */
-
-#invitation{
-  display:none;
-  min-height:100vh;
-  background:var(--cream);
-  overflow:hidden;
-}
-
-
-/* =====================================================
-   PREMIUM BACKGROUND
-===================================================== */
-
-.page-bg{
+#intro{
   position:fixed;
   inset:0;
-  z-index:0;
-  pointer-events:none;
+  z-index:99999;
   overflow:hidden;
 
   background:
     radial-gradient(
-      ellipse at 50% 15%,
-      rgba(255,255,255,.95) 0%,
-      rgba(250,241,227,.85) 35%,
-      rgba(237,220,196,.72) 75%,
-      rgba(226,204,174,.6) 100%
+      ellipse at center 35%,
+      #fffdf9 0%,
+      #f6ecdf 48%,
+      #e4d1b9 100%
     );
+
+  transition:
+    opacity 1.3s ease,
+    visibility 1.3s ease;
 }
 
+#intro.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
 
-/* soft light */
-
-.page-bg::before{
+#intro::before{
   content:"";
   position:absolute;
-  width:600px;
-  height:600px;
-  left:50%;
-  top:10%;
+  inset:0;
 
-  transform:translateX(-50%);
+  opacity:.2;
+
+  background-image:
+    radial-gradient(
+      rgba(115,83,55,.16) .7px,
+      transparent .7px
+    );
+
+  background-size:5px 5px;
+}
+
+#intro::after{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 35%,
+      rgba(89,62,39,.13) 100%
+    );
+
+  pointer-events:none;
+}
+
+.light{
+  position:absolute;
+
+  width:450px;
+  height:450px;
+
+  left:50%;
+  top:45%;
+
+  transform:
+    translate(-50%,-50%);
 
   background:
     radial-gradient(
       circle,
-      rgba(255,255,255,.9),
-      rgba(255,255,255,0)
+      rgba(255,250,233,.85),
+      transparent 70%
     );
 
   filter:blur(20px);
 
   animation:
-    lightFloat 8s ease-in-out infinite;
+    lightMove 5s ease-in-out infinite;
 }
 
-@keyframes lightFloat{
+@keyframes lightMove{
 
   0%,100%{
-    transform:translateX(-50%) scale(1);
+    transform:
+      translate(-50%,-50%)
+      scale(1);
   }
 
   50%{
-    transform:translateX(-50%) scale(1.08);
+    transform:
+      translate(-50%,-52%)
+      scale(1.12);
   }
 
 }
 
-
-/* =====================================================
-   FLOATING PARTICLES
-===================================================== */
-
-.particles{
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  z-index:2;
-  overflow:hidden;
-}
-
-.particles span{
+.orbit{
   position:absolute;
 
-  width:4px;
-  height:4px;
+  left:50%;
+  top:50%;
 
-  border-radius:50%;
-
-  background:rgba(196,157,104,.45);
-
-  animation:
-    particleMove
-    linear
-    infinite;
-}
-
-.particles span:nth-child(1){
-  left:12%;
-  top:25%;
-  animation-duration:8s;
-}
-
-.particles span:nth-child(2){
-  left:72%;
-  top:18%;
-  animation-duration:11s;
-}
-
-.particles span:nth-child(3){
-  left:88%;
-  top:40%;
-  animation-duration:9s;
-}
-
-.particles span:nth-child(4){
-  left:23%;
-  top:58%;
-  animation-duration:12s;
-}
-
-.particles span:nth-child(5){
-  left:64%;
-  top:70%;
-  animation-duration:10s;
-}
-
-.particles span:nth-child(6){
-  left:45%;
-  top:35%;
-  animation-duration:13s;
-}
-
-@keyframes particleMove{
-
-  0%{
-    transform:translateY(0) scale(.5);
-    opacity:0;
-  }
-
-  20%{
-    opacity:.7;
-  }
-
-  50%{
-    transform:translateY(-35px) scale(1);
-    opacity:.8;
-  }
-
-  100%{
-    transform:translateY(-80px) scale(.3);
-    opacity:0;
-  }
-
-}
-
-
-/* =====================================================
-   FLOWER DECORATIONS
-===================================================== */
-
-.flower{
-  position:absolute;
-  pointer-events:none;
-  z-index:3;
-  opacity:.78;
-}
-
-.flower.top-left{
-  left:-35px;
-  top:30px;
-  width:150px;
-  height:150px;
-  transform:rotate(-12deg);
-}
-
-.flower.top-right{
-  right:-40px;
-  top:260px;
-  width:150px;
-  height:150px;
-  transform:rotate(15deg);
-}
-
-.flower.bottom-left{
-  left:-45px;
-  bottom:20px;
-  width:170px;
-  height:170px;
-  transform:rotate(12deg);
-}
-
-.flower.bottom-right{
-  right:-40px;
-  bottom:30px;
-  width:160px;
-  height:160px;
-  transform:rotate(-10deg);
-}
-
-.flower svg{
-  width:100%;
-  height:100%;
-  filter:
-    drop-shadow(
-      0 8px 14px
-      rgba(120,91,57,.08)
-    );
-}
-
-
-/* =====================================================
-   CONTENT
-===================================================== */
-
-.content{
-  position:relative;
-  z-index:5;
-}
-
-
-/* =====================================================
-   MUSIC
-===================================================== */
-
-.music-button{
-  position:fixed;
-
-  right:20px;
-  top:18px;
-
-  z-index:100;
-
-  width:52px;
-  height:52px;
-
-  border-radius:50%;
+  transform:
+    translate(-50%,-50%);
 
   border:
     1px solid
-    rgba(171,139,101,.55);
-
-  background:
-    rgba(255,252,247,.9);
-
-  backdrop-filter:blur(10px);
-
-  color:#6c5948;
-
-  font-size:16px;
-
-  cursor:pointer;
-
-  box-shadow:
-    0 10px 30px
-    rgba(82,59,36,.10);
-
-  transition:.3s ease;
-}
-
-.music-button:hover{
-  transform:scale(1.05);
-}
-
-
-/* =====================================================
-   HERO
-===================================================== */
-
-.hero{
-  position:relative;
-
-  min-height:100vh;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  text-align:center;
-
-  padding:
-    95px 20px
-    80px;
-
-  overflow:hidden;
-}
-
-
-/* silk-like waves */
-
-.hero::before{
-  content:"";
-  position:absolute;
-
-  width:120%;
-  height:430px;
-
-  left:-10%;
-  bottom:-100px;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      rgba(255,255,255,.75),
-      rgba(238,220,195,.25) 55%,
-      transparent 72%
-    );
+    rgba(155,121,84,.14);
 
   border-radius:50%;
-
-  transform:rotate(-4deg);
-
-  opacity:.8;
 }
 
-
-/* golden glow */
-
-.hero::after{
-  content:"";
-  position:absolute;
-
-  width:260px;
-  height:260px;
-
-  right:-90px;
-  top:80px;
-
-  background:
-    radial-gradient(
-      circle,
-      rgba(218,185,135,.20),
-      transparent 70%
-    );
-
-  filter:blur(15px);
+.orbit.one{
+  width:560px;
+  height:560px;
 }
 
+.orbit.two{
+  width:720px;
+  height:720px;
+  opacity:.55;
+}
 
-.hero-content{
+.orbit.three{
+  width:900px;
+  height:900px;
+  opacity:.25;
+}
+
+.intro-content{
   position:relative;
-  z-index:10;
+  z-index:5;
 
   width:100%;
-  max-width:600px;
+  height:100%;
 
-  animation:
-    heroAppear
-    1.2s
-    ease both;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+
+  padding-top:
+    clamp(90px,15vh,145px);
+
+  text-align:center;
 }
 
-@keyframes heroAppear{
+.small-label{
+  font-size:8px;
+  letter-spacing:6px;
+  color:#9a8065;
+
+  opacity:0;
+
+  animation:
+    textIn 1s .2s ease-out forwards;
+}
+
+.intro-names{
+  margin-top:22px;
+
+  font-size:
+    clamp(31px,8vw,45px);
+
+  color:#4d4034;
+
+  opacity:0;
+
+  animation:
+    textIn 1s .35s ease-out forwards;
+}
+
+.intro-names .amp{
+  margin:0 9px;
+
+  font-size:21px;
+
+  color:#b18e67;
+
+  font-style:italic;
+}
+
+.intro-subtitle{
+  margin-top:15px;
+
+  max-width:280px;
+
+  font-size:11px;
+  line-height:1.7;
+
+  color:#8b7764;
+
+  opacity:0;
+
+  animation:
+    textIn 1s .5s ease-out forwards;
+}
+
+@keyframes textIn{
 
   from{
     opacity:0;
-    transform:translateY(35px);
+    transform:translateY(15px);
   }
 
   to{
@@ -432,235 +255,863 @@ body{
 }
 
 
-/* =====================================================
-   LABEL
-===================================================== */
+/* =========================================================
+   ENVELOPE
+========================================================= */
 
-.label{
-  font-size:10px;
-  letter-spacing:4px;
-  color:#a58a69;
-  margin-bottom:28px;
+.envelope-scene{
+  position:relative;
+
+  width:min(360px,90vw);
+  height:320px;
+
+  margin-top:
+    clamp(20px,5vh,42px);
+
+  perspective:1200px;
+
+  opacity:0;
+
+  animation:
+    sceneIn 1s .5s ease-out forwards;
 }
 
+@keyframes sceneIn{
 
-/* =====================================================
-   DECORATIVE DIVIDER
-===================================================== */
+  from{
+    opacity:0;
+  }
 
-.ornament{
+  to{
+    opacity:1;
+  }
+
+}
+
+.envelope{
+  position:absolute;
+
+  width:min(330px,86vw);
+  height:215px;
+
+  left:50%;
+  top:48%;
+
+  transform:
+    translate(-50%,-50%)
+    scale(.88);
+
+  cursor:pointer;
+
+  transform-style:preserve-3d;
+
+  filter:
+    drop-shadow(
+      0 28px 25px
+      rgba(66,45,29,.20)
+    );
+
+  transition:
+    transform 1.35s
+    cubic-bezier(.16,1,.3,1);
+}
+
+.envelope.camera{
+  transform:
+    translate(-50%,-50%)
+    scale(.95);
+}
+
+.env-back{
+  position:absolute;
+  inset:0;
+
+  z-index:1;
+
+  border-radius:4px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #efe0ce,
+      #dfc9ad
+    );
+
+  border:
+    1px solid #cbb496;
+}
+
+.letter{
+  position:absolute;
+
+  z-index:2;
+
+  left:25px;
+  right:25px;
+  bottom:12px;
+
+  height:183px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #fffefa,
+      #f8f1e7
+    );
+
+  border:
+    1px solid #ded0bd;
+
+  box-shadow:
+    0 4px 20px
+    rgba(63,43,27,.12);
+
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+
+  transform:
+    translateY(5px);
+
+  transition:
+    transform 1.25s
+    cubic-bezier(.16,1,.3,1);
+}
+
+.letter-small{
+  font-size:8px;
+  letter-spacing:4px;
+
+  color:#9b8268;
+
+  margin-bottom:13px;
+}
+
+.letter-names{
+  font-size:27px;
+}
+
+.letter-line{
+  width:50px;
+  height:1px;
+
+  margin-top:16px;
+
+  background:#bca083;
+}
+
+.env-front{
+  position:absolute;
+  inset:0;
+
+  z-index:5;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e8d6bf,
+      #d9c1a3
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      50% 53%,
+      100% 0,
+      100% 100%,
+      0 100%
+    );
+
+  border-radius:4px;
+}
+
+.flap{
+  position:absolute;
+
+  z-index:8;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:130px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #f0dfcb,
+      #dcc4a5
+    );
+
+  clip-path:
+    polygon(
+      0 0,
+      100% 0,
+      50% 100%
+    );
+
+  transform-origin:top center;
+
+  transform:
+    rotateX(0deg);
+
+  backface-visibility:hidden;
+
+  transition:
+    transform 1.2s
+    cubic-bezier(.65,0,.2,1);
+}
+
+.envelope.open .flap{
+  transform:
+    rotateX(180deg);
+}
+
+.envelope.open .letter{
+  transform:
+    translateY(-110px);
+}
+
+.seal-wrap{
+  position:absolute;
+
+  z-index:20;
+
+  left:50%;
+  top:93px;
+
+  transform:
+    translateX(-50%);
+
+  transition:
+    transform .35s ease;
+}
+
+.seal{
+  position:relative;
+
+  width:80px;
+  height:80px;
+
+  border-radius:50%;
+
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:10px;
 
-  margin:
-    0 auto
-    25px;
+  background:
+    radial-gradient(
+      circle at 32% 27%,
+      #b16c60 0%,
+      #884b43 48%,
+      #673731 100%
+    );
+
+  border:
+    3px solid #9a5a50;
+
+  color:#f5ddd4;
+
+  font-size:27px;
+
+  box-shadow:
+    0 10px 18px
+    rgba(66,32,25,.28),
+    inset 0 2px 4px
+    rgba(255,255,255,.2);
+
+  animation:
+    sealFloat 2.6s ease-in-out infinite;
 }
 
-.ornament::before,
-.ornament::after{
+.seal::before{
   content:"";
 
-  width:55px;
-  height:1px;
+  position:absolute;
+  inset:7px;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      #c7a77a
-    );
+  border-radius:50%;
+
+  border:
+    1px solid
+    rgba(255,230,220,.4);
 }
 
-.ornament::after{
-  background:
-    linear-gradient(
-      90deg,
-      #c7a77a,
-      transparent
-    );
+@keyframes sealFloat{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      scale(1);
+  }
+
+  50%{
+    transform:
+      translateY(-3px)
+      scale(1.02);
+  }
+
 }
 
-.ornament span{
-  color:#c09a68;
-  font-size:17px;
+.seal-wrap.pressed{
+  animation:
+    sealPress .65s
+    cubic-bezier(.2,.9,.3,1)
+    forwards;
+}
+
+@keyframes sealPress{
+
+  0%{
+    transform:
+      translateX(-50%)
+      scale(1);
+  }
+
+  25%{
+    transform:
+      translateX(-50%)
+      scale(.82);
+  }
+
+  50%{
+    transform:
+      translateX(-50%)
+      scale(1.07)
+      rotate(-3deg);
+  }
+
+  75%{
+    transform:
+      translateX(-50%)
+      scale(.95)
+      rotate(2deg);
+  }
+
+  100%{
+    transform:
+      translateX(-50%)
+      scale(0)
+      rotate(18deg);
+
+    opacity:0;
+  }
+
+}
+
+.open-text{
+  position:absolute;
+
+  left:50%;
+  bottom:0;
+
+  transform:
+    translateX(-50%);
+
+  width:100%;
+
+  font-size:8px;
+  letter-spacing:3px;
+
+  color:#8a735d;
+
+  animation:
+    breathe 2.2s
+    ease-in-out infinite;
+}
+
+@keyframes breathe{
+
+  0%,100%{
+    opacity:.55;
+  }
+
+  50%{
+    opacity:1;
+  }
+
+}
+
+.particle{
+  position:absolute;
+
+  width:4px;
+  height:4px;
+
+  border-radius:50%;
+
+  background:#b99b72;
+
+  pointer-events:none;
+
+  opacity:0;
+
+  z-index:30;
+}
+
+.particle.fly{
+  animation:
+    particleFly 1.6s
+    ease-out forwards;
+}
+
+@keyframes particleFly{
+
+  0%{
+    opacity:0;
+
+    transform:
+      translate(0,0)
+      scale(.2);
+  }
+
+  15%{
+    opacity:.8;
+  }
+
+  100%{
+    opacity:0;
+
+    transform:
+      translate(
+        var(--x),
+        var(--y)
+      )
+      scale(0);
+  }
+
 }
 
 
-/* =====================================================
-   PHOTO
-===================================================== */
+/* =========================================================
+   LOADING
+========================================================= */
 
-.photo-wrap{
+#loading{
+  min-height:100vh;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  color:#9a826b;
+}
+
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+#invitation{
+  display:none;
+
   position:relative;
 
-  width:170px;
-  height:170px;
+  min-height:100vh;
 
-  margin:
-    0 auto
-    28px;
+  overflow:hidden;
+
+  background:
+    linear-gradient(
+      180deg,
+      #f7f0e7,
+      #fbf7f1 50%,
+      #f4eadf
+    );
+}
+
+
+/* =========================================================
+   DECORATIVE BACKGROUND
+========================================================= */
+
+#invitation::before{
+  content:"";
+
+  position:fixed;
+
+  width:420px;
+  height:420px;
+
+  left:-230px;
+  top:110px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(224,196,157,.32),
+      transparent 70%
+    );
+
+  filter:blur(20px);
+
+  pointer-events:none;
+}
+
+#invitation::after{
+  content:"";
+
+  position:fixed;
+
+  width:400px;
+  height:400px;
+
+  right:-230px;
+  bottom:100px;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(221,194,158,.3),
+      transparent 70%
+    );
+
+  filter:blur(20px);
+
+  pointer-events:none;
+}
+
+
+/* =========================================================
+   FLORAL DECOR
+========================================================= */
+
+.flower{
+  position:absolute;
+
+  width:180px;
+  height:180px;
+
+  pointer-events:none;
+
+  opacity:.48;
+
+  z-index:0;
+}
+
+.flower::before,
+.flower::after{
+  content:"";
+
+  position:absolute;
+
+  border-radius:50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.95),
+      rgba(226,201,169,.45)
+    );
+
+  box-shadow:
+    0 0 20px
+    rgba(196,158,113,.14);
+}
+
+.flower::before{
+  width:90px;
+  height:45px;
+
+  left:20px;
+  top:45px;
+
+  transform:rotate(-35deg);
+}
+
+.flower::after{
+  width:90px;
+  height:45px;
+
+  left:75px;
+  top:80px;
+
+  transform:rotate(35deg);
+}
+
+.flower-left{
+  left:-75px;
+  top:100px;
+
+  transform:rotate(-20deg);
+
+  animation:
+    floralFloat 7s ease-in-out infinite;
+}
+
+.flower-right{
+  right:-75px;
+  bottom:240px;
+
+  transform:rotate(20deg);
+
+  animation:
+    floralFloat 8s ease-in-out infinite reverse;
+}
+
+@keyframes floralFloat{
+
+  0%,100%{
+    transform:
+      translateY(0)
+      rotate(-20deg);
+  }
+
+  50%{
+    transform:
+      translateY(-12px)
+      rotate(-15deg);
+  }
+
+}
+
+
+/* =========================================================
+   MUSIC
+========================================================= */
+
+.music-button{
+  position:fixed;
+
+  right:18px;
+  top:18px;
+
+  z-index:100;
+
+  width:48px;
+  height:48px;
+
+  border-radius:50%;
+
+  border:
+    1px solid #c9b091;
+
+  background:
+    rgba(255,253,249,.94);
+
+  color:#665446;
+
+  cursor:pointer;
+
+  box-shadow:
+    0 8px 25px
+    rgba(87,63,40,.10);
+
+  backdrop-filter:blur(8px);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+  position:relative;
+
+  min-height:100vh;
+
+  display:flex;
+
+  align-items:center;
+  justify-content:center;
+
+  text-align:center;
+
+  padding:
+    95px 20px
+    70px;
+
+  overflow:hidden;
+}
+
+.hero-content{
+  position:relative;
+  z-index:2;
+
+  width:100%;
+  max-width:650px;
+
+  animation:
+    mainAppear 1.3s
+    ease-out both;
+}
+
+@keyframes mainAppear{
+
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+}
+
+.label{
+  font-size:9px;
+  letter-spacing:4px;
+
+  color:#a58a6d;
+
+  margin-bottom:25px;
 }
 
 .photo{
-  width:170px;
-  height:170px;
+  width:180px;
+  height:180px;
 
   object-fit:cover;
 
   border-radius:50%;
 
   border:
-    6px solid
+    7px solid
     rgba(255,255,255,.9);
 
   box-shadow:
-    0 18px 50px
-    rgba(86,61,37,.16);
+    0 15px 45px
+    rgba(79,54,34,.15);
+
+  margin-bottom:25px;
 }
-
-.photo-wrap::after{
-  content:"";
-
-  position:absolute;
-  inset:-9px;
-
-  border-radius:50%;
-
-  border:
-    1px solid
-    rgba(190,153,105,.45);
-
-  animation:
-    photoRing
-    5s ease-in-out infinite;
-}
-
-@keyframes photoRing{
-
-  0%,100%{
-    transform:scale(1);
-    opacity:.5;
-  }
-
-  50%{
-    transform:scale(1.04);
-    opacity:1;
-  }
-
-}
-
-
-/* =====================================================
-   NAMES
-===================================================== */
 
 h1{
-  font-size:48px;
+  font-size:
+    clamp(42px,12vw,58px);
+
   font-weight:normal;
-  line-height:1.05;
-  color:#59483a;
+
+  line-height:1.04;
+
+  color:#514238;
 }
 
 .and{
-  font-size:24px;
-  color:#b08a5e;
+  font-size:25px;
+
+  color:#ae8d69;
+
   font-style:italic;
+
   margin:10px 0;
 }
 
+.divider{
+  width:100px;
+  height:1px;
 
-/* =====================================================
-   DESCRIPTION
-===================================================== */
+  background:#c9a87f;
 
-.description{
-  color:#78695c;
-  line-height:1.9;
+  margin:30px auto;
+
+  position:relative;
+}
+
+.divider::before{
+  content:"✦";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  background:#f7f0e7;
+
+  padding:0 12px;
+
+  color:#b38f68;
+
   font-size:14px;
 }
 
+.description{
+  color:#75675b;
 
-/* =====================================================
-   DATE
-===================================================== */
+  line-height:1.9;
+
+  font-size:15px;
+}
 
 .event-date{
   margin-top:25px;
 
-  font-size:12px;
+  font-size:14px;
 
   letter-spacing:4px;
 
-  color:#806b55;
+  color:#6d5b4b;
 }
 
 
-/* =====================================================
+/* =========================================================
    COUNTDOWN
-===================================================== */
+========================================================= */
 
 .countdown{
   display:flex;
 
   justify-content:center;
 
-  gap:7px;
+  gap:8px;
 
-  margin:
-    30px
-    auto;
-
-  max-width:330px;
+  margin:32px 0;
 }
 
 .count-box{
-  width:70px;
+  width:68px;
 
   padding:13px 5px;
 
   background:
-    rgba(255,252,247,.75);
+    rgba(255,253,249,.75);
 
   border:
-    1px solid
-    rgba(208,188,160,.6);
+    1px solid #e5d8c8;
+
+  border-radius:3px;
 
   box-shadow:
     0 8px 25px
-    rgba(87,62,38,.05);
-
-  backdrop-filter:blur(5px);
+    rgba(91,66,42,.05);
 }
 
 .count-box b{
   display:block;
 
-  font-size:21px;
+  font-size:22px;
 
   font-weight:normal;
-
-  color:#5b4b3d;
 }
 
 .count-box span{
   display:block;
 
-  margin-top:5px;
-
-  font-size:7px;
+  font-size:8px;
 
   letter-spacing:1px;
 
-  color:#a08a71;
+  color:#9b836c;
+
+  margin-top:5px;
 }
 
 
-/* =====================================================
+/* =========================================================
    BUTTON
-===================================================== */
+========================================================= */
 
 .button{
   display:inline-flex;
@@ -668,21 +1119,13 @@ h1{
   align-items:center;
   justify-content:center;
 
-  min-width:145px;
-
   padding:
-    14px 22px;
-
-  margin:4px;
+    14px 26px;
 
   border:
-    1px solid
-    #ae8b66;
+    1px solid #a98a6c;
 
-  background:
-    rgba(255,252,247,.45);
-
-  color:#665343;
+  color:#5d4c3e;
 
   text-decoration:none;
 
@@ -690,507 +1133,401 @@ h1{
 
   letter-spacing:2px;
 
-  font-family:inherit;
+  background:
+    rgba(255,255,255,.22);
 
   cursor:pointer;
 
+  margin:4px;
+
   transition:
-    .35s ease;
+    .3s ease;
 }
 
 .button:hover{
-  background:#665343;
+  background:#665344;
   color:#fff;
-  transform:translateY(-2px);
+
+  transform:
+    translateY(-2px);
 }
 
 
-/* =====================================================
-   SCROLL DOWN
-===================================================== */
+/* =========================================================
+   PREMIUM MAP SECTION
+========================================================= */
 
-.scroll-down{
-  position:absolute;
-
-  bottom:35px;
-  left:50%;
-
-  transform:translateX(-50%);
-
-  color:#b09370;
-
-  font-size:22px;
-
-  animation:
-    scrollArrow
-    1.8s
-    ease-in-out
-    infinite;
-}
-
-@keyframes scrollArrow{
-
-  0%,100%{
-    transform:
-      translateX(-50%)
-      translateY(0);
-    opacity:.45;
-  }
-
-  50%{
-    transform:
-      translateX(-50%)
-      translateY(8px);
-    opacity:1;
-  }
-
-}
-
-
-/* =====================================================
-   LOCATION SECTION
-===================================================== */
-
-.location-section{
+.map-section{
   position:relative;
 
   min-height:680px;
 
+  padding:
+    0 0 85px;
+
   overflow:hidden;
 
-  padding:
-    0 0
-    70px;
-
   background:
-    #eee0cb;
+    #efe5d8;
 }
 
+.map-title{
+  position:absolute;
 
-/* map */
+  top:45px;
+  left:50%;
 
-.map{
+  transform:
+    translateX(-50%);
+
+  z-index:5;
+
+  width:90%;
+
+  text-align:center;
+
+  pointer-events:none;
+}
+
+.map-title h2{
+  font-size:
+    clamp(30px,8vw,43px);
+
+  font-weight:normal;
+
+  color:#514238;
+}
+
+.map-title .small{
+  margin-top:9px;
+
+  font-size:9px;
+
+  letter-spacing:4px;
+
+  color:#a08870;
+}
+
+.map-frame{
   position:absolute;
 
   inset:0;
 
-  z-index:0;
-
-  overflow:hidden;
-}
-
-.map iframe{
   width:100%;
   height:100%;
 
   border:0;
 
   filter:
-    sepia(.22)
+    sepia(.18)
     saturate(.65)
-    contrast(.88)
-    brightness(1.08);
+    contrast(.95);
 
-  transform:scale(1.05);
+  opacity:.76;
 }
-
-
-/* map overlay */
 
 .map-overlay{
   position:absolute;
 
   inset:0;
 
+  z-index:2;
+
+  pointer-events:none;
+
   background:
     linear-gradient(
       180deg,
-      rgba(248,238,222,.92) 0%,
-      rgba(248,238,222,.10) 24%,
-      rgba(248,238,222,.04) 55%,
-      rgba(248,238,222,.92) 100%
+      rgba(248,241,231,.96) 0%,
+      rgba(248,241,231,.18) 30%,
+      rgba(248,241,231,.08) 60%,
+      rgba(248,241,231,.75) 100%
     );
-
-  z-index:1;
 }
-
-
-/* =====================================================
-   LOCATION TITLE
-===================================================== */
-
-.location-content{
-  position:relative;
-
-  z-index:5;
-
-  min-height:680px;
-
-  display:flex;
-
-  flex-direction:column;
-
-  align-items:center;
-
-  padding:
-    55px 20px
-    35px;
-}
-
-.location-title{
-  font-size:38px;
-
-  font-weight:normal;
-
-  color:#59483a;
-
-  text-align:center;
-
-  margin-bottom:15px;
-}
-
-.location-subtitle{
-  color:#806f5f;
-
-  font-size:14px;
-
-  margin-bottom:30px;
-}
-
-
-/* =====================================================
-   MAP PIN
-===================================================== */
 
 .map-pin{
-  position:relative;
-
-  margin-top:70px;
-
-  width:74px;
-  height:94px;
-
-  filter:
-    drop-shadow(
-      0 12px 10px
-      rgba(87,59,33,.20)
-    );
-
-  animation:
-    pinFloat
-    2.8s
-    ease-in-out
-    infinite;
-}
-
-.pin-shape{
   position:absolute;
 
   left:50%;
-  top:0;
+  top:48%;
 
-  width:62px;
-  height:62px;
+  z-index:4;
 
   transform:
-    translateX(-50%)
-    rotate(-45deg);
+    translate(-50%,-50%);
+
+  width:58px;
+  height:72px;
 
   border-radius:
-    50%
-    50%
-    50%
-    0;
+    50% 50% 50% 0;
 
   background:
     linear-gradient(
       145deg,
-      #d9b47d,
-      #b88c59
+      #c99e67,
+      #a97d4d
     );
+
+  transform:
+    translate(-50%,-50%)
+    rotate(-45deg);
+
+  box-shadow:
+    0 15px 30px
+    rgba(75,51,31,.22);
+
+  animation:
+    pinFloat 2.8s ease-in-out infinite;
 }
 
-.pin-hole{
+.map-pin::after{
+  content:"";
+
   position:absolute;
 
-  left:50%;
-  top:20px;
-
-  transform:translateX(-50%);
-
-  width:22px;
-  height:22px;
+  width:20px;
+  height:20px;
 
   border-radius:50%;
 
-  background:#f8efe2;
+  background:#f8f0e4;
 
-  z-index:2;
+  left:19px;
+  top:19px;
 }
 
 @keyframes pinFloat{
 
   0%,100%{
-    transform:translateY(0);
+    margin-top:0;
   }
 
   50%{
-    transform:translateY(-8px);
+    margin-top:-10px;
   }
 
 }
 
+.map-card{
+  position:absolute;
 
-/* =====================================================
-   LOCATION CARD
-===================================================== */
+  z-index:5;
 
-.location-card{
+  left:50%;
+  bottom:45px;
+
+  transform:
+    translateX(-50%);
+
   width:
-    min(560px,92vw);
+    min(560px,88%);
 
-  margin-top:35px;
+  padding:27px 28px;
 
-  padding:
-    25px 24px;
+  display:flex;
 
-  border-radius:20px;
+  align-items:center;
+
+  gap:20px;
 
   background:
-    rgba(255,252,247,.91);
-
-  backdrop-filter:
-    blur(14px);
-
-  box-shadow:
-    0 20px 55px
-    rgba(83,57,33,.13);
+    rgba(255,253,249,.92);
 
   border:
     1px solid
-    rgba(207,182,148,.45);
+    rgba(213,195,172,.75);
 
-  display:grid;
+  border-radius:20px;
 
-  grid-template-columns:
-    1fr
-    auto;
+  box-shadow:
+    0 18px 50px
+    rgba(81,58,37,.15);
 
-  gap:18px;
+  backdrop-filter:blur(12px);
+}
 
+.map-card-icon{
+  flex:none;
+
+  width:48px;
+  height:48px;
+
+  display:flex;
   align-items:center;
+  justify-content:center;
+
+  border-radius:50%;
+
+  border:
+    1px solid #c8aa86;
+
+  color:#9b7954;
+
+  font-size:21px;
 }
 
-.location-info{
-  display:flex;
-  flex-direction:column;
-  gap:19px;
-}
-
-.location-row{
-  display:flex;
-  align-items:flex-start;
-  gap:15px;
+.map-card-info{
+  flex:1;
 
   text-align:left;
 }
 
-.location-icon{
-  width:31px;
-  min-width:31px;
-  height:31px;
-
-  border-radius:50%;
-
-  border:
-    1px solid
-    #c5a47b;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  color:#a07b52;
-
-  font-size:14px;
-}
-
-.location-row strong{
+.map-card-info strong{
   display:block;
 
-  font-size:16px;
+  font-size:17px;
 
-  color:#5a4a3c;
+  color:#514238;
 
-  margin-bottom:4px;
+  margin-bottom:6px;
 }
 
-.location-row span{
+.map-card-info span{
   display:block;
 
-  color:#78695b;
+  font-size:13px;
 
-  font-size:14px;
+  line-height:1.6;
 
-  line-height:1.5;
+  color:#76695d;
 }
-
-
-/* map button circle */
 
 .map-go{
-  width:54px;
-  height:54px;
+  flex:none;
+
+  width:50px;
+  height:50px;
 
   border-radius:50%;
 
-  border:
-    1px solid
-    #b89972;
-
   display:flex;
-
   align-items:center;
   justify-content:center;
 
-  color:#8f704d;
+  border:
+    1px solid #bca17f;
+
+  color:#745b42;
 
   text-decoration:none;
 
-  font-size:21px;
+  font-size:19px;
 
   transition:.3s ease;
 }
 
 .map-go:hover{
-  background:#6a5645;
-  color:white;
+  background:#705b47;
+  color:#fff;
 
   transform:
-    rotate(12deg)
-    scale(1.05);
+    rotate(10deg);
 }
 
 
-/* =====================================================
-   RSVP SECTION
-===================================================== */
+/* =========================================================
+   RSVP
+========================================================= */
 
 .rsvp-section{
   position:relative;
 
-  overflow:hidden;
-
   padding:
-    90px
-    20px
+    90px 20px
     100px;
 
   text-align:center;
 
   background:
+    linear-gradient(
+      180deg,
+      #fbf7f1,
+      #f7eee3
+    );
+
+  overflow:hidden;
+}
+
+.rsvp-section::before{
+  content:"";
+
+  position:absolute;
+
+  width:300px;
+  height:300px;
+
+  left:-150px;
+  bottom:-100px;
+
+  border-radius:50%;
+
+  background:
     radial-gradient(
-      ellipse at center top,
-      rgba(255,255,255,.95),
-      rgba(248,239,226,.95) 55%,
-      rgba(235,218,193,.95)
+      circle,
+      rgba(224,197,164,.3),
+      transparent 70%
     );
 }
 
-
-/* decorative leaves */
-
-.leaf-decoration{
-  position:absolute;
-
-  right:-15px;
-  bottom:30px;
-
-  width:150px;
-
-  opacity:.45;
-
-  transform:
-    rotate(-10deg);
-}
-
-.leaf-decoration.left{
-  left:-25px;
-  right:auto;
-  top:100px;
-  bottom:auto;
-  transform:
-    rotate(170deg);
-}
-
-
-/* =====================================================
-   RSVP TITLE
-===================================================== */
-
 .rsvp-title{
-  font-size:43px;
+  position:relative;
+
+  z-index:2;
+}
+
+.rsvp-title h2{
+  font-size:
+    clamp(38px,10vw,52px);
 
   font-weight:normal;
 
-  color:#5a493b;
+  color:#514238;
+}
 
-  margin-bottom:13px;
+.rsvp-divider{
+  width:100px;
+  height:1px;
+
+  background:#c8a57b;
+
+  margin:17px auto 20px;
+
+  position:relative;
+}
+
+.rsvp-divider::after{
+  content:"✦";
+
+  position:absolute;
+
+  left:50%;
+  top:50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  padding:0 12px;
+
+  background:#fbf7f1;
+
+  color:#b18c64;
 }
 
 .rsvp-subtitle{
-  color:#77685b;
+  font-size:14px;
 
-  font-size:15px;
+  color:#74665a;
 
-  margin-bottom:30px;
+  margin-bottom:35px;
 }
-
-
-/* =====================================================
-   RSVP ORNAMENT
-===================================================== */
-
-.rsvp-ornament{
-  display:flex;
-
-  align-items:center;
-  justify-content:center;
-
-  gap:10px;
-
-  margin-bottom:22px;
-}
-
-.rsvp-ornament::before,
-.rsvp-ornament::after{
-  content:"";
-
-  width:50px;
-
-  height:1px;
-
-  background:#c9aa82;
-}
-
-.rsvp-ornament span{
-  color:#c09b69;
-
-  font-size:17px;
-}
-
-
-/* =====================================================
-   RSVP FORM
-===================================================== */
 
 .rsvp{
   position:relative;
 
-  z-index:5;
+  z-index:2;
 
-  width:
-    min(550px,94vw);
+  max-width:560px;
 
   margin:auto;
 }
@@ -1206,45 +1543,36 @@ h1{
   margin-bottom:14px;
 
   border:
-    1px solid
-    rgba(210,188,157,.65);
+    1px solid #e2d5c7;
 
   border-radius:14px;
 
   background:
-    rgba(255,252,247,.72);
+    rgba(255,253,249,.72);
 
-  color:#55483d;
-
-  font-family:inherit;
-
-  font-size:14px;
+  color:#4d4238;
 
   outline:none;
 
-  transition:.3s ease;
+  font-size:14px;
 
   box-shadow:
-    0 5px 20px
-    rgba(85,60,36,.03);
-}
+    0 6px 20px
+    rgba(78,54,34,.025);
 
-.rsvp input::placeholder,
-.rsvp textarea::placeholder{
-  color:#a69583;
+  transition:.3s ease;
 }
 
 .rsvp input:focus,
 .rsvp select:focus,
 .rsvp textarea:focus{
-  border-color:#b99a73;
+  border-color:#bda07d;
 
-  background:
-    rgba(255,255,255,.92);
+  background:#fffdfa;
 
   box-shadow:
-    0 0 0 3px
-    rgba(190,157,112,.10);
+    0 8px 25px
+    rgba(95,67,40,.08);
 }
 
 .rsvp select{
@@ -1255,83 +1583,82 @@ h1{
   height:125px;
 
   resize:none;
-
-  line-height:1.6;
 }
 
+.rsvp input::placeholder,
+.rsvp textarea::placeholder{
+  color:#aaa097;
+}
 
-/* =====================================================
-   RSVP BUTTON
-===================================================== */
+.rsvp-submit{
+  min-width:210px;
 
-.rsvp .button{
-  min-width:220px;
+  margin-top:8px;
 
-  margin-top:5px;
+  border-radius:12px;
 
-  border:none;
+  border:0;
 
-  border-radius:10px;
+  padding:16px 28px;
 
   background:
     linear-gradient(
       135deg,
-      #d8b47e,
-      #cba36d
+      #dfbf91,
+      #cda675
     );
 
-  color:white;
+  color:#fff;
+
+  letter-spacing:2px;
+
+  font-size:10px;
 
   box-shadow:
     0 10px 25px
-    rgba(157,116,68,.18);
+    rgba(148,109,67,.18);
+
+  cursor:pointer;
+
+  transition:.3s ease;
 }
 
-.rsvp .button:hover{
-  background:
-    linear-gradient(
-      135deg,
-      #c99d64,
-      #b98c54
-    );
+.rsvp-submit:hover{
+  transform:
+    translateY(-2px);
 
-  transform:translateY(-2px);
+  box-shadow:
+    0 14px 30px
+    rgba(148,109,67,.25);
 }
-
-
-/* =====================================================
-   MESSAGE
-===================================================== */
 
 .message{
-  margin-top:16px;
+  margin-top:18px;
 
-  color:#71815f;
+  color:#70805e;
 
   font-size:14px;
-
-  min-height:20px;
 }
 
 
-/* =====================================================
+/* =========================================================
    FOOTER
-===================================================== */
+========================================================= */
 
 .premium-footer{
   position:relative;
+
+  text-align:center;
 
   padding:
     80px 20px
     45px;
 
-  text-align:center;
-
   background:
     linear-gradient(
       180deg,
-      #ead9c0,
-      #e3ceb0
+      #f2e6d8,
+      #e9dccb
     );
 
   overflow:hidden;
@@ -1342,30 +1669,33 @@ h1{
 
   position:absolute;
 
-  width:500px;
-  height:220px;
+  width:300px;
+  height:300px;
 
   left:50%;
-  top:-100px;
+  top:-210px;
 
-  transform:translateX(-50%);
+  transform:
+    translateX(-50%);
 
   border-radius:50%;
 
   background:
-    rgba(255,255,255,.32);
-
-  filter:blur(20px);
+    radial-gradient(
+      circle,
+      rgba(255,255,255,.7),
+      transparent 70%
+    );
 }
 
 .instagram-title{
   position:relative;
 
-  font-size:9px;
+  font-size:10px;
 
   letter-spacing:4px;
 
-  color:#92795d;
+  color:#9b836c;
 
   margin-bottom:16px;
 }
@@ -1375,7 +1705,7 @@ h1{
 
   display:inline-block;
 
-  color:#5b493a;
+  color:#493d32;
 
   text-decoration:none;
 
@@ -1386,8 +1716,7 @@ h1{
   padding-bottom:7px;
 
   border-bottom:
-    1px solid
-    #b99970;
+    1px solid #bca083;
 }
 
 .instagram-text{
@@ -1395,11 +1724,11 @@ h1{
 
   margin-top:25px;
 
-  color:#806e5b;
-
   font-size:13px;
 
   font-style:italic;
+
+  color:#806f5e;
 
   line-height:1.8;
 }
@@ -1412,16 +1741,17 @@ h1{
   align-items:center;
   justify-content:center;
 
-  margin-top:26px;
+  margin-top:27px;
 
   padding:
-    14px 28px;
+    15px 30px;
 
-  border-radius:8px;
+  border-radius:10px;
 
-  background:#5c4c3e;
+  background:
+    #5d4d3e;
 
-  color:white;
+  color:#fff;
 
   text-decoration:none;
 
@@ -1431,178 +1761,177 @@ h1{
 
   box-shadow:
     0 10px 25px
-    rgba(65,45,28,.15);
+    rgba(60,40,25,.14);
 
   transition:.3s ease;
 }
 
 .create-invitation-button:hover{
-  transform:translateY(-2px);
+  transform:
+    translateY(-2px);
+
+  background:#493d32;
 }
 
 
-/* =====================================================
+/* =========================================================
    FOOTER
-===================================================== */
+========================================================= */
 
 footer{
-  position:relative;
-
   text-align:center;
 
   padding:
-    22px;
+    25px 20px
+    30px;
 
-  background:#e3ceb0;
-
-  color:#927b61;
-
-  font-size:9px;
+  font-size:10px;
 
   letter-spacing:2px;
+
+  color:#9b836c;
+
+  background:#e9dccb;
 }
 
 
-/* =====================================================
+/* =========================================================
+   SCROLL ANIMATION
+========================================================= */
+
+.reveal{
+  opacity:0;
+
+  transform:
+    translateY(35px);
+
+  transition:
+    opacity .9s ease,
+    transform .9s ease;
+}
+
+.reveal.visible{
+  opacity:1;
+
+  transform:
+    translateY(0);
+}
+
+
+/* =========================================================
    MOBILE
-===================================================== */
+========================================================= */
 
 @media(max-width:600px){
 
-  .music-button{
-    width:48px;
-    height:48px;
-    right:15px;
-    top:14px;
+  .intro-content{
+    padding-top:90px;
   }
 
-  .hero{
-    padding:
-      85px 18px
-      70px;
+  .intro-names{
+    font-size:32px;
   }
 
-  h1{
-    font-size:43px;
+  .envelope-scene{
+    height:310px;
   }
 
-  .photo-wrap,
+  .envelope{
+    transform:
+      translate(-50%,-50%)
+      scale(.82);
+  }
+
+  .envelope.camera{
+    transform:
+      translate(-50%,-50%)
+      scale(.88);
+  }
+
   .photo{
     width:155px;
     height:155px;
   }
 
-  .label{
-    font-size:8px;
-    letter-spacing:3px;
-  }
+  .hero{
+    min-height:100svh;
 
-  .event-date{
-    font-size:11px;
-    letter-spacing:3px;
-  }
-
-  .countdown{
-    gap:5px;
+    padding-top:90px;
   }
 
   .count-box{
     width:62px;
-    padding:12px 3px;
   }
 
   .count-box b{
     font-size:19px;
   }
 
-  .location-section{
-    min-height:680px;
+  .map-section{
+    min-height:650px;
   }
 
-  .location-content{
-    min-height:680px;
-    padding-top:45px;
+  .map-title{
+    top:35px;
   }
 
-  .location-title{
-    font-size:34px;
+  .map-card{
+    width:88%;
+
+    padding:20px;
+
+    gap:13px;
   }
 
-  .map-pin{
-    margin-top:60px;
+  .map-card-icon{
+    width:42px;
+    height:42px;
   }
 
-  .location-card{
-    width:92vw;
-
-    padding:
-      20px 17px;
-
-    grid-template-columns:
-      1fr
-      auto;
+  .map-card-info strong{
+    font-size:15px;
   }
 
-  .location-row strong{
-    font-size:14px;
-  }
-
-  .location-row span{
-    font-size:13px;
+  .map-card-info span{
+    font-size:12px;
   }
 
   .map-go{
-    width:48px;
-    height:48px;
-  }
-
-  .rsvp-section{
-    padding:
-      75px 16px
-      85px;
-  }
-
-  .rsvp-title{
-    font-size:39px;
-  }
-
-  .flower.top-left{
-    width:110px;
-    height:110px;
-    left:-35px;
-  }
-
-  .flower.top-right{
-    width:110px;
-    height:110px;
-    right:-35px;
-  }
-
-  .flower.bottom-left{
-    width:120px;
-    height:120px;
-  }
-
-  .flower.bottom-right{
-    width:120px;
-    height:120px;
+    width:43px;
+    height:43px;
   }
 
 }
 
+@media(max-height:700px){
 
-/* =====================================================
-   REDUCED MOTION
-===================================================== */
+  .intro-content{
+    padding-top:60px;
+  }
+
+  .intro-names{
+    font-size:30px;
+  }
+
+  .envelope-scene{
+    height:290px;
+  }
+
+}
 
 @media(prefers-reduced-motion:reduce){
 
   *,
   *::before,
   *::after{
+
     animation-duration:.01ms !important;
+
     animation-iteration-count:1 !important;
+
     transition-duration:.01ms !important;
+
+    scroll-behavior:auto !important;
   }
 
 }
@@ -1615,11 +1944,110 @@ footer{
 
 
 <!-- =====================================================
+     INTRO
+===================================================== -->
+
+<div id="intro">
+
+  <div class="light"></div>
+
+  <div class="orbit one"></div>
+  <div class="orbit two"></div>
+  <div class="orbit three"></div>
+
+  <div class="intro-content">
+
+    <div class="small-label">
+      TAKLIFNOMA
+    </div>
+
+    <div class="intro-names">
+
+      <span id="introGroom">
+        Aziz
+      </span>
+
+      <span class="amp">
+        &
+      </span>
+
+      <span id="introBride">
+        Madina
+      </span>
+
+    </div>
+
+    <div class="intro-subtitle">
+      Bu taklifnoma siz uchun
+      maxsus tayyorlandi
+    </div>
+
+    <div class="envelope-scene">
+
+      <div
+        class="envelope"
+        id="envelope"
+        onclick="openInvitation()">
+
+        <div class="env-back"></div>
+
+        <div class="letter">
+
+          <div class="letter-small">
+            NIKOH TO‘YI
+          </div>
+
+          <div class="letter-names">
+
+            <span id="letterGroom">
+              Aziz
+            </span>
+
+            &
+
+            <span id="letterBride">
+              Madina
+            </span>
+
+          </div>
+
+          <div class="letter-line"></div>
+
+        </div>
+
+        <div class="env-front"></div>
+
+        <div class="flap"></div>
+
+        <div
+          class="seal-wrap"
+          id="sealWrap">
+
+          <div class="seal">
+            ♡
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="open-text">
+        OCHISH UCHUN MUHRNI BOSING
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- =====================================================
      LOADING
 ===================================================== -->
 
 <div id="loading">
-  TAKLIFNOMA YUKLANMOQDA...
+  Taklifnoma yuklanmoqda...
 </div>
 
 
@@ -1629,693 +2057,314 @@ footer{
 
 <div id="invitation">
 
+  <div class="flower flower-left"></div>
+  <div class="flower flower-right"></div>
 
-<!-- PREMIUM BACKGROUND -->
 
-<div class="page-bg"></div>
+  <!-- MUSIC -->
 
-<div class="particles">
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+  <button
+    class="music-button"
+    id="musicButton"
+    onclick="toggleMusic()">
 
+    ♪
 
-<!-- =====================================================
-     MUSIC
-===================================================== -->
+  </button>
 
-<button
-  class="music-button"
-  id="musicButton"
-  onclick="toggleMusic()">
-  ♪
-</button>
+  <audio
+    id="music"
+    preload="auto">
+  </audio>
 
-<audio
-  id="music"
-  preload="auto">
-</audio>
 
+  <!-- ===================================================
+       HERO
+  =================================================== -->
 
-<div class="content">
+  <section class="hero">
 
+    <div class="hero-content">
 
-<!-- =====================================================
-     HERO
-===================================================== -->
+      <div class="label">
+        SIZNI TO‘YIMIZGA TAKLIF QILAMIZ
+      </div>
 
-<section class="hero">
+      <img
+        id="photo"
+        class="photo"
+        src=""
+        alt="To‘y rasmi"
+        onerror="this.style.display='none';">
 
+      <h1 id="groomName">
+        Aziz
+      </h1>
 
-<!-- TOP LEFT FLOWER -->
+      <div class="and">
+        &
+      </div>
 
-<div class="flower top-left">
+      <h1 id="brideName">
+        Madina
+      </h1>
 
-<svg viewBox="0 0 200 200">
+      <div class="divider"></div>
 
-<path
-d="M20 160 C50 110 75 90 105 70"
-fill="none"
-stroke="#c5a477"
-stroke-width="3"
-opacity=".7"/>
+      <p class="description">
+        Hayotimizdagi eng go‘zal kunni
+        siz bilan birga nishonlashdan
+        mamnun bo‘lamiz.
+      </p>
 
-<g fill="#fffaf0">
+      <div
+        class="event-date"
+        id="eventDate">
+      </div>
 
-<ellipse
-cx="55"
-cy="105"
-rx="17"
-ry="35"
-transform="rotate(-45 55 105)"/>
+      <div class="countdown">
 
-<ellipse
-cx="72"
-cy="91"
-rx="17"
-ry="35"
-transform="rotate(20 72 91)"/>
+        <div class="count-box">
+          <b id="days">00</b>
+          <span>KUN</span>
+        </div>
 
-<ellipse
-cx="42"
-cy="86"
-rx="17"
-ry="35"
-transform="rotate(-80 42 86)"/>
+        <div class="count-box">
+          <b id="hours">00</b>
+          <span>SOAT</span>
+        </div>
 
-<circle
-cx="57"
-cy="94"
-r="8"
-fill="#d2ad79"/>
+        <div class="count-box">
+          <b id="minutes">00</b>
+          <span>DAQIQA</span>
+        </div>
 
-</g>
+        <div class="count-box">
+          <b id="seconds">00</b>
+          <span>SONIYA</span>
+        </div>
 
-<path
-d="M76 119 C105 105 126 90 150 50"
-fill="none"
-stroke="#b99b70"
-stroke-width="3"/>
+      </div>
 
-</svg>
+      <a
+        href="#location"
+        class="button">
 
-</div>
+        MANZIL
 
+      </a>
 
-<!-- TOP RIGHT FLOWER -->
+      <a
+        href="#rsvp"
+        class="button">
 
-<div class="flower top-right">
+        RSVP
 
-<svg viewBox="0 0 200 200">
+      </a>
 
-<path
-d="M30 180 C70 130 100 100 160 35"
-fill="none"
-stroke="#c4a276"
-stroke-width="3"/>
+    </div>
 
-<g fill="#fffaf1">
+  </section>
 
-<ellipse
-cx="135"
-cy="70"
-rx="15"
-ry="32"
-transform="rotate(40 135 70)"/>
 
-<ellipse
-cx="155"
-cy="55"
-rx="15"
-ry="32"
-transform="rotate(80 155 55)"/>
+  <!-- ===================================================
+       MAP
+  =================================================== -->
 
-<ellipse
-cx="119"
-cy="48"
-rx="15"
-ry="32"
-transform="rotate(-5 119 48)"/>
+  <section
+    class="map-section"
+    id="location">
 
-<circle
-cx="137"
-cy="58"
-r="7"
-fill="#d2aa72"/>
+    <div class="map-title reveal">
 
-</g>
+      <h2>
+        Tantanali marosim
+      </h2>
 
-</svg>
+      <div class="small">
+        BIZNING MANZILIMIZ
+      </div>
 
-</div>
+    </div>
 
 
-<div class="hero-content">
+    <!-- MAP -->
 
+    <iframe
+      id="mapFrame"
+      class="map-frame"
+      loading="lazy"
+      allowfullscreen
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
 
-<div class="label">
-  TANTANALI MAROSIM
-</div>
 
+    <div class="map-overlay"></div>
 
-<div class="ornament">
-  <span>✦</span>
-</div>
 
+    <div class="map-pin"></div>
 
-<div class="photo-wrap">
 
-<img
-  id="photo"
-  class="photo"
-  src=""
-  alt="To‘y rasmi">
+    <!-- LOCATION CARD -->
 
-</div>
+    <div class="map-card reveal">
 
+      <div class="map-card-icon">
+        ♜
+      </div>
 
-<h1 id="groomName">
-  Aziz
-</h1>
+      <div class="map-card-info">
 
-<div class="and">
-  &
-</div>
+        <strong id="venue">
+          Tantanali marosim
+        </strong>
 
-<h1 id="brideName">
-  Madina
-</h1>
+        <span id="address">
+          Manzil yuklanmoqda...
+        </span>
 
+      </div>
 
-<div class="ornament">
-  <span>✦</span>
-</div>
+      <a
+        id="mapsButton"
+        class="map-go"
+        target="_blank"
+        rel="noopener">
 
+        ➤
 
-<p class="description">
+      </a>
 
-  Hayotimizdagi eng go‘zal kunni
-  siz bilan birga nishonlashdan
-  mamnun bo‘lamiz.
+    </div>
 
-</p>
+  </section>
 
 
-<div
-  class="event-date"
-  id="eventDate">
-</div>
+  <!-- ===================================================
+       RSVP
+  =================================================== -->
 
+  <section
+    class="rsvp-section"
+    id="rsvp">
 
-<div class="countdown">
+    <div class="rsvp-title reveal">
 
-<div class="count-box">
-<b id="days">00</b>
-<span>KUN</span>
-</div>
+      <h2>
+        Tilaklar
+      </h2>
 
-<div class="count-box">
-<b id="hours">00</b>
-<span>SOAT</span>
-</div>
+      <div class="rsvp-divider"></div>
 
-<div class="count-box">
-<b id="minutes">00</b>
-<span>DAQIQA</span>
-</div>
+      <p class="rsvp-subtitle">
+        Egalariga issiq tilaklaringizni qoldiring ❤️
+      </p>
 
-<div class="count-box">
-<b id="seconds">00</b>
-<span>SONIYA</span>
-</div>
+    </div>
 
-</div>
 
+    <form
+      class="rsvp reveal"
+      onsubmit="sendRSVP(event)">
 
-<a
-  href="#location"
-  class="button">
+      <input
+        id="guestName"
+        type="text"
+        placeholder="Ismingiz"
+        required>
 
-  XARITADA KO‘RISH
+      <select
+        id="attendance"
+        required>
 
-</a>
+        <option value="">
+          Iltimos, javob bering
+        </option>
 
+        <option value="Albatta kelaman">
+          Albatta kelaman
+        </option>
 
-</div>
+        <option value="Kela olmayman">
+          Kela olmayman
+        </option>
 
+      </select>
 
-<div class="scroll-down">
-  ⇊
-</div>
+      <textarea
+        id="guestMessage"
+        placeholder="Tilagingiz (ixtiyoriy)">
+      </textarea>
 
+      <button
+        type="submit"
+        class="rsvp-submit">
 
-</section>
+        TILAK QOLDIRISH
 
+      </button>
 
+      <div
+        id="message"
+        class="message">
+      </div>
 
-<!-- =====================================================
-     LOCATION
-===================================================== -->
+    </form>
 
-<section
-  class="location-section"
-  id="location">
+  </section>
 
 
-<div class="map">
+  <!-- ===================================================
+       PREMIUM FOOTER
+  =================================================== -->
 
-<iframe
-  id="mapFrame"
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps?q=Toshkent&output=embed">
-</iframe>
+  <section class="premium-footer">
 
-<div class="map-overlay"></div>
+    <div class="instagram-title">
+      📸 INSTAGRAM
+    </div>
 
-</div>
+    <a
+      href="https://www.instagram.com/my.inviter"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="instagram-link">
 
+      @my.inviter
 
-<div class="location-content">
+    </a>
 
+    <div class="instagram-text">
 
-<h2 class="location-title">
-  TANTANALI MAROSIM
-</h2>
+      🤍 Sizning baxtli kuningiz —
+      <br>
+      bizning ilhomimiz
 
+    </div>
 
-<div class="ornament">
-  <span>✦</span>
-</div>
+    <a
+      href="/create.html"
+      class="create-invitation-button">
 
+      TAKLIFNOMA YARATISH
 
-<div class="location-subtitle">
-  Sizni kutib qolamiz
-</div>
+    </a>
 
+  </section>
 
-<div class="map-pin">
 
-<div class="pin-shape"></div>
-
-<div class="pin-hole"></div>
-
-</div>
-
-
-<div class="location-card">
-
-
-<div class="location-info">
-
-
-<div class="location-row">
-
-<div class="location-icon">
-  ♜
-</div>
-
-<div>
-
-<strong id="venue">
-  Tantanali marosim
-</strong>
-
-<span id="address">
-  Toshkent shahri
-</span>
+  <footer>
+    MYINVITER · 2026
+  </footer>
 
 </div>
-
-</div>
-
-
-<div class="location-row">
-
-<div class="location-icon">
-  ♧
-</div>
-
-<div>
-
-<strong>
-  Manzil
-</strong>
-
-<span id="address2">
-  Toshkent shahri
-</span>
-
-</div>
-
-</div>
-
-
-</div>
-
-
-<a
-  id="mapsButton"
-  class="map-go"
-  target="_blank"
-  rel="noopener">
-
-  ➤
-
-</a>
-
-
-</div>
-
-
-</div>
-
-
-<!-- BOTTOM LEFT FLOWER -->
-
-<div class="flower bottom-left">
-
-<svg viewBox="0 0 200 200">
-
-<path
-d="M15 190 C60 145 85 110 115 50"
-fill="none"
-stroke="#b9996d"
-stroke-width="3"/>
-
-<path
-d="M65 130 C40 115 25 95 22 70"
-fill="none"
-stroke="#b9996d"
-stroke-width="3"/>
-
-<g fill="#fffaf0">
-
-<ellipse
-cx="42"
-cy="82"
-rx="14"
-ry="30"
-transform="rotate(-45 42 82)"/>
-
-<ellipse
-cx="61"
-cy="72"
-rx="14"
-ry="30"
-transform="rotate(20 61 72)"/>
-
-<ellipse
-cx="35"
-cy="62"
-rx="14"
-ry="30"
-transform="rotate(-80 35 62)"/>
-
-</g>
-
-</svg>
-
-</div>
-
-
-<!-- BOTTOM RIGHT FLOWER -->
-
-<div class="flower bottom-right">
-
-<svg viewBox="0 0 200 200">
-
-<path
-d="M185 190 C140 150 120 100 80 45"
-fill="none"
-stroke="#b9996d"
-stroke-width="3"/>
-
-<g fill="#fffaf0">
-
-<ellipse
-cx="125"
-cy="100"
-rx="14"
-ry="32"
-transform="rotate(40 125 100)"/>
-
-<ellipse
-cx="110"
-cy="82"
-rx="14"
-ry="32"
-transform="rotate(-10 110 82)"/>
-
-<ellipse
-cx="140"
-cy="78"
-rx="14"
-ry="32"
-transform="rotate(75 140 78)"/>
-
-</g>
-
-</svg>
-
-</div>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     RSVP
-===================================================== -->
-
-<section
-  class="rsvp-section"
-  id="rsvp">
-
-
-<!-- LEFT DECOR -->
-
-<div class="leaf-decoration left">
-
-<svg viewBox="0 0 150 220">
-
-<path
-d="M120 220 C100 160 70 100 20 20"
-fill="none"
-stroke="#b79b76"
-stroke-width="3"/>
-
-<ellipse
-cx="42"
-cy="70"
-rx="10"
-ry="30"
-fill="#fffaf1"
-transform="rotate(-45 42 70)"/>
-
-<ellipse
-cx="63"
-cy="105"
-rx="10"
-ry="30"
-fill="#fffaf1"
-transform="rotate(-50 63 105)"/>
-
-<ellipse
-cx="83"
-cy="140"
-rx="10"
-ry="30"
-fill="#fffaf1"
-transform="rotate(-55 83 140)"/>
-
-</svg>
-
-</div>
-
-
-<!-- RIGHT DECOR -->
-
-<div class="leaf-decoration">
-
-<svg viewBox="0 0 150 220">
-
-<path
-d="M30 220 C55 160 80 100 130 20"
-fill="none"
-stroke="#b79b76"
-stroke-width="3"/>
-
-<ellipse
-cx="108"
-cy="65"
-rx="10"
-ry="30"
-fill="#fffaf1"
-transform="rotate(45 108 65)"/>
-
-<ellipse
-cx="87"
-cy="105"
-rx="10"
-ry="30"
-fill="#fffaf1"
-transform="rotate(50 87 105)"/>
-
-<ellipse
-cx="67"
-cy="145"
-rx="10"
-ry="30"
-fill="#fffaf1"
-transform="rotate(55 67 145)"/>
-
-</svg>
-
-</div>
-
-
-<h2 class="rsvp-title">
-  Tilaklar
-</h2>
-
-
-<div class="rsvp-ornament">
-  <span>✦</span>
-</div>
-
-
-<p class="rsvp-subtitle">
-
-  Egalariga issiq tilaklaringizni
-  qoldiring ❤️
-
-</p>
-
-
-<form
-  class="rsvp"
-  onsubmit="sendRSVP(event)">
-
-
-<input
-  id="guestName"
-  type="text"
-  placeholder="Ismingiz"
-  required>
-
-
-<select
-  id="attendance"
-  required>
-
-<option value="">
-  Iltimos, javob bering
-</option>
-
-<option value="Albatta kelaman">
-  Albatta kelaman
-</option>
-
-<option value="Kela olmayman">
-  Kela olmayman
-</option>
-
-</select>
-
-
-<textarea
-  id="guestMessage"
-  placeholder="Tilagingiz (ixtiyoriy)">
-</textarea>
-
-
-<button
-  type="submit"
-  class="button">
-
-  TILAK QOLDIRISH
-
-</button>
-
-
-<div
-  id="message"
-  class="message">
-</div>
-
-
-</form>
-
-
-</section>
-
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<section class="premium-footer">
-
-
-<div class="instagram-title">
-  📸 INSTAGRAM
-</div>
-
-
-<a
-  href="https://www.instagram.com/my.inviter"
-  target="_blank"
-  rel="noopener noreferrer"
-  class="instagram-link">
-
-  @my.inviter
-
-</a>
-
-
-<div class="instagram-text">
-
-  🤍 Sizning baxtli kuningiz —
-  <br>
-  bizning ilhomimiz
-
-</div>
-
-
-<a
-  href="/create.html"
-  class="create-invitation-button">
-
-  TAKLIFNOMA YARATISH
-
-</a>
-
-
-</section>
-
-
-<footer>
-  MYINVITER · 2026
-</footer>
-
-
-</div>
-</div>
-
 
 
 <script>
 
-/* =====================================================
+/* =========================================================
    SUPABASE
-===================================================== */
+========================================================= */
 
 const SUPABASE_URL =
 "https://bhqdkzeueunfhompvywm.supabase.co";
@@ -2324,9 +2373,9 @@ const SUPABASE_KEY =
 "sb_publishable_CiiL8jno2aCpj8LQBZmemA_H7vFnnS1";
 
 
-/* =====================================================
+/* =========================================================
    INVITATION ID
-===================================================== */
+========================================================= */
 
 const params =
 new URLSearchParams(
@@ -2337,9 +2386,18 @@ const INVITATION_ID =
 params.get("id") || "1";
 
 
-/* =====================================================
+/* =========================================================
    ELEMENTS
-===================================================== */
+========================================================= */
+
+const intro =
+document.getElementById("intro");
+
+const envelope =
+document.getElementById("envelope");
+
+const sealWrap =
+document.getElementById("sealWrap");
 
 const music =
 document.getElementById("music");
@@ -2348,9 +2406,9 @@ const musicButton =
 document.getElementById("musicButton");
 
 
-/* =====================================================
+/* =========================================================
    LOAD INVITATION
-===================================================== */
+========================================================= */
 
 async function loadInvitation(){
 
@@ -2367,16 +2425,20 @@ async function loadInvitation(){
         "&select=*",
 
         {
+
           method:"GET",
 
           headers:{
+
             "apikey":
               SUPABASE_KEY,
 
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
+
           }
+
         }
 
       );
@@ -2412,9 +2474,9 @@ async function loadInvitation(){
       data[0];
 
 
-    /* =================================================
+    /* ===================================================
        NAMES
-    ================================================= */
+    =================================================== */
 
     const groom =
       invitation.groom_name ||
@@ -2430,16 +2492,35 @@ async function loadInvitation(){
     ).innerText =
       groom;
 
-
     document.getElementById(
       "brideName"
     ).innerText =
       bride;
 
+    document.getElementById(
+      "introGroom"
+    ).innerText =
+      groom;
 
-    /* =================================================
+    document.getElementById(
+      "introBride"
+    ).innerText =
+      bride;
+
+    document.getElementById(
+      "letterGroom"
+    ).innerText =
+      groom;
+
+    document.getElementById(
+      "letterBride"
+    ).innerText =
+      bride;
+
+
+    /* ===================================================
        PHOTO
-    ================================================= */
+    =================================================== */
 
     if(invitation.photo_url){
 
@@ -2448,29 +2529,12 @@ async function loadInvitation(){
       ).src =
         invitation.photo_url;
 
-    }else{
-
-      /*
-        Agar rasm yo‘q bo‘lsa,
-        placeholder ko‘rinadi.
-      */
-
-      document.getElementById(
-        "photo"
-      ).style.display =
-        "none";
-
-      document.querySelector(
-        ".photo-wrap"
-      ).style.display =
-        "none";
-
     }
 
 
-    /* =================================================
+    /* ===================================================
        MUSIC
-    ================================================= */
+    =================================================== */
 
     if(invitation.music_url){
 
@@ -2482,34 +2546,33 @@ async function loadInvitation(){
     }
 
 
-    /* =================================================
-       VENUE
-    ================================================= */
+    /* ===================================================
+       LOCATION
+    =================================================== */
+
+    const venue =
+      invitation.venue ||
+      "Tantanali marosim";
+
+    const address =
+      invitation.address ||
+      "Manzil ko‘rsatilmagan";
+
 
     document.getElementById(
       "venue"
     ).innerText =
-      invitation.venue ||
-      "Tantanali marosim";
-
+      venue;
 
     document.getElementById(
       "address"
     ).innerText =
-      invitation.address ||
-      "Toshkent shahri";
+      address;
 
 
-    document.getElementById(
-      "address2"
-    ).innerText =
-      invitation.address ||
-      "Toshkent shahri";
-
-
-    /* =================================================
-       MAP
-    ================================================= */
+    /* ===================================================
+       GOOGLE MAPS
+    =================================================== */
 
     if(invitation.maps_url){
 
@@ -2520,66 +2583,48 @@ async function loadInvitation(){
 
 
       /*
-        Google Maps URL'dan xaritani
-        iframe uchun ishlatishga harakat.
+        Google Maps URL'ni iframe uchun
+        avtomatik ishlatamiz.
       */
 
-      try{
-
-        const mapURL =
-          invitation.maps_url;
-
-
-        if(
-          mapURL.includes("google.com/maps") ||
-          mapURL.includes("maps.app.goo.gl")
-        ){
-
-          let embedURL =
-            mapURL;
-
-
-          if(
-            mapURL.includes("google.com/maps")
-          ){
-
-            embedURL =
-              mapURL
-                .replace(
-                  "/maps/",
-                  "/maps/embed?"
-                );
-
-          }
-
-
-          /*
-            Agar oddiy URL embed bo‘lmasa,
-            query orqali fallback ishlatiladi.
-          */
-
-          document.getElementById(
-            "mapFrame"
-          ).src =
-            embedURL;
-
-        }
-
-      }catch(e){
-
-        console.log(
-          "Map iframe:",
-          e
+      let mapQuery =
+        encodeURIComponent(
+          address
         );
 
-      }
+
+      document.getElementById(
+        "mapFrame"
+      ).src =
+        "https://www.google.com/maps?q=" +
+        mapQuery +
+        "&output=embed";
+
+    }else{
+
+      /*
+        Agar maps_url bo‘lmasa ham
+        address orqali xarita chiqadi.
+      */
+
+      const mapQuery =
+        encodeURIComponent(
+          address
+        );
+
+      document.getElementById(
+        "mapFrame"
+      ).src =
+        "https://www.google.com/maps?q=" +
+        mapQuery +
+        "&output=embed";
 
     }
 
 
-    /* =================================================
+    /* ===================================================
        DATE
-    ================================================= */
+    =================================================== */
 
     if(invitation.event_date){
 
@@ -2616,15 +2661,15 @@ async function loadInvitation(){
           date.getDate()
         ).padStart(2,"0")
 
-        + " · "
+        + " · " +
 
-        + months[
+        months[
           date.getMonth()
         ]
 
-        + " · "
+        + " · " +
 
-        + date.getFullYear();
+        date.getFullYear();
 
 
       startCountdown(
@@ -2634,15 +2679,14 @@ async function loadInvitation(){
     }
 
 
-    /* =================================================
+    /* ===================================================
        SHOW
-    ================================================= */
+    =================================================== */
 
     document.getElementById(
       "loading"
     ).style.display =
       "none";
-
 
     document.getElementById(
       "invitation"
@@ -2650,10 +2694,12 @@ async function loadInvitation(){
       "block";
 
 
+    initReveal();
+
+
   }catch(error){
 
     console.error(error);
-
 
     document.getElementById(
       "loading"
@@ -2666,9 +2712,213 @@ async function loadInvitation(){
 }
 
 
-/* =====================================================
+/* =========================================================
+   PARTICLES
+========================================================= */
+
+function createParticles(){
+
+  const scene =
+    document.querySelector(
+      ".envelope-scene"
+    );
+
+
+  for(
+    let i=0;
+    i<28;
+    i++
+  ){
+
+    const particle =
+      document.createElement(
+        "div"
+      );
+
+
+    particle.className =
+      "particle";
+
+
+    const angle =
+      Math.random() *
+      Math.PI *
+      2;
+
+
+    const distance =
+      80 +
+      Math.random() *
+      190;
+
+
+    particle.style.setProperty(
+      "--x",
+      Math.cos(angle) *
+      distance +
+      "px"
+    );
+
+
+    particle.style.setProperty(
+      "--y",
+      Math.sin(angle) *
+      distance +
+      "px"
+    );
+
+
+    particle.style.left =
+      "50%";
+
+    particle.style.top =
+      "48%";
+
+
+    scene.appendChild(
+      particle
+    );
+
+
+    setTimeout(
+      function(){
+
+        particle.classList.add(
+          "fly"
+        );
+
+      },
+      Math.random()*250
+    );
+
+
+    setTimeout(
+      function(){
+
+        particle.remove();
+
+      },
+      1900
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   OPEN INVITATION
+========================================================= */
+
+let opened =
+false;
+
+
+function openInvitation(){
+
+  if(opened){
+    return;
+  }
+
+
+  opened =
+    true;
+
+
+  envelope.classList.add(
+    "camera"
+  );
+
+
+  sealWrap.classList.add(
+    "pressed"
+  );
+
+
+  setTimeout(
+    createParticles,
+    280
+  );
+
+
+  setTimeout(
+    function(){
+
+      envelope.classList.add(
+        "open"
+      );
+
+    },
+    500
+  );
+
+
+  setTimeout(
+    function(){
+
+      if(music.src){
+
+        music.play()
+
+          .then(
+            function(){
+
+              musicButton.innerText =
+                "Ⅱ";
+
+            }
+          )
+
+          .catch(
+            function(error){
+
+              console.log(
+                "Autoplay:",
+                error
+              );
+
+            }
+          );
+
+      }
+
+    },
+    850
+  );
+
+
+  setTimeout(
+    function(){
+
+      intro.classList.add(
+        "hide"
+      );
+
+    },
+    2500
+  );
+
+
+  setTimeout(
+    function(){
+
+      intro.remove();
+
+      window.scrollTo(
+        0,
+        0
+      );
+
+    },
+    3900
+  );
+
+}
+
+
+/* =========================================================
    MUSIC
-===================================================== */
+========================================================= */
 
 function toggleMusic(){
 
@@ -2712,9 +2962,9 @@ function toggleMusic(){
 }
 
 
-/* =====================================================
+/* =========================================================
    COUNTDOWN
-===================================================== */
+========================================================= */
 
 let countdownTimer =
 null;
@@ -2761,6 +3011,10 @@ function startCountdown(
         "seconds"
       ).innerText =
         "00";
+
+      clearInterval(
+        countdownTimer
+      );
 
       return;
 
@@ -2841,9 +3095,9 @@ function startCountdown(
 }
 
 
-/* =====================================================
+/* =========================================================
    RSVP
-===================================================== */
+========================================================= */
 
 async function sendRSVP(event){
 
@@ -2901,9 +3155,9 @@ async function sendRSVP(event){
   try{
 
 
-    /* ================================================
+    /* =====================================================
        SUPABASE
-    ================================================ */
+    ===================================================== */
 
     const response =
       await fetch(
@@ -2976,103 +3230,89 @@ async function sendRSVP(event){
     }
 
 
-    /* ================================================
+    /* =====================================================
        TELEGRAM
-    ================================================ */
+    ===================================================== */
 
-    try{
+    const telegramResponse =
+      await fetch(
 
-      const telegramResponse =
-        await fetch(
+        "/api/rsvp",
 
-          "/api/rsvp",
+        {
 
-          {
+          method:"POST",
 
-            method:"POST",
+          headers:{
 
-            headers:{
-              "Content-Type":
-                "application/json"
-            },
+            "Content-Type":
+              "application/json"
 
-            body:
-              JSON.stringify({
+          },
 
-                invitationId:
-                  Number(
-                    INVITATION_ID
-                  ),
+          body:
+            JSON.stringify({
 
-                guestName:
-                  guestName,
+              invitationId:
+                Number(
+                  INVITATION_ID
+                ),
 
-                attendance:
-                  attendance,
+              guestName:
+                guestName,
 
-                message:
-                  guestMessage
+              attendance:
+                attendance,
 
-              })
+              message:
+                guestMessage
 
+            })
+
+        }
+
+      );
+
+
+    const telegramData =
+      await telegramResponse
+        .json()
+        .catch(
+          function(){
+            return {};
           }
-
         );
 
 
-      const telegramData =
-        await telegramResponse
-          .json()
-          .catch(
-            function(){
-              return {};
-            }
-          );
-
-
-      if(!telegramResponse.ok){
-
-        console.error(
-          "TELEGRAM ERROR:",
-          telegramData
-        );
-
-      }
-
-    }catch(telegramError){
+    if(!telegramResponse.ok){
 
       console.error(
-        "Telegram:",
-        telegramError
+        "RSVP TELEGRAM ERROR:",
+        telegramData
       );
 
     }
 
 
-    /* ================================================
-       SUCCESS
-    ================================================ */
-
     message.innerText =
       "❤️ Rahmat! Javobingiz saqlandi.";
 
 
+    /* =====================================================
+       CLEAR FORM
+    ===================================================== */
+
     document.getElementById(
       "guestName"
-    ).value =
-      "";
-
+    ).value = "";
 
     document.getElementById(
       "attendance"
-    ).value =
-      "";
-
+    ).value = "";
 
     document.getElementById(
       "guestMessage"
-    ).value =
-      "";
+    ).value = "";
 
 
   }catch(error){
@@ -3092,9 +3332,66 @@ async function sendRSVP(event){
 }
 
 
-/* =====================================================
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+function initReveal(){
+
+  const items =
+    document.querySelectorAll(
+      ".reveal"
+    );
+
+
+  const observer =
+    new IntersectionObserver(
+
+      function(entries){
+
+        entries.forEach(
+          function(entry){
+
+            if(entry.isIntersecting){
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
+
+            }
+
+          }
+        );
+
+      },
+
+      {
+        threshold:.12
+      }
+
+    );
+
+
+  items.forEach(
+    function(item){
+
+      observer.observe(
+        item
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
    START
-===================================================== */
+========================================================= */
 
 loadInvitation();
 
